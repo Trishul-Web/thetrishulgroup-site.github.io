@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Safekeep - Secure File Encryption | DevDuo's</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --card: #111;
+            --border: #222;
+            --brand-1: #5eead4;
+            /* Teal */
+            --brand-2: #60a5fa;
+            /* Blue */
+            --brand-3: #a78bfa;
+            /* Purple */
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
+                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* --- NEW APP BAR STYLES --- */
+        .app-bar {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+
+        .container {
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .hero {
+            padding-top: 6rem;
+            text-align: center;
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .grand-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 1.05;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            color: #fafafa;
+        }
+
+        .intro-lede {
+            font-size: 1.25rem;
+            color: #c5c8ce;
+            max-width: 680px;
+            margin: .25rem auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: 0 0 3rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(17, 17, 17, .7);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            text-align: left;
+        }
+
+        .feature-card svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 1rem;
+            color: var(--brand-1);
+        }
+
+        .feature-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: #f0f0f0;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .visual-showcase {
+            background: #080808;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="safekeep_info.html" class="app-bar-link active">App Info</a>
+                <a href="safekeep_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
+                <a href="safekeep_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <img src="https://play-lh.googleusercontent.com/Y-vEXw1NXdcXe6uSVeucD6Bv2TtN5uBQTNT8ah07H--sXo9IcO5E8h0WYPADhyMp8w=s128-rw"
+                alt="Safekeep App Icon" class="hero-icon">
+            <h1 class="grand-title">Your Digital Fortress, <span class="gradient-text">Secured</span>.</h1>
+            <p class="intro-lede">
+                Safekeep is a zero-knowledge, end-to-end encrypted service that allows you to store and manage your
+                digital files securely. All encryption and decryption operations are performed exclusively on your
+                device.
+            </p>
+            <a href="https://play.google.com/store/apps/details?id=com.devduos.encryptedphotosvideoshider"
+                target="_blank" class="cta-button">View on Play Store</a>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Core Security Principles</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+                    </svg>
+                    <h3>Zero-Knowledge Encryption</h3>
+                    <p>Your Master Key is the only key that can unlock your files. It is never sent to us or stored on
+                        any server. We cannot access your data, ever.</p>
+                </div>
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                    </svg>
+                    <h3>On-Device Operations</h3>
+                    <p>All encryption and decryption happens exclusively on your device. Your files are only ever in
+                        their original state while you are actively viewing them.</p>
+                </div>
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 18a.75.75 0 0 0 .75-.75v-4.5A.75.75 0 0 0 12 12h0a.75.75 0 0 0-.75.75v4.5A.75.75 0 0 0 12 18Zm0-9a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-1.5 0v2.25A.75.75 0 0 0 12 9Zm0 9a.75.75 0 0 0 .75-.75v-4.5a.75.75 0 0 0-1.5 0v4.5A.75.75 0 0 0 12 18Zm0-9a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-1.5 0v2.25A.75.75 0 0 0 12 9Z" />
+                    </svg>
+                    <h3>Cross-Platform Sync</h3>
+                    <p>For signed-in users, your encrypted data is backed up to a private folder inside your own Google
+                        Drive account. We never have access to your Google Drive.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Visual Showcase</h2>
+            <div class="visual-showcase">
+                <p>[Your App Screenshots or a Demo Video Can Go Here]</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="safekeep_privacypolicy.html">Privacy Policy</a>
+                <a href="safekeep_termsandconditions.html">Terms of Service</a>
+            </div>
+            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
+        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+    </script>
+
+</body>
+
+</html>

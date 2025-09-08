@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - Safekeep | DevDuo's</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --border: #222;
+            --brand-1: #5eead4;
+            --brand-2: #60a5fa;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: min(800px, 90vw);
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        h1,
+        h2 {
+            font-family: var(--font-display);
+            color: var(--brand-1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--brand-2);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 2rem;
+        }
+
+        .timestamp {
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+
+    <header>
+        <div class="container-header">
+            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="safekeep_info.html" class="app-bar-link">App Info</a>
+                <a href="safekeep_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
+                <a href="safekeep_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Privacy Policy for Safekeep</h1>
+        <p class="timestamp">Last Updated: September 8, 2025</p>
+
+        <p>DevDuo's ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we
+            handle your information when you use our Safekeep mobile application (the "Service").</p>
+
+        <h2>1. The "Zero-Knowledge" Principle</h2>
+        <p>Safekeep is a **zero-knowledge** application. This means we, the developers, have zero access to the files
+            you encrypt or the Master Key you create. Your data's privacy is mathematically guaranteed by the encryption
+            itself, which occurs exclusively on your device.</p>
+
+        <h2>2. Information We Do Not Collect</h2>
+        <ul>
+            <li>**Your Master Key:** Your Master Key is created by you and is never transmitted to our servers. We
+                cannot recover it if you lose it.</li>
+            <li>**Your Files:** The contents of the files you choose to encrypt are never uploaded or visible to us.
+            </li>
+            <li>**Personal Information:** We do not require you to create an account with personal details like your
+                name or address to use the core features of the app.</li>
+        </ul>
+
+        <h2>3. Information We Collect</h2>
+        <p>Our collection is limited to what is essential for the app's functionality and improvement:</p>
+        <ul>
+            <li><strong>Google Account Information (Optional):</strong> If you choose to sign in with Google to enable
+                cloud backup, we receive your email address and basic profile information from Google for authentication
+                purposes only. This allows us to connect the Service to your personal Google Drive account.</li>
+            <li><strong>Anonymous Analytics:</strong> We may collect anonymous, aggregated usage data, such as app
+                crashes, session duration, and feature usage. This data is not personally identifiable and helps us
+                improve the app's stability and user experience.</li>
+            <li><strong>Purchase Information (Premium Users):</strong> If you subscribe to Safekeep Premium, the
+                transaction is handled by the respective app store (Google Play). We receive anonymous purchase tokens
+                to verify your subscription status but do not receive your payment information.</li>
+        </ul>
+
+        <h2>4. How Your Data Is Used</h2>
+        <ul>
+            <li><strong>Cloud Backup (Optional):</strong> If you sign in, the Service will create a private folder named
+                "safekeep-data" in your own Google Drive. Your encrypted files are stored there. We do not have
+                permission to access any other part of your Google Drive.</li>
+            <li><strong>Service Improvement:</strong> Anonymous analytics help us identify bugs, understand which
+                features are popular, and make the app better.</li>
+        </ul>
+
+        <h2>5. Data Security</h2>
+        <p>We implement industry-standard security measures, but the ultimate security of your files rests on the
+            strength of your Master Key and the principle of on-device, end-to-end encryption.</p>
+
+        <h2>6. Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new
+            Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+
+        <h2>7. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at: <a
+                href="mailto:support@thetrishulgroup.com">support@thetrishulgroup.com</a></p>
+    </main>
+</body>
+
+</html>

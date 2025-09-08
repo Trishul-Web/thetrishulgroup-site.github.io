@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Trishul Group</title>
+
+    <style>
+        /* ---------- Base ---------- */
+        :root {
+            --bg: #000;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --card: #111;
+            --card-2: #171717;
+            --border: #222;
+            --glow-1: rgba(94, 234, 212, .22);
+            --glow-2: rgba(96, 165, 250, .18);
+            --brand-1: #5eead4;
+            --brand-2: #60a5fa;
+            --brand-3: #a78bfa;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        /* ---------- Loader ---------- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: #000;
+            z-index: 1000;
+            color: #e5e7eb;
+            letter-spacing: .06em
+        }
+
+        /* ---------- Decorative background (aurora + noise) ---------- */
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05)
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .18), transparent 60%),
+                radial-gradient(60% 60% at 90% 20%, rgba(96, 165, 250, .16), transparent 60%),
+                radial-gradient(70% 70% at 50% 90%, rgba(167, 139, 250, .12), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        .grain {
+            position: absolute;
+            inset: 0;
+            opacity: .05;
+            mix-blend: overlay;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+            background-size: 140px 140px;
+            animation: grain 1.2s steps(2, end) infinite;
+        }
+
+        @keyframes grain {
+            100% {
+                transform: translate3d(1%, 0, 0)
+            }
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        /* ---------- Pin area (video frames) ---------- */
+        #video-pin-container {
+            height: 200vh;
+            position: relative;
+            opacity: 0
+        }
+
+        #intro {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            position: relative
+        }
+
+        #intro canvas {
+            width: 100%;
+            height: 100%
+        }
+
+        /* ---------- Main ---------- */
+        main {
+            background: #000;
+            margin-top: -1px;
+            position: relative;
+            opacity: 0
+        }
+
+        /* ---------- Containers & Sections ---------- */
+        .container {
+            width: min(1120px, 92vw);
+            margin: 0 auto
+        }
+
+        section {
+            padding: 6rem 0;
+            border-bottom: 1px solid #1a1a1a
+        }
+
+        section:last-child {
+            border-bottom: none
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            text-align: center
+        }
+
+        .eyebrow {
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            font-size: .9rem;
+            color: #a3a3a3;
+            margin-bottom: 1rem
+        }
+
+        .grand-title {
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.05;
+            margin: 0 0 .75rem;
+            font-weight: 800;
+            color: #fafafa
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2) 50%, var(--brand-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
+
+        .intro-lede {
+            font-size: 1.2rem;
+            color: #c5c8ce;
+            max-width: 760px;
+            margin: .25rem auto 2rem
+        }
+
+        .cta-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1.25rem 0 2rem
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .9rem 1.2rem;
+            border-radius: 12px;
+            border: 1px solid #1f2937;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform .2s, background .2s, border-color .2s, box-shadow .2s;
+            will-change: transform
+        }
+
+        .btn-primary {
+            background: radial-gradient(150% 150% at 50% 0%, #0b1220 0%, #0a0a0a 60%);
+            border-color: #2b2b2b;
+            box-shadow: 0 0 0 1px rgba(94, 234, 212, .1), 0 10px 30px rgba(0, 0, 0, .4);
+            color: #e6fdf8
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            border-color: #334155;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, .55)
+        }
+
+        .btn-ghost {
+            color: #cfd3da;
+            background: rgba(255, 255, 255, .02)
+        }
+
+        .btn-ghost:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, .04)
+        }
+
+        .trust-badges {
+            list-style: none;
+            padding: 0;
+            margin: 0 auto;
+            display: flex;
+            gap: .75rem;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .trust-badges li {
+            padding: .5rem .8rem;
+            border: 1px solid #212121;
+            border-radius: 999px;
+            font-size: .95rem;
+            color: #a6adb7;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(255, 255, 255, 0))
+        }
+
+        /* ---------- KPI counters ---------- */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 2rem
+        }
+
+        .kpi {
+            padding: 1.1rem 1rem;
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 14px;
+            background: rgba(17, 17, 17, .6);
+            backdrop-filter: blur(6px);
+            text-align: center
+        }
+
+        .kpi .num {
+            font-size: 1.8rem;
+            font-weight: 800
+        }
+
+        .kpi .label {
+            font-size: .92rem;
+            color: #a6adb7
+        }
+
+        @media (max-width:820px) {
+            .kpi-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        /* ---------- Cards ---------- */
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin: 0 0 2rem;
+            color: #fff;
+            text-align: center
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 1.5rem
+        }
+
+        .card {
+            position: relative;
+            background: rgba(17, 17, 17, .7);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 18px;
+            padding: 1.6rem;
+            overflow: hidden;
+            backdrop-filter: blur(6px);
+            transition: transform .3s, border-color .25s, box-shadow .25s;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .02), 0 10px 30px rgba(0, 0, 0, .45);
+            transform-style: preserve-3d
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: radial-gradient(60% 80% at 0% 0%, rgba(96, 165, 250, .12), transparent 60%), radial-gradient(80% 60% at 100% 100%, rgba(167, 139, 250, .10), transparent 60%);
+            pointer-events: none
+        }
+
+        .card:hover {
+            transform: translateY(-6px) rotateX(.8deg) rotateY(.8deg);
+            border-color: var(--glow-1);
+            box-shadow: 0 18px 44px rgba(0, 0, 0, .62)
+        }
+
+        .card-top {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            margin-bottom: .25rem
+        }
+
+        .card-top h3 {
+            margin: 0;
+            font-size: 1.35rem;
+            color: #fff
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 12px currentColor
+        }
+
+        .dot-green {
+            color: #34d399;
+            background: currentColor
+        }
+
+        .dot-blue {
+            color: #60a5fa;
+            background: currentColor
+        }
+
+        .card-sub {
+            color: #b5bac3;
+            margin: .35rem 0 1rem
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1rem;
+            display: grid;
+            gap: .6rem
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            color: #d1d5db
+        }
+
+        .fi {
+            width: 1.4rem;
+            height: 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .chip-row {
+            display: flex;
+            gap: .5rem;
+            flex-wrap: wrap
+        }
+
+        .chip {
+            font-size: .85rem;
+            color: #c9cfd8;
+            padding: .35rem .6rem;
+            border-radius: 999px;
+            border: 1px solid #262626;
+            background: rgba(255, 255, 255, .03)
+        }
+
+        /* ---------- Selected Work (parallax tiles) ---------- */
+        .work-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem
+        }
+
+        .work {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, .06);
+            background: #0c0c0c
+        }
+
+        .work .thumb {
+            aspect-ratio: 16/10;
+            background: linear-gradient(120deg, rgba(94, 234, 212, .25), transparent 40%), linear-gradient(300deg, rgba(96, 165, 250, .25), transparent 40%);
+            transform: scale(1.02);
+            transition: transform .5s
+        }
+
+        .work:hover .thumb {
+            transform: scale(1.06)
+        }
+
+        .work .info {
+            padding: 1rem 1rem 1.2rem
+        }
+
+        .work .title {
+            font-weight: 600
+        }
+
+        .work .meta {
+            font-size: .95rem;
+            color: #a6adb7
+        }
+
+        /* ---------- Process timeline ---------- */
+        .process {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem
+        }
+
+        .step {
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 14px;
+            padding: 1rem 1rem 1.1rem;
+            background: rgba(17, 17, 17, .6)
+        }
+
+        .badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: .9rem;
+            background: rgba(255, 255, 255, .06);
+            margin-bottom: .4rem
+        }
+
+        @media (max-width:860px) {
+            .process {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* ---------- Links ---------- */
+        .link-accent {
+            color: var(--brand-1);
+            border-bottom: 1px solid transparent;
+            text-decoration: none
+        }
+
+        .link-accent:hover {
+            border-bottom-color: var(--brand-1)
+        }
+
+        /* ---------- Tiny utilities ---------- */
+        .muted {
+            color: #a6adb7
+        }
+
+        .center {
+            text-align: center
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+        <div class="grain"></div>
+    </div>
+
+    <div id="loader">Loading…</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <div id="video-pin-container">
+        <div id="intro">
+            <canvas id="introCanvas"></canvas>
+        </div>
+    </div>
+
+    <main id="site">
+        <section class="hero container" id="trishul-intro">
+            <div class="eyebrow">Strategy • Design • Engineering</div>
+            <h1 class="grand-title">The <span class="gradient-text">Trishul</span> Group</h1>
+            <p class="intro-lede">
+                We are a strategic product group, home to the Devduos studio. We build mission-critical software with an
+                obsessive focus on craft and user experience.
+            </p>
+        </section>
+
+        <section id="our-studios" class="container">
+            <h2 class="section-title">Our Flagship Studio</h2>
+
+            <div class="card-grid" style="max-width: 420px; margin: 0 auto;">
+                <article class="card" data-tilt>
+                    <div class="card-top">
+                        <div class="dot dot-green"></div>
+                        <h3>Devduos</h3>
+                    </div>
+                    <p class="card-sub">A digital product studio for ambitious brands. We design and build elegant,
+                        high-performance applications from concept to launch.</p>
+                    <ul class="feature-list">
+                        <li><span class="fi">🌐</span>Web & Application Development</li>
+                        <li><span class="fi">📱</span>Native Mobile (Android & iOS)</li>
+                        <li><span class="fi">⚙️</span>Scalable Backend APIs</li>
+                    </ul>
+                    <div class="chip-row"><span class="chip">React</span><span class="chip">Next.js</span><span
+                            class="chip">Node</span><span class="chip">Kotlin</span><span class="chip">Swift</span>
+                    </div>
+                    <div style="margin-top: 1.5rem; text-align: center;">
+                        <a href="devduos.html" class="btn btn-ghost">View Studio Website</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" id="process">
+            <h2 class="section-title">How We Work</h2>
+            <div class="process">
+                <div class="step">
+                    <div class="badge">1</div>
+                    <h3 style="margin:.15rem 0 .4rem">Discovery & Strategy</h3>
+                    <p class="muted">We begin by mapping the product vision, identifying risks, defining success
+                        metrics, and aligning on core outcomes to ensure we're building the right thing.</p>
+                </div>
+                <div class="step">
+                    <div class="badge">2</div>
+                    <h3 style="margin:.15rem 0 .4rem">Design & Prototyping</h3>
+                    <p class="muted">Our design phase focuses on user flows, component libraries, and interaction
+                        details. We create high-fidelity prototypes to validate the experience before writing code.</p>
+                </div>
+                <div class="step">
+                    <div class="badge">3</div>
+                    <h3 style="margin:.15rem 0 .4rem">Build & Integrate</h3>
+                    <p class="muted">We build with modern, scalable stacks. With automated CI/CD pipelines and robust
+                        observability, we ensure quality is built-in, not bolted on.</p>
+                </div>
+                <div class="step">
+                    <div class="badge">4</div>
+                    <h3 style="margin:.15rem 0 .4rem">Launch & Evolve</h3>
+                    <p class="muted">Launch is just the beginning. We implement key analytics and establish iteration
+                        loops to continuously learn, adapt, and compound product value over time.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" id="contact">
+            <h2 class="section-title">Let's Build Together</h2>
+            <p class="center">Have a project in mind or an ambitious idea to bring to life? We'd love to hear from you.
+            </p>
+            <p class="center" style="margin-top:.5rem">
+                <a href="mailto:support@thetrishulgroup.com" class="link-accent">support@thetrishulgroup.com</a>
+            </p>
+        </section>
+    </main>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        /* ---------- Canvas setup ---------- */
+        const canvas = document.getElementById('introCanvas');
+        const context = canvas.getContext('2d');
+        const frameCount = 90;
+        const currentFrame = i => (`assets/frames/frame_${(i + 61).toString().padStart(4, '0')}.jpg`);
+        const frames = [];
+        let frameScrub = { frame: 0 };
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            if (frames.length > 0) { render(Math.round(frameScrub.frame)); }
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        function render(idx) {
+            const img = frames[idx];
+            if (!img) return;
+            const hRatio = canvas.width / img.width;
+            const vRatio = canvas.height / img.height;
+            const ratio = Math.max(hRatio, vRatio);
+            const cx = (canvas.width - img.width * ratio) / 2;
+            const cy = (canvas.height - img.height * ratio) / 2;
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.drawImage(img, cx, cy, img.width * ratio, img.height * ratio);
+        }
+
+        /* ---------- Preload frames then animate ---------- */
+        (function init() {
+            const promises = [];
+            for (let i = 0; i < frameCount; i++) {
+                promises.push(new Promise(res => {
+                    const img = new Image(); img.onload = res; img.src = currentFrame(i); frames.push(img);
+                }));
+            }
+
+            Promise.all(promises).then(() => {
+                const loader = document.getElementById('loader');
+                gsap.to(loader, { opacity: 0, duration: .5, onComplete: () => loader.style.display = 'none' });
+                gsap.to(["#video-pin-container", "#site"], { opacity: 1, duration: .5 });
+                resizeCanvas(); render(0);
+
+                // Keep pin duration in sync with container height to avoid gaps
+                const PIN_VH = 500;
+
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#video-pin-container",
+                        start: "top top",
+                        end: `+=${PIN_VH}vh`,
+                        scrub: true,
+                        pin: "#intro",
+                        // Set to false if you want the next section to overlap while pinned
+                        pinSpacing: true
+                    }
+                }).to(frameScrub, {
+                    frame: frameCount - 1,
+                    snap: "frame",
+                    ease: "none",
+                    onUpdate: () => render(Math.round(frameScrub.frame))
+                });
+
+                /* ---------- Page entrance & interactions ---------- */
+                // Fancy hero entrance
+                gsap.from(".eyebrow", { opacity: 0, y: 10, duration: .5, delay: .1 });
+                gsap.from(".grand-title", { opacity: 0, y: 12, duration: .7, delay: .2, ease: "power2.out" });
+                gsap.from(".intro-lede", { opacity: 0, y: 12, duration: .7, delay: .32, ease: "power2.out" });
+                gsap.from(".cta-row .btn", { opacity: 0, y: 12, stagger: .08, duration: .6, delay: .42, ease: "power2.out" });
+                gsap.from(".trust-badges li", { opacity: 0, y: 8, stagger: .06, duration: .5, delay: .55 });
+
+                // KPI counters on view
+                const counters = document.querySelectorAll(".kpi .num");
+                counters.forEach(el => {
+                    const end = parseInt(el.dataset.count || "0", 10);
+                    ScrollTrigger.create({
+                        trigger: el.closest(".kpi"),
+                        start: "top 85%",
+                        once: true,
+                        onEnter: () => {
+                            gsap.fromTo(el, { textContent: 0 }, {
+                                textContent: end,
+                                duration: 1.2,
+                                ease: "power1.out",
+                                snap: { textContent: 1 }
+                            });
+                        }
+                    });
+                });
+
+                // Luxe card entrance
+                gsap.from(".card", {
+                    opacity: 0, y: 30, scale: .98, stagger: .12, duration: .6, ease: "power2.out",
+                    scrollTrigger: { trigger: ".card-grid", start: "top 80%" }
+                });
+
+                // Work tiles subtle parallax
+                document.querySelectorAll("[data-parallax]").forEach(tile => {
+                    gsap.to(tile.querySelector(".thumb"), {
+                        yPercent: -6, ease: "none",
+                        scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: true }
+                    });
+                });
+
+                // Magnetic hover for CTAs
+                document.querySelectorAll(".btn").forEach(btn => {
+                    const strength = 12;
+                    btn.addEventListener("mousemove", e => {
+                        const r = btn.getBoundingClientRect();
+                        const x = e.clientX - (r.left + r.width / 2);
+                        const y = e.clientY - (r.top + r.height / 2);
+                        btn.style.transform = `translate(${x / strength}px, ${y / strength}px)`;
+                    });
+                    btn.addEventListener("mouseleave", () => btn.style.transform = "");
+                });
+
+                // Subtle 3D tilt for cards (GPU-friendly)
+                const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+                document.querySelectorAll("[data-tilt]").forEach(card => {
+                    let raf;
+                    const onMove = (e) => {
+                        const r = card.getBoundingClientRect();
+                        const px = (e.clientX - r.left) / r.width - .5;
+                        const py = (e.clientY - r.top) / r.height - .5;
+                        const rx = clamp(py * -6, -6, 6);
+                        const ry = clamp(px * 6, -6, 6);
+                        card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-6px)`;
+                    };
+                    card.addEventListener("mousemove", (e) => { cancelAnimationFrame(raf); raf = requestAnimationFrame(() => onMove(e)); });
+                    card.addEventListener("mouseleave", () => { card.style.transform = ""; });
+                });
+
+            });
+        })();
+    </script>
+</body>
+
+</html>

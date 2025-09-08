@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Devduos - Innovative Mobile Applications</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --card: #111;
+            --border: #222;
+            --glow-1: rgba(94, 234, 212, .22);
+            --glow-2: rgba(96, 165, 250, .18);
+            --brand-1: #5eead4;
+            --brand-2: #60a5fa;
+            --brand-3: #a78bfa;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #loader {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: radial-gradient(farthest-side, var(--brand-1) 94%, #0000) top/9px 9px no-repeat, conic-gradient(#0000 30%, var(--brand-1));
+            -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+            animation: spinner-c7wet2 1s infinite linear;
+        }
+
+        @keyframes spinner-c7wet2 {
+            100% {
+                transform: rotate(1turn)
+            }
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .18), transparent 60%), radial-gradient(60% 60% at 90% 20%, rgba(96, 165, 250, .16), transparent 60%), radial-gradient(70% 70% at 50% 90%, rgba(167, 139, 250, .12), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.25rem 0;
+            z-index: 500;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transform: translateY(-100%);
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2) 50%, var(--brand-3));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            font-size: 1rem;
+        }
+
+        .nav-link:hover {
+            color: var(--fg);
+        }
+
+        main {
+            background: transparent;
+            position: relative;
+        }
+
+        .container {
+            width: min(1140px, 92vw);
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 7rem 0;
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        #hero {
+            padding-top: 12rem;
+            padding-bottom: 8rem;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .hero {
+            position: relative;
+            text-align: center;
+        }
+
+        .eyebrow {
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            font-size: .9rem;
+            color: #a3a3a3;
+            margin-bottom: 1rem;
+        }
+
+        .grand-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6.5vw, 5.5rem);
+            line-height: 1.05;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            color: #fafafa;
+        }
+
+        .intro-lede {
+            font-size: 1.25rem;
+            color: #c5c8ce;
+            max-width: 780px;
+            margin: .25rem auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-size: 200% 100%;
+            animation: gradient-flow 4s ease infinite;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
+        }
+
+        @keyframes gradient-flow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            margin: 0 0 3rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card-link-wrapper {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card {
+            position: relative;
+            background: rgba(17, 17, 17, .7);
+            border: 1px solid rgba(255, 255, 255, .06);
+            border-radius: 18px;
+            padding: 2rem;
+            backdrop-filter: blur(8px);
+            transition: transform .3s, border-color .25s, box-shadow .25s;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .02), 0 10px 30px rgba(0, 0, 0, .45);
+            text-align: center;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: radial-gradient(60% 80% at 0% 0%, var(--glow-2), transparent 60%), radial-gradient(80% 60% at 100% 100%, var(--glow-1), transparent 60%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(94, 234, 212, .3);
+        }
+
+        .card-app-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem auto;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card h3 {
+            margin: 0 0 0.5rem 0;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: #f0f0f0;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: #b5bac3;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .link-accent {
+            color: var(--brand-1);
+            border-bottom: 1px solid transparent;
+            text-decoration: none;
+            transition: border-bottom-color 0.2s;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .link-accent:hover {
+            border-bottom-color: var(--brand-1);
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-socials a {
+            color: var(--muted);
+            transition: color .2s, transform .2s;
+            display: inline-block;
+        }
+
+        .footer-socials a:hover {
+            color: var(--brand-1);
+            transform: scale(1.1);
+        }
+
+        .footer-socials svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-1);
+        }
+
+        .muted {
+            color: #a6adb7;
+        }
+
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo gradient-text">DevDuo's</a>
+            <nav>
+                <a href="#our-apps" class="nav-link">Our Apps</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="site">
+        <section class="hero container" id="hero">
+            <div class="eyebrow">Innovation • Excellence • Integrity</div>
+            <h1 class="grand-title">Crafting Digital <span class="gradient-text">Experiences</span></h1>
+            <p class="intro-lede">
+                We are a passionate developer duo dedicated to creating high-quality, user-friendly mobile
+                applications that solve real-world problems through innovative and elegant software solutions.
+            </p>
+            <a href="#our-apps" class="cta-button">Explore Our Apps</a>
+        </section>
+
+        <section id="our-apps" class="container">
+            <h2 class="section-title">Our Application Suite</h2>
+            <div class="card-grid">
+
+                <a href="./devduos/apps/safekeep/safekeep_info.html" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/Y-vEXw1NXdcXe6uSVeucD6Bv2TtN5uBQTNT8ah07H--sXo9IcO5E8h0WYPADhyMp8w=s128-rw"
+                            alt="SafeKeep App Icon" class="card-app-icon">
+                        <h3>SafeKeep</h3>
+                        <p>State-of-the-art file encryption.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/kMJRO7ugt48BruvM5B0vbOsmV1ilERJTViiSw8KJgOpa8vHhN4z7JFWctkmXYfGJqHcj=s128-rw"
+                            alt="SkillSprint App Icon" class="card-app-icon">
+                        <h3>SkillSprint</h3>
+                        <p>Learn new skills with bite-sized lessons.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/o262zVMenKFEQ9zyRpg_rO72VpStzfhHBmKpn1msf7wgANftLYRK0WgjUiHBzhvTO0OrlI76zYDZt6eOe3cA=s128-rw"
+                            alt="PDF Scanner Pro App Icon" class="card-app-icon">
+                        <h3>PDF Scanner Pro</h3>
+                        <p>Scan, manage, and share documents.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/dm1N0yKMjYAQGL3lBBSDB5_fo6Cflol9lBjueP0fIpGv2rufQ8lQ6puA721S8IS6MkA=s128-rw"
+                            alt="Programming Files Viewer App Icon" class="card-app-icon">
+                        <h3>Programming Files Viewer</h3>
+                        <p>View code with syntax highlighting.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/r3hSof4dnJyEjQsXlUQruGS5NrKV44m3PBvoppSS8eWqjmQmdPmZG7V4VqWZ8M5PLzfq=s128-rw"
+                            alt="SmartBMI Tracker App Icon" class="card-app-icon">
+                        <h3>SmartBMI Tracker</h3>
+                        <p>Track your BMI and stay motivated.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/vkdnhLxJL4aynZ0LfZdm6b_xCONKNqvVV7tLYiBD8n3ZYQeayJcsK_cbfusCJBmXwnXHykjpC-aHfLbhIXlj=s128-rw"
+                            alt="AI PDF Viewer App Icon" class="card-app-icon">
+                        <h3>AI PDF Viewer</h3>
+                        <p>Intelligent editing and translation.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/WJoQltPOYA53DmpU0CZCyS1StHbI7mgNmEsTNi0lhK82Ww-R_IrzbRoGAb1AwJlbaw=s128-rw"
+                            alt="SafeKey App Icon" class="card-app-icon">
+                        <h3>SafeKey</h3>
+                        <p>Robust password encryption tool.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/Ivl59qd4pRerYA2MHs6le-_T-NQG7O7mjJnOap98JfvINKL9IV48PCfsvteIXGDBERSU=s128-rw"
+                            alt="TTT Battles App Icon" class="card-app-icon">
+                        <h3>TTT Battles</h3>
+                        <p>A modern take on a classic game.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/W2RUIuIsBC7ZGEXVeRmexkYGB7XTvfMIFFrPbag8SmeOdY5ut6X5Jg2pHwGcmHQxAA=s128-rw"
+                            alt="Disciplined Forge App Icon" class="card-app-icon">
+                        <h3>Disciplined Forge (BETA)</h3>
+                        <p>Build and maintain healthy habits.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/JTQDASoXRlv0tkfwauLC7ihVj7VUakV92mJkmNmIPuijYMTrUQN8UmJboRJCsWTwsg=s128-rw"
+                            alt="ClassicFlow Launcher App Icon" class="card-app-icon">
+                        <h3>ClassicFlow Launcher</h3>
+                        <p>A minimalist, focused launcher.</p>
+                    </article>
+                </a>
+
+                <a href="#" class="card-link-wrapper">
+                    <article class="card" data-tilt><img
+                            src="https://play-lh.googleusercontent.com/ayL14u1BulZWufV6Kue8dnHh5GghO45HflsdvUy61Pmp15RoJPa1hzwe5m6uXXrC2sU=s128-rw"
+                            alt="Clock Counter Themes App Icon" class="card-app-icon">
+                        <h3>Clock Counter Themes</h3>
+                        <p>Stylish clock and counter themes.</p>
+                    </article>
+                </a>
+
+            </div>
+        </section>
+
+        <section class="container" id="about">
+            <h2 class="section-title">About Devduos</h2>
+            <p class="intro-lede" style="text-align: center;">
+                Founded in 2023, Devduos is a software development team based in Pune, India. We specialize in
+                creating high-quality mobile applications for the Google Play Store. Driven by a passion for
+                technology and a commitment to exceptional user experiences, we believe in the power of code
+                to transform ideas into reality.
+            </p>
+        </section>
+
+        <section class="container" id="contact">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="center">Have a project in mind, a question, or just want to say hello? We'd love to hear from you.
+            </p>
+            <p class="center" style="margin-top:1rem">
+                <a href="mailto:support@thetrishulgroup.com" class="link-accent">support@thetrishulgroup.com</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-socials">
+                <a href="https://github.com" target="_blank" title="GitHub"><svg fill="currentColor" viewBox="0 0 24 24"
+                        aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0 0 22 12c0-5.523-4.477-10-10-10Z"
+                            clip-rule="evenodd"></path>
+                    </svg></a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><svg fill="currentColor"
+                        viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8 19H5v-9h3v9Zm-1.5-10.25a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM19 19h-3v-4.75c0-1.4-1.2-2.5-2.5-2.5S11 12.85 11 14.25V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.6-1.3c2.4 0 4.5 2 4.5 5.25V19Z">
+                        </path>
+                    </svg></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="https://play.google.com/store/apps/developer?id=DevDuo%27s" target="_blank">Play Store</a>
+            </div>
+            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        (function init() {
+            const loader = document.getElementById('loader');
+            gsap.to(loader, { opacity: 0, duration: .5, delay: 0.5, onComplete: () => loader.style.display = 'none' });
+            gsap.to("main", { opacity: 1, duration: .5, delay: 0.5 });
+            gsap.to("header", { y: 0, duration: 0.8, ease: "power2.out", delay: 1 });
+            const tlHero = gsap.timeline({ defaults: { duration: 0.7, ease: "power2.out" } });
+            tlHero.from(".eyebrow", { opacity: 0, y: 10, delay: 1.2 })
+                .from(".grand-title", { opacity: 0, y: 12 }, "-=0.6")
+                .from("#hero .intro-lede", { opacity: 0, y: 12 }, "-=0.6")
+                .from(".cta-button", { opacity: 0, y: 12 }, "-=0.5");
+            document.querySelectorAll(".section-title").forEach(title => {
+                gsap.from(title, { opacity: 0, y: 20, duration: 0.6, ease: "power2.out", scrollTrigger: { trigger: title, start: "top 85%", toggleActions: "play none none none" } });
+            });
+            gsap.from(".card", { opacity: 0, y: 30, scale: .98, stagger: .08, duration: .6, ease: "power2.out", scrollTrigger: { trigger: ".card-grid", start: "top 80%" } });
+            gsap.from("#about .intro-lede", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out", scrollTrigger: { trigger: "#about .intro-lede", start: "top 85%" } });
+            gsap.from("#contact .center", { opacity: 0, y: 20, duration: 0.6, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: "#contact", start: "top 75%" } });
+            gsap.from("footer", { opacity: 0, y: 20, duration: 1, ease: "power2.out", scrollTrigger: { trigger: "footer", start: "top 95%" } });
+
+            const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
+            document.querySelectorAll("[data-tilt]").forEach(card => {
+                const onMove = (e) => {
+                    const r = card.getBoundingClientRect();
+                    const px = (e.clientX - r.left) / r.width - .5;
+                    const py = (e.clientY - r.top) / r.height - .5;
+                    const rx = clamp(py * -8, -8, 8);
+                    const ry = clamp(px * 8, -8, 8);
+                    gsap.to(card, { rotationX: rx, rotationY: ry, duration: 0.7, ease: "expo.out" });
+                };
+                card.addEventListener("mousemove", onMove);
+                card.addEventListener("mouseleave", () => {
+                    gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.7, ease: "expo.out" });
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
