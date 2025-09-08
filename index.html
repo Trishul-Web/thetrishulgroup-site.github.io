@@ -72,7 +72,6 @@
             position: absolute;
             inset: 0;
             opacity: .05;
-            mix-blend: overlay;
             background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
             background-size: 140px 140px;
             animation: grain 1.2s steps(2, end) infinite;
@@ -92,7 +91,7 @@
 
         /* ---------- Pin area (video frames) ---------- */
         #video-pin-container {
-            height: 200vh;
+            height: 400vh;
             position: relative;
             opacity: 0
         }
@@ -607,12 +606,12 @@
 
             Promise.all(promises).then(() => {
                 const loader = document.getElementById('loader');
-                gsap.to(loader, { opacity: 0, duration: .5, onComplete: () => loader.style.display = 'none' });
-                gsap.to(["#video-pin-container", "#site"], { opacity: 1, duration: .5 });
+                gsap.to(loader, { opacity: 0, duration: 1, onComplete: () => loader.style.display = 'none' });
+                gsap.to(["#video-pin-container", "#site"], { opacity: 1, duration: 1 });
                 resizeCanvas(); render(0);
 
                 // Keep pin duration in sync with container height to avoid gaps
-                const PIN_VH = 500;
+                const PIN_VH = 3000;
 
                 gsap.timeline({
                     scrollTrigger: {
