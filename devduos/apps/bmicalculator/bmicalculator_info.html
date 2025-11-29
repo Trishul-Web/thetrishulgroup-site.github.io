@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SmartBMI Tracker - App Info | DevDuo's</title>
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚖️</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --card: #111;
+            --border: #222;
+            --brand-1: #5eead4;
+            /* Teal */
+            --brand-2: #60a5fa;
+            /* Blue */
+            --brand-3: #a78bfa;
+            /* Purple */
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
+                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+
+        .container {
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .hero {
+            padding-top: 6rem;
+            text-align: center;
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .grand-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 1.05;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            color: #fafafa;
+        }
+
+        .intro-lede {
+            font-size: 1.25rem;
+            color: #c5c8ce;
+            max-width: 720px;
+            margin: .25rem auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: 0 0 3rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(17, 17, 17, .7);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            text-align: left;
+        }
+
+        .feature-card svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 1rem;
+            color: var(--brand-1);
+        }
+
+        .feature-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: #f0f0f0;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .visual-showcase {
+            background: #080808;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="bmicalculator_info.html" class="app-bar-link active">App Info</a>
+                <a href="bmicalculator_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
+                <a href="bmicalculator_termsandconditions.html" class="app-bar-link">Terms</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero container">
+            <img src="https://play-lh.googleusercontent.com/r3hSof4dnJyEjQsXlUQruGS5NrKV44m3PBvoppSS8eWqjmQmdPmZG7V4VqWZ8M5PLzfq=w480-h960-rw"
+                alt="SmartBMI Tracker Icon" class="hero-icon" style="background:#222;">
+
+            <h1 class="grand-title">Discover Your Path to a <span class="gradient-text">Healthier You</span></h1>
+            <p class="intro-lede">
+                Meet <strong>SmartBMI Tracker</strong> – the ultimate BMI Calculator that makes tracking your body mass
+                index a breeze! Whether you're on a fitness journey or simply curious about your health, our app
+                provides quick and accurate BMI results in seconds.
+            </p>
+            <a href="https://play.google.com/store/apps/details?id=com.devduos.bmicalculator" target="_blank"
+                class="cta-button">Download on Play Store</a>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Feature Highlights</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                    </svg>
+                    <h3>Instant Calculation</h3>
+                    <p>Easy to Use: Input your height and weight effortlessly to get instant, accurate BMI calculations
+                        in mere seconds.</p>
+                </div>
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42" />
+                    </svg>
+                    <h3>Intuitive Design</h3>
+                    <p>Experience a seamless user interface designed for clarity. No clutter, just the health insights
+                        you need.</p>
+                </div>
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                    </svg>
+                    <h3>For Everyone</h3>
+                    <p>Suitable for all ages and fitness levels. Embark on your wellness journey today and take the
+                        first step towards a happier you.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container">
+            <h2 class="section-title">Take the First Step</h2>
+            <div class="visual-showcase">
+                <p style="font-size:1.1rem; color:var(--fg); margin-bottom:1rem;">Ready to track your health?</p>
+                <a href="https://play.google.com/store/apps/details?id=com.devduos.bmicalculator" target="_blank"
+                    class="cta-button" style="display:inline-block;">Download App</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="bmicalculator_privacypolicy.html">Privacy Policy</a>
+                <a href="bmicalculator_termsandconditions.html">Terms of Service</a>
+            </div>
+            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
+        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+    </script>
+
+</body>
+
+</html>
