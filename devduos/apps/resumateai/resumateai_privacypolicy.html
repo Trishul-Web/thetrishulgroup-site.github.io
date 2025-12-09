@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - ResuMate AI | DevDuo's</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Exact Copy of Safekeep Styles */
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --border: #222;
+            --brand-1: #5eead4;
+            --brand-2: #60a5fa;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: min(800px, 90vw);
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        h1,
+        h2 {
+            font-family: var(--font-display);
+            color: var(--brand-1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--brand-2);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 2rem;
+        }
+
+        .timestamp {
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+
+    <header>
+        <div class="container-header">
+            <a href="../../devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="resumateai_info.html" class="app-bar-link">App Info</a>
+                <a href="resumateai_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
+                <a href="resumateai_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Privacy Policy for ResuMate AI</h1>
+        <p class="timestamp">Last Updated: December 09, 2025</p>
+
+        <p>DevDuo's built the ResuMate AI app as a Free, Ad-Supported app. This SERVICE is provided by DevDuos at no
+            cost and is intended for use as is.</p>
+
+        <h2>1. Data Storage & Privacy</h2>
+        <p>ResuMate AI follows a **local-first** principle. All resume data (names, contact info, experience, etc.) you
+            enter is stored securely on your device using a local database. We (DevDuos) generally do not have access to
+            this data.</p>
+
+        <h2>2. Third-Party Services</h2>
+        <p>The app uses third-party services that may collect information used to identify you or provide functionality:
+        </p>
+        <ul>
+            <li><strong>Google AdMob:</strong> Used to display advertisements. AdMob may collect data such as
+                Advertising ID, coarse location, and usage metrics to serve relevant ads.</li>
+            <li><strong>Google Gemini API:</strong> When you use AI features (e.g., "AI Writer", "ATS Scanner", "Review
+                Resume"), the text content (resume data, job descriptions) is sent to Google's Gemini API for
+                processing. This data is used solely to generate the response and is not used to train Google's models.
+            </li>
+        </ul>
+
+        <h2>3. Log Data</h2>
+        <p>In a case of an error in the app, we collect data and information (through third-party products like Google
+            Play Services) on your phone called Log Data. This may include your device IP address, device name,
+            operating system version, and the time and date of your use of the Service.</p>
+
+        <h2>4. Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy from time to time. You are advised to review this page periodically for any
+            changes. These changes are effective immediately after they are posted on this page.</p>
+
+        <h2>5. Contact Us</h2>
+        <p>If you have any questions about this Privacy Policy, please contact us at: <a
+                href="mailto:devduos@gmail.com">devduos@gmail.com</a></p>
+    </main>
+</body>
+
+</html>
