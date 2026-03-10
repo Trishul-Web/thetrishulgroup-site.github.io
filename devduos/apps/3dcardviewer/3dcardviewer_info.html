@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Newszio - Swipe News App | DevDuo's</title>
+    <title>3D Card Viewer - 3D Vault & Document Scanner | DevDuo's</title>
 
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>">
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧊</text></svg>">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +25,7 @@
             --border: #222;
             --brand-1: #5eead4;
             --brand-2: #60a5fa;
+            --brand-3: #a78bfa;
             --font-sans: "Inter", system-ui, sans-serif;
             --font-display: "Sora", sans-serif;
         }
@@ -98,7 +99,6 @@
             color: transparent;
         }
 
-        /* --- APP BAR STYLES --- */
         .app-bar {
             display: flex;
             gap: 1.5rem;
@@ -142,6 +142,14 @@
             border-radius: 28px;
             margin-bottom: 2rem;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .grand-title {
@@ -156,7 +164,7 @@
         .intro-lede {
             font-size: 1.25rem;
             color: #c5c8ce;
-            max-width: 780px;
+            max-width: 680px;
             margin: .25rem auto 2.5rem;
             line-height: 1.6;
         }
@@ -260,71 +268,59 @@
 
     <header>
         <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
+            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
             <nav class="app-bar">
-                <a href="newszio_info.html" class="app-bar-link active">App Info</a>
-                <a href="newszio_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="newszio_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+                <a href="3dcardviewer_info.html" class="app-bar-link active">App Info</a>
+                <a href="3dcardviewer_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
+                <a href="3dcardviewer_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
             </nav>
         </div>
     </header>
 
     <main>
         <section class="hero container">
-            <img src="https://play-lh.googleusercontent.com/DheZ43QvWfA5nPyawQKrnCLxFxQUKgk6pNiy7Od6gzG1pD1GlN61-c6uHgYywL_Hztt6jHeZXdIFCkw-J2At=s512-rw"
-                alt="Newszio App Icon" class="hero-icon">
-            <h1 class="grand-title">Experience News, <span class="gradient-text">Reimagined</span>.</h1>
+            <div class="hero-icon">🧊</div>
+            <h1 class="grand-title">Breathe Life into Your <span class="gradient-text">Digital Vault</span>.</h1>
             <p class="intro-lede">
-                Instead of endless scrolling, Newszio lets you swipe through news just like a card feed — quickly
-                skipping what you don’t care about and diving deeper into what matters to you. Read smarter, not harder.
+                Transform flat 2D ID cards, documents, and designs into stunning interactive 3D holograms. Scan,
+                organize, and export high-res PDFs in a secure digital vault!
             </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduo.devduonewszio" target="_blank"
-                class="cta-button">Download on Play Store</a>
+            <a href="#" target="_blank" class="cta-button">View on Play Store</a>
         </section>
 
         <section class="container">
-            <h2 class="section-title">Why Newszio is Different</h2>
+            <h2 class="section-title">Core Features</h2>
             <div class="feature-grid">
                 <div class="feature-card">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-.813 2.846a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+                            d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
                     </svg>
-                    <h3>Smart Reading Tools</h3>
-                    <p>Don’t just read headlines — understand the story. Get instant bullet-point summaries, simplify
-                        complex topics into plain language, and ask questions directly about the article.</p>
+                    <h3>Interactive 3D Space</h3>
+                    <p>Watch your cards come to life! Spin, tilt, and zoom your documents in a fully interactive 3D
+                        environment powered by an advanced momentum-based physics engine.</p>
                 </div>
                 <div class="feature-card">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
+                            d="M9.53 16.122a3 3 0 0 0-5.78 1.128 2.25 2.25 0 0 1-2.4 2.245 4.5 4.5 0 0 0 8.4-2.245c0-.399-.078-.78-.22-1.128Zm0 0a15.998 15.998 0 0 0 3.388-1.62m-5.043-.025a15.994 15.994 0 0 1 1.622-3.395m3.42 3.42a15.995 15.995 0 0 0 4.764-4.648l3.876-5.814a1.151 1.151 0 0 0-1.597-1.597L14.146 6.32a15.996 15.996 0 0 0-4.649 4.763m3.42 3.42a6.776 6.776 0 0 0-3.42-3.42" />
                     </svg>
-                    <h3>Read Your Way</h3>
-                    <p>Switch reading styles instantly to match your mood: Reel Mode for fast vertical scrolling, Stack
-                        Mode to swipe horizontally, Paper Mode for deep reading, or List Mode for efficient scanning.
-                    </p>
+                    <h3>Premium Surface Finishes</h3>
+                    <p>Customize the physical material of your digital cards. Apply premium finishes like Holographic,
+                        Chrome, Glossy, Matte, and Satin. Watch how the ambient light dynamically reflects off your
+                        card!</p>
                 </div>
                 <div class="feature-card">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
+                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m6.75 12-3-3m0 0-3 3m3-3v6m-1.5-15H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                     </svg>
-                    <h3>Build Your Super Feed</h3>
-                    <p>You are the editor. Create Custom Mixes that combine exactly what you care about: Keywords
-                        (Crypto, AI), Trusted publishers, or specific cities. Pin them for one-tap access.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                    </svg>
-                    <h3>Global Reach, Local Focus</h3>
-                    <p>Stay informed at every level. Switch between multiple country editions, follow news from any city
-                        worldwide, and read global perspectives with instant translation support.</p>
+                    <h3>Pro Exporting Engine</h3>
+                    <p>Extract high-resolution images directly from PDFs, and export your creations as beautifully
+                        formatted A4 PDF sheets or 300 DPI PNG images perfect for sharing or physical printing.</p>
                 </div>
             </div>
         </section>
@@ -340,8 +336,8 @@
     <footer>
         <div class="container">
             <div class="footer-links">
-                <a href="newszio_privacypolicy.html">Privacy Policy</a>
-                <a href="newszio_termsandconditions.html">Terms of Service</a>
+                <a href="3dcardviewer_privacypolicy.html">Privacy Policy</a>
+                <a href="3dcardviewer_termsandconditions.html">Terms of Service</a>
             </div>
             <p class="muted">© 2025 Devduos. All rights reserved.</p>
         </div>
