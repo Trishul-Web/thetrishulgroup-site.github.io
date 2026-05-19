@@ -50,14 +50,17 @@
             width: 100%; box-sizing: border-box; transition: 0.2s; font-size: 15px; cursor: pointer;
         }
         .action-btn:hover { background: #059669; }
+        
+        .secondary-btn { background: transparent; border: 2px solid #475569; color: #CBD5E1; margin-top: 10px; }
+        .secondary-btn:hover { background: #334155; color: white; }
+
+        .button-group { display: flex; gap: 10px; margin-top: 10px; }
+        .button-group .secondary-btn { margin-top: 0; flex: 1; padding: 12px 10px; font-size: 13px; }
 
         .raw-text-box {
             background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;
             font-size: 13px; color: #94A3B8; margin-top: 15px; word-break: break-all;
         }
-        
-        .redirect-msg { font-size: 12px; color: #10B981; margin-top: 10px; font-weight: bold; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
         /* Premium App Promotion Styles */
         .divider { height: 1px; background: #334155; margin: 30px 0 24px 0; border: none; }
@@ -117,6 +120,44 @@
     </div>
 
     <script>
+        // Bulletproof Copy to Clipboard
+        function copyToClipboard(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert("✅ Copied to clipboard! You can now paste this anywhere.");
+                }).catch(() => fallbackCopyTextToClipboard(text));
+            } else {
+                fallbackCopyTextToClipboard(text);
+            }
+        }
+
+        function fallbackCopyTextToClipboard(text) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";  // Avoid scrolling to bottom
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                alert("✅ Copied to clipboard! You can now paste this anywhere.");
+            } catch (err) {
+                alert("❌ Failed to copy. Please copy the text manually.");
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // Native App Chooser
+        function triggerAppChooser(dataToShare) {
+            if (navigator.share) {
+                navigator.share({
+                    text: dataToShare
+                }).catch((error) => console.log('Share blocked by WebView', error));
+            } else {
+                alert("Your current browser blocks the App Chooser. Please use the 'Copy' button instead.");
+            }
+        }
+
         function decryptData(encryptedBase64, pin) {
             try {
                 const encryptedStr = atob(encryptedBase64);
@@ -151,27 +192,15 @@
                 resultBox.style.display = 'block';
                 
                 const actualMessage = decrypted.replace("DEVDUO_VALID:", "");
+                const safeEncodedMessage = encodeURIComponent(actualMessage).replace(/'/g, "%27");
                 
-                // SMART ACTION DETECTOR - NOW WITH WEBVIEW BREAKOUT (NEW TAB)
+                // SMART ACTION DETECTOR
                 let actionHtml = '';
-                let autoBreakoutHtml = '';
 
                 if (actualMessage.startsWith('http://') || actualMessage.startsWith('https://')) {
-                    // Added target="_blank" to force the phone out of the mini-browser
-                    actionHtml = `<a href="${actualMessage}" target="_blank" class="action-btn">🌍 Open Link</a>`;
-                    
-                    // Attempt to auto-breakout the moment they click "Reveal Secret"
-                    window.open(actualMessage, '_blank');
-                    autoBreakoutHtml = `<div class="redirect-msg">Opening link...</div>`;
-                    
+                    actionHtml = `<a href="${actualMessage}" class="action-btn">🌍 Open Link</a>`;
                 } else if (actualMessage.startsWith('upi://')) {
-                    // Added target="_blank" to force the phone out of the mini-browser
-                    actionHtml = `<a href="${actualMessage}" target="_blank" class="action-btn">💸 Pay Now (Open App)</a>`;
-                    
-                    // Attempt to auto-breakout the moment they click "Reveal Secret"
-                    window.open(actualMessage, '_blank');
-                    autoBreakoutHtml = `<div class="redirect-msg">Opening payment app...</div>`;
-                    
+                    actionHtml = `<a href="${actualMessage}" class="action-btn">💸 Pay Now (Default App)</a>`;
                 } else if (actualMessage.startsWith('WIFI:')) {
                     const ssidMatch = actualMessage.match(/S:(.*?);/);
                     const passMatch = actualMessage.match(/P:(.*?);/);
@@ -189,20 +218,28 @@
                     actionHtml = `<a href="${url}" download="event.ics" class="action-btn">📅 Save Event</a>`;
                 } else if (actualMessage.startsWith('MATMSG:')) {
                     const emailMatch = actualMessage.match(/TO:(.*?);/);
-                    // Email apps often require new tabs to trigger on mobile too
-                    actionHtml = `<a href="mailto:${emailMatch ? emailMatch[1] : ''}" target="_blank" class="action-btn">✉️ Send Email</a>`;
+                    actionHtml = `<a href="mailto:${emailMatch ? emailMatch[1] : ''}" class="action-btn">✉️ Send Email</a>`;
                 }
+
+                // Dual Fallback Buttons (Copy & Share)
+                let secondaryButtons = `
+                    <div class="button-group">
+                        <button onclick="copyToClipboard(decodeURIComponent('${safeEncodedMessage}'))" class="action-btn secondary-btn">📋 Copy</button>
+                        <button onclick="triggerAppChooser(decodeURIComponent('${safeEncodedMessage}'))" class="action-btn secondary-btn">📤 Share</button>
+                    </div>
+                `;
 
                 // Render the UI
                 if (actionHtml !== '') {
                     resultBox.innerHTML = `
                         ${actionHtml}
-                        ${autoBreakoutHtml}
+                        ${secondaryButtons}
                         <div class="raw-text-box">${actualMessage}</div>
                     `;
                 } else {
                     resultBox.innerHTML = `
                         ${actualMessage}
+                        ${secondaryButtons}
                     `;
                 }
                 
