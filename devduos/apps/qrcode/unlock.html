@@ -1,50 +1,337 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Message</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0F172A; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box; }
-        .card { background: #1E293B; padding: 30px 24px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); text-align: center; width: 100%; max-width: 400px; border: 1px solid #334155; margin: 15px auto; }
-        .brand-logo { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; margin: 0 auto 12px auto; display: block; border: 2px solid #3B82F6; box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); background-color: #0F172A; }
-        .icon { font-size: 40px; margin-bottom: 5px; }
-        h2 { margin: 0 0 10px 0; font-size: 24px; color: #F8FAFC; }
-        p.desc { color: #94A3B8; font-size: 14px; margin-bottom: 24px; line-height: 1.5; }
-        
-        input { width: 100%; padding: 16px; border-radius: 12px; border: 1px solid #334155; background: #0F172A; color: white; font-size: 16px; margin-bottom: 15px; box-sizing: border-box; text-align: center; letter-spacing: 2px; }
-        input:focus { outline: 2px solid #3B82F6; border-color: transparent; }
-        button.unlock-btn { background: #3B82F6; color: white; border: none; width: 100%; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
-        button.unlock-btn:hover { background: #2563EB; }
-        
-        #result-box { display: none; margin-top: 10px; padding: 20px; background: #0F172A; border-radius: 12px; border: 1px solid #334155; word-wrap: break-word; font-size: 16px; line-height: 1.5; color: #F1F5F9; }
-        #error-msg { color: #EF4444; font-size: 14px; display: none; margin-bottom: 15px; font-weight: bold; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0F172A;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
 
-        .action-btn { display: inline-block; background: #10B981; color: white; text-decoration: none; border: none; padding: 14px 20px; border-radius: 10px; font-weight: bold; margin-top: 10px; width: 100%; box-sizing: border-box; transition: 0.2s; font-size: 15px; cursor: pointer; }
-        .action-btn:hover { background: #059669; }
-        .secondary-btn { background: #334155; border: none; color: white; margin-top: 10px; }
-        .secondary-btn:hover { background: #475569; }
+        .card {
+            background: #1E293B;
+            padding: 30px 24px;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #334155;
+            margin: 15px auto;
+        }
 
-        .info-box { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; font-size: 14px; color: #E2E8F0; margin-top: 15px; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
-        
-        .qr-title { font-size: 14px; color: #94A3B8; margin-top: 25px; margin-bottom: 4px; font-weight: bold; }
-        .pro-tip { font-size: 11px; color: #3B82F6; margin-bottom: 12px; font-weight: 600; line-height: 1.3; }
-        #qr-container { background: white; padding: 15px; border-radius: 12px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
-        #qr-container img { display: block; margin: 0 auto; }
+        .brand-logo {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 12px auto;
+            display: block;
+            border: 2px solid #3B82F6;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            background-color: #0F172A;
+        }
 
-        .divider { height: 1px; background: #334155; margin: 30px 0 24px 0; border: none; }
-        .promo-section { background: linear-gradient(145deg, #1E293B, #0F172A); border-radius: 20px; padding: 20px; border: 1px solid #334155; box-shadow: 0 8px 25px rgba(0,0,0,0.3); text-align: left; }
-        .download-btn { display: flex; align-items: center; justify-content: center; background: linear-gradient(to right, #10B981, #059669); color: white; text-decoration: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 800; width: 100%; box-sizing: border-box; transition: 0.3s; text-transform: uppercase; letter-spacing: 0.5px; }
+        .icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            color: #F8FAFC;
+        }
+
+        p.desc {
+            color: #94A3B8;
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        input {
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            background: #0F172A;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        input:focus {
+            outline: 2px solid #3B82F6;
+            border-color: transparent;
+        }
+
+        button.unlock-btn {
+            background: #3B82F6;
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        button.unlock-btn:hover {
+            background: #2563EB;
+        }
+
+        #result-box {
+            display: none;
+            margin-top: 10px;
+            padding: 20px;
+            background: #0F172A;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            word-wrap: break-word;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #F1F5F9;
+        }
+
+        #error-msg {
+            color: #EF4444;
+            font-size: 14px;
+            display: none;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .action-btn {
+            display: inline-block;
+            background: #10B981;
+            color: white;
+            text-decoration: none;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            transition: 0.2s;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            background: #059669;
+        }
+
+        .secondary-btn {
+            background: #334155;
+            border: none;
+            color: white;
+            margin-top: 10px;
+        }
+
+        .secondary-btn:hover {
+            background: #475569;
+        }
+
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #E2E8F0;
+            margin-top: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .qr-title {
+            font-size: 14px;
+            color: #94A3B8;
+            margin-top: 25px;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .pro-tip {
+            font-size: 11px;
+            color: #3B82F6;
+            margin-bottom: 12px;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        #qr-container {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #qr-container img {
+            display: block;
+            margin: 0 auto;
+        }
+
+        .divider {
+            height: 1px;
+            background: #334155;
+            margin: 30px 0 24px 0;
+            border: none;
+        }
+
+        .promo-section {
+            background: linear-gradient(145deg, #1E293B, #0F172A);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #334155;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            text-align: left;
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .app-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            object-fit: cover;
+            border: 1px solid #475569;
+        }
+
+        .app-title-container {
+            flex: 1;
+        }
+
+        .app-title {
+            font-size: 16px;
+            color: #F8FAFC;
+            font-weight: 800;
+            margin: 0 0 4px 0;
+            line-height: 1.2;
+        }
+
+        .app-rating {
+            font-size: 12px;
+            color: #94A3B8;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stars {
+            color: #FBBF24;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .feature-item {
+            font-size: 13px;
+            color: #CBD5E1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .check-icon {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10B981;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #10B981, #059669);
+            color: white;
+            text-decoration: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 800;
+            width: 100%;
+            box-sizing: border-box;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
     </style>
 </head>
+
 <body>
     <div class="card">
-        <img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=w480-h960-rw" alt="DevDuo Logo" class="brand-logo" onerror="this.style.display='none'">
+        <div class="promo-section">
+            <div class="app-header">
+                <img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=w480-h960-rw"
+                    alt="App Logo" class="app-icon"
+                    onerror="this.src='https://via.placeholder.com/60/1E293B/FFFFFF?text=QR'">
+                <div class="app-title-container">
+                    <h3 class="app-title">QR Code Scanner & Generator Pro</h3>
+                    <div class="app-rating"><span class="stars">★★★★★</span> Free App</div>
+                </div>
+            </div>
+            <ul class="feature-list">
+                <li class="feature-item">
+                    <div class="check-icon">✓</div> Lock any QR with a Password
+                </li>
+                <li class="feature-item">
+                    <div class="check-icon">✓</div> Generate Instant UPI Payment QRs
+                </li>
+                <li class="feature-item">
+                    <div class="check-icon">✓</div> Custom Colors, Logos & Brand Frames
+                </li>
+            </ul>
+            <a href="https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator" target="_blank"
+                class="download-btn">
+                ▶ Get it on Play Store
+            </a>
+        </div>
+        <div class="divider"></div>
         <div class="icon">🔒</div>
         <h2>Locked Data</h2>
         <p class="desc">This QR code contains hidden information that has been password-protected.</p>
-        
+
         <div id="unlock-form">
             <p id="error-msg">Incorrect password! Please try again.</p>
             <input type="password" id="pin-input" placeholder="Enter Password">
@@ -53,12 +340,7 @@
 
         <div id="result-box"></div>
 
-        <div class="divider"></div>
-        <div class="promo-section">
-            <h3 style="margin-top:0; color:#fff;">Get the Pro App</h3>
-            <p style="font-size:13px; color:#94A3B8;">Lock QR codes, generate UPI payments, and manage history easily.</p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator" target="_blank" class="download-btn">▶ Get it on Play Store</a>
-        </div>
+
     </div>
 
     <script>
@@ -81,7 +363,7 @@
             try {
                 const encryptedStr = atob(encryptedBase64);
                 const bytes = new Uint8Array(encryptedStr.length);
-                for(let i=0; i<encryptedStr.length; i++) bytes[i] = encryptedStr.charCodeAt(i);
+                for (let i = 0; i < encryptedStr.length; i++) bytes[i] = encryptedStr.charCodeAt(i);
                 const pinBytes = new TextEncoder().encode(pin);
                 const decryptedBytes = new Uint8Array(bytes.length);
                 for (let i = 0; i < bytes.length; i++) decryptedBytes[i] = bytes[i] ^ pinBytes[i % pinBytes.length];
@@ -92,7 +374,7 @@
         function unlockMessage() {
             const urlParams = new URLSearchParams(window.location.search);
             const decrypted = decryptData(urlParams.get('data'), document.getElementById('pin-input').value);
-            
+
             if (decrypted === "ERROR_DECRYPT" || !decrypted.startsWith("DEVDUO_VALID:")) {
                 document.getElementById('error-msg').style.display = 'block';
             } else {
@@ -100,7 +382,7 @@
                 const resultBox = document.getElementById('result-box');
                 resultBox.style.display = 'block';
                 const msg = decrypted.replace("DEVDUO_VALID:", "");
-                
+
                 let actionBtn = '';
                 if (msg.startsWith('http') || msg.startsWith('upi://')) {
                     actionBtn = `<a href="${msg}" target="_blank" class="action-btn">🚀 Open / Pay Now</a>`;
@@ -115,7 +397,7 @@
                     <div class="pro-tip">💡 iOS: Long-press QR to scan. Android: Use buttons above.</div>
                     <div id="qr-container"></div>
                 `;
-                
+
                 new QRCode(document.getElementById("qr-container"), { text: msg, width: 180, height: 180 });
                 document.querySelector('.icon').innerText = '🔓';
                 document.querySelector('h2').innerText = 'Unlocked';
@@ -123,4 +405,5 @@
         }
     </script>
 </body>
+
 </html>
