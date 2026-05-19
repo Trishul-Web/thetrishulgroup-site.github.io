@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Message</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0F172A; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { background: #1E293B; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; max-width: 90%; width: 350px; border: 1px solid #334155; }
+        .icon { font-size: 40px; margin-bottom: 10px; }
+        h2 { margin: 0 0 10px 0; font-size: 22px; color: #F8FAFC; }
+        p { color: #94A3B8; font-size: 14px; margin-bottom: 20px; }
+        input { width: 100%; padding: 15px; border-radius: 10px; border: none; background: #0F172A; color: white; font-size: 16px; margin-bottom: 15px; box-sizing: border-box; text-align: center; letter-spacing: 2px; }
+        input:focus { outline: 2px solid #3B82F6; }
+        button { background: #3B82F6; color: white; border: none; width: 100%; padding: 15px; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button:hover { background: #2563EB; }
+        #result-box { display: none; margin-top: 20px; padding: 20px; background: #0F172A; border-radius: 10px; border: 1px solid #334155; word-wrap: break-word; }
+        #error-msg { color: #EF4444; font-size: 14px; display: none; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">🔒</div>
+        <h2>Locked Message</h2>
+        <p>This QR code contains a hidden message.</p>
+        
+        <div id="unlock-form">
+            <p id="error-msg">Incorrect PIN. Try again.</p>
+            <input type="password" id="pin-input" placeholder="Enter PIN">
+            <button onclick="unlockMessage()">Reveal Message</button>
+        </div>
+
+        <div id="result-box"></div>
+    </div>
+
+    <script>
+        function decryptData(encryptedBase64, pin) {
+            try {
+                const encryptedStr = atob(encryptedBase64);
+                const encryptedBytes = new Uint8Array(encryptedStr.length);
+                for(let i=0; i<encryptedStr.length; i++) encryptedBytes[i] = encryptedStr.charCodeAt(i);
+
+                const pinBytes = new TextEncoder().encode(pin);
+                const decryptedBytes = new Uint8Array(encryptedBytes.length);
+
+                for (let i = 0; i < encryptedBytes.length; i++) {
+                    decryptedBytes[i] = encryptedBytes[i] ^ pinBytes[i % pinBytes.length];
+                }
+                return new TextDecoder().decode(decryptedBytes);
+            } catch (e) {
+                return "ERROR_DECRYPT";
+            }
+        }
+
+        function unlockMessage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const encryptedData = urlParams.get('data');
+            const pin = document.getElementById('pin-input').value;
+            
+            if (!encryptedData || !pin) return;
+
+            const decrypted = decryptData(encryptedData, pin);
+            
+            if (decrypted === "ERROR_DECRYPT" || !decrypted.trim()) {
+                document.getElementById('error-msg').style.display = 'block';
+            } else {
+                document.getElementById('unlock-form').style.display = 'none';
+                const resultBox = document.getElementById('result-box');
+                resultBox.style.display = 'block';
+                resultBox.innerText = decrypted;
+                document.querySelector('.icon').innerText = '🔓';
+                document.querySelector('h2').innerText = 'Message Unlocked';
+                document.querySelector('p').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
