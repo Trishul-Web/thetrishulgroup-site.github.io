@@ -80,13 +80,17 @@
 
         /* Raw QR Code Styles */
         .qr-title {
-            font-size: 14px; color: #94A3B8; margin-top: 25px; margin-bottom: 10px; font-weight: bold;
+            font-size: 14px; color: #94A3B8; margin-top: 25px; margin-bottom: 4px; font-weight: bold;
+        }
+        .pro-tip {
+            font-size: 12px; color: #3B82F6; margin-bottom: 12px; font-weight: 600;
         }
         #qr-container {
             background: white; padding: 15px; border-radius: 12px; display: inline-block;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            user-select: auto; -webkit-user-select: auto; -webkit-touch-callout: default;
         }
-        #qr-container img { display: block; margin: 0 auto; }
+        #qr-container img { display: block; margin: 0 auto; pointer-events: auto; }
 
         /* Premium App Promotion Styles */
         .divider { height: 1px; background: #334155; margin: 30px 0 24px 0; border: none; }
@@ -146,15 +150,31 @@
     </div>
 
     <script>
-        function triggerAppChooser(dataToShare) {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'QR Code Data',
-                    text: dataToShare
-                }).catch((error) => console.log('Error sharing', error));
-            } else {
-                alert("Your browser doesn't support the App Chooser.");
+        // --- NEW: NATIVE IMAGE SHARE FUNCTION ---
+        function shareQRImage() {
+            const qrContainer = document.getElementById("qr-container");
+            const canvas = qrContainer.querySelector("canvas");
+            
+            if (!canvas) {
+                alert("QR code is not ready yet.");
+                return;
             }
+
+            // Convert canvas to a blob (image file)
+            canvas.toBlob(function(blob) {
+                const file = new File([blob], "secret_qr.png", { type: "image/png" });
+                
+                // Check if the browser supports sharing FILES (images)
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    navigator.share({
+                        files: [file],
+                        title: 'Unlocked QR Code',
+                        text: 'Here is the unlocked QR code!'
+                    }).catch((error) => console.log('Error sharing image', error));
+                } else {
+                    alert("Your browser blocks image sharing. Please long-press the QR code below to save or share it!");
+                }
+            }, 'image/png');
         }
 
         function decryptData(encryptedBase64, pin) {
@@ -192,17 +212,15 @@
                 
                 const actualMessage = decrypted.replace("DEVDUO_VALID:", "");
                 
-                // --- SMART DATA PARSER ---
                 let actionHtml = '';
                 let infoHtml = '';
 
                 if (actualMessage.startsWith('http://') || actualMessage.startsWith('https://')) {
-                    actionHtml = `<a href="${actualMessage}" class="action-btn">🌍 Open Link</a>`;
+                    actionHtml = `<a href="${actualMessage}" target="_blank" class="action-btn">🌍 Open Link</a>`;
                     infoHtml = `<div class="info-box"><strong>🔗 Link:</strong> <br>${actualMessage}</div>`;
                 
                 } else if (actualMessage.startsWith('upi://')) {
-                    actionHtml = `<a href="${actualMessage}" class="action-btn">💸 Pay Now (Default App)</a>`;
-                    
+                    actionHtml = `<a href="${actualMessage}" target="_blank" class="action-btn">💸 Pay Now (Default App)</a>`;
                     const upiString = actualMessage.replace('upi://pay?', '');
                     const upiParams = new URLSearchParams(upiString);
                     const pa = upiParams.get('pa') || 'N/A';
@@ -227,11 +245,9 @@
                     const blob = new Blob([actualMessage], { type: 'text/vcard' });
                     const url = URL.createObjectURL(blob);
                     actionHtml = `<a href="${url}" download="contact.vcf" class="action-btn">👤 Save Contact</a>`;
-                    
                     const fnMatch = actualMessage.match(/FN:(.*?)(?:\n|$)/);
                     const telMatch = actualMessage.match(/TEL:(.*?)(?:\n|$)/);
                     const emailMatch = actualMessage.match(/EMAIL:(.*?)(?:\n|$)/);
-                    
                     infoHtml = `<div class="info-box">
                                     <strong>👤 Name:</strong> ${fnMatch ? fnMatch[1] : 'N/A'}<br>
                                     <strong>📞 Phone:</strong> ${telMatch ? telMatch[1] : 'N/A'}<br>
@@ -242,10 +258,8 @@
                     const blob = new Blob([actualMessage], { type: 'text/calendar' });
                     const url = URL.createObjectURL(blob);
                     actionHtml = `<a href="${url}" download="event.ics" class="action-btn">📅 Save Event</a>`;
-                    
                     const summaryMatch = actualMessage.match(/SUMMARY:(.*?)(?:\n|$)/);
                     const locMatch = actualMessage.match(/LOCATION:(.*?)(?:\n|$)/);
-                    
                     infoHtml = `<div class="info-box">
                                     <strong>📅 Event:</strong> ${summaryMatch ? summaryMatch[1] : 'N/A'}<br>
                                     <strong>📍 Location:</strong> ${locMatch ? locMatch[1] : 'N/A'}
@@ -253,33 +267,31 @@
                 
                 } else if (actualMessage.startsWith('MATMSG:')) {
                     const emailMatch = actualMessage.match(/TO:(.*?);/);
-                    actionHtml = `<a href="mailto:${emailMatch ? emailMatch[1] : ''}" class="action-btn">✉️ Send Email</a>`;
-                    
+                    actionHtml = `<a href="mailto:${emailMatch ? emailMatch[1] : ''}" target="_blank" class="action-btn">✉️ Send Email</a>`;
                     const subMatch = actualMessage.match(/SUB:(.*?);/);
                     infoHtml = `<div class="info-box">
                                     <strong>✉️ To:</strong> ${emailMatch ? emailMatch[1] : 'N/A'}<br>
                                     <strong>📝 Subject:</strong> ${subMatch ? subMatch[1] : 'N/A'}
                                 </div>`;
-                
                 } else {
                     infoHtml = `<div class="info-box">${actualMessage}</div>`;
                 }
 
+                // Call the new shareQRImage function!
                 let shareHtml = '';
                 if (navigator.share) {
-                    shareHtml = `<button onclick="triggerAppChooser(decodeURIComponent('${encodeURIComponent(actualMessage)}'))" class="action-btn secondary-btn">📤 Choose App / Share</button>`;
+                    shareHtml = `<button onclick="shareQRImage()" class="action-btn secondary-btn">📤 Share QR Image</button>`;
                 }
 
-                // Render the complete UI including the new QR container
                 resultBox.innerHTML = `
                     ${infoHtml}
                     ${actionHtml}
                     ${shareHtml}
                     <div class="qr-title">⬇️ Save Unlocked QR Code</div>
+                    <div class="pro-tip">💡 Tip: Long-press this QR to open specific apps!</div>
                     <div id="qr-container"></div>
                 `;
                 
-                // Generate the QR code visually
                 new QRCode(document.getElementById("qr-container"), {
                     text: actualMessage,
                     width: 180,
