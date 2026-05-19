@@ -383,14 +383,80 @@
                 resultBox.style.display = 'block';
                 const msg = decrypted.replace("DEVDUO_VALID:", "");
 
-                let actionBtn = '';
-                if (msg.startsWith('http') || msg.startsWith('upi://')) {
-                    actionBtn = `<a href="${msg}" target="_blank" class="action-btn">🚀 Open / Pay Now</a>`;
+                let actionHtml = '';
+                let infoHtml = '';
+
+                if (msg.startsWith('http://') || msg.startsWith('https://')) {
+                    actionHtml = `<a href="${msg}" target="_blank" class="action-btn">🌍 Open Website</a>`;
+                    infoHtml = `<div class="info-box">
+                                    <strong style="color: #3B82F6; font-size: 16px;">🔗 Website Link</strong><br><br>
+                                    <span style="color:#CBD5E1; word-break: break-all;">${msg}</span>
+                                </div>`;
+                } else if (msg.startsWith('upi://')) {
+                    actionHtml = `<a href="${msg}" target="_blank" class="action-btn">💸 Pay Now</a>`;
+                    const upiString = msg.replace('upi://pay?', '');
+                    const upiParams = new URLSearchParams(upiString);
+                    const pa = upiParams.get('pa') || 'N/A';
+                    const pn = upiParams.get('pn') ? decodeURIComponent(upiParams.get('pn')) : 'N/A';
+                    const am = upiParams.get('am');
+
+                    infoHtml = `<div class="info-box">
+                                    <strong style="color: #14B8A6; font-size: 16px;">🏦 UPI Payment</strong><br><br>
+                                    <strong style="color: #94A3B8;">Receiver:</strong> <span style="color:#F8FAFC;">${pn}</span><br>
+                                    <strong style="color: #94A3B8;">UPI ID:</strong> <span style="color:#CBD5E1;">${pa}</span>
+                                    ${am ? `<br><strong style="color: #94A3B8;">Amount:</strong> <span style="color:#F8FAFC; font-weight: bold;">₹${am}</span>` : ''}
+                                </div>`;
+                } else if (msg.startsWith('WIFI:')) {
+                    const ssidMatch = msg.match(/S:(.*?);/);
+                    const passMatch = msg.match(/P:(.*?);/);
+                    infoHtml = `<div class="info-box">
+                                    <strong style="color: #F59E0B; font-size: 16px;">📶 Wi-Fi Network</strong><br><br>
+                                    <strong style="color: #94A3B8;">Network Name:</strong> <span style="color:#F8FAFC;">${ssidMatch ? ssidMatch[1] : 'Unknown'}</span><br>
+                                    <strong style="color: #94A3B8;">Password:</strong> <span style="color:#CBD5E1;">${passMatch ? passMatch[1] : 'None'}</span>
+                                </div>`;
+                } else if (msg.startsWith('BEGIN:VCARD')) {
+                    const blob = new Blob([msg], { type: 'text/vcard' });
+                    const url = URL.createObjectURL(blob);
+                    actionHtml = `<a href="${url}" download="contact.vcf" class="action-btn">👤 Save Contact</a>`;
+                    const fnMatch = msg.match(/FN:(.*?)(?:\n|$)/);
+                    const telMatch = msg.match(/TEL:(.*?)(?:\n|$)/);
+                    const emailMatch = msg.match(/EMAIL:(.*?)(?:\n|$)/);
+                    infoHtml = `<div class="info-box">
+                                    <strong style="color: #8B5CF6; font-size: 16px;">📇 Contact Card</strong><br><br>
+                                    <strong style="color: #94A3B8;">Name:</strong> <span style="color:#F8FAFC;">${fnMatch ? fnMatch[1] : 'N/A'}</span><br>
+                                    <strong style="color: #94A3B8;">Phone:</strong> <span style="color:#CBD5E1;">${telMatch ? telMatch[1] : 'N/A'}</span><br>
+                                    <strong style="color: #94A3B8;">Email:</strong> <span style="color:#CBD5E1;">${emailMatch ? emailMatch[1] : 'N/A'}</span>
+                                </div>`;
+                } else if (msg.startsWith('BEGIN:VCALENDAR')) {
+                    const blob = new Blob([msg], { type: 'text/calendar' });
+                    const url = URL.createObjectURL(blob);
+                    actionHtml = `<a href="${url}" download="event.ics" class="action-btn">📅 Save Event</a>`;
+                    const summaryMatch = msg.match(/SUMMARY:(.*?)(?:\n|$)/);
+                    const locMatch = msg.match(/LOCATION:(.*?)(?:\n|$)/);
+                    infoHtml = `<div class="info-box">
+                                    <strong style="color: #06B6D4; font-size: 16px;">📅 Calendar Event</strong><br><br>
+                                    <strong style="color: #94A3B8;">Event:</strong> <span style="color:#F8FAFC;">${summaryMatch ? summaryMatch[1] : 'N/A'}</span><br>
+                                    <strong style="color: #94A3B8;">Location:</strong> <span style="color:#CBD5E1;">${locMatch ? locMatch[1] : 'N/A'}</span>
+                                </div>`;
+                } else if (msg.startsWith('MATMSG:')) {
+                    const emailMatch = msg.match(/TO:(.*?);/);
+                    actionHtml = `<a href="mailto:${emailMatch ? emailMatch[1] : ''}" target="_blank" class="action-btn">✉️ Send Email</a>`;
+                    const subMatch = msg.match(/SUB:(.*?);/);
+                    infoHtml = `<div class="info-box">
+                                    <strong style="color: #F43F5E; font-size: 16px;">📧 Email Message</strong><br><br>
+                                    <strong style="color: #94A3B8;">To:</strong> <span style="color:#F8FAFC;">${emailMatch ? emailMatch[1] : 'N/A'}</span><br>
+                                    <strong style="color: #94A3B8;">Subject:</strong> <span style="color:#CBD5E1;">${subMatch ? subMatch[1] : 'N/A'}</span>
+                                </div>`;
+                } else {
+                    infoHtml = `<div class="info-box">
+                                    <strong style="color: #10B981; font-size: 16px;">📝 Info</strong><br><br>
+                                    <span style="color:#CBD5E1; word-break: break-word;">${msg}</span>
+                                </div>`;
                 }
 
                 resultBox.innerHTML = `
-                    <div class="info-box">${msg}</div>
-                    ${actionBtn}
+                    ${infoHtml}
+                    ${actionHtml}
                     <button onclick="shareQRImage()" class="action-btn secondary-btn">🖼 Share QR Image</button>
                     <button onclick="triggerAppChooser('${encodeURIComponent(msg)}')" class="action-btn secondary-btn">📤 Choose App / Share Text</button>
                     <div class="qr-title">⬇️ Save Unlocked QR</div>
