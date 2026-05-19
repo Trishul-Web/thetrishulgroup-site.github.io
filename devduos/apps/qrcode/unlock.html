@@ -7,13 +7,26 @@
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: #0F172A; color: white; display: flex; align-items: center; 
-            justify-content: center; min-height: 100vh; margin: 0; padding: 20px; box-sizing: border-box;
+            background: #0F172A; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+            box-sizing: border-box;
         }
         .card { 
-            background: #1E293B; padding: 30px 24px; border-radius: 24px; 
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6); text-align: center; 
-            width: 100%; max-width: 400px; border: 1px solid #334155; margin: 15px auto; 
+            background: #1E293B; 
+            padding: 30px 24px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); 
+            text-align: center; 
+            width: 100%; 
+            max-width: 400px; 
+            border: 1px solid #334155; 
+            margin: 15px auto; 
         }
 
         /* Top Unlock Section */
@@ -51,11 +64,10 @@
         }
         .action-btn:hover { background: #059669; }
         
-        .secondary-btn { background: transparent; border: 2px solid #475569; color: #CBD5E1; margin-top: 10px; }
-        .secondary-btn:hover { background: #334155; color: white; }
-
-        .button-group { display: flex; gap: 10px; margin-top: 10px; }
-        .button-group .secondary-btn { margin-top: 0; flex: 1; padding: 12px 10px; font-size: 13px; }
+        .secondary-btn {
+            background: transparent; border: 2px solid #475569; color: #CBD5E1; margin-top: 10px;
+        }
+        .secondary-btn:hover { background: #334155; }
 
         .raw-text-box {
             background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;
@@ -120,41 +132,15 @@
     </div>
 
     <script>
-        // Bulletproof Copy to Clipboard
-        function copyToClipboard(text) {
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(text).then(() => {
-                    alert("✅ Copied to clipboard! You can now paste this anywhere.");
-                }).catch(() => fallbackCopyTextToClipboard(text));
-            } else {
-                fallbackCopyTextToClipboard(text);
-            }
-        }
-
-        function fallbackCopyTextToClipboard(text) {
-            var textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";  // Avoid scrolling to bottom
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            try {
-                document.execCommand('copy');
-                alert("✅ Copied to clipboard! You can now paste this anywhere.");
-            } catch (err) {
-                alert("❌ Failed to copy. Please copy the text manually.");
-            }
-            document.body.removeChild(textArea);
-        }
-
-        // Native App Chooser
+        // Trigger Native App Chooser
         function triggerAppChooser(dataToShare) {
             if (navigator.share) {
                 navigator.share({
+                    title: 'QR Code Data',
                     text: dataToShare
-                }).catch((error) => console.log('Share blocked by WebView', error));
+                }).catch((error) => console.log('Error sharing', error));
             } else {
-                alert("Your current browser blocks the App Chooser. Please use the 'Copy' button instead.");
+                alert("Your browser doesn't support the App Chooser.");
             }
         }
 
@@ -192,7 +178,6 @@
                 resultBox.style.display = 'block';
                 
                 const actualMessage = decrypted.replace("DEVDUO_VALID:", "");
-                const safeEncodedMessage = encodeURIComponent(actualMessage).replace(/'/g, "%27");
                 
                 // SMART ACTION DETECTOR
                 let actionHtml = '';
@@ -221,25 +206,24 @@
                     actionHtml = `<a href="mailto:${emailMatch ? emailMatch[1] : ''}" class="action-btn">✉️ Send Email</a>`;
                 }
 
-                // Dual Fallback Buttons (Copy & Share)
-                let secondaryButtons = `
-                    <div class="button-group">
-                        <button onclick="copyToClipboard(decodeURIComponent('${safeEncodedMessage}'))" class="action-btn secondary-btn">📋 Copy</button>
-                        <button onclick="triggerAppChooser(decodeURIComponent('${safeEncodedMessage}'))" class="action-btn secondary-btn">📤 Share</button>
-                    </div>
-                `;
+                // Add the dynamic "Choose App" button if the browser supports it
+                let shareHtml = '';
+                if (navigator.share) {
+                    // Pass the actual message to the share function via an encoded URI component to prevent quote breaks
+                    shareHtml = `<button onclick="triggerAppChooser(decodeURIComponent('${encodeURIComponent(actualMessage)}'))" class="action-btn secondary-btn">📤 Choose App / Share</button>`;
+                }
 
                 // Render the UI
                 if (actionHtml !== '') {
                     resultBox.innerHTML = `
                         ${actionHtml}
-                        ${secondaryButtons}
+                        ${shareHtml}
                         <div class="raw-text-box">${actualMessage}</div>
                     `;
                 } else {
                     resultBox.innerHTML = `
                         ${actualMessage}
-                        ${secondaryButtons}
+                        ${shareHtml}
                     `;
                 }
                 
