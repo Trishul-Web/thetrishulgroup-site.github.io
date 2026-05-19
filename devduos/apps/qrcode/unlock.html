@@ -1,244 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Message</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0F172A;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #0F172A; 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
             box-sizing: border-box;
         }
-
-        .card {
-            background: #1E293B;
-            padding: 30px 24px;
-            border-radius: 24px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            text-align: center;
-            width: 100%;
-            max-width: 400px;
-            border: 1px solid #334155;
-            margin: 15px auto;
+        .card { 
+            background: #1E293B; 
+            padding: 30px 24px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6); 
+            text-align: center; 
+            width: 100%; 
+            max-width: 400px; 
+            border: 1px solid #334155; 
+            margin: 15px auto; 
         }
 
         /* Top Unlock Section */
-        .icon {
-            font-size: 40px;
-            margin-bottom: 5px;
+        .brand-logo {
+            width: 76px; height: 76px; border-radius: 50%; object-fit: cover;
+            margin: 0 auto 12px auto; display: block; border: 2px solid #3B82F6;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); background-color: #0F172A;
         }
-
-        h2 {
-            margin: 0 0 10px 0;
-            font-size: 24px;
-            color: #F8FAFC;
-        }
-
-        p.desc {
-            color: #94A3B8;
-            font-size: 14px;
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-
+        .icon { font-size: 40px; margin-bottom: 5px; }
+        h2 { margin: 0 0 10px 0; font-size: 24px; color: #F8FAFC; }
+        p.desc { color: #94A3B8; font-size: 14px; margin-bottom: 24px; line-height: 1.5; }
+        
         /* Input & Form Styles */
-        input {
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            background: #0F172A;
-            color: white;
-            font-size: 16px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-            text-align: center;
-            letter-spacing: 2px;
+        input { 
+            width: 100%; padding: 16px; border-radius: 12px; border: 1px solid #334155; 
+            background: #0F172A; color: white; font-size: 16px; margin-bottom: 15px; 
+            box-sizing: border-box; text-align: center; letter-spacing: 2px; 
         }
+        input:focus { outline: 2px solid #3B82F6; border-color: transparent; }
+        button.unlock-btn { 
+            background: #3B82F6; color: white; border: none; width: 100%; padding: 16px; 
+            border-radius: 12px; font-size: 16px; font-weight: bold; cursor: pointer; 
+            transition: 0.2s; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        button.unlock-btn:hover { background: #2563EB; }
+        
+        #result-box { display: none; margin-top: 10px; padding: 20px; background: #0F172A; border-radius: 12px; border: 1px solid #334155; word-wrap: break-word; font-size: 16px; line-height: 1.5; color: #F1F5F9; }
+        #error-msg { color: #EF4444; font-size: 14px; display: none; margin-bottom: 15px; font-weight: bold; }
 
-        input:focus {
-            outline: 2px solid #3B82F6;
-            border-color: transparent;
+        /* Smart Actions Styles */
+        .action-btn {
+            display: inline-block; background: #10B981; color: white; text-decoration: none;
+            padding: 12px 20px; border-radius: 10px; font-weight: bold; margin-top: 15px;
+            width: 100%; box-sizing: border-box; transition: 0.2s; font-size: 15px;
         }
-
-        button.unlock-btn {
-            background: #3B82F6;
-            color: white;
-            border: none;
-            width: 100%;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        .action-btn:hover { background: #059669; }
+        .raw-text-box {
+            background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;
+            font-size: 13px; color: #94A3B8; margin-top: 10px; word-break: break-all;
         }
-
-        button.unlock-btn:hover {
-            background: #2563EB;
-        }
-
-        #result-box {
-            display: none;
-            margin-top: 10px;
-            padding: 20px;
-            background: #0F172A;
-            border-radius: 12px;
-            border: 1px solid #334155;
-            word-wrap: break-word;
-            font-size: 16px;
-            line-height: 1.5;
-            color: #F1F5F9;
-        }
-
-        #error-msg {
-            color: #EF4444;
-            font-size: 14px;
-            display: none;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
+        .redirect-msg { font-size: 12px; color: #10B981; margin-top: 10px; font-weight: bold; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
 
         /* Premium App Promotion Styles */
-        .divider {
-            height: 1px;
-            background: #334155;
-            margin: 30px 0 24px 0;
-            border: none;
+        .divider { height: 1px; background: #334155; margin: 30px 0 24px 0; border: none; }
+        .promo-section { 
+            background: linear-gradient(145deg, #1E293B, #0F172A); border-radius: 20px; 
+            padding: 20px; border: 1px solid #334155; box-shadow: 0 8px 25px rgba(0,0,0,0.3); text-align: left;
         }
-
-        .promo-section {
-            background: linear-gradient(145deg, #1E293B, #0F172A);
-            border-radius: 20px;
-            padding: 20px;
-            border: 1px solid #334155;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            text-align: left;
-        }
-
-        /* App Header (Logo & Title) */
-        .app-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 20px;
-        }
-
-        .app-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 14px;
-            object-fit: cover;
-            border: 1px solid #475569;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-            background-color: white;
-        }
-
-        .app-title-container {
-            flex: 1;
-        }
-
-        .app-title {
-            font-size: 16px;
-            color: #F8FAFC;
-            font-weight: 800;
-            margin: 0 0 4px 0;
-            line-height: 1.2;
-        }
-
-        .app-rating {
-            font-size: 12px;
-            color: #94A3B8;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .stars {
-            color: #FBBF24;
-            font-size: 14px;
-            letter-spacing: 1px;
-        }
-
-        /* Feature List */
-        .feature-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 20px 0;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .feature-item {
-            font-size: 13px;
-            color: #CBD5E1;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-        }
-
-        .check-icon {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10B981;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-        }
-
-        /* Download Button */
-        .download-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(to right, #10B981, #059669);
-            color: white;
-            text-decoration: none;
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 800;
-            width: 100%;
-            box-sizing: border-box;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .download-btn:hover {
-            background: linear-gradient(to right, #059669, #047857);
-            transform: translateY(-2px);
-        }
-
-        .play-icon {
-            font-size: 20px;
-            margin-right: 10px;
+        .app-header { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+        .app-icon { width: 60px; height: 60px; border-radius: 14px; object-fit: cover; border: 1px solid #475569; }
+        .app-title-container { flex: 1; }
+        .app-title { font-size: 16px; color: #F8FAFC; font-weight: 800; margin: 0 0 4px 0; line-height: 1.2; }
+        .app-rating { font-size: 12px; color: #94A3B8; display: flex; align-items: center; gap: 4px; }
+        .stars { color: #FBBF24; font-size: 14px; letter-spacing: 1px; }
+        .feature-list { list-style: none; padding: 0; margin: 0 0 20px 0; display: flex; flex-direction: column; gap: 10px; }
+        .feature-item { font-size: 13px; color: #CBD5E1; display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        .check-icon { background: rgba(16, 185, 129, 0.1); color: #10B981; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .download-btn { 
+            display: flex; align-items: center; justify-content: center; background: linear-gradient(to right, #10B981, #059669); 
+            color: white; text-decoration: none; padding: 16px; border-radius: 12px; font-size: 16px; font-weight: 800; 
+            width: 100%; box-sizing: border-box; transition: 0.3s; text-transform: uppercase; letter-spacing: 0.5px;
         }
     </style>
 </head>
-
 <body>
     <div class="card">
+        <img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=w480-h960-rw" alt="DevDuo Logo" class="brand-logo" onerror="this.style.display='none'">
         <div class="icon">🔒</div>
         <h2>Locked Data</h2>
         <p class="desc">This QR code contains hidden information that has been password-protected.</p>
-
+        
         <div id="unlock-form">
             <p id="error-msg">Incorrect password! Please try again.</p>
             <input type="password" id="pin-input" placeholder="Enter Password">
@@ -249,37 +109,20 @@
 
         <div class="divider"></div>
         <div class="promo-section">
-
             <div class="app-header">
-                <img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=w480-h960-rw"
-                    alt="App Logo" class="app-icon"
-                    onerror="this.src='https://via.placeholder.com/60/1E293B/FFFFFF?text=QR'">
+                <img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=w480-h960-rw" alt="App Logo" class="app-icon" onerror="this.src='https://via.placeholder.com/60/1E293B/FFFFFF?text=QR'">
                 <div class="app-title-container">
                     <h3 class="app-title">QR Code Scanner & Generator Pro</h3>
-                    <div class="app-rating">
-                        <span class="stars">★★★★★</span> Free App
-                    </div>
+                    <div class="app-rating"><span class="stars">★★★★★</span> Free App</div>
                 </div>
             </div>
-
             <ul class="feature-list">
-                <li class="feature-item">
-                    <div class="check-icon">✓</div> Lock any QR with a Password
-                </li>
-                <li class="feature-item">
-                    <div class="check-icon">✓</div> Generate Instant UPI Payment QRs
-                </li>
-                <li class="feature-item">
-                    <div class="check-icon">✓</div> Track all Scans & Save History
-                </li>
-                <li class="feature-item">
-                    <div class="check-icon">✓</div> Custom Colors, Logos & Brand Frames
-                </li>
+                <li class="feature-item"><div class="check-icon">✓</div> Lock any QR with a Password</li>
+                <li class="feature-item"><div class="check-icon">✓</div> Generate Instant UPI Payment QRs</li>
+                <li class="feature-item"><div class="check-icon">✓</div> Custom Colors, Logos & Brand Frames</li>
             </ul>
-
-            <a href="https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator" target="_blank"
-                class="download-btn">
-                <span class="play-icon">▶</span> Get it on Play Store
+            <a href="https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator" target="_blank" class="download-btn">
+                ▶ Get it on Play Store
             </a>
         </div>
     </div>
@@ -289,11 +132,9 @@
             try {
                 const encryptedStr = atob(encryptedBase64);
                 const encryptedBytes = new Uint8Array(encryptedStr.length);
-                for (let i = 0; i < encryptedStr.length; i++) encryptedBytes[i] = encryptedStr.charCodeAt(i);
-
+                for(let i=0; i<encryptedStr.length; i++) encryptedBytes[i] = encryptedStr.charCodeAt(i);
                 const pinBytes = new TextEncoder().encode(pin);
                 const decryptedBytes = new Uint8Array(encryptedBytes.length);
-
                 for (let i = 0; i < encryptedBytes.length; i++) {
                     decryptedBytes[i] = encryptedBytes[i] ^ pinBytes[i % pinBytes.length];
                 }
@@ -307,25 +148,69 @@
             const urlParams = new URLSearchParams(window.location.search);
             const encryptedData = urlParams.get('data');
             const pin = document.getElementById('pin-input').value;
-
             if (!encryptedData || !pin) return;
 
             const decrypted = decryptData(encryptedData, pin);
-
-            // SECURITY CHECK: Does it have our hidden signature?
+            
             if (decrypted === "ERROR_DECRYPT" || !decrypted.startsWith("DEVDUO_VALID:")) {
                 document.getElementById('error-msg').style.display = 'block';
             } else {
                 document.getElementById('error-msg').style.display = 'none';
                 document.getElementById('unlock-form').style.display = 'none';
-
+                
                 const resultBox = document.getElementById('result-box');
                 resultBox.style.display = 'block';
-
-                // Remove the hidden signature and show the real message
+                
                 const actualMessage = decrypted.replace("DEVDUO_VALID:", "");
-                resultBox.innerText = actualMessage;
+                
+                // SMART ACTION DETECTOR
+                let actionHtml = '';
+                let autoRedirect = false;
+                let redirectUrl = '';
 
+                if (actualMessage.startsWith('http://') || actualMessage.startsWith('https://')) {
+                    redirectUrl = actualMessage;
+                    actionHtml = `<a href="${redirectUrl}" class="action-btn">🌍 Open Link</a>`;
+                    autoRedirect = true;
+                } else if (actualMessage.startsWith('upi://')) {
+                    redirectUrl = actualMessage;
+                    actionHtml = `<a href="${redirectUrl}" class="action-btn">💸 Pay Now (UPI)</a>`;
+                    autoRedirect = true;
+                } else if (actualMessage.startsWith('WIFI:')) {
+                    const ssidMatch = actualMessage.match(/S:(.*?);/);
+                    const passMatch = actualMessage.match(/P:(.*?);/);
+                    actionHtml = `<div style="text-align:left; background:#1E293B; padding:15px; border-radius:10px;">
+                                    <strong>📡 Network:</strong> ${ssidMatch ? ssidMatch[1] : 'Unknown'}<br>
+                                    <strong>🔑 Password:</strong> ${passMatch ? passMatch[1] : 'None'}
+                                  </div>`;
+                } else if (actualMessage.startsWith('BEGIN:VCARD')) {
+                    const blob = new Blob([actualMessage], { type: 'text/vcard' });
+                    const url = URL.createObjectURL(blob);
+                    actionHtml = `<a href="${url}" download="contact.vcf" class="action-btn">👤 Save Contact</a>`;
+                } else if (actualMessage.startsWith('BEGIN:VCALENDAR')) {
+                    const blob = new Blob([actualMessage], { type: 'text/calendar' });
+                    const url = URL.createObjectURL(blob);
+                    actionHtml = `<a href="${url}" download="event.ics" class="action-btn">📅 Save Event</a>`;
+                } else if (actualMessage.startsWith('MATMSG:')) {
+                    const emailMatch = actualMessage.match(/TO:(.*?);/);
+                    actionHtml = `<a href="mailto:${emailMatch ? emailMatch[1] : ''}" class="action-btn">✉️ Send Email</a>`;
+                }
+
+                // Render the UI
+                if (actionHtml !== '') {
+                    resultBox.innerHTML = `
+                        ${actionHtml}
+                        ${autoRedirect ? `<div class="redirect-msg">Opening automatically in 3 seconds...</div>` : ''}
+                        <div class="raw-text-box">${actualMessage}</div>
+                    `;
+                    
+                    if (autoRedirect) {
+                        setTimeout(() => { window.location.href = redirectUrl; }, 3000);
+                    }
+                } else {
+                    resultBox.innerText = actualMessage; // Standard Text
+                }
+                
                 document.querySelector('.icon').innerText = '🔓';
                 document.querySelector('h2').innerText = 'Unlocked Successfully';
                 document.querySelector('p.desc').style.display = 'none';
@@ -333,5 +218,4 @@
         }
     </script>
 </body>
-
 </html>
