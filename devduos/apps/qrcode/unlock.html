@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secret Message</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -69,13 +70,23 @@
         }
         .secondary-btn:hover { background: #334155; color: white; }
 
-        /* New Info Box Style */
+        /* Info Box Style */
         .info-box {
             background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;
             font-size: 14px; color: #E2E8F0; margin-top: 15px; text-align: left;
             border: 1px solid rgba(255,255,255,0.1); line-height: 1.6;
         }
         .info-box strong { color: #94A3B8; margin-right: 5px; }
+
+        /* Raw QR Code Styles */
+        .qr-title {
+            font-size: 14px; color: #94A3B8; margin-top: 25px; margin-bottom: 10px; font-weight: bold;
+        }
+        #qr-container {
+            background: white; padding: 15px; border-radius: 12px; display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        #qr-container img { display: block; margin: 0 auto; }
 
         /* Premium App Promotion Styles */
         .divider { height: 1px; background: #334155; margin: 30px 0 24px 0; border: none; }
@@ -192,7 +203,6 @@
                 } else if (actualMessage.startsWith('upi://')) {
                     actionHtml = `<a href="${actualMessage}" class="action-btn">💸 Pay Now (Default App)</a>`;
                     
-                    // Parse UPI Data securely
                     const upiString = actualMessage.replace('upi://pay?', '');
                     const upiParams = new URLSearchParams(upiString);
                     const pa = upiParams.get('pa') || 'N/A';
@@ -252,22 +262,32 @@
                                 </div>`;
                 
                 } else {
-                    // Plain Text
                     infoHtml = `<div class="info-box">${actualMessage}</div>`;
                 }
 
-                // Share Button (Only if supported)
                 let shareHtml = '';
                 if (navigator.share) {
                     shareHtml = `<button onclick="triggerAppChooser(decodeURIComponent('${encodeURIComponent(actualMessage)}'))" class="action-btn secondary-btn">📤 Choose App / Share</button>`;
                 }
 
-                // Render the complete UI
+                // Render the complete UI including the new QR container
                 resultBox.innerHTML = `
                     ${infoHtml}
                     ${actionHtml}
                     ${shareHtml}
+                    <div class="qr-title">⬇️ Save Unlocked QR Code</div>
+                    <div id="qr-container"></div>
                 `;
+                
+                // Generate the QR code visually
+                new QRCode(document.getElementById("qr-container"), {
+                    text: actualMessage,
+                    width: 180,
+                    height: 180,
+                    colorDark : "#0F172A",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.M
+                });
                 
                 document.querySelector('.icon').innerText = '🔓';
                 document.querySelector('h2').innerText = 'Unlocked Successfully';
