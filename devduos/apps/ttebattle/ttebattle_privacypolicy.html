@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - TTE Battle | DevDuo's</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --border: #222;
+            --brand-1: #00d2ff;
+            --brand-2: #ff2a85;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: min(800px, 90vw);
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        h1,
+        h2 {
+            font-family: var(--font-display);
+            color: var(--brand-1);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        a {
+            color: var(--brand-2);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 2rem;
+        }
+
+        .timestamp {
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(60% 70% at 10% 10%, rgba(0, 210, 255, .14), transparent 60%),
+                radial-gradient(70% 70% at 90% 90%, rgba(255, 42, 133, .12), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02);
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+
+        .highlight-box {
+            background: rgba(0, 210, 255, 0.08);
+            border: 1px solid var(--brand-1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .highlight-box h2 {
+            margin-top: 0;
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+    <header>
+        <div class="container-header">
+            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="ttebattle_info.html" class="app-bar-link">App Info</a>
+                <a href="ttebattle_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
+                <a href="ttebattle_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container">
+        <h1>Privacy Policy</h1>
+        <p class="timestamp">Last Updated: August 30, 2026</p>
+        <p>DevDuo ("we," "our," or "us") operates the <strong>TTE Battle: Tic Tac Toe Arena</strong> mobile application
+            (the "Service"). This Privacy Policy explains our commitment to player privacy, data protection, and local
+            retention models.</p>
+
+        <div class="highlight-box">
+            <h2>Local Game Save & Data Deletion Policy</h2>
+            <p><strong>TTE Battle is engineered on a strict offline, local-first architecture.</strong> We do not
+                collect, upload, transmit, or store your player names, tournament scores, or battle history on remote
+                cloud servers.</p>
+            <p><strong>Local Data Storage:</strong><br>
+                All match records, score tallies, avatar selections, and game preferences are saved strictly within your
+                device's private sandbox storage using local persistence mechanisms.</p>
+            <p><strong>Data Deletion Instructions:</strong><br>
+                Because your game data resides entirely on your device, you have total authority over its deletion:
+            </p>
+            <ul>
+                <li><strong>In-App Deletion:</strong> You can delete individual match records directly from the Match
+                    History screen or clear all history with a single tap.</li>
+                <li><strong>Clear App Storage:</strong> Navigate to your device's <em>Settings &gt; Apps &gt; TTE Battle
+                        &gt; Storage &gt; Clear Storage / Clear Data</em> to reset all statistics.</li>
+                <li><strong>Application Uninstallation:</strong> Uninstalling the application from your device
+                    permanently purges all local records and history files.</li>
+                <li><strong>No Server Deletion Required:</strong> Since we do not harvest or retain your data on
+                    external servers, external web-based deletion tickets are not needed.</li>
+            </ul>
+        </div>
+
+        <h2>1. Information We Do Not Collect</h2>
+        <ul>
+            <li><strong>Personal Identity:</strong> We do not require accounts, logins, emails, phone numbers, or
+                passwords.</li>
+            <li><strong>Location & Media Data:</strong> The game does not track GPS locations or access your camera,
+                media, or personal photos.</li>
+        </ul>
+
+        <h2>2. Third-Party Services & Diagnostics</h2>
+        <p>The app operates 100% offline. If diagnostic logs are collected via Google Play Console crash reporting, they
+            consist solely of anonymized hardware specifications and stack traces to fix app crashes and optimize
+            performance.</p>
+
+        <h2>3. Children's Privacy</h2>
+        <p>Our game is designed for all audiences and does not knowingly collect personally identifiable information
+            from children under 13.</p>
+
+        <h2>4. Changes to This Privacy Policy</h2>
+        <p>We may update our Privacy Policy periodically. Any updates will be reflected directly on this page with a
+            revised "Last Updated" timestamp.</p>
+
+        <h2>5. Contact Us</h2>
+        <p>If you have any questions or feedback regarding this Privacy Policy, please contact our team at: <a
+                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a>[cite: 1]</p>
+    </main>
+</body>
+
+</html>
