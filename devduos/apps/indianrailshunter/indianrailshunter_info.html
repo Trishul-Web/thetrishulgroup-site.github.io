@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Indian Rail Shunter - Railway Simulation | DevDuo's</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚂</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --card: #111;
+            --border: #222;
+            --brand-1: #f59e0b;
+            --brand-2: #10b981;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(60% 70% at 10% 10%, rgba(245, 158, 11, .14), transparent 60%),
+                radial-gradient(70% 70% at 90% 90%, rgba(16, 185, 129, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02);
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+
+        .container {
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        .hero {
+            padding-top: 6rem;
+            text-align: center;
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 28px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: #111;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .grand-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7vw, 5rem);
+            line-height: 1.05;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            color: #fafafa;
+        }
+
+        .intro-lede {
+            font-size: 1.25rem;
+            color: #c5c8ce;
+            max-width: 780px;
+            margin: .25rem auto 2.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000;
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            padding: 0.8rem 1.8rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: 0 0 3rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(17, 17, 17, .7);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            text-align: left;
+        }
+
+        .feature-card svg {
+            width: 32px;
+            height: 32px;
+            margin-bottom: 1rem;
+            color: var(--brand-1);
+        }
+
+        .feature-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: #f0f0f0;
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .visual-showcase {
+            background: #080808;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--muted);
+        }
+
+        footer {
+            padding: 4rem 0;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+    <header>
+        <div class="container">
+            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="indianrailshunter_info.html" class="app-bar-link active">App Info</a>
+                <a href="indianrailshunter_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
+                <a href="indianrailshunter_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="hero container">
+            <div class="hero-icon">🚂</div>
+            <h1 class="grand-title">Master the Yard, <span class="gradient-text">Shunt the Rails</span>.</h1>
+            <p class="intro-lede">
+                Take charge of real Indian Railway yard operations. Shunt rakes between maintenance sheds and platforms,
+                swap locomotives, assemble 3-engine freight runs, and supervise real-time passenger flows.
+            </p>
+            <a href="https://play.google.com/store/apps/developer?id=DevDuo%27s" target="_blank"
+                class="cta-button">Download on Play Store</a>
+        </section>
+        <section class="container">
+            <h2 class="section-title">Core Gameplay Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v.958" />
+                    </svg>
+                    <h3>Authentic Indian Rolling Stock</h3>
+                    <p>Operate authentic WAP-7, WDM-3A, WAG-9, and heavy twin-section WAG-12 locomotives alongside ICF,
+                        Utkrisht, LHB, and Vande Bharat rakes.</p>
+                </div>
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25A2.25 2.25 0 0113.5 8V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
+                    </svg>
+                    <h3>True Shunting & Engine Swapping</h3>
+                    <p>Push coaches from depot lines to passenger platforms, decouple yard shunters, and link high-speed
+                        road engines for on-time departures.</p>
+                </div>
+                <div class="feature-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h3>Triple-Engine Freight Workshop</h3>
+                    <p>Assemble multi-engine cargo consists in the Freight Workshop to run heavy coal, oil, and
+                        container freight flybys past your main junction.</p>
+                </div>
+            </div>
+        </section>
+        <section class="container">
+            <h2 class="section-title">Visual Showcase</h2>
+            <div class="visual-showcase">
+                <p>Featuring procedural train formations, realistic acceleration/braking physics, and 12-track Indian
+                    Railway ambient audio jukebox.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="indianrailshunter_privacypolicy.html">Privacy Policy</a>
+                <a href="indianrailshunter_termsandconditions.html">Terms of Service</a>
+            </div>
+            <p class="muted">&copy; 2026 Devduos. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
+        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+    </script>
+</body>
+
+</html>
