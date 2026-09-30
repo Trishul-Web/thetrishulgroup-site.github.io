@@ -496,8 +496,8 @@
         }
 
         .promo-icon {
-            width: 48px;
-            height: 48px;
+            width: 52px;
+            height: 52px;
             border-radius: 14px;
             background: linear-gradient(135deg, #2563EB, #7C3AED);
             color: #fff;
@@ -506,7 +506,15 @@
             justify-content: center;
             font-size: 24px;
             flex-shrink: 0;
-            box-shadow: 0 6px 16px rgba(37, 99, 235, .35);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .2);
+            overflow: hidden;
+        }
+
+        .promo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .promo-top strong {
@@ -936,7 +944,11 @@
                     var promo = el("div", "promo");
                     var top = el("div", "promo-top");
                     var pi = el("div", "promo-icon");
-                    pi.appendChild(faIcon("fa-solid fa-qrcode"));
+                    var appIcon = el("img");
+                    appIcon.alt = "Custom QR";
+                    appIcon.src = "https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=s512-rw";
+                    appIcon.onerror = function () { appIcon.replaceWith(faIcon("fa-solid fa-qrcode")); };
+                    pi.appendChild(appIcon);
                     top.appendChild(pi);
                     var tt = el("div");
                     tt.appendChild(el("strong", null, "Custom QR"));
