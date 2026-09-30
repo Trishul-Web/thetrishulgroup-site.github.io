@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Link Card</title>
+    <meta name="theme-color" id="themeColor" content="#EFF6FF">
+    <meta name="color-scheme" content="light dark">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -397,6 +399,101 @@
             font-weight: 700;
         }
 
+        /* APP PROMO CARD (free users) */
+        .promo {
+            margin-top: 36px;
+            background: var(--btn);
+            color: var(--btnText);
+            border: 1.5px solid var(--border);
+            border-radius: 22px;
+            padding: 20px 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+            text-align: center;
+        }
+
+        .promo-top {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+
+        .promo-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #2563EB, #7C3AED);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+            box-shadow: 0 6px 16px rgba(37, 99, 235, .35);
+        }
+
+        .promo-top strong {
+            display: block;
+            font-size: 15px;
+            font-weight: 800;
+        }
+
+        .promo-top small {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            opacity: .6;
+            margin-top: 2px;
+        }
+
+        .promo p {
+            font-size: 13px;
+            font-weight: 600;
+            opacity: .85;
+            margin: 14px 0 12px;
+            line-height: 1.45;
+        }
+
+        .promo-feats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .promo-feats span {
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(127, 127, 127, .14);
+        }
+
+        .promo-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #111827;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            padding: 14px;
+            border-radius: 14px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .25);
+            transition: transform .15s;
+        }
+
+        .promo-btn:active {
+            transform: scale(.97);
+        }
+
+        .promo-btn .gp {
+            font-size: 18px;
+        }
+
         /* PREVIEW MODE */
         .pbar {
             position: fixed;
@@ -430,7 +527,13 @@
     <div class="wrap" id="app"></div>
 
     <script>
-        var FOOTER_URL = "https://play.google.com/store/search?q=DevDuo%20QR%20Code&c=apps";
+        var FOOTER_URL = "https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator&utm_source=linkbio_card&utm_medium=qr";
+        var BAR_COLORS = { classic: "#EFF6FF", midnight: "#020617", sunset: "#F97316", ocean: "#0EA5E9", forest: "#10B981", royal: "#4C1D95" };
+
+        function setBarColor(c) {
+            var m = document.getElementById("themeColor");
+            if (m) m.setAttribute("content", c);
+        }
         var LAYOUTS = ["stack", "minimal", "grid", "cover", "pill", "glass", "bento", "neon", "retro", "iconbar", "card"];
 
         var THEMES = {
@@ -460,24 +563,47 @@
             return JSON.parse(new TextDecoder().decode(bytes));
         }
 
-        function handle(v) { return v.replace(/^@/, "").replace(/\s+/g, ""); }
+        function handle(v) { return v.replace(/^@/, "").replace(/^\/+|\/+$/g, "").replace(/\s+/g, ""); }
         function isHttp(v) { return /^https?:\/\//i.test(v); }
+        function asUrl(v) { return isHttp(v) ? v : "https://" + v.replace(/^\/+/, ""); }
+
+        // Accepts a username, @username, full link, or link without https://
+        var DOMAINS = {
+            instagram: /(^|\.|\/\/)(instagram\.com|instagr\.am)(\/|$)/i,
+            youtube: /(^|\.|\/\/)(youtube\.com|youtu\.be)(\/|$)/i,
+            facebook: /(^|\.|\/\/)(facebook\.com|fb\.com|fb\.me)(\/|$)/i,
+            linkedin: /(^|\.|\/\/)(linkedin\.com|lnkd\.in)(\/|$)/i,
+            x: /(^|\.|\/\/)(x\.com|twitter\.com)(\/|$)/i,
+            telegram: /(^|\.|\/\/)(t\.me|telegram\.me)(\/|$)/i
+        };
+
+        function social(type, v, base) {
+            if (isHttp(v)) return v;
+            if (DOMAINS[type] && DOMAINS[type].test(v)) return asUrl(v);
+            var h = handle(v);
+            return h ? base + h : null;
+        }
 
         function buildUrl(type, v, name) {
             v = String(v || "").trim();
             if (!v) return null;
             switch (type) {
-                case "instagram": return isHttp(v) ? v : "https://instagram.com/" + handle(v);
-                case "whatsapp": return "https://wa.me/" + v.replace(/[^0-9]/g, "");
-                case "website": return isHttp(v) ? v : "https://" + v;
-                case "phone": return "tel:" + v.replace(/[^0-9+]/g, "");
-                case "email": return "mailto:" + v;
-                case "upi": return "upi://pay?pa=" + encodeURIComponent(v) + "&pn=" + encodeURIComponent(name) + "&cu=INR";
-                case "youtube": return isHttp(v) ? v : "https://youtube.com/@" + handle(v);
-                case "facebook": return isHttp(v) ? v : "https://facebook.com/" + handle(v);
-                case "linkedin": return isHttp(v) ? v : "https://linkedin.com/in/" + handle(v);
-                case "x": return isHttp(v) ? v : "https://x.com/" + handle(v);
-                case "telegram": return isHttp(v) ? v : "https://t.me/" + handle(v);
+                case "instagram": return social(type, v, "https://instagram.com/");
+                case "youtube": return social(type, v, "https://youtube.com/@");
+                case "facebook": return social(type, v, "https://facebook.com/");
+                case "linkedin": return social(type, v, "https://linkedin.com/in/");
+                case "x": return social(type, v, "https://x.com/");
+                case "telegram": return social(type, v, "https://t.me/");
+                case "whatsapp":
+                    if (/wa\.me|whatsapp\.com/i.test(v)) return asUrl(v);
+                    var digits = v.replace(/[^0-9]/g, "");
+                    return digits ? "https://wa.me/" + digits : null;
+                case "website": return asUrl(v);
+                case "phone": return "tel:" + v.replace(/^tel:/i, "").replace(/[^0-9+]/g, "");
+                case "email": return "mailto:" + v.replace(/^mailto:/i, "").trim();
+                case "upi":
+                    if (/^upi:\/\//i.test(v)) return v;
+                    return "upi://pay?pa=" + encodeURIComponent(v) + "&pn=" + encodeURIComponent(name) + "&cu=INR";
                 default: return isHttp(v) ? v : null;
             }
         }
@@ -488,6 +614,7 @@
             var th = THEMES[t] || THEMES.classic;
             var r = document.documentElement.style;
             Object.keys(th).forEach(function (k) { r.setProperty("--" + k, th[k]); });
+            setBarColor(BAR_COLORS[t] || BAR_COLORS.classic);
         }
 
         function el(tag, cls, text) {
@@ -618,7 +745,11 @@
 
                 applyTheme(d.t);
                 var layout = LAYOUTS.indexOf(d.y) >= 0 ? d.y : "stack";
-                if (layout === "neon") document.body.classList.add("neon");
+                if (layout === "neon") {
+                    document.body.classList.add("neon");
+                    setBarColor("#05070F");
+                }
+                if (d.p === 1) setBarColor("#F59E0B");
 
                 if (d.p === 1) {
                     // PREVIEW MODE: always ignore any data in the URL and show fixed sample details
@@ -651,7 +782,7 @@
                 var phone = "", email = "";
                 (d.l || []).slice(0, d.p === 1 ? 12 : 8).forEach(function (pair) {
                     var type = pair[0], val = String(pair[1] || "");
-                    if (type === "phone" || (type === "whatsapp" && !phone)) phone = val;
+                    if (type === "phone" || (type === "whatsapp" && !phone && !/wa\.me|whatsapp/i.test(val))) phone = val;
                     if (type === "email") email = val;
                     var url = buildUrl(type, val, name);
                     if (!safe(url)) return;
@@ -668,12 +799,33 @@
                     app.appendChild(sb);
                 }
 
-                if (d.f !== 0) {
+                if (d.f === 2) {
+                    // PRO user who chose to keep the small credit line
                     var f = el("div", "footer");
-                    var fa = el("a", null, "⚡ Made with DevDuo QR · Create yours free");
+                    var fa = el("a", null, "⚡ Made with Custom QR");
                     fa.href = FOOTER_URL; fa.target = "_blank"; fa.rel = "noopener";
                     f.appendChild(fa);
                     app.appendChild(f);
+                } else if (d.f !== 0) {
+                    // FREE users (and old cards): full promotion card
+                    var promo = el("div", "promo");
+                    var top = el("div", "promo-top");
+                    top.appendChild(el("div", "promo-icon", "▦"));
+                    var tt = el("div");
+                    tt.appendChild(el("strong", null, "Custom QR"));
+                    tt.appendChild(el("small", null, "All Links in One QR • Free app • Android"));
+                    top.appendChild(tt);
+                    promo.appendChild(top);
+                    promo.appendChild(el("p", null, "Want a card like this? Create your own Link-in-Bio QR in 60 seconds. All your socials, WhatsApp & payments in one scan."));
+                    var feats = el("div", "promo-feats");
+                    ["✔ 100% Free", "✔ No account", "✔ Never expires"].forEach(function (t) { feats.appendChild(el("span", null, t)); });
+                    promo.appendChild(feats);
+                    var pb = el("a", "promo-btn");
+                    pb.href = FOOTER_URL; pb.target = "_blank"; pb.rel = "noopener";
+                    pb.appendChild(el("span", "gp", "▶"));
+                    pb.appendChild(el("span", null, "Get it on Google Play"));
+                    promo.appendChild(pb);
+                    app.appendChild(promo);
                 }
             } catch (e) {
                 app.appendChild(el("p", "err", "This card link is invalid or incomplete."));
