@@ -9,6 +9,7 @@
     <meta name="color-scheme" content="light dark">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -81,6 +82,15 @@
             word-break: break-word;
         }
 
+        /* ICONS */
+        .fav {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            object-fit: contain;
+            display: block;
+        }
+
         /* STACK (default) */
         .links {
             margin-top: 28px;
@@ -93,7 +103,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            padding: 15px 18px;
+            padding: 13px 18px 13px 13px;
             border-radius: 16px;
             background: var(--btn);
             color: var(--btnText);
@@ -111,18 +121,19 @@
         .btn:active,
         .tile:active,
         .chip:active,
-        .ic:active {
+        .ic:active,
+        .mlink:active {
             transform: scale(.97);
         }
 
         .ico {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             background: rgba(127, 127, 127, .14);
             flex-shrink: 0;
         }
@@ -143,10 +154,23 @@
             text-overflow: ellipsis;
         }
 
+        .arrow {
+            opacity: .5;
+            font-size: 13px;
+        }
+
         /* PILL */
         .pill {
             justify-content: center;
             border-radius: 999px;
+            padding: 11px 18px;
+        }
+
+        .pill .ico {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-size: 16px;
         }
 
         .pill .lbl {
@@ -162,6 +186,10 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             box-shadow: none !important;
+        }
+
+        .glassb .ico {
+            background: rgba(255, 255, 255, .9) !important;
         }
 
         /* NEON */
@@ -187,6 +215,10 @@
             box-shadow: 0 0 14px var(--accent) !important;
         }
 
+        .neonb .ico {
+            background: rgba(255, 255, 255, .08) !important;
+        }
+
         /* RETRO */
         .retrob {
             background: #fff !important;
@@ -194,6 +226,11 @@
             border: 2.5px solid #111 !important;
             border-radius: 6px !important;
             box-shadow: 5px 5px 0 #111 !important;
+        }
+
+        .retrob .ico {
+            border-radius: 4px;
+            border: 2px solid #111;
         }
 
         /* MINIMAL */
@@ -215,13 +252,27 @@
             align-items: center;
             gap: 10px;
             text-align: left;
+            transition: transform .15s;
+        }
+
+        .mlink .ml {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .mlink .ml i {
+            font-size: 18px;
+            width: 22px;
+            text-align: center;
         }
 
         .mlink small {
             font-weight: 600;
             font-size: 12px;
             color: var(--sub);
-            max-width: 50%;
+            max-width: 45%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -246,18 +297,27 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             font-weight: 800;
             font-size: 13px;
             box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
             text-align: center;
             word-break: break-word;
-            min-height: 104px;
+            min-height: 108px;
             transition: transform .15s;
         }
 
         .tile .big {
-            font-size: 30px;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tile .big .fav {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
         }
 
         .tile.hero {
@@ -271,7 +331,7 @@
         }
 
         .tile.hero .big {
-            font-size: 24px;
+            font-size: 26px;
         }
 
         /* COVER */
@@ -282,7 +342,7 @@
             margin-bottom: -52px;
         }
 
-        /* ICON BUBBLES */
+        /* ICON BUBBLES (app-icon look) */
         .icons {
             margin-top: 28px;
             display: flex;
@@ -308,15 +368,20 @@
         .ic .c {
             width: 62px;
             height: 62px;
-            border-radius: 50%;
+            border-radius: 18px;
             background: var(--btn);
             color: var(--btnText);
-            border: 1.5px solid var(--border);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+            font-size: 28px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .18);
+        }
+
+        .ic .c .fav {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
         }
 
         /* BUSINESS CARD */
@@ -374,12 +439,24 @@
             transition: transform .15s;
         }
 
+        .chip i {
+            font-size: 16px;
+        }
+
+        .chip .fav {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
         .save {
             margin-top: 18px;
             background: var(--accent);
             color: #fff;
             border: none;
             justify-content: center;
+            gap: 10px;
+            padding: 15px 18px;
         }
 
         .footer {
@@ -490,7 +567,7 @@
             transform: scale(.97);
         }
 
-        .promo-btn .gp {
+        .promo-btn i {
             font-size: 18px;
         }
 
@@ -506,7 +583,7 @@
             font-size: 12px;
             font-weight: 800;
             text-align: center;
-            padding: 10px 12px calc(10px);
+            padding: 10px 12px;
             padding-top: calc(10px + env(safe-area-inset-top));
             box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
             letter-spacing: .3px;
@@ -529,12 +606,12 @@
     <script>
         var FOOTER_URL = "https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator&utm_source=linkbio_card&utm_medium=qr";
         var BAR_COLORS = { classic: "#EFF6FF", midnight: "#020617", sunset: "#F97316", ocean: "#0EA5E9", forest: "#10B981", royal: "#4C1D95" };
+        var LAYOUTS = ["stack", "minimal", "grid", "cover", "pill", "glass", "bento", "neon", "retro", "iconbar", "card"];
 
         function setBarColor(c) {
             var m = document.getElementById("themeColor");
             if (m) m.setAttribute("content", c);
         }
-        var LAYOUTS = ["stack", "minimal", "grid", "cover", "pill", "glass", "bento", "neon", "retro", "iconbar", "card"];
 
         var THEMES = {
             classic: { bg: "linear-gradient(160deg,#EFF6FF,#FFFFFF)", card: "#FFFFFF", text: "#111827", sub: "#6B7280", btn: "#FFFFFF", btnText: "#111827", border: "#E5E7EB", accent: "#2563EB" },
@@ -545,13 +622,19 @@
             royal: { bg: "linear-gradient(160deg,#4C1D95,#6D28D9)", card: "#FDE68A", text: "#FFFFFF", sub: "#DDD6FE", btn: "#1E1B4B", btnText: "#FDE68A", border: "#F59E0B", accent: "#F59E0B" }
         };
 
+        // Real brand icons (Font Awesome) + brand colors. color:null = follows the theme text color.
         var TYPES = {
-            instagram: { label: "Instagram", icon: "📸" }, whatsapp: { label: "WhatsApp", icon: "💬" },
-            website: { label: "Website", icon: "🌐" }, phone: { label: "Call", icon: "📞" },
-            email: { label: "Email", icon: "✉️" }, upi: { label: "Pay via UPI", icon: "₹" },
-            youtube: { label: "YouTube", icon: "▶️" }, facebook: { label: "Facebook", icon: "👍" },
-            linkedin: { label: "LinkedIn", icon: "💼" }, x: { label: "X / Twitter", icon: "✖️" },
-            telegram: { label: "Telegram", icon: "✈️" }
+            instagram: { label: "Instagram", fa: "fa-brands fa-instagram", color: "#E1306C" },
+            whatsapp: { label: "WhatsApp", fa: "fa-brands fa-whatsapp", color: "#25D366" },
+            website: { label: "Website", fa: "fa-solid fa-globe", color: "#2563EB" },
+            phone: { label: "Call", fa: "fa-solid fa-phone", color: "#0EA5E9" },
+            email: { label: "Email", fa: "fa-solid fa-envelope", color: "#F43F5E" },
+            upi: { label: "Pay via UPI", fa: "fa-solid fa-indian-rupee-sign", color: "#14B8A6" },
+            youtube: { label: "YouTube", fa: "fa-brands fa-youtube", color: "#FF0000" },
+            facebook: { label: "Facebook", fa: "fa-brands fa-facebook-f", color: "#1877F2" },
+            linkedin: { label: "LinkedIn", fa: "fa-brands fa-linkedin-in", color: "#0A66C2" },
+            x: { label: "X / Twitter", fa: "fa-brands fa-x-twitter", color: null },
+            telegram: { label: "Telegram", fa: "fa-brands fa-telegram", color: "#229ED9" }
         };
 
         function decode(s) {
@@ -631,6 +714,32 @@
             return a;
         }
 
+        function faIcon(cls, color) {
+            var i = el("i", cls);
+            if (color) i.style.color = color;
+            return i;
+        }
+
+        // Real icon: website -> its own favicon, everything else -> brand logo
+        function glyph(it, color) {
+            if (it.type === "website" && it.host) {
+                var img = el("img", "fav");
+                img.alt = "";
+                img.loading = "lazy";
+                img.src = "https://www.google.com/s2/favicons?domain=" + encodeURIComponent(it.host) + "&sz=64";
+                img.onerror = function () { img.replaceWith(faIcon(it.info.fa, color)); };
+                return img;
+            }
+            return faIcon(it.info.fa, color);
+        }
+
+        function softIcon(it) {
+            var s = el("span", "ico");
+            if (it.info.color) s.style.background = it.info.color + "1F";
+            s.appendChild(glyph(it, it.info.color));
+            return s;
+        }
+
         function saveContact(name, phone, email) {
             var vcf = "BEGIN:VCARD\nVERSION:3.0\nFN:" + name + (phone ? "\nTEL:" + phone : "") + (email ? "\nEMAIL:" + email : "") + "\nEND:VCARD";
             var blob = new Blob([vcf], { type: "text/vcard" });
@@ -660,17 +769,19 @@
 
         function btn(it, extra, noSub) {
             var a = link(it.url, "btn" + (extra ? " " + extra : ""));
-            a.appendChild(el("span", "ico", it.icon));
+            a.appendChild(softIcon(it));
             var lbl = el("span", "lbl", it.label);
             if (!noSub) lbl.appendChild(el("small", null, it.val));
             a.appendChild(lbl);
-            if (!noSub) a.appendChild(el("span", null, "›"));
+            if (!noSub) a.appendChild(faIcon("fa-solid fa-chevron-right arrow"));
             return a;
         }
 
         function tile(it, hero) {
             var a = link(it.url, hero ? "tile hero" : "tile");
-            a.appendChild(el("span", "big", it.icon));
+            var big = el("span", "big");
+            big.appendChild(glyph(it, hero ? "#fff" : it.info.color));
+            a.appendChild(big);
             a.appendChild(el("span", null, it.label));
             return a;
         }
@@ -682,7 +793,10 @@
                     box = el("div", "mlinks");
                     items.forEach(function (it) {
                         var a = link(it.url, "mlink");
-                        a.appendChild(el("span", null, it.label));
+                        var ml = el("span", "ml");
+                        ml.appendChild(glyph(it, it.info.color));
+                        ml.appendChild(el("span", null, it.label));
+                        a.appendChild(ml);
                         a.appendChild(el("small", null, it.val));
                         box.appendChild(a);
                     });
@@ -699,7 +813,12 @@
                     box = el("div", "icons");
                     items.forEach(function (it) {
                         var a = link(it.url, "ic");
-                        a.appendChild(el("span", "c", it.icon));
+                        var c = el("span", "c");
+                        var isFav = it.type === "website" && it.host;
+                        if (isFav) c.style.background = "#FFFFFF";
+                        else if (it.info.color) c.style.background = it.info.color;
+                        c.appendChild(glyph(it, it.info.color ? "#FFFFFF" : null));
+                        a.appendChild(c);
                         a.appendChild(el("span", null, it.label));
                         box.appendChild(a);
                     });
@@ -708,7 +827,7 @@
                     box = el("div", "chips");
                     items.forEach(function (it) {
                         var a = link(it.url, "chip");
-                        a.appendChild(el("span", null, it.icon));
+                        a.appendChild(glyph(it, it.info.color));
                         a.appendChild(el("span", null, it.label));
                         box.appendChild(a);
                     });
@@ -749,7 +868,6 @@
                     document.body.classList.add("neon");
                     setBarColor("#05070F");
                 }
-                if (d.p === 1) setBarColor("#F59E0B");
 
                 if (d.p === 1) {
                     // PREVIEW MODE: always ignore any data in the URL and show fixed sample details
@@ -759,7 +877,7 @@
                         ["whatsapp", "919876543210", "Order on WhatsApp"],
                         ["phone", "+91 98765 43210", "Call Me"],
                         ["instagram", "priya.designs"],
-                        ["website", "priyadesigns.in", "My Portfolio"],
+                        ["website", "google.com", "My Portfolio"],
                         ["upi", "priya@okicici", "Pay via UPI"],
                         ["email", "hello@priyadesigns.in", "Email Me"],
                         ["youtube", "priyadesigns", "Watch My Tutorials"],
@@ -770,6 +888,7 @@
                     ];
                     document.body.classList.add("preview");
                     document.body.appendChild(el("div", "pbar", "👀 DESIGN PREVIEW · Sample details · Links disabled"));
+                    setBarColor("#F59E0B");
                 }
 
                 var name = String(d.n || "My Links").slice(0, 40);
@@ -788,13 +907,19 @@
                     if (!safe(url)) return;
                     var info = TYPES[type] || TYPES.website;
                     var customTitle = pair[2] ? String(pair[2]).trim().slice(0, 30) : "";
-                    items.push({ url: url, icon: info.icon, label: customTitle || info.label, val: val });
+                    var host = "";
+                    if (type === "website") {
+                        try { host = new URL(url).hostname; } catch (e) { host = ""; }
+                    }
+                    items.push({ url: url, type: TYPES[type] ? type : "website", info: info, label: customTitle || info.label, val: val, host: host });
                 });
 
                 renderLinks(app, layout, items);
 
                 if (phone || email) {
-                    var sb = el("button", "btn save", "⬇ Save Contact");
+                    var sb = el("button", "btn save");
+                    sb.appendChild(faIcon("fa-solid fa-address-book"));
+                    sb.appendChild(el("span", null, "Save Contact"));
                     sb.onclick = function () { saveContact(name, phone, email); };
                     app.appendChild(sb);
                 }
@@ -810,19 +935,21 @@
                     // FREE users (and old cards): full promotion card
                     var promo = el("div", "promo");
                     var top = el("div", "promo-top");
-                    top.appendChild(el("div", "promo-icon", "▦"));
+                    var pi = el("div", "promo-icon");
+                    pi.appendChild(faIcon("fa-solid fa-qrcode"));
+                    top.appendChild(pi);
                     var tt = el("div");
                     tt.appendChild(el("strong", null, "Custom QR"));
                     tt.appendChild(el("small", null, "All Links in One QR • Free app • Android"));
                     top.appendChild(tt);
                     promo.appendChild(top);
-                    promo.appendChild(el("p", null, "Want a card like this? Create your own Link-in-Bio QR in 60 seconds. All your socials, WhatsApp & payments in one scan."));
+                    promo.appendChild(el("p", null, "Want a card like this? Create your own links page in one QR in 60 seconds. All your socials, WhatsApp & payments in one scan."));
                     var feats = el("div", "promo-feats");
-                    ["✔ 100% Free", "✔ No account", "✔ Never expires"].forEach(function (t) { feats.appendChild(el("span", null, t)); });
+                    ["✔ Free", "✔ No account", "✔ Never expires"].forEach(function (t) { feats.appendChild(el("span", null, t)); });
                     promo.appendChild(feats);
                     var pb = el("a", "promo-btn");
                     pb.href = FOOTER_URL; pb.target = "_blank"; pb.rel = "noopener";
-                    pb.appendChild(el("span", "gp", "▶"));
+                    pb.appendChild(faIcon("fa-brands fa-google-play"));
                     pb.appendChild(el("span", null, "Get it on Google Play"));
                     promo.appendChild(pb);
                     app.appendChild(promo);
