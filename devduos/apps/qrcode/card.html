@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Link Card</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: linear-gradient(160deg, #EFF6FF, #FFFFFF);
+            --card: #FFFFFF;
+            --text: #111827;
+            --sub: #6B7280;
+            --btn: #FFFFFF;
+            --btnText: #111827;
+            --border: #E5E7EB;
+            --accent: #2563EB;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            padding: 40px 18px calc(30px + env(safe-area-inset-bottom));
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            font-weight: 800;
+            color: #fff;
+            background: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
+            border: 4px solid var(--card);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            word-break: break-word;
+        }
+
+        .bio {
+            color: var(--sub);
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 6px;
+            word-break: break-word;
+        }
+
+        .links {
+            margin-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 15px 18px;
+            border-radius: 16px;
+            background: var(--btn);
+            color: var(--btnText);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            border: 1.5px solid var(--border);
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .06);
+            transition: transform .15s;
+            cursor: pointer;
+            width: 100%;
+            font-family: inherit;
+        }
+
+        .btn:active {
+            transform: scale(.97);
+        }
+
+        .ico {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: rgba(127, 127, 127, .12);
+            flex-shrink: 0;
+        }
+
+        .lbl {
+            flex: 1;
+            text-align: left;
+            overflow: hidden;
+        }
+
+        .lbl small {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            opacity: .6;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .save {
+            margin-top: 18px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            justify-content: center;
+        }
+
+        .footer {
+            margin-top: 34px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .footer a {
+            color: var(--sub);
+            text-decoration: none;
+        }
+
+        .err {
+            margin-top: 30vh;
+            color: var(--sub);
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap" id="app"></div>
+
+    <script>
+        var FOOTER_URL = "https://play.google.com/store/search?q=DevDuo%20QR%20Code&c=apps";
+
+        var THEMES = {
+            classic: { bg: "linear-gradient(160deg,#EFF6FF,#FFFFFF)", card: "#FFFFFF", text: "#111827", sub: "#6B7280", btn: "#FFFFFF", btnText: "#111827", border: "#E5E7EB", accent: "#2563EB" },
+            midnight: { bg: "linear-gradient(160deg,#020617,#0F172A)", card: "#0F172A", text: "#F8FAFC", sub: "#94A3B8", btn: "#1E293B", btnText: "#F8FAFC", border: "#334155", accent: "#38BDF8" },
+            sunset: { bg: "linear-gradient(160deg,#F97316,#DB2777)", card: "#FFFFFF", text: "#FFFFFF", sub: "#FFE4E6", btn: "rgba(255,255,255,.95)", btnText: "#9D174D", border: "transparent", accent: "#BE185D" },
+            ocean: { bg: "linear-gradient(160deg,#0EA5E9,#1E3A8A)", card: "#FFFFFF", text: "#FFFFFF", sub: "#DBEAFE", btn: "rgba(255,255,255,.95)", btnText: "#1E3A8A", border: "transparent", accent: "#1D4ED8" },
+            forest: { bg: "linear-gradient(160deg,#10B981,#064E3B)", card: "#FFFFFF", text: "#FFFFFF", sub: "#D1FAE5", btn: "rgba(255,255,255,.95)", btnText: "#064E3B", border: "transparent", accent: "#047857" },
+            royal: { bg: "linear-gradient(160deg,#4C1D95,#6D28D9)", card: "#FDE68A", text: "#FFFFFF", sub: "#DDD6FE", btn: "#1E1B4B", btnText: "#FDE68A", border: "#F59E0B", accent: "#F59E0B" }
+        };
+
+        var TYPES = {
+            instagram: { label: "Instagram", icon: "📸" }, whatsapp: { label: "WhatsApp", icon: "💬" },
+            website: { label: "Website", icon: "🌐" }, phone: { label: "Call", icon: "📞" },
+            email: { label: "Email", icon: "✉️" }, upi: { label: "Pay via UPI", icon: "₹" },
+            youtube: { label: "YouTube", icon: "▶️" }, facebook: { label: "Facebook", icon: "👍" },
+            linkedin: { label: "LinkedIn", icon: "💼" }, x: { label: "X / Twitter", icon: "✖️" },
+            telegram: { label: "Telegram", icon: "✈️" }
+        };
+
+        function decode(s) {
+            s = s.replace(/-/g, "+").replace(/_/g, "/");
+            while (s.length % 4) s += "=";
+            var bin = atob(s);
+            var bytes = new Uint8Array(bin.length);
+            for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+            return JSON.parse(new TextDecoder().decode(bytes));
+        }
+
+        function handle(v) { return v.replace(/^@/, "").replace(/\s+/g, ""); }
+        function isHttp(v) { return /^https?:\/\//i.test(v); }
+
+        function buildUrl(type, v, name) {
+            v = String(v || "").trim();
+            if (!v) return null;
+            switch (type) {
+                case "instagram": return isHttp(v) ? v : "https://instagram.com/" + handle(v);
+                case "whatsapp": return "https://wa.me/" + v.replace(/[^0-9]/g, "");
+                case "website": return isHttp(v) ? v : "https://" + v;
+                case "phone": return "tel:" + v.replace(/[^0-9+]/g, "");
+                case "email": return "mailto:" + v;
+                case "upi": return "upi://pay?pa=" + encodeURIComponent(v) + "&pn=" + encodeURIComponent(name) + "&cu=INR";
+                case "youtube": return isHttp(v) ? v : "https://youtube.com/@" + handle(v);
+                case "facebook": return isHttp(v) ? v : "https://facebook.com/" + handle(v);
+                case "linkedin": return isHttp(v) ? v : "https://linkedin.com/in/" + handle(v);
+                case "x": return isHttp(v) ? v : "https://x.com/" + handle(v);
+                case "telegram": return isHttp(v) ? v : "https://t.me/" + handle(v);
+                default: return isHttp(v) ? v : null;
+            }
+        }
+
+        function safe(url) { return url && /^(https?:|tel:|mailto:|upi:)/i.test(url); }
+
+        function applyTheme(t) {
+            var th = THEMES[t] || THEMES.classic;
+            var r = document.documentElement.style;
+            Object.keys(th).forEach(function (k) { r.setProperty("--" + k, th[k]); });
+        }
+
+        function el(tag, cls, text) {
+            var e = document.createElement(tag);
+            if (cls) e.className = cls;
+            if (text != null) e.textContent = text;
+            return e;
+        }
+
+        function saveContact(name, phone, email) {
+            var vcf = "BEGIN:VCARD\nVERSION:3.0\nFN:" + name + (phone ? "\nTEL:" + phone : "") + (email ? "\nEMAIL:" + email : "") + "\nEND:VCARD";
+            var blob = new Blob([vcf], { type: "text/vcard" });
+            var a = document.createElement("a");
+            a.href = URL.createObjectURL(blob);
+            a.download = (name || "contact").replace(/[^a-z0-9]/gi, "_") + ".vcf";
+            document.body.appendChild(a); a.click(); a.remove();
+        }
+
+        (function render() {
+            var app = document.getElementById("app");
+            try {
+                var hash = location.hash || "";
+                var m = hash.match(/d=([A-Za-z0-9\-_]+)/);
+                if (!m) throw new Error("no data");
+                var d = decode(m[1]);
+
+                applyTheme(d.t);
+                var name = String(d.n || "My Links").slice(0, 40);
+                document.title = name;
+
+                var av = el("div", "avatar", name.trim().charAt(0).toUpperCase());
+                app.appendChild(av);
+                app.appendChild(el("h1", null, name));
+                if (d.b) app.appendChild(el("p", "bio", String(d.b).slice(0, 60)));
+
+                var links = el("div", "links");
+                var phone = "", email = "";
+                (d.l || []).slice(0, 8).forEach(function (pair) {
+                    var type = pair[0], val = String(pair[1] || "");
+                    if (type === "phone" || (type === "whatsapp" && !phone)) phone = val;
+                    if (type === "email") email = val;
+                    var url = buildUrl(type, val, name);
+                    if (!safe(url)) return;
+                    var info = TYPES[type] || TYPES.website;
+                    var a = el("a", "btn");
+                    a.href = url;
+                    if (/^https?:/i.test(url)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+                    a.appendChild(el("span", "ico", info.icon));
+                    var lbl = el("span", "lbl", info.label);
+                    lbl.appendChild(el("small", null, val));
+                    a.appendChild(lbl);
+                    a.appendChild(el("span", null, "›"));
+                    links.appendChild(a);
+                });
+                app.appendChild(links);
+
+                if (phone || email) {
+                    var sb = el("button", "btn save", "⬇ Save Contact");
+                    sb.onclick = function () { saveContact(name, phone, email); };
+                    app.appendChild(sb);
+                }
+
+                if (d.f !== 0) {
+                    var f = el("div", "footer");
+                    var fa = el("a", null, "⚡ Made with DevDuo QR · Create yours free");
+                    fa.href = FOOTER_URL; fa.target = "_blank"; fa.rel = "noopener";
+                    f.appendChild(fa);
+                    app.appendChild(f);
+                }
+            } catch (e) {
+                app.appendChild(el("p", "err", "This card link is invalid or incomplete."));
+            }
+        })();
+    </script>
+</body>
+
+</html>
