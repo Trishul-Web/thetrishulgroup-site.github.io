@@ -54,7 +54,14 @@
             color: #fff;
             background: var(--accent);
             box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
-            border: 4px solid var(--card);
+            border: 4px solid #fff;
+            position: relative;
+        }
+
+        .avatar.small {
+            width: 72px;
+            height: 72px;
+            font-size: 28px;
         }
 
         h1 {
@@ -72,6 +79,7 @@
             word-break: break-word;
         }
 
+        /* STACK (default) */
         .links {
             margin-top: 28px;
             display: flex;
@@ -98,7 +106,10 @@
             font-family: inherit;
         }
 
-        .btn:active {
+        .btn:active,
+        .tile:active,
+        .chip:active,
+        .ic:active {
             transform: scale(.97);
         }
 
@@ -110,7 +121,7 @@
             align-items: center;
             justify-content: center;
             font-size: 18px;
-            background: rgba(127, 127, 127, .12);
+            background: rgba(127, 127, 127, .14);
             flex-shrink: 0;
         }
 
@@ -128,6 +139,237 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        /* PILL */
+        .pill {
+            justify-content: center;
+            border-radius: 999px;
+        }
+
+        .pill .lbl {
+            flex: none;
+            text-align: center;
+        }
+
+        /* GLASS */
+        .glassb {
+            background: rgba(255, 255, 255, .16) !important;
+            color: var(--text) !important;
+            border: 1px solid rgba(255, 255, 255, .35) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: none !important;
+        }
+
+        /* NEON */
+        body.neon {
+            background: linear-gradient(160deg, #05070F, #111827) !important;
+            color: #fff;
+        }
+
+        body.neon .bio,
+        body.neon .footer a {
+            color: #94A3B8;
+        }
+
+        body.neon .avatar {
+            border-color: var(--accent);
+            box-shadow: 0 0 26px var(--accent);
+        }
+
+        .neonb {
+            background: transparent !important;
+            color: var(--accent) !important;
+            border: 1.5px solid var(--accent) !important;
+            box-shadow: 0 0 14px var(--accent) !important;
+        }
+
+        /* RETRO */
+        .retrob {
+            background: #fff !important;
+            color: #111 !important;
+            border: 2.5px solid #111 !important;
+            border-radius: 6px !important;
+            box-shadow: 5px 5px 0 #111 !important;
+        }
+
+        /* MINIMAL */
+        .mlinks {
+            margin-top: 26px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mlink {
+            padding: 15px 4px;
+            border-bottom: 1px solid rgba(127, 127, 127, .3);
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            text-align: left;
+        }
+
+        .mlink small {
+            font-weight: 600;
+            font-size: 12px;
+            color: var(--sub);
+            max-width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* GRID + BENTO */
+        .grid {
+            margin-top: 26px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .tile {
+            background: var(--btn);
+            color: var(--btnText);
+            border: 1.5px solid var(--border);
+            border-radius: 18px;
+            padding: 18px 10px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-weight: 800;
+            font-size: 13px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+            text-align: center;
+            word-break: break-word;
+            min-height: 104px;
+            transition: transform .15s;
+        }
+
+        .tile .big {
+            font-size: 30px;
+        }
+
+        .tile.hero {
+            grid-column: 1 / -1;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            flex-direction: row;
+            font-size: 17px;
+            min-height: 76px;
+        }
+
+        .tile.hero .big {
+            font-size: 24px;
+        }
+
+        /* COVER */
+        .coverband {
+            height: 130px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, var(--accent), rgba(0, 0, 0, .25));
+            margin-bottom: -52px;
+        }
+
+        /* ICON BUBBLES */
+        .icons {
+            margin-top: 28px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px 14px;
+        }
+
+        .ic {
+            width: 76px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 7px;
+            word-break: break-word;
+            transition: transform .15s;
+        }
+
+        .ic .c {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: var(--btn);
+            color: var(--btnText);
+            border: 1.5px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+        }
+
+        /* BUSINESS CARD */
+        .biz {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--btn);
+            color: var(--btnText);
+            border: 1.5px solid var(--border);
+            border-radius: 22px;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 12px 34px rgba(0, 0, 0, .14);
+        }
+
+        .biz .avatar {
+            width: 68px;
+            height: 68px;
+            font-size: 28px;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .biz h1 {
+            font-size: 20px;
+        }
+
+        .biz .bio {
+            color: inherit;
+            opacity: .7;
+        }
+
+        .chips {
+            margin-top: 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .chip {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            padding: 11px 16px;
+            border-radius: 999px;
+            background: var(--btn);
+            color: var(--btnText);
+            border: 1.5px solid var(--border);
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 13px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .08);
+            transition: transform .15s;
         }
 
         .save {
@@ -154,6 +396,33 @@
             color: var(--sub);
             font-weight: 700;
         }
+
+        /* PREVIEW MODE */
+        .pbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 99;
+            background: #F59E0B;
+            color: #111;
+            font-size: 12px;
+            font-weight: 800;
+            text-align: center;
+            padding: 10px 12px calc(10px);
+            padding-top: calc(10px + env(safe-area-inset-top));
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+            letter-spacing: .3px;
+        }
+
+        body.preview {
+            padding-top: 84px;
+        }
+
+        body.preview a,
+        body.preview button {
+            pointer-events: none;
+        }
     </style>
 </head>
 
@@ -162,6 +431,7 @@
 
     <script>
         var FOOTER_URL = "https://play.google.com/store/search?q=DevDuo%20QR%20Code&c=apps";
+        var LAYOUTS = ["stack", "minimal", "grid", "cover", "pill", "glass", "bento", "neon", "retro", "iconbar", "card"];
 
         var THEMES = {
             classic: { bg: "linear-gradient(160deg,#EFF6FF,#FFFFFF)", card: "#FFFFFF", text: "#111827", sub: "#6B7280", btn: "#FFFFFF", btnText: "#111827", border: "#E5E7EB", accent: "#2563EB" },
@@ -227,6 +497,13 @@
             return e;
         }
 
+        function link(url, cls) {
+            var a = el("a", cls);
+            a.href = url;
+            if (/^https?:/i.test(url)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
+            return a;
+        }
+
         function saveContact(name, phone, email) {
             var vcf = "BEGIN:VCARD\nVERSION:3.0\nFN:" + name + (phone ? "\nTEL:" + phone : "") + (email ? "\nEMAIL:" + email : "") + "\nEND:VCARD";
             var blob = new Blob([vcf], { type: "text/vcard" });
@@ -236,24 +513,125 @@
             document.body.appendChild(a); a.click(); a.remove();
         }
 
+        function renderHeader(app, layout, name, bio) {
+            var initial = name.trim().charAt(0).toUpperCase();
+            if (layout === "card") {
+                var biz = el("div", "biz");
+                biz.appendChild(el("div", "avatar", initial));
+                var col = el("div");
+                col.appendChild(el("h1", null, name));
+                if (bio) col.appendChild(el("p", "bio", bio));
+                biz.appendChild(col);
+                app.appendChild(biz);
+                return;
+            }
+            if (layout === "cover") app.appendChild(el("div", "coverband"));
+            app.appendChild(el("div", layout === "minimal" ? "avatar small" : "avatar", initial));
+            app.appendChild(el("h1", null, name));
+            if (bio) app.appendChild(el("p", "bio", bio));
+        }
+
+        function btn(it, extra, noSub) {
+            var a = link(it.url, "btn" + (extra ? " " + extra : ""));
+            a.appendChild(el("span", "ico", it.icon));
+            var lbl = el("span", "lbl", it.label);
+            if (!noSub) lbl.appendChild(el("small", null, it.val));
+            a.appendChild(lbl);
+            if (!noSub) a.appendChild(el("span", null, "›"));
+            return a;
+        }
+
+        function tile(it, hero) {
+            var a = link(it.url, hero ? "tile hero" : "tile");
+            a.appendChild(el("span", "big", it.icon));
+            a.appendChild(el("span", null, it.label));
+            return a;
+        }
+
+        function renderLinks(app, layout, items) {
+            var box;
+            switch (layout) {
+                case "minimal":
+                    box = el("div", "mlinks");
+                    items.forEach(function (it) {
+                        var a = link(it.url, "mlink");
+                        a.appendChild(el("span", null, it.label));
+                        a.appendChild(el("small", null, it.val));
+                        box.appendChild(a);
+                    });
+                    break;
+                case "grid":
+                    box = el("div", "grid");
+                    items.forEach(function (it) { box.appendChild(tile(it, false)); });
+                    break;
+                case "bento":
+                    box = el("div", "grid");
+                    items.forEach(function (it, i) { box.appendChild(tile(it, i === 0)); });
+                    break;
+                case "iconbar":
+                    box = el("div", "icons");
+                    items.forEach(function (it) {
+                        var a = link(it.url, "ic");
+                        a.appendChild(el("span", "c", it.icon));
+                        a.appendChild(el("span", null, it.label));
+                        box.appendChild(a);
+                    });
+                    break;
+                case "card":
+                    box = el("div", "chips");
+                    items.forEach(function (it) {
+                        var a = link(it.url, "chip");
+                        a.appendChild(el("span", null, it.icon));
+                        a.appendChild(el("span", null, it.label));
+                        box.appendChild(a);
+                    });
+                    break;
+                case "pill":
+                    box = el("div", "links");
+                    items.forEach(function (it) { box.appendChild(btn(it, "pill", true)); });
+                    break;
+                case "glass":
+                    box = el("div", "links");
+                    items.forEach(function (it) { box.appendChild(btn(it, "glassb")); });
+                    break;
+                case "neon":
+                    box = el("div", "links");
+                    items.forEach(function (it) { box.appendChild(btn(it, "neonb")); });
+                    break;
+                case "retro":
+                    box = el("div", "links");
+                    items.forEach(function (it) { box.appendChild(btn(it, "retrob")); });
+                    break;
+                default:
+                    box = el("div", "links");
+                    items.forEach(function (it) { box.appendChild(btn(it)); });
+            }
+            app.appendChild(box);
+        }
+
         (function render() {
             var app = document.getElementById("app");
             try {
-                var hash = location.hash || "";
-                var m = hash.match(/d=([A-Za-z0-9\-_]+)/);
+                var m = (location.hash || "").match(/d=([A-Za-z0-9\-_]+)/);
                 if (!m) throw new Error("no data");
                 var d = decode(m[1]);
 
                 applyTheme(d.t);
+                var layout = LAYOUTS.indexOf(d.y) >= 0 ? d.y : "stack";
+                if (layout === "neon") document.body.classList.add("neon");
+
+                if (d.p === 1) {
+                    document.body.classList.add("preview");
+                    document.body.appendChild(el("div", "pbar", "👀 PREVIEW MODE · Design preview only, links are disabled"));
+                }
+
                 var name = String(d.n || "My Links").slice(0, 40);
+                var bio = d.b ? String(d.b).slice(0, 60) : "";
                 document.title = name;
 
-                var av = el("div", "avatar", name.trim().charAt(0).toUpperCase());
-                app.appendChild(av);
-                app.appendChild(el("h1", null, name));
-                if (d.b) app.appendChild(el("p", "bio", String(d.b).slice(0, 60)));
+                renderHeader(app, layout, name, bio);
 
-                var links = el("div", "links");
+                var items = [];
                 var phone = "", email = "";
                 (d.l || []).slice(0, 8).forEach(function (pair) {
                     var type = pair[0], val = String(pair[1] || "");
@@ -262,17 +640,11 @@
                     var url = buildUrl(type, val, name);
                     if (!safe(url)) return;
                     var info = TYPES[type] || TYPES.website;
-                    var a = el("a", "btn");
-                    a.href = url;
-                    if (/^https?:/i.test(url)) { a.target = "_blank"; a.rel = "noopener noreferrer"; }
-                    a.appendChild(el("span", "ico", info.icon));
-                    var lbl = el("span", "lbl", info.label);
-                    lbl.appendChild(el("small", null, val));
-                    a.appendChild(lbl);
-                    a.appendChild(el("span", null, "›"));
-                    links.appendChild(a);
+                    var customTitle = pair[2] ? String(pair[2]).trim().slice(0, 30) : "";
+                    items.push({ url: url, icon: info.icon, label: customTitle || info.label, val: val });
                 });
-                app.appendChild(links);
+
+                renderLinks(app, layout, items);
 
                 if (phone || email) {
                     var sb = el("button", "btn save", "⬇ Save Contact");
