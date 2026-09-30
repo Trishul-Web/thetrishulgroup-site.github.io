@@ -621,8 +621,24 @@
                 if (layout === "neon") document.body.classList.add("neon");
 
                 if (d.p === 1) {
+                    // PREVIEW MODE: always ignore any data in the URL and show fixed sample details
+                    d.n = "Priya Sharma Designs";
+                    d.b = "Handmade jewellery • Pune";
+                    d.l = [
+                        ["whatsapp", "919876543210", "Order on WhatsApp"],
+                        ["phone", "+91 98765 43210", "Call Me"],
+                        ["instagram", "priya.designs"],
+                        ["website", "priyadesigns.in", "My Portfolio"],
+                        ["upi", "priya@okicici", "Pay via UPI"],
+                        ["email", "hello@priyadesigns.in", "Email Me"],
+                        ["youtube", "priyadesigns", "Watch My Tutorials"],
+                        ["facebook", "priyadesigns"],
+                        ["linkedin", "priya-sharma"],
+                        ["x", "priyadesigns"],
+                        ["telegram", "priyadesigns"]
+                    ];
                     document.body.classList.add("preview");
-                    document.body.appendChild(el("div", "pbar", "👀 PREVIEW MODE · Design preview only, links are disabled"));
+                    document.body.appendChild(el("div", "pbar", "👀 DESIGN PREVIEW · Sample details · Links disabled"));
                 }
 
                 var name = String(d.n || "My Links").slice(0, 40);
@@ -633,7 +649,7 @@
 
                 var items = [];
                 var phone = "", email = "";
-                (d.l || []).slice(0, 8).forEach(function (pair) {
+                (d.l || []).slice(0, d.p === 1 ? 12 : 8).forEach(function (pair) {
                     var type = pair[0], val = String(pair[1] || "");
                     if (type === "phone" || (type === "whatsapp" && !phone)) phone = val;
                     if (type === "email") email = val;
