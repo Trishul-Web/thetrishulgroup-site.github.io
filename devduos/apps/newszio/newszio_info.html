@@ -250,6 +250,23 @@
         .footer-links a:hover {
             color: var(--brand-1);
         }
+
+        @media (max-width: 640px) {
+            header .container {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            .app-bar {
+                gap: .5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .app-bar-link {
+                font-size: .9rem;
+            }
+        }
     </style>
 </head>
 
@@ -265,6 +282,7 @@
                 <a href="newszio_info.html" class="app-bar-link active">App Info</a>
                 <a href="newszio_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
                 <a href="newszio_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+                <a href="newszio-contact.html" class="app-bar-link">Contact Us</a>
             </nav>
         </div>
     </header>
@@ -324,7 +342,7 @@
                     </svg>
                     <h3>Global Reach, Local Focus</h3>
                     <p>Stay informed at every level. Switch between multiple country editions, follow news from any city
-                        worldwide, and read global perspectives with instant translation support.</p>
+                        worldwide, and compare how outlets around the world report the same story.</p>
                 </div>
             </div>
         </section>
@@ -342,6 +360,7 @@
             <div class="footer-links">
                 <a href="newszio_privacypolicy.html">Privacy Policy</a>
                 <a href="newszio_termsandconditions.html">Terms of Service</a>
+                <a href="newszio-contact.html">Contact Us</a>
             </div>
             <p class="muted">© 2025 Devduos. All rights reserved.</p>
         </div>

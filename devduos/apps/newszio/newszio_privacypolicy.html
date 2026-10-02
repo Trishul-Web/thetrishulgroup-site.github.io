@@ -155,6 +155,23 @@
             color: var(--brand-1);
             border-bottom-color: var(--brand-1);
         }
+
+        @media (max-width: 640px) {
+            header .container-header {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            .app-bar {
+                gap: .5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .app-bar-link {
+                font-size: .9rem;
+            }
+        }
     </style>
 </head>
 
@@ -170,6 +187,7 @@
                 <a href="newszio_info.html" class="app-bar-link">App Info</a>
                 <a href="newszio_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
                 <a href="newszio_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+                <a href="newszio-contact.html" class="app-bar-link">Contact Us</a>
             </nav>
         </div>
     </header>
@@ -193,7 +211,7 @@
         <ul>
             <li><strong>Google AdMob:</strong> Used to display advertisements. AdMob may collect data such as
                 Advertising ID, coarse location, and usage metrics to serve relevant ads.</li>
-            <li><strong>RSS Feed Providers:</strong> Newszio aggregates content from public RSS feeds (e.g., Google
+            <li><strong>RSS Feed Providers:</strong> Newszio aggregates content from public RSS feeds (e.g., Bing
                 News).
                 When you click to read a full article, you may be directed to the original publisher's website, which
                 may have its own privacy policy and cookie usage.</li>

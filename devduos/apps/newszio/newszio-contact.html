@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact Us - Newszio | DevDuo's</title>
+    <meta name="description"
+        content="Contact the Newszio team at DevDuo Apps. Email us for support, feedback, bug reports or content removal requests.">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --card: #111;
+            --border: #222;
+            --brand-1: #5eead4;
+            --brand-2: #60a5fa;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
+                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+
+        /* --- HERO --- */
+        .hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem 1rem;
+            border-radius: 999px;
+            border: 1px solid rgba(94, 234, 212, .35);
+            background: rgba(94, 234, 212, .08);
+            color: var(--brand-1);
+            font-size: .85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--brand-1);
+            box-shadow: 0 0 0 0 rgba(94, 234, 212, .6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            70% {
+                box-shadow: 0 0 0 10px rgba(94, 234, 212, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(94, 234, 212, 0);
+            }
+        }
+
+        .grand-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 7vw, 4.5rem);
+            line-height: 1.05;
+            margin: 0 0 1rem;
+            font-weight: 800;
+            color: #fafafa;
+        }
+
+        .intro-lede {
+            font-size: 1.2rem;
+            color: #c5c8ce;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* --- MAIN EMAIL CARD --- */
+        .email-card {
+            position: relative;
+            margin: 3rem auto 0;
+            max-width: 720px;
+            padding: 2.5rem 2rem;
+            border-radius: 24px;
+            background: rgba(17, 17, 17, .75);
+            border: 1px solid var(--border);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .email-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, var(--brand-1), transparent 40%, transparent 60%, var(--brand-2));
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .email-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.25rem;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, rgba(94, 234, 212, .15), rgba(96, 165, 250, .15));
+            border: 1px solid rgba(94, 234, 212, .3);
+        }
+
+        .email-icon svg {
+            width: 30px;
+            height: 30px;
+            color: var(--brand-1);
+        }
+
+        .email-label {
+            color: var(--muted);
+            font-size: .9rem;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            font-weight: 600;
+            margin: 0 0 .5rem;
+        }
+
+        .email-address {
+            font-family: var(--font-display);
+            font-size: clamp(1.1rem, 3.5vw, 1.7rem);
+            font-weight: 800;
+            margin: 0 0 1.75rem;
+            word-break: break-all;
+        }
+
+        .email-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--bg);
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
+        }
+
+        .ghost-button {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--fg);
+            background: rgba(255, 255, 255, .04);
+            padding: 0.85rem 1.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            font-family: var(--font-sans);
+            transition: border-color .2s, transform .2s;
+        }
+
+        .ghost-button:hover {
+            border-color: var(--brand-1);
+            transform: translateY(-3px);
+        }
+
+        .response-note {
+            margin: 1.5rem 0 0;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        /* --- INFO GRID --- */
+        section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+            margin: 0 0 2.5rem;
+            color: #fff;
+            text-align: center;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .info-card {
+            background: rgba(17, 17, 17, .7);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.75rem;
+            transition: border-color .2s, transform .2s;
+        }
+
+        .info-card:hover {
+            border-color: rgba(94, 234, 212, .4);
+            transform: translateY(-4px);
+        }
+
+        .info-card svg {
+            width: 28px;
+            height: 28px;
+            color: var(--brand-1);
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            margin: 0 0 .4rem;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: #f0f0f0;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .info-card a {
+            color: var(--brand-2);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .info-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- HELP TOPICS --- */
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+            justify-content: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .topic-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .7rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(17, 17, 17, .8);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            text-decoration: none;
+            font-weight: 500;
+            transition: border-color .2s, color .2s;
+        }
+
+        .topic-chip:hover {
+            border-color: var(--brand-1);
+            color: var(--brand-1);
+        }
+
+        /* --- PUBLISHER NOTE --- */
+        .notice {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.75rem;
+            border-radius: 18px;
+            background: rgba(96, 165, 250, .06);
+            border: 1px solid rgba(96, 165, 250, .25);
+        }
+
+        .notice h3 {
+            margin: 0 0 .5rem;
+            font-family: var(--font-display);
+            color: var(--brand-2);
+        }
+
+        .notice p {
+            margin: 0;
+            color: #c5c8ce;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--brand-1);
+        }
+
+        /* --- TOAST --- */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(150%);
+            background: #111;
+            border: 1px solid var(--brand-1);
+            color: var(--brand-1);
+            padding: .8rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: transform .3s ease;
+            z-index: 200;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* --- MOBILE --- */
+        @media (max-width: 640px) {
+            header .container {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            .app-bar {
+                gap: .5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .app-bar-link {
+                font-size: .9rem;
+            }
+
+            .hero {
+                padding-top: 3rem;
+            }
+
+            .email-card {
+                padding: 2rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="newszio_info.html" class="app-bar-link">App Info</a>
+                <a href="newszio_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
+                <a href="newszio_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+                <a href="newszio-contact.html" class="app-bar-link active">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero container">
+            <div class="hero-badge"><span class="pulse-dot"></span> We're here to help</div>
+            <h1 class="grand-title">Contact <span class="gradient-text">Us</span></h1>
+            <p class="intro-lede">
+                Have a question, found a bug, or want to share an idea for Newszio?
+                Our team at DevDuo Apps reads every message.
+            </p>
+
+            <!-- MAIN EMAIL CARD -->
+            <div class="email-card">
+                <div class="email-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg>
+                </div>
+                <p class="email-label">Support Email</p>
+                <p class="email-address gradient-text">support.devduos@thetrishulgroup.com</p>
+                <div class="email-actions">
+                    <a class="cta-button" href="mailto:support.devduos@thetrishulgroup.com?subject=Newszio%20Support">
+                        ✉️ Send Email
+                    </a>
+                    <button class="ghost-button" id="copyBtn" type="button">📋 Copy Email</button>
+                </div>
+                <p class="response-note">⏱️ We usually reply within 48 hours.</p>
+            </div>
+        </section>
+
+        <!-- INFO GRID -->
+        <section class="container">
+            <h2 class="section-title">About the App & Developer</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z" />
+                    </svg>
+                    <h3>App</h3>
+                    <p>Newszio – Personalize Your News</p>
+                </div>
+                <div class="info-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                    <h3>Developer</h3>
+                    <p>DevDuo Apps</p>
+                </div>
+                <div class="info-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                    </svg>
+                    <h3>Google Play</h3>
+                    <p><a href="https://play.google.com/store/apps/details?id=com.devduo.devduonewszio" target="_blank"
+                            rel="noopener">View Newszio →</a></p>
+                </div>
+                <div class="info-card">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <h3>Response Time</h3>
+                    <p>Usually within 48 hours</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HELP TOPICS -->
+        <section class="container">
+            <h2 class="section-title">What Can We Help With?</h2>
+            <div class="topics">
+                <a class="topic-chip"
+                    href="mailto:support.devduos@thetrishulgroup.com?subject=Newszio%20Bug%20Report">🐞 Report a Bug</a>
+                <a class="topic-chip"
+                    href="mailto:support.devduos@thetrishulgroup.com?subject=Newszio%20Feature%20Request">💡 Request a
+                    Feature</a>
+                <a class="topic-chip"
+                    href="mailto:support.devduos@thetrishulgroup.com?subject=Newszio%20Premium%20%2F%20Payment">💎
+                    Premium & Payments</a>
+                <a class="topic-chip"
+                    href="mailto:support.devduos@thetrishulgroup.com?subject=Newszio%20Content%20Removal%20Request">📰
+                    Content Removal</a>
+                <a class="topic-chip" href="mailto:support.devduos@thetrishulgroup.com?subject=Newszio%20Feedback">💬
+                    General Feedback</a>
+            </div>
+        </section>
+
+        <!-- PUBLISHER NOTE -->
+        <section class="container" style="padding-top: 0;">
+            <div class="notice">
+                <h3>For Publishers & Content Owners</h3>
+                <p>
+                    Newszio is a news aggregator. Headlines and articles come from publicly available RSS feeds,
+                    and every story links back to its original publisher. If you own content shown in Newszio and
+                    want it removed or corrected, email us with the article link and we will act promptly.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="newszio_info.html">App Info</a>
+                <a href="newszio_privacypolicy.html">Privacy Policy</a>
+                <a href="newszio_termsandconditions.html">Terms of Service</a>
+                <a href="newszio-contact.html">Contact Us</a>
+            </div>
+            <p>© 2026 DevDuo's. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="toast" id="toast">✅ Email copied!</div>
+
+    <script>
+        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
+        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.4, ease: "power2.out" });
+        gsap.from(".info-card", { opacity: 0, y: 30, stagger: 0.1, duration: 0.7, delay: 0.9, ease: "power2.out" });
+
+        document.getElementById("copyBtn").addEventListener("click", function () {
+            const email = "support.devduos@thetrishulgroup.com";
+            const toast = document.getElementById("toast");
+            const showToast = function () {
+                toast.classList.add("show");
+                setTimeout(function () { toast.classList.remove("show"); }, 2000);
+            };
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(email).then(showToast);
+            } else {
+                const temp = document.createElement("textarea");
+                temp.value = email;
+                document.body.appendChild(temp);
+                temp.select();
+                document.execCommand("copy");
+                document.body.removeChild(temp);
+                showToast();
+            }
+        });
+    </script>
+</body>
+
+</html>

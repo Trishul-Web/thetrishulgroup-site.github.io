@@ -147,6 +147,23 @@
             color: var(--brand-1);
             border-bottom-color: var(--brand-1);
         }
+
+        @media (max-width: 640px) {
+            header .container-header {
+                flex-direction: column;
+                gap: .5rem;
+            }
+
+            .app-bar {
+                gap: .5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .app-bar-link {
+                font-size: .9rem;
+            }
+        }
     </style>
 </head>
 
@@ -162,6 +179,7 @@
                 <a href="newszio_info.html" class="app-bar-link">App Info</a>
                 <a href="newszio_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
                 <a href="newszio_termsandconditions.html" class="app-bar-link active">Terms & Conditions</a>
+                <a href="newszio-contact.html" class="app-bar-link">Contact Us</a>
             </nav>
         </div>
     </header>
@@ -177,7 +195,7 @@
 
         <h2>2. Content Aggregation & Ownership</h2>
         <p>Newszio functions as a news aggregator. It fetches and displays content from publicly available RSS feeds
-            (such as Google News). <strong>DevDuos does not own, edit, or create the news content</strong> displayed
+            (such as Bing News). <strong>DevDuos does not own, edit, or create the news content</strong> displayed
             within the app. All articles, headlines, and images remain the property of their respective publishers.</p>
 
         <h2>3. Accuracy of Information</h2>
