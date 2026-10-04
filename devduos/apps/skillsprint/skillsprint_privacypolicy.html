@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Privacy Policy - SkillSprint | DevDuo Softwares</title>
+    <meta name="description" content="Privacy Policy for the SkillSprint learning app (com.devduos.skillsprint) by DevDuo Softwares.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --border: #222;
+            --brand-1: #5eead4;
+            --brand-2: #60a5fa;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: min(800px, 90vw);
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: var(--font-display);
+            color: var(--brand-1);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            color: var(--fg);
+            margin-top: 1.75rem;
+        }
+
+        p,
+        li,
+        td,
+        th {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        strong {
+            color: var(--fg);
+        }
+
+        a {
+            color: var(--brand-2);
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:focus-visible {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 2rem;
+        }
+
+        .timestamp {
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        .identity {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            background: rgba(17, 17, 17, .7);
+            margin: 2rem 0;
+        }
+
+        .identity p {
+            margin: 0.25rem 0;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+            font-size: 0.98rem;
+        }
+
+        th {
+            color: var(--fg);
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .aurora {
+                animation: none;
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+
+    <header>
+        <div class="container-header">
+            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="skillsprint_info.html" class="app-bar-link">App Info</a>
+                <a href="skillsprint_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
+                <a href="skillsprint_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Privacy Policy for SkillSprint</h1>
+        <p class="timestamp">Effective date: October 5, 2026</p>
+
+        <div class="identity">
+            <p><strong>App name:</strong> SkillSprint</p>
+            <p><strong>Package name:</strong> com.devduos.skillsprint</p>
+            <p><strong>Developer:</strong> DevDuo Softwares</p>
+            <p><strong>Available on:</strong> <a href="https://play.google.com/store/apps/details?id=com.devduos.skillsprint" target="_blank" rel="noopener">Google Play</a></p>
+            <p><strong>Contact:</strong> <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+        </div>
+
+        <p>This Privacy Policy explains how DevDuo Softwares ("we", "our", or "us") handles information when you use the
+            SkillSprint mobile application (the "App"). SkillSprint is a learning app with 200+ interactive courses,
+            audio lessons, module tests, certificates, skill cards, and an on-device AI course creator.</p>
+
+        <h2>1. Summary</h2>
+        <ul>
+            <li>Your learning progress, test scores, certificates, skill cards, saved courses, and AI-generated courses
+                are stored <strong>only on your device</strong>. We do not upload them to our servers.</li>
+            <li>We do not require you to create an account or sign in.</li>
+            <li>The App shows ads through <strong>Google AdMob</strong> and processes purchases through <strong>Google
+                    Play Billing</strong> and <strong>RevenueCat</strong>. These services collect some device and usage
+                data, described below.</li>
+            <li>If you send us feedback from inside the App, we receive the details you submit.</li>
+            <li>We do not sell your personal information.</li>
+        </ul>
+
+        <h2>2. Information stored only on your device</h2>
+        <p>The following information is created and saved inside the App's private storage on your device. It never
+            leaves your device unless you choose to share it yourself:</p>
+        <ul>
+            <li>Course progress, completed lessons, test results, and scores.</li>
+            <li>Certificates and skill cards you earn, including the certificate ID and date.</li>
+            <li><strong>The name you enter for your certificates.</strong> It is used only to print your name on your
+                certificates and skill cards. You can change it anytime in Profile.</li>
+            <li>Saved (bookmarked) courses and app settings such as the intro video preference.</li>
+            <li>Courses and lectures you create with the on-device AI. The AI model runs entirely on your phone, so the
+                topics you type and the content it generates are never sent to us.</li>
+        </ul>
+        <p>When you tap "Share" or "Save to Gallery", the certificate image or PDF is created on your device and shared
+            only with the app or person you choose.</p>
+
+        <h2>3. Information you choose to send us</h2>
+        <p>If you use <strong>Send Feedback</strong> or <strong>Report Bug</strong> inside the App, the following is
+            sent to us through Google Forms:</p>
+        <ul>
+            <li>Your email address (optional, but required for payment-related requests).</li>
+            <li>The topic you select and the message you write.</li>
+            <li>The App version, your device brand and model, and Android version, to help us fix problems.</li>
+        </ul>
+        <p>We use this information only to reply to you and improve the App. You can ask us to delete it at any time by
+            emailing us.</p>
+
+        <h2>4. Third-party services</h2>
+        <p>The App uses the following third-party services. Each one has its own privacy policy that explains how it
+            handles data.</p>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Why we use it</th>
+                        <th>Data it may collect</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google AdMob</a></td>
+                        <td>To show ads to free users.</td>
+                        <td>Advertising ID, IP address, device and app information, approximate location from IP, and ad
+                            interactions.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.revenuecat.com/privacy" target="_blank" rel="noopener">RevenueCat</a> and
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Play Billing</a></td>
+                        <td>To process and restore Pro purchases.</td>
+                        <td>An anonymous app user ID, purchase history, and device information. We never see your payment
+                            card details.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Play In-App Review</a></td>
+                        <td>To let you rate the App without leaving it.</td>
+                        <td>Handled by Google Play under your Google account.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Forms</a></td>
+                        <td>To receive feedback you choose to send.</td>
+                        <td>Only what is listed in section 3.</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://developers.google.com/fonts/faq/privacy" target="_blank" rel="noopener">Google Fonts</a></td>
+                        <td>To download text fonts used in the App.</td>
+                        <td>Your IP address is visible to Google when a font is downloaded.</td>
+                    </tr>
+                    <tr>
+                        <td>Content downloads (GitHub and Cloudflare)</td>
+                        <td>To download the optional AI model, app update notes, and our list of other apps.</td>
+                        <td>Standard technical request data such as IP address. No personal information is sent.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>You can reset your advertising ID or opt out of personalized ads in your Android settings
+            (Settings &gt; Google &gt; Ads, or Settings &gt; Privacy &gt; Ads, depending on your device).</p>
+
+        <h2>5. Permissions the App uses</h2>
+        <ul>
+            <li><strong>Internet and network access:</strong> to load ads, check purchases, download the optional AI
+                model, and receive update notes.</li>
+            <li><strong>Photos and media (Android 10 and below only):</strong> to save your certificates and skill cards
+                to your gallery when you tap "Save to Gallery". On newer Android versions no permission is needed.</li>
+            <li><strong>Keep screen awake:</strong> only while the AI model is downloading, so the download does not
+                stop.</li>
+        </ul>
+        <p>The App does not access your camera, microphone, contacts, or precise location.</p>
+
+        <h2>6. Children's privacy</h2>
+        <p>SkillSprint is a general learning app and is not directed at children under 13. We do not knowingly collect
+            personal information from children under 13. If you believe a child has sent us personal information through
+            the feedback form, contact us and we will delete it.</p>
+
+        <h2>7. Data security</h2>
+        <p>Data stored by the App is kept in the private storage area that Android gives to each app. Information sent
+            to third-party services is transmitted over encrypted connections (HTTPS). Anyone with access to your
+            unlocked device may still be able to open the App and see your progress.</p>
+
+        <h2>8. Data retention and deletion</h2>
+        <ul>
+            <li><strong>On-device data:</strong> you can delete it at any time by clearing the App's data or uninstalling
+                the App. This permanently removes your progress, certificates, and skill cards.</li>
+            <li><strong>Feedback messages:</strong> email us and we will delete your submissions.</li>
+            <li><strong>Third-party data:</strong> data held by Google AdMob, Google Play, or RevenueCat is managed under
+                their own policies linked above.</li>
+        </ul>
+
+        <h2>9. Changes to this Privacy Policy</h2>
+        <p>We may update this Privacy Policy when the App changes. The new version will be posted on this page with an
+            updated effective date.</p>
+
+        <h2>10. Contact us</h2>
+        <p>If you have any questions about this Privacy Policy or want your data deleted, contact DevDuo Softwares at:
+            <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    </main>
+
+    <footer>
+        <p>© 2026 DevDuo Softwares. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>

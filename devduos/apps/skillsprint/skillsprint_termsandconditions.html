@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Terms & Conditions - SkillSprint | DevDuo Softwares</title>
+    <meta name="description" content="Terms and Conditions for the SkillSprint learning app (com.devduos.skillsprint) by DevDuo Softwares.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #010101;
+            --fg: #e5e7eb;
+            --muted: #9aa3af;
+            --border: #222;
+            --brand-1: #5eead4;
+            --brand-2: #60a5fa;
+            --font-sans: "Inter", system-ui, sans-serif;
+            --font-display: "Sora", sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--fg);
+            font-family: var(--font-sans);
+            line-height: 1.7;
+        }
+
+        .container {
+            width: min(800px, 90vw);
+            margin: 0 auto;
+            padding: 4rem 0;
+        }
+
+        h1,
+        h2 {
+            font-family: var(--font-display);
+            color: var(--brand-1);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 6vw, 3rem);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            margin-top: 3rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+        }
+
+        p,
+        li {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: var(--brand-2);
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:focus-visible {
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 2rem;
+        }
+
+        strong {
+            color: #ff6b6b;
+            font-weight: 700;
+        }
+
+        .timestamp {
+            font-style: italic;
+            color: var(--muted);
+        }
+
+        .identity {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            background: rgba(17, 17, 17, .7);
+            margin: 2rem 0;
+        }
+
+        .identity p {
+            margin: 0.25rem 0;
+        }
+
+        .identity b {
+            color: var(--fg);
+        }
+
+        .bg-wrap {
+            position: fixed;
+            inset: -20vmax;
+            pointer-events: none;
+            z-index: -1;
+            filter: saturate(1.05);
+        }
+
+        .aurora {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
+            animation: floaty 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes floaty {
+            to {
+                transform: translate3d(0, -2%, 0) scale(1.02)
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .aurora {
+                animation: none;
+            }
+        }
+
+        header {
+            padding: 1.25rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            width: min(1000px, 90vw);
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .app-bar {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .app-bar-link {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 500;
+            transition: color .2s;
+            padding: 0.5rem;
+            border-bottom: 2px solid transparent;
+        }
+
+        .app-bar-link:hover {
+            color: var(--fg);
+        }
+
+        .app-bar-link.active {
+            color: var(--brand-1);
+            border-bottom-color: var(--brand-1);
+        }
+
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-wrap">
+        <div class="aurora"></div>
+    </div>
+
+    <header>
+        <div class="container-header">
+            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
+            <nav class="app-bar">
+                <a href="skillsprint_info.html" class="app-bar-link">App Info</a>
+                <a href="skillsprint_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
+                <a href="skillsprint_termsandconditions.html" class="app-bar-link active">Terms & Conditions</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>Terms and Conditions for SkillSprint</h1>
+        <p class="timestamp">Effective date: October 5, 2026</p>
+
+        <div class="identity">
+            <p><b>App name:</b> SkillSprint (com.devduos.skillsprint)</p>
+            <p><b>Developer:</b> DevDuo Softwares</p>
+            <p><b>Contact:</b> <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+        </div>
+
+        <h2>1. Agreement to terms</h2>
+        <p>By downloading or using the SkillSprint application (the "App"), published by DevDuo Softwares ("we", "our",
+            or "us"), you agree to these Terms and Conditions. If you do not agree, please do not use the App.</p>
+
+        <h2>2. What the App provides</h2>
+        <p>SkillSprint offers self-paced interactive courses, story mode lessons, audio podcasts, module tests, grand
+            tests, certificates of completion, skill cards, and an optional on-device AI course creator. The courses are
+            for general learning and personal development.</p>
+
+        <h2>3. Certificates and skill cards</h2>
+        <ul>
+            <li>Certificates and skill cards confirm that you completed a self-paced course or passed a module test inside
+                the SkillSprint app.</li>
+            <li><strong>They are not accredited qualifications, degrees, diplomas, or government-recognized
+                    certifications.</strong> They are not issued or endorsed by any university, exam board, government
+                body, or technology company.</li>
+            <li>You are responsible for entering your real name. You agree not to misrepresent a certificate or skill card
+                as an official or third-party certification.</li>
+        </ul>
+
+        <h2>4. Course names and trademarks</h2>
+        <p>Some course titles mention technologies, software, or exams (for example programming languages, cloud
+            platforms, office tools, or competitive exams) only to describe the topic taught. All trademarks belong to
+            their respective owners. SkillSprint and DevDuo Softwares are not affiliated with, sponsored by, or endorsed
+            by those companies or organizations.</p>
+
+        <h2>5. AI-generated content</h2>
+        <p>Courses and lessons created with the on-device AI are generated automatically and may contain mistakes or
+            incomplete information. Please check important facts with trusted sources. AI-generated content is not
+            reviewed by us.</p>
+
+        <h2>6. Pro purchase</h2>
+        <p>SkillSprint offers an optional one-time Lifetime Pro purchase that unlocks all modules, removes ads, and adds
+            extra features such as the gold certificate design. Purchases are processed by Google Play and are subject to
+            Google Play's refund policies. You can restore a previous purchase from inside the App.</p>
+
+        <h2>7. Local storage and your data</h2>
+        <ul>
+            <li>Your progress, certificates, skill cards, and AI courses are stored only on your device.</li>
+            <li><strong>If you uninstall the App or clear its data, all of this is permanently deleted.</strong> We do
+                not offer cloud backup. Save or share any certificates you want to keep before uninstalling.</li>
+        </ul>
+
+        <h2>8. Acceptable use</h2>
+        <ul>
+            <li>Do not copy, resell, or redistribute the App's course content.</li>
+            <li>Do not edit or forge certificates or skill cards, or use them to deceive anyone.</li>
+            <li>Do not try to reverse engineer, hack, or interfere with the App or its purchase system.</li>
+        </ul>
+
+        <h2>9. Disclaimer of warranties</h2>
+        <p>The App and its content are provided "as is" and "as available". We work to keep courses accurate and
+            up to date, but we do not guarantee that all content is complete, error-free, or suitable for any exam,
+            job, or specific purpose.</p>
+
+        <h2>10. Limitation of liability</h2>
+        <p>To the maximum extent permitted by law, DevDuo Softwares is not liable for any indirect, incidental, or
+            consequential damages, including loss of data or progress, arising from your use of or inability to use the
+            App.</p>
+
+        <h2>11. Changes to these terms</h2>
+        <p>We may update these Terms when the App changes. The new version will be posted on this page with an updated
+            effective date.</p>
+
+        <h2>12. Governing law</h2>
+        <p>These Terms are governed by the laws of India, without regard to its conflict of law provisions.</p>
+
+        <h2>13. Contact us</h2>
+        <p>If you have any questions about these Terms, contact DevDuo Softwares at:
+            <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    </main>
+
+    <footer>
+        <p>© 2026 DevDuo Softwares. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
