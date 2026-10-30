@@ -3,752 +3,1082 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Devduos - Innovative Mobile Applications</title>
-
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧑‍💻</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>DevDuo Software | Android Apps and Games from Pune, India</title>
+    <meta name="description"
+        content="DevDuo Software builds Android apps and games: Indian railway driving games, PDF and document tools, privacy apps and everyday utilities. A Trishul Group company.">
+    <meta property="og:title" content="DevDuo Software">
+    <meta property="og:description" content="Android apps and games made in Pune, India.">
+    <meta property="og:image" content="assets/devduo_logo.png">
+    <meta name="theme-color" content="#060a12">
+    <link rel="icon" type="image/png" href="assets/devduo_logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --glow-1: rgba(94, 234, 212, .22);
-            --glow-2: rgba(96, 165, 250, .18);
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --brand-3: #a78bfa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --ink: #060a12;
+            --ink-2: #0c1220;
+            --ink-3: #121a2c;
+            --line: #1c2538;
+            --cyan: #2fd4e8;
+            --blue: #3b82f6;
+            --text: #e8edf5;
+            --soft: #b5bfd0;
+            --mute: #7d889c;
+            --display: "Unbounded", "Segoe UI", system-ui, sans-serif;
+            --sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        #loader {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #000;
-            z-index: 1000;
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 84px;
         }
 
-        .spinner {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: radial-gradient(farthest-side, var(--brand-1) 94%, #0000) top/9px 9px no-repeat, conic-gradient(#0000 30%, var(--brand-1));
-            animation: spinner-c7wet2 1s infinite linear;
+        body {
+            margin: 0;
+            background: var(--ink);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1.0625rem;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        @keyframes spinner-c7wet2 {
-            100% {
-                transform: rotate(1turn)
-            }
+        a {
+            color: inherit;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        img {
+            max-width: 100%;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .18), transparent 60%), radial-gradient(60% 60% at 90% 20%, rgba(96, 165, 250, .16), transparent 60%), radial-gradient(70% 70% at 50% 90%, rgba(167, 139, 250, .12), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        :focus-visible {
+            outline: 2px solid var(--cyan);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
+        .wrap {
+            width: min(1160px, 90vw);
+            margin: 0 auto;
         }
 
-        header {
-            position: fixed;
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.25rem 0;
-            z-index: 500;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            transform: translateY(-100%);
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(6, 10, 18, .8);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        header .container {
+        .nav .wrap {
+            height: 68px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            text-decoration: none;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .brand img {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            font-size: .95rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--soft);
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-play {
+            padding: .5rem 1rem;
+            border-radius: 999px;
+            border: 1px solid #2a3550;
+            color: var(--text) !important;
+        }
+
+        .nav-play:hover {
+            border-color: var(--cyan);
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 6.5rem 0 5rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 760px;
+            height: 760px;
+            right: -220px;
+            top: -260px;
+            background: radial-gradient(closest-side, rgba(47, 212, 232, .16), rgba(59, 130, 246, .08) 55%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 4rem;
             align-items: center;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
+        .parent-link {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .9rem;
+            color: var(--mute);
             text-decoration: none;
+            margin-bottom: 1.75rem;
+            transition: color .2s;
         }
 
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2) 50%, var(--brand-3));
+        .parent-link:hover {
+            color: #e8a33d;
+        }
+
+        .parent-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        h1 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(2.5rem, 5.6vw, 4.4rem);
+            line-height: 1.04;
+            letter-spacing: -.025em;
+            margin: 0 0 1.5rem;
+        }
+
+        h1 .line-2 {
+            display: block;
+            background: linear-gradient(95deg, var(--cyan), var(--blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        nav {
+        .hero-lede {
+            font-size: 1.2rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2.25rem;
+        }
+
+        .actions {
             display: flex;
-            gap: 2rem;
+            flex-wrap: wrap;
+            gap: .8rem;
         }
 
-        .nav-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            font-size: 1rem;
-        }
-
-        .nav-link:hover {
-            color: var(--fg);
-        }
-
-        main {
-            background: transparent;
-            position: relative;
-        }
-
-        .container {
-            width: min(1140px, 92vw);
-            margin: 0 auto;
-        }
-
-        section {
-            padding: 7rem 0;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        #hero {
-            padding-top: 12rem;
-            padding-bottom: 8rem;
-        }
-
-        section:last-child {
-            border-bottom: none;
-        }
-
-        .hero {
-            position: relative;
-            text-align: center;
-        }
-
-        .eyebrow {
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            font-size: .9rem;
-            color: #a3a3a3;
-            margin-bottom: 1rem;
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 6.5vw, 5.5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 780px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: .85rem 1.4rem;
+            border-radius: 999px;
             font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
+            font-size: .97rem;
             text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            background-size: 200% 100%;
-            animation: gradient-flow 4s ease infinite;
+            transition: transform .2s, box-shadow .2s, border-color .2s, background .2s;
         }
 
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
+        .btn-main {
+            background: linear-gradient(95deg, var(--cyan), var(--blue));
+            color: #04121c;
+            box-shadow: 0 10px 30px rgba(47, 160, 232, .25);
         }
 
-        @keyframes gradient-flow {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+        .btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(47, 160, 232, .35);
         }
 
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
+        .btn-line {
+            border: 1px solid #2a3550;
+            color: var(--text);
         }
 
-        .card-grid {
+        .btn-line:hover {
+            border-color: var(--cyan);
+        }
+
+        /* Icon wall in hero */
+        .icon-wall {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            transform: rotate(-6deg);
         }
 
-        .card-link-wrapper {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .card {
-            position: relative;
-            background: rgba(17, 17, 17, .7);
+        .icon-wall img,
+        .icon-wall .tile {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 24%;
+            object-fit: cover;
+            display: block;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, .45);
             border: 1px solid rgba(255, 255, 255, .06);
-            border-radius: 18px;
-            padding: 2rem;
-            backdrop-filter: blur(8px);
-            transition: transform .3s, border-color .25s, box-shadow .25s;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .02), 0 10px 30px rgba(0, 0, 0, .45);
-            text-align: center;
+        }
 
-            height: 100%;
-            /* Forces card to take full height of grid cell */
+        .icon-wall> :nth-child(4n+2),
+        .icon-wall> :nth-child(4n+4) {
+            transform: translateY(26px);
+        }
+
+        /* ---------- Stats strip ---------- */
+        .strip {
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            background: var(--ink-2);
+        }
+
+        .strip .wrap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .stat {
+            padding: 1.75rem 1.25rem;
+            border-left: 1px solid var(--line);
+        }
+
+        .stat:first-child {
+            border-left: 0;
+            padding-left: 0;
+        }
+
+        .stat strong {
+            display: block;
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: 1.7rem;
+            line-height: 1.1;
+        }
+
+        .stat span {
+            color: var(--mute);
+            font-size: .92rem;
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 6rem 0;
+        }
+
+        h2 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(1.9rem, 3.6vw, 2.7rem);
+            letter-spacing: -.02em;
+            line-height: 1.1;
+            margin: 0 0 1rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.5rem;
+        }
+
+        /* Featured */
+        .featured {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .feature {
+            position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            padding: 2rem;
+            border-radius: 26px;
+            background: linear-gradient(160deg, var(--ink-3), var(--ink-2));
+            border: 1px solid var(--line);
+            text-decoration: none;
+            overflow: hidden;
+            transition: border-color .25s, transform .25s;
         }
 
-        .card::before {
-            content: "";
-            position: absolute;
-            inset: -1px;
-            border-radius: inherit;
-            background: radial-gradient(60% 80% at 0% 0%, var(--glow-2), transparent 60%), radial-gradient(80% 60% at 100% 100%, var(--glow-1), transparent 60%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s;
+        .feature:hover {
+            border-color: #2f4466;
+            transform: translateY(-4px);
         }
 
-        .card:hover::before {
-            opacity: 1;
-        }
-
-        .card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(94, 234, 212, .3);
-        }
-
-        .card-app-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
-            margin: 0 auto 1.5rem auto;
+        .feature .fshot {
+            width: calc(100% + 4rem);
+            max-width: none;
+            margin: -2rem -2rem 0;
+            aspect-ratio: 526 / 296;
+            object-fit: cover;
             display: block;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--line);
         }
 
-        .card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-            font-weight: 600;
+        .feature .fshot+.ficon {
+            margin-top: -38px;
+            border: 3px solid var(--ink-3);
+            position: relative;
         }
 
-        .card p {
-            color: #b5bac3;
-            margin: 0;
-            line-height: 1.6;
-        }
-
-        .link-accent {
-            color: var(--brand-1);
-            border-bottom: 1px solid transparent;
-            text-decoration: none;
-            transition: border-bottom-color 0.2s;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .link-accent:hover {
-            border-bottom-color: var(--brand-1);
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid #1a1a1a;
-        }
-
-        .footer-socials {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+        .feature .ficon {
+            width: 76px;
+            height: 76px;
+            border-radius: 20px;
+            object-fit: cover;
             margin-bottom: 1.5rem;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .4);
         }
 
-        .footer-socials a {
-            color: var(--muted);
-            transition: color .2s, transform .2s;
-            display: inline-block;
+        .feature .tag {
+            font-size: .85rem;
+            color: var(--cyan);
+            font-weight: 600;
+            margin-bottom: .35rem;
         }
 
-        .footer-socials a:hover {
-            color: var(--brand-1);
-            transform: scale(1.1);
+        .feature h3 {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: 1.35rem;
+            line-height: 1.2;
+            margin: 0 0 .75rem;
         }
 
-        .footer-socials svg {
-            width: 24px;
-            height: 24px;
+        .feature p {
+            margin: 0 0 1.5rem;
+            color: var(--soft);
+            font-size: .98rem;
         }
 
-        .footer-links {
+        .feature .more {
+            margin-top: auto;
+            font-weight: 600;
+            font-size: .93rem;
+            color: var(--text);
+        }
+
+        /* Catalogue */
+        .catalog-bar {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .chip {
+            font: inherit;
+            font-size: .92rem;
+            font-weight: 600;
+            padding: .55rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--ink-2);
+            color: var(--soft);
+            cursor: pointer;
+            transition: background .2s, color .2s, border-color .2s;
+        }
+
+        .chip:hover {
+            border-color: #2f4466;
+            color: var(--text);
+        }
+
+        .chip[aria-pressed="true"] {
+            background: var(--text);
+            color: var(--ink);
+            border-color: var(--text);
+        }
+
+        .chip .n {
+            opacity: .55;
+            font-weight: 500;
+            margin-left: .3rem;
+        }
+
+        .search {
+            position: relative;
+            flex: 0 1 280px;
+        }
+
+        .search input {
+            width: 100%;
+            font: inherit;
+            font-size: .95rem;
+            padding: .7rem 1rem .7rem 2.6rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--ink-2);
+            color: var(--text);
+        }
+
+        .search input::placeholder {
+            color: var(--mute);
+        }
+
+        .search input:focus {
+            outline: none;
+            border-color: var(--cyan);
+        }
+
+        .search svg {
+            position: absolute;
+            left: .95rem;
+            top: 50%;
+            width: 18px;
+            height: 18px;
+            transform: translateY(-50%);
+            color: var(--mute);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .app {
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 1rem;
+            align-items: start;
+            padding: 1.25rem;
+            border-radius: 20px;
+            background: var(--ink-2);
+            border: 1px solid var(--line);
             text-decoration: none;
-            transition: color .2s;
+            transition: border-color .2s, background .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        .app:hover {
+            border-color: #2f4466;
+            background: var(--ink-3);
         }
 
-        .muted {
-            color: #a6adb7;
+        .app img,
+        .app .tile {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            object-fit: cover;
+            display: block;
         }
 
-        .center {
+        .tile {
+            display: grid !important;
+            place-items: center;
+            font-size: 1.9rem;
+            line-height: 1;
+        }
+
+        .app h3 {
+            margin: .1rem 0 .25rem;
+            font-size: 1.02rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .app p {
+            margin: 0;
+            font-size: .9rem;
+            line-height: 1.5;
+            color: var(--mute);
+        }
+
+        .app .cat {
+            display: inline-block;
+            margin-top: .55rem;
+            font-size: .78rem;
+            font-weight: 600;
+            color: var(--soft);
+            padding: .15rem .55rem;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, .05);
+        }
+
+        .empty {
+            grid-column: 1 / -1;
+            padding: 3rem 1rem;
             text-align: center;
+            color: var(--mute);
+            border: 1px dashed var(--line);
+            border-radius: 20px;
+        }
+
+        .empty button {
+            margin-top: 1rem;
+        }
+
+        /* About */
+        .about {
+            background: var(--ink-2);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .about p {
+            color: var(--soft);
+            margin: 0 0 1.1rem;
+        }
+
+        .values {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .value {
+            display: grid;
+            grid-template-columns: 44px 1fr;
+            gap: 1rem;
+        }
+
+        .value .ic {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: rgba(47, 212, 232, .1);
+            color: var(--cyan);
+        }
+
+        .value .ic svg {
+            width: 22px;
+            height: 22px;
+        }
+
+        .value h3 {
+            margin: 0 0 .2rem;
+            font-size: 1.05rem;
+        }
+
+        .value p {
+            margin: 0;
+            font-size: .95rem;
+            color: var(--mute);
+        }
+
+        /* Contact */
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 28px;
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(120% 140% at 100% 0%, rgba(59, 130, 246, .14), transparent 55%),
+                var(--ink-2);
+        }
+
+        .contact-box p {
+            color: var(--soft);
+            margin: 0;
+        }
+
+        .contact-links {
+            display: grid;
+            gap: .75rem;
+        }
+
+        .contact-links a {
+            display: block;
+            padding: 1rem 1.2rem;
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            background: var(--ink);
+            text-decoration: none;
+            transition: border-color .2s;
+            word-break: break-word;
+        }
+
+        .contact-links a:hover {
+            border-color: var(--cyan);
+        }
+
+        .contact-links small {
+            display: block;
+            color: var(--mute);
+            font-size: .82rem;
+            margin-bottom: .15rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+
+        footer nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3.5rem;
+            }
+
+            .icon-wall {
+                max-width: 460px;
+                transform: rotate(-4deg);
+            }
+
+            .featured {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid,
+            .contact-box {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .contact-box {
+                padding: 2rem;
+            }
+
+            .strip .wrap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat:nth-child(3) {
+                border-left: 0;
+                padding-left: 0;
+            }
+
+            .stat:nth-child(n+3) {
+                border-top: 1px solid var(--line);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-links a:not(.nav-play) {
+                display: none;
+            }
+
+            .hero {
+                padding: 4rem 0 3.5rem;
+            }
+
+            section {
+                padding: 4.5rem 0;
+            }
+
+            .search {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <div id="loader">
-        <div class="spinner"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="#" class="logo gradient-text">DevDuo's</a>
-            <nav>
-                <a href="#our-apps" class="nav-link">Our Apps</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#contact" class="nav-link">Contact</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="#top" class="brand">
+                <img src="assets/devduo_logo.png" alt="" width="34" height="34">
+                DevDuo Software
+            </a>
+            <nav class="nav-links" aria-label="Main">
+                <a href="#apps">Apps</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                <a href="https://play.google.com/store/apps/dev?id=4747892129266629665" target="_blank" rel="noopener"
+                    class="nav-play">Google Play</a>
             </nav>
         </div>
     </header>
 
-    <main id="site">
-        <section class="hero container" id="hero">
-            <div class="eyebrow">Innovation • Excellence • Integrity</div>
-            <h1 class="grand-title">Crafting Digital <span class="gradient-text">Experiences</span></h1>
-            <p class="intro-lede">
-                We are a passionate developer duo dedicated to creating high-quality, user-friendly mobile
-                applications that solve real-world problems through innovative and elegant software solutions.
-            </p>
-            <a href="#our-apps" class="cta-button">Explore Our Apps</a>
-        </section>
+    <main id="top">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <a href="index.html" class="parent-link">
+                        <svg viewBox="0 0 64 64" aria-hidden="true">
+                            <path fill="currentColor"
+                                d="M32 4l5 12h-3v18c6-1 9-6 9-14h-3l5-10 5 10h-3c0 13-6 20-15 21v19h-4V41c-9-1-15-8-15-21h-3l5-10 5 10h-3c0 8 3 13 9 14V16h-3z" />
+                        </svg>
+                        A Trishul Group company
+                    </a>
+                    <h1>Apps and games <span class="line-2">made in Pune.</span></h1>
+                    <p class="hero-lede">
+                        DevDuo Software builds Android apps that work offline and keep your data on your phone. From
+                        driving trains across India to scanning, signing and securing your documents.
+                    </p>
+                    <div class="actions">
+                        <a href="#apps" class="btn btn-main">Browse all apps</a>
+                        <a href="https://play.google.com/store/apps/dev?id=4747892129266629665" target="_blank"
+                            rel="noopener" class="btn btn-line">Open on Google Play</a>
+                    </div>
+                </div>
+                <div class="icon-wall" id="iconWall" aria-hidden="true"></div>
+            </div>
+        </div>
 
-        <section id="our-apps" class="container">
-            <h2 class="section-title">Our Application Suite</h2>
-            <div class="card-grid">
+        <!-- Stats -->
+        <div class="strip">
+            <div class="wrap">
+                <div class="stat"><strong id="appCount">27</strong><span>apps and games</span></div>
+                <div class="stat"><strong>2023</strong><span>founded in Pune, India</span></div>
+                <div class="stat"><strong>Offline</strong><span>core features, no account needed</span></div>
+                <div class="stat"><strong>Lifetime PRO</strong><span>one-time purchase, no forced subscriptions</span>
+                </div>
+            </div>
+        </div>
 
-                <a href="devduos/apps/traindriverindia/traindriverindia_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/f59e0b?text=%F0%9F%9A%86"
-                            alt="Train Driver India App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Train Driver India</h3>
-                        <p>Plan your own route, build your train and drive it across India. Obey signals, wait in
-                            loops for crossings, run round your loco and shunt the yard.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/metrodriverindia/metrodriverindia_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/39c2ff?text=%F0%9F%9A%87"
-                            alt="Metro Driver India App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Metro Driver India</h3>
-                        <p>Drive metro trains through eleven Indian cities on viaducts, at street level and
-                            underground, or build and share your own metro network.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/indianrailshunter/indianrailshunter_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/f59e0b?text=%F0%9F%9A%82"
-                            alt="Indian Rail Shunter App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Indian Rail Shunter</h3>
-                        <p>Master the depot yard. Shunt passenger rakes, couple twin locomotives, manage high-speed
-                            freight flybys, and expand your station.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/americanrailempire/americanrailempire_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/f59e0b?text=%F0%9F%9A%82"
-                            alt="American Rail Empire App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>American Rail Empire</h3>
-                        <p>Build custom locomotive rakes, expand terminal platform lines, fulfill freight & passenger
-                            contracts, and operate a multi-billion dollar tycoon grid.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/indianstationmaster/indianstationmaster_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/f59e0b?text=%F0%9F%9A%89"
-                            alt="Indian Station Master App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Indian Station Master</h3>
-                        <p>Dispatch 50+ Indian trains, manage live track interlocking, booking windows, and VIP retiring
-                            suites.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/railjunction/railjunction_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/5eead4?text=%F0%9F%9A%89"
-                            alt="Rail Junction App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Rail Junction: Station Empire</h3>
-                        <p>Coordinate schedules, manage live shunting configurations, and build a massive rail tycoon
-                            network.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/dailytracker/dailytracker_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/6366F1?text=%F0%9F%93%88"
-                            alt="Daily Tracker App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Daily Tracker</h3>
-                        <p>Track habits, daily goals, health, and custom stats in one beautiful offline app.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/webtopdf/webtopdf_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/5eead4?text=%F0%9F%93%84"
-                            alt="Web to PDF App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Web to PDF</h3>
-                        <p>Convert any website URL or raw HTML code into a seamless, continuous PDF.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/qrcode/qrcode_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/5eead4?text=%E2%96%A3"
-                            alt="QR Code Generator App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>QR Code Generator</h3>
-                        <p>Create custom QR codes, scan instantly, and generate UPI, Wi-Fi & Contact cards!</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/10minstretch/10minstretch_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s512-rw"
-                            alt="10 Min Stretch App Icon" class="card-app-icon">
-                        <h3>10 Min Stretch</h3>
-                        <p>Daily routines for mobility, posture, and pain relief.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/saveanything/saveanything_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://via.placeholder.com/150/111111/9333ea?text=%E2%9A%A1"
-                            alt="SaveAnything App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>SaveAnything</h3>
-                        <p>Your ultimate digital vault for links, files, media, and notes.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/photocompressor/photocompressor_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://play-lh.googleusercontent.com/3PIP6CtS9TKEkOGoyyqcXO_g-Ze5FDWR2DnGe-94UH0zV2BZJbIXEQwl4lnIKhWvxegaTHOgtZsNdlg70n4asw=s512-rw"
-                            alt="Photo Compressor App Icon" class="card-app-icon" style="object-fit: cover;">
-                        <h3>Photo Compressor</h3>
-                        <p>Batch compress images instantly with a built-in compare slider. 100% on-device.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/newszio/newszio_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt>
-                        <img src="https://play-lh.googleusercontent.com/DheZ43QvWfA5nPyawQKrnCLxFxQUKgk6pNiy7Od6gzG1pD1GlN61-c6uHgYywL_Hztt6jHeZXdIFCkw-J2At=s512-rw"
-                            alt="Newszio App Icon" class="card-app-icon">
-                        <h3>Newszio</h3>
-                        <p>Global news aggregator with custom feeds.</p>
-                    </article>
-                </a>
-
-                <a href="devduos/apps/resumateai/resumateai_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://lh3.googleusercontent.com/K0SIktwU92Q-dTN2zGNJ55-hMnuhkV-Gf45ZRwBLH27wETfRH0YRI4wbQAxy8Niz6L9jJ_cIoSLlaDMt3FqtfQ"
-                            alt="SafeKeep App Icon" class="card-app-icon">
-                        <h3>ResuMate AI</h3>
-                        <p>AI-powered Resume Builder & ATS Scanner.</p>
-                    </article>
-                </a>
-
-                <a href="./devduos/apps/safekeep/safekeep_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/Y-vEXw1NXdcXe6uSVeucD6Bv2TtN5uBQTNT8ah07H--sXo9IcO5E8h0WYPADhyMp8w=s128-rw"
-                            alt="SafeKeep App Icon" class="card-app-icon">
-                        <h3>SafeKeep</h3>
-                        <p>State-of-the-art file encryption.</p>
-                    </article>
-                </a>
-
-                <a href="./devduos/apps/3dcardviewer/3dcardviewer_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/zc4D6jz4eLdJVOhAA_9yNmFRVQn3ts_yCsAM0JpFCI-Rsu2Ia0d2_w6ZmLI3f12_gIYJJ-P3p0Onz-j7mFBfi0Q=w480-h960-rw"
-                            alt="3D Card Viewer App Icon" class="card-app-icon">
-                        <h3>3D Card Viewer</h3>
-                        <p>Transform 2D cards into interactive 3D holograms.</p>
-                    </article>
-                </a>
-
-                <a href="./devduos/apps/skillsprint/skillsprint_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/kMJRO7ugt48BruvM5B0vbOsmV1ilERJTViiSw8KJgOpa8vHhN4z7JFWctkmXYfGJqHcj=s128-rw"
-                            alt="SkillSprint App Icon" class="card-app-icon">
-                        <h3>SkillSprint</h3>
-                        <p>Learn new skills with bite-sized lessons.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/o262zVMenKFEQ9zyRpg_rO72VpStzfhHBmKpn1msf7wgANftLYRK0WgjUiHBzhvTO0OrlI76zYDZt6eOe3cA=s128-rw"
-                            alt="PDF Scanner Pro App Icon" class="card-app-icon">
-                        <h3>PDF Scanner Pro</h3>
-                        <p>Scan, manage, and share documents.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/dm1N0yKMjYAQGL3lBBSDB5_fo6Cflol9lBjueP0fIpGv2rufQ8lQ6puA721S8IS6MkA=s128-rw"
-                            alt="Programming Files Viewer App Icon" class="card-app-icon">
-                        <h3>Programming Files Viewer</h3>
-                        <p>View code with syntax highlighting.</p>
-                    </article>
-                </a>
-
-                <a href="./devduos/apps/bmicalculator/bmicalculator_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/r3hSof4dnJyEjQsXlUQruGS5NrKV44m3PBvoppSS8eWqjmQmdPmZG7V4VqWZ8M5PLzfq=s128-rw"
-                            alt="SmartBMI Tracker App Icon" class="card-app-icon">
-                        <h3>SmartBMI Tracker</h3>
-                        <p>Track your BMI and stay motivated.</p>
-                    </article>
-                </a>
-
-                <a href="./devduos/apps/ttebattle/ttebattle_info.html" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://lh3.googleusercontent.com/YE6zZZWAsJ2iT-WSRawQBi6LS9G9dKMSLXDzBzmRxVnrKRjgZoR07v33zScr7JRSM3jftq6tEaM1zUspbrxrAg"
-                            alt="Programming Files Viewer App Icon" class="card-app-icon">
-                        <h3>TTE Battle: Tic Tac Toe Arena</h3>
-                        <p>Enter the Cyber Battle Arena.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/vkdnhLxJL4aynZ0LfZdm6b_xCONKNqvVV7tLYiBD8n3ZYQeayJcsK_cbfusCJBmXwnXHykjpC-aHfLbhIXlj=s128-rw"
-                            alt="AI PDF Viewer App Icon" class="card-app-icon">
-                        <h3>AI PDF Viewer</h3>
-                        <p>Intelligent editing and translation.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/WJoQltPOYA53DmpU0CZCyS1StHbI7mgNmEsTNi0lhK82Ww-R_IrzbRoGAb1AwJlbaw=s128-rw"
-                            alt="SafeKey App Icon" class="card-app-icon">
-                        <h3>SafeKey</h3>
-                        <p>Robust password encryption tool.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/Ivl59qd4pRerYA2MHs6le-_T-NQG7O7mjJnOap98JfvINKL9IV48PCfsvteIXGDBERSU=s128-rw"
-                            alt="TTT Battles App Icon" class="card-app-icon">
-                        <h3>TTT Battles</h3>
-                        <p>A modern take on a classic game.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/W2RUIuIsBC7ZGEXVeRmexkYGB7XTvfMIFFrPbag8SmeOdY5ut6X5Jg2pHwGcmHQxAA=s128-rw"
-                            alt="Disciplined Forge App Icon" class="card-app-icon">
-                        <h3>Disciplined Forge (BETA)</h3>
-                        <p>Build and maintain healthy habits.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/JTQDASoXRlv0tkfwauLC7ihVj7VUakV92mJkmNmIPuijYMTrUQN8UmJboRJCsWTwsg=s128-rw"
-                            alt="ClassicFlow Launcher App Icon" class="card-app-icon">
-                        <h3>ClassicFlow Launcher</h3>
-                        <p>A minimalist, focused launcher.</p>
-                    </article>
-                </a>
-
-                <a href="#" class="card-link-wrapper">
-                    <article class="card" data-tilt><img
-                            src="https://play-lh.googleusercontent.com/ayL14u1BulZWufV6Kue8dnHh5GghO45HflsdvUy61Pmp15RoJPa1hzwe5m6uXXrC2sU=s128-rw"
-                            alt="Clock Counter Themes App Icon" class="card-app-icon">
-                        <h3>Clock Counter Themes</h3>
-                        <p>Stylish clock and counter themes.</p>
-                    </article>
-                </a>
-
+        <!-- Featured -->
+        <section id="featured">
+            <div class="wrap">
+                <h2>Start with these</h2>
+                <p class="section-lede">Our most played game, our most useful tool and our most secure app.</p>
+                <div class="featured" id="featuredGrid"></div>
             </div>
         </section>
 
-        <section class="container" id="about">
-            <h2 class="section-title">About Devduos</h2>
-            <p class="intro-lede" style="text-align: center;">
-                Founded in 2023, Devduos is a software development team based in Pune, India. We specialize in
-                creating high-quality mobile applications for the Google Play Store. Driven by a passion for
-                technology and a commitment to exceptional user experiences, we believe in the power of code
-                to transform ideas into reality.
-            </p>
+        <!-- Catalogue -->
+        <section id="apps" style="padding-top:0">
+            <div class="wrap">
+                <h2>All apps and games</h2>
+                <p class="section-lede">Filter by category or search by name.</p>
+                <div class="catalog-bar">
+                    <div class="chips" id="chips" role="group" aria-label="Filter by category"></div>
+                    <label class="search">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7" />
+                            <path d="M20 20l-3.5-3.5" stroke-linecap="round" />
+                        </svg>
+                        <input type="search" id="search" placeholder="Search apps" aria-label="Search apps">
+                    </label>
+                </div>
+                <div class="grid" id="grid" aria-live="polite"></div>
+            </div>
         </section>
 
-        <section class="container" id="contact">
-            <h2 class="section-title">Get in Touch</h2>
-            <p class="center">Have a project in mind, a question, or just want to say hello? We'd love to hear from you.
-            </p>
-            <p class="center" style="margin-top:1rem">
-                <a href="mailto:support.devduos@thetrishulgroup.com"
-                    class="link-accent">support.devduos@thetrishulgroup.com</a>
-            </p>
+        <!-- About -->
+        <section class="about" id="about">
+            <div class="wrap about-grid">
+                <div>
+                    <h2>About DevDuo Software</h2>
+                    <p>
+                        DevDuo Software started in 2023 in Pune, India, as a two-person studio with a simple idea:
+                        make apps we would want on our own phones. Today we publish more than 25 apps and games on
+                        Google Play.
+                    </p>
+                    <p>
+                        Our games bring Indian railways, metros and local trains to your phone with real signals,
+                        routes and stations. Our tools handle everyday work like PDFs, scanning, passwords and photos,
+                        quickly and privately.
+                    </p>
+                    <p>DevDuo Software is part of <a href="index.html" style="color:#e8a33d">The Trishul Group</a>.</p>
+                </div>
+                <div class="values">
+                    <div class="value">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                aria-hidden="true">
+                                <rect x="5" y="11" width="14" height="10" rx="2" />
+                                <path d="M8 11V7a4 4 0 018 0v4" />
+                            </svg></div>
+                        <div>
+                            <h3>Private by design</h3>
+                            <p>Files, notes and passwords are processed and stored on your device wherever possible.</p>
+                        </div>
+                    </div>
+                    <div class="value">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                aria-hidden="true">
+                                <path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg></div>
+                        <div>
+                            <h3>Works without internet</h3>
+                            <p>Core features run offline, so our apps and games work on a train or a weak network.</p>
+                        </div>
+                    </div>
+                    <div class="value">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                                aria-hidden="true">
+                                <path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3M18 3v4h-4M6 21v-4h4"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg></div>
+                        <div>
+                            <h3>Built with players</h3>
+                            <p>We read every review and ship regular updates based on what people ask for.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact">
+            <div class="wrap">
+                <div class="contact-box">
+                    <div>
+                        <h2>Need help with an app?</h2>
+                        <p>Write to us with the app name and what happened. For feature ideas, a review on Google Play
+                            also reaches us.</p>
+                    </div>
+                    <div class="contact-links">
+                        <a href="mailto:support.devduos@thetrishulgroup.com">
+                            <small>App support</small>
+                            support.devduos@thetrishulgroup.com
+                        </a>
+                        <a href="https://play.google.com/store/apps/dev?id=4747892129266629665" target="_blank"
+                            rel="noopener">
+                            <small>All our apps</small>
+                            DevDuo Software on Google Play
+                        </a>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-socials">
-                <a href="https://github.com" target="_blank" title="GitHub"><svg fill="currentColor" viewBox="0 0 24 24"
-                        aria-hidden="true">
-                        <path fill-rule="evenodd"
-                            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0 0 22 12c0-5.523-4.477-10-10-10Z"
-                            clip-rule="evenodd"></path>
-                    </svg></a>
-                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><svg fill="currentColor"
-                        viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                            d="M20.5 2h-17A1.5 1.5 0 0 0 2 3.5v17A1.5 1.5 0 0 0 3.5 22h17a1.5 1.5 0 0 0 1.5-1.5v-17A1.5 1.5 0 0 0 20.5 2ZM8 19H5v-9h3v9Zm-1.5-10.25a1.75 1.75 0 1 1 0-3.5 1.75 1.75 0 0 1 0 3.5ZM19 19h-3v-4.75c0-1.4-1.2-2.5-2.5-2.5S11 12.85 11 14.25V19h-3v-9h2.9v1.3a3.11 3.11 0 0 1 2.6-1.3c2.4 0 4.5 2 4.5 5.25V19Z">
-                        </path>
-                    </svg></a>
-            </div>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="https://play.google.com/store/apps/developer?id=DevDuo%27s" target="_blank">Play Store</a>
-            </div>
-            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="index.html">The Trishul Group</a>
+                <a href="#apps">Apps</a>
+                <a href="https://play.google.com/store/apps/dev?id=4747892129266629665" target="_blank"
+                    rel="noopener">Google Play</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        gsap.registerPlugin(ScrollTrigger);
-        (function init() {
-            const loader = document.getElementById('loader');
-            gsap.to(loader, { opacity: 0, duration: .5, delay: 0.5, onComplete: () => loader.style.display = 'none' });
-            gsap.to("main", { opacity: 1, duration: .5, delay: 0.5 });
-            gsap.to("header", { y: 0, duration: 0.8, ease: "power2.out", delay: 1 });
-            const tlHero = gsap.timeline({ defaults: { duration: 0.7, ease: "power2.out" } });
-            tlHero.from(".eyebrow", { opacity: 0, y: 10, delay: 1.2 })
-                .from(".grand-title", { opacity: 0, y: 12 }, "-=0.6")
-                .from("#hero .intro-lede", { opacity: 0, y: 12 }, "-=0.6")
-                .from(".cta-button", { opacity: 0, y: 12 }, "-=0.5");
-            document.querySelectorAll(".section-title").forEach(title => {
-                gsap.from(title, { opacity: 0, y: 20, duration: 0.6, ease: "power2.out", scrollTrigger: { trigger: title, start: "top 85%", toggleActions: "play none none none" } });
-            });
-            gsap.from(".card", { opacity: 0, y: 30, scale: .98, stagger: .08, duration: .6, ease: "power2.out", scrollTrigger: { trigger: ".card-grid", start: "top 80%" } });
-            gsap.from("#about .intro-lede", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out", scrollTrigger: { trigger: "#about .intro-lede", start: "top 85%" } });
-            gsap.from("#contact .center", { opacity: 0, y: 20, duration: 0.6, stagger: 0.1, ease: "power2.out", scrollTrigger: { trigger: "#contact", start: "top 75%" } });
-            gsap.from("footer", { opacity: 0, y: 20, duration: 1, ease: "power2.out", scrollTrigger: { trigger: "footer", start: "top 95%" } });
+        const PLAY = 'https://play.google.com/store/apps/dev?id=4747892129266629665';
+        const P = 'devduos/apps/';
 
-            const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-            document.querySelectorAll("[data-tilt]").forEach(card => {
-                const onMove = (e) => {
-                    const r = card.getBoundingClientRect();
-                    const px = (e.clientX - r.left) / r.width - .5;
-                    const py = (e.clientY - r.top) / r.height - .5;
-                    const rx = clamp(py * -8, -8, 8);
-                    const ry = clamp(px * 8, -8, 8);
-                    gsap.to(card, { rotationX: rx, rotationY: ry, duration: 0.7, ease: "expo.out" });
+        // To add an app: copy one line and change the values.
+        // icon: Play Store icon URL, or '' to show the emoji tile.
+        // link: the app's info page, or '' to open its Play Store page.
+        // shot: a screenshot URL (used on featured cards), or ''.
+        const APPS = [
+            { name: 'Train Driver India', cat: 'games', emoji: '🚆', color: '#f59e0b', icon: 'https://play-lh.googleusercontent.com/U9EfjGYsYzqA18P2iY44iVSlqnuGoo0SzcX6ZjGOnK_Zwn9o1yHoVSOv2-SgtTu0mLutidiOyuO4XxLrCyR0XA=w240-h480-rw', link: P + 'traindriverindia/traindriverindia_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.train_driver_india', shot: 'https://play-lh.googleusercontent.com/D939O3gYu_3A4i2y1KyuOoewE83WXmlRrrKzjmOXCP8EbN4VaPs4pFj7-tYq8TRDnD83a_PQG3K797r8LlePoA=w526-h296-rw', desc: 'Plan your route, build your train and drive it across India. Obey 4-aspect signals, wait in loops and run round at reversal stations.' },
+            { name: 'Metro Driver India', cat: 'games', emoji: '🚇', color: '#39c2ff', icon: 'https://play-lh.googleusercontent.com/s7c8oRTZYmab9St-56EOkKf6zqFBmFrxyZzwLg8EyGJIpskMjbhYQVodZQr8ogfkaYcTvNwVp_X2gP24lHsaeA=w240-h480-rw', link: P + 'metrodriverindia/metrodriverindia_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.metro_driver_india', shot: 'https://play-lh.googleusercontent.com/vM3hk46h2wK3i-VrM8bU3Lyrq72QoBf-uadQbkMicDjbkf_z3bRnySiCPlt338baSvpLzeYY6_IFnBiBd9NAdw=w526-h296-rw', desc: 'Drive metros on viaducts, street-level corridors and tunnels across 11 cities, or build a metro for any city.' },
+            { name: 'Rail Junction: Station Empire', cat: 'games', emoji: '🛤️', color: '#5eead4', icon: 'https://play-lh.googleusercontent.com/gtkcb1i-QzTExxcnNK50mvu-juroLxt60US5uH4WqxKxhPHUMx_ZxIEfaldDiWRRIqFOVYK1aKK7rlBKUZwz=w240-h480-rw', link: P + 'railjunction/railjunction_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.railjunction', shot: 'https://play-lh.googleusercontent.com/O5U4H8vjhdhzy_30-DF1sqDheTuIQPtbAx_T5-n6drbxhClgq3y58VuArOwA0W6JjfeTNSRPoHWy2RPePo_GRw=w526-h296-rw', desc: 'Run a busy terminal, manage timetables, build food plazas and service your fleet in heavy sheds.' },
+            { name: 'Indian Station Master', cat: 'games', emoji: '🚉', color: '#fb923c', icon: 'https://play-lh.googleusercontent.com/2_MtlYME3-4RXq69N5sXRZXyKi5ksPWY2GqQwuzUwF91CX6zFWfVRO5jcNBEZrt9QaImbB7RFGyLa2TFPnEGgw=w240-h480-rw', link: P + 'indianstationmaster/indianstationmaster_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.train_traffic_manager', shot: 'https://play-lh.googleusercontent.com/dcVdCm7ZRYfr6gSlFWdhZ9GLZ15JvA4TwkLoqvkN3BDirQ0uAtOWj3hQnpp_UnOz-3SwwbZb5pVfqeGn7NmnVAI=w526-h296-rw', desc: 'Assign platforms, dispatch passenger and freight trains and upgrade booking counters at a busy station.' },
+            { name: 'Indian Rail Shunter', cat: 'games', emoji: '🚂', color: '#f59e0b', icon: 'https://play-lh.googleusercontent.com/3Fp-5wqtuAoCo5e4HW5khoeV0jXB_387ASyRL7xgYIuMbA9qchrCn5_CzLBaa0vzXbJoAYegNii9arxeehJNHA=w240-h480-rw', link: P + 'indianrailshunter/indianrailshunter_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.indian_rail_shunter', shot: 'https://play-lh.googleusercontent.com/QOhxJYsiTYQcqgo0UI7nHrD1S3KJqPAZXsaNZHFdkawBZp35J1WsKxI4MLKq5vFatuoVJt9i7QHswvKifWz56Cs=w526-h296-rw', desc: 'Be the yard pilot. Move rakes, locomotives, express coaches and freight through busy station yards.' },
+            { name: 'American Rail Empire', cat: 'games', emoji: '🚃', color: '#ef4444', icon: 'https://play-lh.googleusercontent.com/XGvxinG9LvvPemw4cQTjVK3yImU9smdzmFGOD4_SHDEg1r3EAy-T-ZfpWlWXR3sHqYARWsktfgwKIpSENI5N6g=w240-h480-rw', link: P + 'americanrailempire/americanrailempire_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.american_rail_empire', shot: 'https://play-lh.googleusercontent.com/c0ZgxBrlR0VFknOGiQN0tWNS22qRR2ZqUw7S2n6j5S8Vd6VLOtdkHCWHvOVZp4k4nYvQYCbubjx7I_80adBlff8=w526-h296-rw', desc: 'Collect locomotives, assemble trains, take contracts and grow a busy American terminal.' },
+            { name: 'TTT Battles', cat: 'games', emoji: '❌', color: '#ec4899', icon: 'https://play-lh.googleusercontent.com/EedjnPdljyNuM6EJng3qMkx_ZKB4nBxm84aJHGbt3ZuD9wNhCkAN073q97RQBsRJ9r5YyEldyivCkgpL08nE7Q=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.DevDuos.tictaktoegame', shot: '', desc: 'Tic tac toe as a one-on-one battle, with themes and logic challenges.' },
+            { name: 'DevDuo PDF Editor, Reader, OCR', cat: 'docs', emoji: '📕', color: '#ef4444', icon: 'https://play-lh.googleusercontent.com/_x7vdqbf6QZ6KWjVmzjE9JPZ9RnrdQn1y6a-Pen9oS6y9QwQq6_MZmua8cMJ78l9LV3Dd2aRbFELmRR9l8tht4E=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.devduos.pdfviewer', shot: 'https://play-lh.googleusercontent.com/IGtrgkujn85qqEMYnjhPYBEFe5C9TgmmpR5T0kgGkP_SweUDrdYdQgtE1FwJIE10IENQvPYYUDoh1_WLRrkb=w526-h296-rw', desc: 'Read, edit and sign PDFs, extract text with OCR and ask DocuMind AI about your documents.' },
+            { name: 'DevDuo PDF Scanner: ID & Photo', cat: 'docs', emoji: '📷', color: '#22c55e', icon: 'https://play-lh.googleusercontent.com/o262zVMenKFEQ9zyRpg_rO72VpStzfhHBmKpn1msf7wgANftLYRK0WgjUiHBzhvTO0OrlI76zYDZt6eOe3cA=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.devduos.pdfscannerpro', shot: '', desc: 'Scan documents and ID cards offline, crop passport photos and extract text.' },
+            { name: 'Web to PDF: URL & HTML', cat: 'docs', emoji: '🌐', color: '#5eead4', icon: 'https://play-lh.googleusercontent.com/-YSkETFKDcweeJ6ayK2UQxxgFsk_btZWSut3qu8PY17tkXKNT8O4-bYeUaWT04gNVIpm3tzXNx4V43Az_TmDaQ=w240-h480-rw', link: P + 'webtopdf/webtopdf_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.web_to_pdf', shot: '', desc: 'Turn any webpage or HTML into one continuous PDF with no page breaks.' },
+            { name: 'ResuMateAI: AI Resume Build CV', cat: 'docs', emoji: '📄', color: '#6366f1', icon: 'https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=w240-h480-rw', link: P + 'resumateai/resumateai_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduos.resumateai', shot: '', desc: 'Build a resume, check it with an ATS scanner and practise for interviews.' },
+            { name: 'SkillSprint: Learning App', cat: 'docs', emoji: '🎓', color: '#f97316', icon: 'https://play-lh.googleusercontent.com/tJKzTaRWh-QRKpwSa5UkYj4nFSLVbUaw5obCS0Wad2k8V5R23P6XZNv0AVyclelnrLEAXK_KefqbKYtFxAjIcQ=w240-h480-rw', link: P + 'skillsprint/skillsprint_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduos.skillsprint', shot: '', desc: 'Learn coding, languages and exam topics from 200+ bite-sized offline courses.' },
+            { name: 'DevDuo IDE: AI Code Editor', cat: 'docs', emoji: '💻', color: '#0ea5e9', icon: 'https://play-lh.googleusercontent.com/exFCMg3IKVv6jqjfUlT5-ikRQUI3x2enIRYvNRKNg_AVTPDFRgOVGDU10C5Gj5PZfb9D3kz2fOgTzYHVpux92Q=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.devduos.programmingfileviewer', shot: '', desc: 'A code editor for your phone with an AI companion and syntax highlighting for 100+ languages.' },
+            { name: 'Newszio: Personalize Your News', cat: 'docs', emoji: '📰', color: '#64748b', icon: 'https://play-lh.googleusercontent.com/DheZ43QvWfA5nPyawQKrnCLxFxQUKgk6pNiy7Od6gzG1pD1GlN61-c6uHgYywL_Hztt6jHeZXdIFCkw-J2At=w240-h480-rw', link: P + 'newszio/newszio_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.devduonewszio', shot: '', desc: 'Breaking news in a swipeable feed, with personalised picks and quick AI summaries.' },
+            { name: 'SafeKey: Password Manager Safe', cat: 'privacy', emoji: '🔑', color: '#22c55e', icon: 'https://play-lh.googleusercontent.com/fL1szEF80gdjwkI9JD393XiW8Njy5qw38oTTWs9QRLGb_hAAkHoQl2gL1EQnGmKGme8Qn7rD9xDFzeO-TaKRUA=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.devduos.encryptedpassword', shot: 'https://play-lh.googleusercontent.com/GTGDZLgbNoPqleYuYzIqPxGkIRwG3tlsfdLC2NJ1Rvg7v9xOu6wFz5nQ1kxgxDkdx945popdq8-7UDxQ6BlB9A=w526-h296-rw', desc: 'A zero-knowledge password vault with AES-256 encryption, autofill, breach alerts and Drive backup.' },
+            { name: 'SafeKeep: Secure Folder Vault', cat: 'privacy', emoji: '🗄️', color: '#0ea5e9', icon: 'https://play-lh.googleusercontent.com/xvj_ERCVi1zPcRyiZSuz7F9uPmyUXQm5eHvuCLAK5QOIQFBvBOgiAZdJnEMgO5heVNQ1cuXkJ_8IsoT6V0QY=w240-h480-rw', link: P + 'safekeep/safekeep_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduos.encryptedphotosvideoshider', shot: '', desc: 'Hide and encrypt private photos, videos and documents in a secure folder.' },
+            { name: '3D ID Wallet & Card Scanner', cat: 'privacy', emoji: '🪪', color: '#a78bfa', icon: 'https://play-lh.googleusercontent.com/zc4D6jz4eLdJVOhAA_9yNmFRVQn3ts_yCsAM0JpFCI-Rsu2Ia0d2_w6ZmLI3f12_gIYJJ-P3p0Onz-j7mFBfi0Q=w240-h480-rw', link: P + '3dcardviewer/3dcardviewer_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.docu3d', shot: '', desc: 'Scan and keep ID and loyalty cards offline, and view them as interactive 3D cards.' },
+            { name: 'SaveAnything: Link & File Save', cat: 'privacy', emoji: '⚡', color: '#9333ea', icon: 'https://play-lh.googleusercontent.com/ddvFW3biXwZqg5CRC3Kz3shsYXH4eP7bLaIHuwUr3nTOcnhybmLZXzerzCppRk4w7lTRUdyM-z7rVOdBu2EdrA=w240-h480-rw', link: P + 'saveanything/saveanything_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.saveanything', shot: '', desc: 'Save links, media, PDFs and documents in one private, auto-tagged vault.' },
+            { name: '10 Min Stretch: Posture Fix', cat: 'lifestyle', emoji: '🧘', color: '#5eead4', icon: 'https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=w240-h480-rw', link: P + '10minstretch/10minstretch_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.tenminstretch', shot: '', desc: 'Fix posture and relieve neck pain with guided routines under 10 minutes a day.' },
+            { name: 'All in One Habit Tracker Daily', cat: 'lifestyle', emoji: '📈', color: '#6366f1', icon: 'https://play-lh.googleusercontent.com/3z-nA1Y_Hy_f2nqC0zx0vkDDgN6PjgDmAEQXleZbruwONRwiaNzA4zFIAzl7hWxpfZ4v-CfREMJcn9HNI2gd-w=w240-h480-rw', link: P + 'dailytracker/dailytracker_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.all_in_one_tracker', shot: '', desc: 'Track habits, water, workouts and goals in one place, fully offline.' },
+            { name: 'Discipline Forge Habit Tracker', cat: 'lifestyle', emoji: '🔥', color: '#f97316', icon: 'https://play-lh.googleusercontent.com/KtpGbymZoif_OB6mnFhIc-uoi5nBFzFQCKXJEFqrNBp4vpKyZ5jRqduqUx9r0FR9iUI0SYU5cZsWpHeD9xzdlw=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.devduos.DisciplinedForge', shot: '', desc: 'Beat procrastination with routines and a strict-mode focus timer.' },
+            { name: 'SmartBMI Tracker', cat: 'lifestyle', emoji: '⚖️', color: '#14b8a6', icon: 'https://play-lh.googleusercontent.com/2ZkYRQBy3DfA6A3B8D9J2Z2kvnyxLMf7SRkaZ5kjDs3bTSJch7idLvKItlK6bbCjv8gT9hBCrnP3dhMEaxal6Q=w240-h480-rw', link: P + 'bmicalculator/bmicalculator_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduos.bmicalculator', shot: '', desc: 'Calculate and track your BMI with quick, accurate results.' },
+            { name: 'Photo Compressor & Resizer', cat: 'tools', emoji: '🖼️', color: '#3b82f6', icon: 'https://play-lh.googleusercontent.com/3PIP6CtS9TKEkOGoyyqcXO_g-Ze5FDWR2DnGe-94UH0zV2BZJbIXEQwl4lnIKhWvxegaTHOgtZsNdlg70n4asw=w240-h480-rw', link: P + 'photocompressor/photocompressor_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.photocompressor', shot: '', desc: 'Batch compress photos to an exact KB size, export as ZIP, all on your device.' },
+            { name: 'QR Code Scanner & Generator', cat: 'tools', emoji: '▣', color: '#5eead4', icon: 'https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=w240-h480-rw', link: P + 'qrcode/qrcode_info.html', play: 'https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator', shot: '', desc: 'Scan barcodes and design branded QR codes, plus an offline UPI pay generator.' },
+            { name: 'NoMoreDistraction Launcher', cat: 'tools', emoji: '📱', color: '#94a3b8', icon: 'https://play-lh.googleusercontent.com/HSDpQXH1EtUjbbD3w7NjBRG9AN5Gd09sW7d4_kTld-nZdbNfmxfWBajxbfOj2VcXB7E3Ac7M641HyiMmU9a4rUI=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.devduos.smoothlauncher', shot: '', desc: 'A minimal, search-first home screen with app blocking to cut screen time.' },
+            { name: 'Tymio: Aesthetic Clock & Timer', cat: 'tools', emoji: '⏰', color: '#eab308', icon: 'https://play-lh.googleusercontent.com/FIrBkwfgzyOz-0E1-ip0PM9Z8cxC9voXLVHRvY3faXkk9WTpr9m9_pyTy9wTN-QuA80OFJsKDhW5FlZ7DSgLKLs=w240-h480-rw', link: '', play: 'https://play.google.com/store/apps/details?id=com.DevDuos.animatedclock', shot: '', desc: 'An aesthetic desk clock with 20+ flip animations, soundscapes and a Pomodoro timer.' }
+        ];
+
+        const CATS = [
+            { id: 'all', label: 'All' },
+            { id: 'games', label: 'Games' },
+            { id: 'docs', label: 'Documents and learning' },
+            { id: 'privacy', label: 'Privacy and security' },
+            { id: 'lifestyle', label: 'Health and habits' },
+            { id: 'tools', label: 'Everyday tools' }
+        ];
+        const CAT_NAME = Object.fromEntries(CATS.map(c => [c.id, c.label]));
+
+        // Featured: one game, one tool, one privacy app
+        const FEATURED = ['Train Driver India', 'DevDuo PDF Editor, Reader, OCR', 'SafeKey: Password Manager Safe'];
+
+        const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+        const hrefOf = a => a.link || a.play || PLAY;
+        const targetOf = a => a.link ? '' : ' target="_blank" rel="noopener"';
+
+        function tile(a, cls = 'tile') {
+            return `<span class="${cls}" style="background:linear-gradient(145deg, ${a.color}33, ${a.color}14);border:1px solid ${a.color}40">${a.emoji}</span>`;
+        }
+
+        function iconHtml(a, cls = '') {
+            if (!a.icon) return tile(a, 'tile ' + cls);
+            return `<img src="${a.icon}" alt="" class="${cls}" loading="lazy" data-emoji="${a.emoji}" data-color="${a.color}">`;
+        }
+
+        // Replace any icon that fails to load with its emoji tile
+        document.addEventListener('error', e => {
+            const img = e.target;
+            if (img.tagName !== 'IMG' || !img.dataset.emoji) return;
+            const span = document.createElement('span');
+            span.className = 'tile ' + img.className;
+            span.textContent = img.dataset.emoji;
+            const c = img.dataset.color;
+            span.style.cssText = `background:linear-gradient(145deg, ${c}33, ${c}14);border:1px solid ${c}40`;
+            img.replaceWith(span);
+        }, true);
+
+        // Hero icon wall (apps that have real icons first)
+        const withIcons = APPS.filter(a => a.icon).concat(APPS.filter(a => !a.icon));
+        document.getElementById('iconWall').innerHTML = withIcons.slice(0, 12).map(a => iconHtml(a)).join('');
+
+        // Featured cards
+        document.getElementById('featuredGrid').innerHTML = FEATURED.map(n => APPS.find(a => a.name === n)).filter(Boolean).map(a => `
+            <a class="feature" href="${hrefOf(a)}"${targetOf(a)}>
+                ${a.shot ? `<img class="fshot" src="${a.shot}" alt="" loading="lazy">` : ''}
+                ${a.icon ? `<img class="ficon" src="${a.icon}" alt="" loading="lazy" data-emoji="${a.emoji}" data-color="${a.color}">` : tile(a, 'tile ficon')}
+                <span class="tag">${CAT_NAME[a.cat]}</span>
+                <h3>${esc(a.name)}</h3>
+                <p>${esc(a.desc)}</p>
+                <span class="more">View app</span>
+            </a>`).join('');
+
+        // Catalogue
+        let activeCat = 'all';
+        let query = '';
+        const chips = document.getElementById('chips');
+        const grid = document.getElementById('grid');
+        const search = document.getElementById('search');
+
+        chips.innerHTML = CATS.map(c => {
+            const n = c.id === 'all' ? APPS.length : APPS.filter(a => a.cat === c.id).length;
+            return `<button class="chip" data-cat="${c.id}" aria-pressed="${c.id === 'all'}">${c.label}<span class="n">${n}</span></button>`;
+        }).join('');
+
+        chips.addEventListener('click', e => {
+            const b = e.target.closest('.chip');
+            if (!b) return;
+            activeCat = b.dataset.cat;
+            chips.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x === b));
+            render();
+        });
+
+        search.addEventListener('input', () => { query = search.value.trim().toLowerCase(); render(); });
+
+        function render() {
+            const list = APPS.filter(a =>
+                (activeCat === 'all' || a.cat === activeCat) &&
+                (!query || a.name.toLowerCase().includes(query) || a.desc.toLowerCase().includes(query)));
+
+            if (!list.length) {
+                grid.innerHTML = `<div class="empty">No apps match “${esc(query)}”. Try a different name or category.<br>
+                    <button class="chip" id="resetBtn">Show all apps</button></div>`;
+                document.getElementById('resetBtn').onclick = () => {
+                    search.value = ''; query = ''; activeCat = 'all';
+                    chips.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', x.dataset.cat === 'all'));
+                    render();
                 };
-                card.addEventListener("mousemove", onMove);
-                card.addEventListener("mouseleave", () => {
-                    gsap.to(card, { rotationX: 0, rotationY: 0, duration: 0.7, ease: "expo.out" });
-                });
-            });
-        })();
+                return;
+            }
+
+            grid.innerHTML = list.map(a => `
+                <a class="app" href="${hrefOf(a)}"${targetOf(a)}>
+                    ${iconHtml(a)}
+                    <div>
+                        <h3>${esc(a.name)}</h3>
+                        <p>${esc(a.desc)}</p>
+                        <span class="cat">${CAT_NAME[a.cat]}</span>
+                    </div>
+                </a>`).join('');
+        }
+
+        render();
+        document.getElementById('appCount').textContent = APPS.length;
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 
