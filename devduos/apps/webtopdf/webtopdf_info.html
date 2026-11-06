@@ -3,321 +3,1527 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Web to PDF - URL & HTML Converter | DevDuo's</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Web to PDF: URL & HTML | DevDuo Software</title>
+    <meta name="description"
+        content="Turn any website or HTML into one continuous PDF with no page breaks. No watermarks, no cloud processing, offline vault and easy sharing.">
+    <meta property="og:title" content="Web to PDF: URL & HTML">
+    <meta property="og:description" content="One continuous PDF. Zero page breaks.">
+    <meta property="og:image" content="screens/02-document-preview.jpg">
+    <meta name="theme-color" content="#0a0d1c">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+        href="https://play-lh.googleusercontent.com/-YSkETFKDcweeJ6ayK2UQxxgFsk_btZWSut3qu8PY17tkXKNT8O4-bYeUaWT04gNVIpm3tzXNx4V43Az_TmDaQ=s128-rw">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #0a0d1c;
+            --bg-2: #11152b;
+            --bg-3: #181d3a;
+            --line: #262c52;
+            --text: #edf0fb;
+            --soft: #b9bfdd;
+            --mute: #8188ad;
+            --violet: #7c5cff;
+            --violet-2: #a594ff;
+            --green: #34d399;
+            --red: #f87171;
+            --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
         }
+
+        * { box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
             margin: 0;
-            padding: 0;
             background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            color: var(--text);
+            font-family: var(--font);
+            font-size: 1.02rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        * {
-            box-sizing: border-box;
+        a { color: inherit; }
+
+        img, video { max-width: 100%; display: block; }
+
+        :focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
+        .wrap {
+            width: min(1140px, 90vw);
             margin: 0 auto;
         }
 
-        section {
-            padding: 6rem 0;
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(10, 13, 28, .82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            object-fit: cover;
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 680px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
-        }
-
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
-            color: var(--brand-1);
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-links {
+        .nav .wrap {
+            height: 66px;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
             text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 600;
             transition: color .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        .tabs a:hover { color: var(--text); }
+
+        .tabs a[aria-current="page"] {
+            background: var(--violet);
+            color: #fff;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 820px;
+            height: 820px;
+            right: -240px;
+            top: -330px;
+            background: radial-gradient(closest-side, rgba(124, 92, 255, .26), rgba(52, 211, 153, .08) 55%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(124, 92, 255, .3);
+        }
+
+        .app-id strong { display: block; }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: clamp(2.5rem, 5.6vw, 4.3rem);
+            line-height: 1.02;
+            letter-spacing: -.035em;
+            margin: 0 0 1.25rem;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--green);
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .btn-main {
+            background: var(--green);
+            color: #04261a;
+            box-shadow: 0 10px 30px rgba(52, 211, 153, .3);
+        }
+
+        .btn-main:hover { transform: translateY(-2px); }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .btn-line:hover { border-color: var(--violet-2); }
+
+        .promises {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: 2rem;
+            font-size: .92rem;
+            font-weight: 600;
+            color: var(--soft);
+        }
+
+        .promises span::before {
+            content: "✓ ";
+            color: var(--green);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #2b3260;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 0 10px rgba(124, 92, 255, .06);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 1080 / 2300;
+            object-fit: cover;
+            background: var(--bg);
+        }
+
+        /* ---------- Page-break comparison (signature) ---------- */
+        .compare-box {
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .compare-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .kicker {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: .6rem;
+        }
+
+        .toggle {
+            display: inline-flex;
+            padding: 4px;
+            border-radius: 999px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+        }
+
+        .vh {
+            position: absolute;
+            opacity: 0;
+            width: 1px;
+            height: 1px;
+            pointer-events: none;
+        }
+
+        .toggle label {
+            font-weight: 700;
+            font-size: .9rem;
+            padding: .55rem 1.1rem;
+            border-radius: 999px;
+            color: var(--soft);
+            cursor: pointer;
+            user-select: none;
+            transition: background .2s, color .2s;
+        }
+
+        .toggle label:hover { color: var(--text); }
+
+        #cmpBoth:checked ~ .compare-head label[for="cmpBoth"],
+        #cmpSplit:checked ~ .compare-head label[for="cmpSplit"] { background: var(--violet); color: #fff; }
+
+        #cmpSeam:checked ~ .compare-head label[for="cmpSeam"] { background: var(--green); color: #04261a; }
+
+        #cmpBoth:focus-visible ~ .compare-head label[for="cmpBoth"],
+        #cmpSplit:focus-visible ~ .compare-head label[for="cmpSplit"],
+        #cmpSeam:focus-visible ~ .compare-head label[for="cmpSeam"] { outline: 2px solid var(--green); outline-offset: 2px; }
+
+        #cmpSplit:checked ~ .docs,
+        #cmpSeam:checked ~ .docs { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+
+        #cmpSplit:checked ~ .docs .seam-col,
+        #cmpSeam:checked ~ .docs .split-col { display: none; }
+
+        .docs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .doc-view {
+            position: relative;
+            height: 520px;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #0d1124;
+            border: 1px solid var(--line);
+            padding: 1rem;
+        }
+
+        .doc-scroll {
+            animation: scrollDoc 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes scrollDoc { to { transform: translateY(calc(-100% + 488px)); } }
+
+        .sheet {
+            background: #fff;
+            color: #1b1f33;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .35);
+        }
+
+        .split .sheet + .sheet { margin-top: 18px; }
+
+        .page-chunk {
+            height: 300px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .page-chunk.cut::after {
+            content: "✂ page break";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            font-size: .68rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--red);
+            border-top: 2px dashed var(--red);
+            background: rgba(255, 255, 255, .85);
+            padding: 1px 0;
+        }
+
+        .web {
+            padding: 14px 16px 18px;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .web .bar {
+            height: 18px;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #7c5cff, #34d399);
+            margin-bottom: 12px;
+        }
+
+        .web h4 {
+            margin: 0 0 6px;
+            font-size: 15px;
+        }
+
+        .web p {
+            margin: 0 0 8px;
+            color: #4b5170;
+        }
+
+        .web .img {
+            height: 90px;
+            border-radius: 6px;
+            margin: 8px 0 10px;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe 50%, #d1fae5);
+        }
+
+        .web .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin: 8px 0;
+        }
+
+        .web .row div {
+            height: 54px;
+            border-radius: 6px;
+            background: #f1f3fb;
+        }
+
+        .doc-label {
+            margin: .9rem 0 0;
+            font-size: .9rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .doc-label.bad { color: var(--red); }
+
+        .doc-label.good { color: var(--green); }
+
+        /* ---------- HTML playground ---------- */
+        .play {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            align-items: stretch;
+        }
+
+        .editor,
+        .preview {
+            border-radius: 20px;
+            border: 1px solid var(--line);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 380px;
+        }
+
+        .pane-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .7rem 1rem;
+            background: var(--bg-3);
+            border-bottom: 1px solid var(--line);
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--soft);
+        }
+
+        .dots { display: flex; gap: 5px; }
+
+        .dots i {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #3a4170;
+        }
+
+        .editor textarea {
+            flex: 1;
+            width: 100%;
+            min-height: 330px;
+            border: 0;
+            resize: none;
+            padding: 1rem;
+            background: #0b0f22;
+            color: #c9d1ff;
+            font-family: var(--mono);
+            font-size: .85rem;
+            line-height: 1.6;
+            outline: none;
+        }
+
+        .preview iframe {
+            flex: 1;
+            min-height: 330px;
+            width: 100%;
+            border: 0;
+            background: #fff;
+        }
+
+        .play-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 1rem;
+        }
+
+        .play-actions label {
+            font-weight: 700;
+            font-size: .88rem;
+            padding: .55rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .play-actions label:hover { border-color: var(--violet-2); }
+
+        #smp-invoice:checked ~ .play-actions label[for="smp-invoice"],
+        #smp-resume:checked ~ .play-actions label[for="smp-resume"],
+        #smp-card:checked ~ .play-actions label[for="smp-card"] {
+            background: var(--violet);
+            border-color: var(--violet);
+            color: #fff;
+        }
+
+        .play .code,
+        .play .out { display: none; }
+
+        #smp-invoice:checked ~ .play .smp-invoice,
+        #smp-resume:checked ~ .play .smp-resume,
+        #smp-card:checked ~ .play .smp-card { display: block; }
+
+        .play-note {
+            font-size: .82rem;
+            color: var(--mute);
+            margin: .75rem 0 0;
+        }
+
+        /* ---------- Sections ---------- */
+        section { padding: 5.5rem 0; }
+
+        h2 {
+            font-weight: 800;
+            font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+            line-height: 1.08;
+            letter-spacing: -.03em;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .center { text-align: center; }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Split */
+        .split-feat {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split-feat.flip .split-text { order: 2; }
+
+        .split-feat ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split-feat li { margin-bottom: .4rem; }
+
+        .duo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .duo .phone {
+            width: 220px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) { margin-top: 3rem; }
+
+        /* Who */
+        .who {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .persona {
+            border-radius: 24px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform .25s, border-color .25s;
+        }
+
+        .persona:hover {
+            transform: translateY(-4px);
+            border-color: #3b4380;
+        }
+
+        .thumb {
+            position: relative;
+            height: 170px;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .t-student { background: radial-gradient(80% 100% at 30% 0%, rgba(124, 92, 255, .35), transparent 70%), #151a36; }
+
+        .t-dev { background: radial-gradient(80% 100% at 70% 0%, rgba(52, 211, 153, .3), transparent 70%), #121a2e; }
+
+        .t-pro { background: radial-gradient(80% 100% at 50% 0%, rgba(245, 179, 1, .28), transparent 70%), #1a1830; }
+
+        .mini-doc {
+            width: 110px;
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff;
+            display: grid;
+            gap: 6px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, .4);
+            transform: rotate(-4deg) translateY(10px);
+        }
+
+        .mini-doc i {
+            display: block;
+            height: 6px;
+            border-radius: 3px;
+            background: #dfe3f3;
+        }
+
+        .mini-doc i.h { height: 9px; width: 70%; background: #7c5cff; }
+
+        .mini-doc i.img { height: 34px; background: linear-gradient(135deg, #dbeafe, #d1fae5); }
+
+        .mini-doc i.s { width: 55%; }
+
+        .mini-doc.receipt { transform: rotate(3deg) translateY(10px); }
+
+        .mini-doc.receipt i.h { background: #f5b301; width: 50%; }
+
+        .mini-doc.receipt i.row { background: linear-gradient(90deg, #dfe3f3 60%, transparent 60%, transparent 75%, #c7cde6 75%); }
+
+        .mini-doc.receipt i.total { height: 9px; background: #1b1f33; width: 45%; justify-self: end; }
+
+        .mini-code {
+            font-family: var(--mono);
+            font-size: .72rem;
+            line-height: 1.6;
+            color: #c9d1ff;
+            background: #0b0f22;
+            border: 1px solid #2a3263;
+            border-radius: 10px;
+            padding: 12px 14px;
+            display: grid;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, .4);
+            transform: translateY(6px);
+        }
+
+        .mini-code b {
+            color: #6ee7b7;
+            font-weight: 600;
+        }
+
+        .badge {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            font-family: var(--mono);
+            font-size: .72rem;
+            font-weight: 600;
+            padding: .25rem .6rem;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, .55);
+            color: var(--green);
+        }
+
+        .p-body { padding: 1.4rem 1.5rem 1.6rem; }
+
+        .p-ic {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: .35rem;
+        }
+
+        .p-body h3 {
+            margin: 0 0 .35rem;
+            font-size: 1.2rem;
+        }
+
+        .p-body p {
+            margin: 0 0 .9rem;
+            color: var(--soft);
+            font-size: .95rem;
+        }
+
+        .p-body ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: .4rem;
+        }
+
+        .p-body li {
+            font-size: .9rem;
+            color: var(--mute);
+            display: grid;
+            grid-template-columns: 18px 1fr;
+        }
+
+        .p-body li::before {
+            content: "✓";
+            color: var(--green);
+            font-weight: 800;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img { transform: scale(1.03); }
+
+        .trailer .play-btn {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(10, 13, 28, .6), rgba(10, 13, 28, .1));
+        }
+
+        .trailer .play-btn span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--green);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play-btn span { transform: scale(1.08); }
+
+        .trailer .play-btn svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #04261a;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover { border-color: var(--green); }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar { display: none; }
+
+        .gallery figure {
+            flex: 0 0 200px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img { border-radius: 24px; }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* FAQ */
+        .faq { max-width: 780px; }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::after {
+            content: "+";
+            color: var(--green);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after { content: "–"; }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(60% 120% at 0% 0%, rgba(124, 92, 255, .25), transparent 60%),
+                radial-gradient(60% 120% at 100% 100%, rgba(52, 211, 153, .16), transparent 60%),
+                var(--bg-2);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a { text-decoration: none; }
+
+        footer a:hover { color: var(--text); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero-grid, .split-feat, .play { grid-template-columns: 1fr; gap: 2.5rem; }
+            .split-feat.flip .split-text { order: 0; }
+            .compare-box { padding: 2rem 1.25rem; }
+            .docs { grid-template-columns: 1fr; }
+            .doc-view { height: 420px; }
+            @keyframes scrollDoc { to { transform: translateY(calc(-100% + 388px)); } }
+            .who { grid-template-columns: 1fr; }
+            .phone { width: 240px; }
+            .duo .phone { width: 170px; }
+        }
+
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) { display: none; }
+            .hero { padding: 3rem 0; }
+            section { padding: 4rem 0; }
+            .duo .phone { width: 145px; }
+            .gallery figure { flex-basis: 170px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; animation: none !important; }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="webtopdf_info.html" class="app-bar-link active">App Info</a>
-                <a href="webtopdf_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="webtopdf_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="webtopdf_info.html" aria-current="page">App info</a>
+                <a href="webtopdf_privacypolicy.html">Privacy</a>
+                <a href="webtopdf_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://via.placeholder.com/150/111111/5eead4?text=%F0%9F%93%84" alt="Web to PDF App Icon"
-                class="hero-icon">
-            <h1 class="grand-title">Continuous PDF Output, <span class="gradient-text">Instantly</span>.</h1>
-            <p class="intro-lede">
-                Convert any website URL or raw HTML code into a high-quality, continuous PDF document. No watermarks, no
-                cloud processing, and completely offline.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduo.web_to_pdf" target="_blank"
-                class="cta-button">View on Play Store</a>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/-YSkETFKDcweeJ6ayK2UQxxgFsk_btZWSut3qu8PY17tkXKNT8O4-bYeUaWT04gNVIpm3tzXNx4V43Az_TmDaQ=s256-rw"
+                            alt="Web to PDF app icon" width="64" height="64">
+                        <div>
+                            <strong>Web to PDF: URL &amp; HTML</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>One continuous PDF. <em>Zero page breaks.</em></h1>
+                    <p class="lede">Save any website or your own HTML as a seamless, scrollable PDF that keeps the
+                        layout exactly as it looks on the web. Made right on your phone.</p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.web_to_pdf" target="_blank"
+                            rel="noopener" class="btn btn-main">View on Google Play</a>
+                        <a href="#compare" class="btn btn-line">See the difference</a>
+                    </div>
+                    <div class="promises"><span>No watermarks</span><span>No cloud processing</span><span>Offline
+                            vault</span></div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/09-continuous-pdf.jpg" autoplay muted loop
+                        playsinline preload="metadata" id="heroLoop" aria-label="Previewing and editing a captured page"></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page break comparison -->
+        <section id="compare" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="compare-box">
+                    <input type="radio" name="cmp" id="cmpBoth" class="vh" checked>
+                    <input type="radio" name="cmp" id="cmpSplit" class="vh">
+                    <input type="radio" name="cmp" id="cmpSeam" class="vh">
+                    <div class="compare-head">
+                        <div>
+                            <span class="kicker">Why it matters</span>
+                            <h2>Other apps cut your page. We don’t.</h2>
+                            <p class="section-lede" style="margin:0">Most converters chop a long page into A4 sheets,
+                                splitting text and images in half. Web to PDF keeps it as one smooth document.</p>
+                        </div>
+                        <div class="toggle" role="group" aria-label="Compare output">
+                            <label for="cmpBoth">Side by side</label>
+                            <label for="cmpSplit">Paged</label>
+                            <label for="cmpSeam" class="seam">Seamless</label>
+                        </div>
+                    </div>
+                    <div class="docs" id="docs">
+                        <div class="split-col">
+                            <div class="doc-view">
+                                <div class="doc-scroll split" id="splitDoc"><div class="sheet"><div class="page-chunk cut"><div style="margin-top:0px">
+            <div class="web">
+                <div class="bar"></div>
+                <h4>How to Save Webpages for Offline Reading</h4>
+                <p>Long articles, recipes and guides are easier to keep as a single document you can open anytime.</p>
+                <div class="img"></div>
+                <p>Most tools split a page into fixed-size sheets. Headings end up at the bottom of one page while their text continues on the next.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>Images and tables are often sliced straight through the middle, making them hard to read.</p>
+                <div class="img"></div>
+                <h4>Step 1: Paste the link</h4>
+                <p>Copy the address of the page you want and paste it in.</p>
+                <div class="row"><div></div><div></div></div>
+                <h4>Step 2: Preview and clean</h4>
+                <p>Remove banners or pop-ups so only the content remains.</p>
+                <div class="img"></div>
+                <h4>Step 3: Save as one PDF</h4>
+                <p>Your page is saved exactly as it looks, from top to bottom, in one continuous document.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>That’s it. Share it, print it or keep it in your vault.</p>
+            </div></div></div></div><div class="sheet"><div class="page-chunk cut"><div style="margin-top:-300px">
+            <div class="web">
+                <div class="bar"></div>
+                <h4>How to Save Webpages for Offline Reading</h4>
+                <p>Long articles, recipes and guides are easier to keep as a single document you can open anytime.</p>
+                <div class="img"></div>
+                <p>Most tools split a page into fixed-size sheets. Headings end up at the bottom of one page while their text continues on the next.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>Images and tables are often sliced straight through the middle, making them hard to read.</p>
+                <div class="img"></div>
+                <h4>Step 1: Paste the link</h4>
+                <p>Copy the address of the page you want and paste it in.</p>
+                <div class="row"><div></div><div></div></div>
+                <h4>Step 2: Preview and clean</h4>
+                <p>Remove banners or pop-ups so only the content remains.</p>
+                <div class="img"></div>
+                <h4>Step 3: Save as one PDF</h4>
+                <p>Your page is saved exactly as it looks, from top to bottom, in one continuous document.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>That’s it. Share it, print it or keep it in your vault.</p>
+            </div></div></div></div><div class="sheet"><div class="page-chunk cut"><div style="margin-top:-600px">
+            <div class="web">
+                <div class="bar"></div>
+                <h4>How to Save Webpages for Offline Reading</h4>
+                <p>Long articles, recipes and guides are easier to keep as a single document you can open anytime.</p>
+                <div class="img"></div>
+                <p>Most tools split a page into fixed-size sheets. Headings end up at the bottom of one page while their text continues on the next.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>Images and tables are often sliced straight through the middle, making them hard to read.</p>
+                <div class="img"></div>
+                <h4>Step 1: Paste the link</h4>
+                <p>Copy the address of the page you want and paste it in.</p>
+                <div class="row"><div></div><div></div></div>
+                <h4>Step 2: Preview and clean</h4>
+                <p>Remove banners or pop-ups so only the content remains.</p>
+                <div class="img"></div>
+                <h4>Step 3: Save as one PDF</h4>
+                <p>Your page is saved exactly as it looks, from top to bottom, in one continuous document.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>That’s it. Share it, print it or keep it in your vault.</p>
+            </div></div></div></div><div class="sheet"><div class="page-chunk "><div style="margin-top:-900px">
+            <div class="web">
+                <div class="bar"></div>
+                <h4>How to Save Webpages for Offline Reading</h4>
+                <p>Long articles, recipes and guides are easier to keep as a single document you can open anytime.</p>
+                <div class="img"></div>
+                <p>Most tools split a page into fixed-size sheets. Headings end up at the bottom of one page while their text continues on the next.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>Images and tables are often sliced straight through the middle, making them hard to read.</p>
+                <div class="img"></div>
+                <h4>Step 1: Paste the link</h4>
+                <p>Copy the address of the page you want and paste it in.</p>
+                <div class="row"><div></div><div></div></div>
+                <h4>Step 2: Preview and clean</h4>
+                <p>Remove banners or pop-ups so only the content remains.</p>
+                <div class="img"></div>
+                <h4>Step 3: Save as one PDF</h4>
+                <p>Your page is saved exactly as it looks, from top to bottom, in one continuous document.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>That’s it. Share it, print it or keep it in your vault.</p>
+            </div></div></div></div></div>
+                            </div>
+                            <p class="doc-label bad">✕ Typical converter: content cut across pages</p>
+                        </div>
+                        <div class="seam-col">
+                            <div class="doc-view">
+                                <div class="doc-scroll" id="seamDoc"><div class="sheet">
+            <div class="web">
+                <div class="bar"></div>
+                <h4>How to Save Webpages for Offline Reading</h4>
+                <p>Long articles, recipes and guides are easier to keep as a single document you can open anytime.</p>
+                <div class="img"></div>
+                <p>Most tools split a page into fixed-size sheets. Headings end up at the bottom of one page while their text continues on the next.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>Images and tables are often sliced straight through the middle, making them hard to read.</p>
+                <div class="img"></div>
+                <h4>Step 1: Paste the link</h4>
+                <p>Copy the address of the page you want and paste it in.</p>
+                <div class="row"><div></div><div></div></div>
+                <h4>Step 2: Preview and clean</h4>
+                <p>Remove banners or pop-ups so only the content remains.</p>
+                <div class="img"></div>
+                <h4>Step 3: Save as one PDF</h4>
+                <p>Your page is saved exactly as it looks, from top to bottom, in one continuous document.</p>
+                <div class="row"><div></div><div></div></div>
+                <p>That’s it. Share it, print it or keep it in your vault.</p>
+            </div></div></div>
+                            </div>
+                            <p class="doc-label good">✓ Web to PDF: one continuous page</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Engine Capabilities</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
-                    </svg>
-                    <h3>URL to PDF</h3>
-                    <p>Paste any website link and capture the entire scrollable page as a seamless, continuous document
-                        without awkward page breaks.</p>
+        <!-- HTML playground -->
+        <section id="html" style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">Developer mode</span>
+                <h2>Paste HTML. See it render.</h2>
+                <p class="section-lede">Edit the code below and watch the preview update, just like the HTML editor in the
+                    app. In the app, one tap turns the result into a PDF.</p>
+                <input type="radio" name="smp" id="smp-invoice" class="vh" checked>
+                <input type="radio" name="smp" id="smp-resume" class="vh">
+                <input type="radio" name="smp" id="smp-card" class="vh">
+                <div class="play">
+                    <div class="editor">
+                        <div class="pane-head"><span class="dots"><i></i><i></i><i></i></span><span>index.html</span>
+                        </div>
+                        <textarea class="code smp-invoice" data-s="invoice" spellcheck="false" aria-label="HTML code (invoice)">&lt;div style="font-family:system-ui;padding:24px;color:#1b1f33"&gt;
+  &lt;h2 style="margin:0;color:#7c5cff"&gt;INVOICE #1024&lt;/h2&gt;
+  &lt;p style="color:#666"&gt;Riverside Studio · 30 Oct 2026&lt;/p&gt;
+  &lt;table style="width:100%;border-collapse:collapse;margin-top:16px"&gt;
+    &lt;tr style="background:#f1f3fb"&gt;&lt;th align="left" style="padding:8px"&gt;Item&lt;/th&gt;&lt;th align="right" style="padding:8px"&gt;Amount&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style="padding:8px"&gt;Website design&lt;/td&gt;&lt;td align="right" style="padding:8px"&gt;₹12,000&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style="padding:8px"&gt;Hosting (1 year)&lt;/td&gt;&lt;td align="right" style="padding:8px"&gt;₹3,500&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr style="font-weight:700;border-top:2px solid #1b1f33"&gt;&lt;td style="padding:8px"&gt;Total&lt;/td&gt;&lt;td align="right" style="padding:8px"&gt;₹15,500&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;p style="margin-top:20px;color:#34a37a"&gt;Thank you for your business!&lt;/p&gt;
+&lt;/div&gt;</textarea>
+                        <textarea class="code smp-resume" data-s="resume" spellcheck="false" aria-label="HTML code (resume)">&lt;div style="font-family:Georgia,serif;padding:24px;color:#222"&gt;
+  &lt;h1 style="margin:0"&gt;Aarav Mehta&lt;/h1&gt;
+  &lt;p style="margin:4px 0 16px;color:#7c5cff"&gt;Frontend Developer · Pune&lt;/p&gt;
+  &lt;h3 style="border-bottom:2px solid #7c5cff"&gt;Experience&lt;/h3&gt;
+  &lt;p&gt;&lt;b&gt;UI Engineer&lt;/b&gt;, Brightlane (2023–now)&lt;br&gt;Built responsive dashboards used by 50k people.&lt;/p&gt;
+  &lt;h3 style="border-bottom:2px solid #7c5cff"&gt;Skills&lt;/h3&gt;
+  &lt;p&gt;HTML · CSS · JavaScript · Flutter · Figma&lt;/p&gt;
+&lt;/div&gt;</textarea>
+                        <textarea class="code smp-card" data-s="card" spellcheck="false" aria-label="HTML code (card)">&lt;div style="font-family:system-ui;display:grid;place-items:center;height:100vh;margin:0;background:linear-gradient(135deg,#7c5cff,#34d399)"&gt;
+  &lt;div style="background:#fff;border-radius:16px;padding:24px 28px;box-shadow:0 20px 40px rgba(0,0,0,.2);text-align:center"&gt;
+    &lt;h2 style="margin:0 0 6px"&gt;Happy Birthday, Riya! 🎉&lt;/h2&gt;
+    &lt;p style="margin:0;color:#555"&gt;Wishing you a year full of joy.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    </div>
+                    <div class="preview">
+                        <div class="pane-head"><span>Live preview</span><span style="color:var(--green)">● Rendering</span>
+                        </div>
+                        <iframe class="out smp-invoice" data-s="invoice" title="HTML preview (invoice)" sandbox="allow-scripts" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;body style=&quot;margin:0&quot;&gt;&lt;div style=&quot;font-family:system-ui;padding:24px;color:#1b1f33&quot;&gt;
+  &lt;h2 style=&quot;margin:0;color:#7c5cff&quot;&gt;INVOICE #1024&lt;/h2&gt;
+  &lt;p style=&quot;color:#666&quot;&gt;Riverside Studio · 30 Oct 2026&lt;/p&gt;
+  &lt;table style=&quot;width:100%;border-collapse:collapse;margin-top:16px&quot;&gt;
+    &lt;tr style=&quot;background:#f1f3fb&quot;&gt;&lt;th align=&quot;left&quot; style=&quot;padding:8px&quot;&gt;Item&lt;/th&gt;&lt;th align=&quot;right&quot; style=&quot;padding:8px&quot;&gt;Amount&lt;/th&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:8px&quot;&gt;Website design&lt;/td&gt;&lt;td align=&quot;right&quot; style=&quot;padding:8px&quot;&gt;₹12,000&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr&gt;&lt;td style=&quot;padding:8px&quot;&gt;Hosting (1 year)&lt;/td&gt;&lt;td align=&quot;right&quot; style=&quot;padding:8px&quot;&gt;₹3,500&lt;/td&gt;&lt;/tr&gt;
+    &lt;tr style=&quot;font-weight:700;border-top:2px solid #1b1f33&quot;&gt;&lt;td style=&quot;padding:8px&quot;&gt;Total&lt;/td&gt;&lt;td align=&quot;right&quot; style=&quot;padding:8px&quot;&gt;₹15,500&lt;/td&gt;&lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;p style=&quot;margin-top:20px;color:#34a37a&quot;&gt;Thank you for your business!&lt;/p&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+                        <iframe class="out smp-resume" data-s="resume" title="HTML preview (resume)" sandbox="allow-scripts" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;body style=&quot;margin:0&quot;&gt;&lt;div style=&quot;font-family:Georgia,serif;padding:24px;color:#222&quot;&gt;
+  &lt;h1 style=&quot;margin:0&quot;&gt;Aarav Mehta&lt;/h1&gt;
+  &lt;p style=&quot;margin:4px 0 16px;color:#7c5cff&quot;&gt;Frontend Developer · Pune&lt;/p&gt;
+  &lt;h3 style=&quot;border-bottom:2px solid #7c5cff&quot;&gt;Experience&lt;/h3&gt;
+  &lt;p&gt;&lt;b&gt;UI Engineer&lt;/b&gt;, Brightlane (2023–now)&lt;br&gt;Built responsive dashboards used by 50k people.&lt;/p&gt;
+  &lt;h3 style=&quot;border-bottom:2px solid #7c5cff&quot;&gt;Skills&lt;/h3&gt;
+  &lt;p&gt;HTML · CSS · JavaScript · Flutter · Figma&lt;/p&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+                        <iframe class="out smp-card" data-s="card" title="HTML preview (card)" sandbox="allow-scripts" srcdoc="&lt;!doctype html&gt;&lt;html&gt;&lt;body style=&quot;margin:0&quot;&gt;&lt;div style=&quot;font-family:system-ui;display:grid;place-items:center;height:100vh;margin:0;background:linear-gradient(135deg,#7c5cff,#34d399)&quot;&gt;
+  &lt;div style=&quot;background:#fff;border-radius:16px;padding:24px 28px;box-shadow:0 20px 40px rgba(0,0,0,.2);text-align:center&quot;&gt;
+    &lt;h2 style=&quot;margin:0 0 6px&quot;&gt;Happy Birthday, Riya! 🎉&lt;/h2&gt;
+    &lt;p style=&quot;margin:0;color:#555&quot;&gt;Wishing you a year full of joy.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"></iframe>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-                    </svg>
-                    <h3>Raw HTML Editor</h3>
-                    <p>Developer mode allows you to paste raw HTML, CSS, or JS snippets into our monospace editor and
-                        render them into beautiful PDFs instantly.</p>
+                <div class="play-actions">
+                    <label for="smp-invoice">Load an invoice</label>
+                    <label for="smp-resume">Load a resume</label>
+                    <label for="smp-card">Load a card</label>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                    </svg>
-                    <h3>100% Secure & Local</h3>
-                    <p>All rendering happens entirely on your device's hardware. Your browsing data, links, and code are
-                        never sent to external servers.</p>
+                <p class="play-note">The preview runs in a safe, isolated sandbox in your browser. HTML, CSS and JavaScript all work.</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split-feat">
+                    <div class="split-text">
+                        <span class="kicker">URL to PDF</span>
+                        <h2>Clean captures, your way</h2>
+                        <ul>
+                            <li>Paste a link and preview the full page before saving</li>
+                            <li>Tap to erase pop-ups, banners or any element you don’t want</li>
+                            <li>Hide sticky top bars that repeat while scrolling</li>
+                            <li>Pick full page or just the part you need</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/01-home.jpg" alt="Paste a link" loading="lazy"></div>
+                        <div class="phone"><img src="screens/03-erase-edit.jpg" alt="Erase elements"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split-feat flip">
+                    <div class="split-text">
+                        <span class="kicker">Multi-URL workspace</span>
+                        <h2>Merge pages into one document</h2>
+                        <ul>
+                            <li>Add several URLs or HTML snippets to one workspace</li>
+                            <li>The engine scans, stitches and combines them in order</li>
+                            <li>Get one merged PDF ready to share</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/06-multi-url.jpg" alt="Multi-URL workspace"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/07-stitching.jpg" alt="Stitching document"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split-feat">
+                    <div class="split-text">
+                        <span class="kicker">Clean text and Markdown</span>
+                        <h2>Grab just the words</h2>
+                        <ul>
+                            <li>Extract clean, readable text from any page</li>
+                            <li>Switch to Markdown with links and headings kept</li>
+                            <li>Copy it straight into your notes or docs</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/04-clean-text.jpg" alt="Extracted clean text"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/08-merged-pdf.jpg" alt="Merged PDF" loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Who -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">Perfect for</span>
+                <h2>Made for the way you save the web</h2>
+                <p class="section-lede">Three kinds of people use Web to PDF every day. Here’s what they save.</p>
+                <div class="who">
+                    <article class="persona">
+                        <div class="thumb t-student" aria-hidden="true">
+                            <div class="mini-doc">
+                                <i class="h"></i><i></i><i></i><i class="img"></i><i></i><i class="s"></i>
+                            </div>
+                            <span class="badge">Lecture-notes.pdf</span>
+                        </div>
+                        <div class="p-body">
+                            <span class="p-ic" aria-hidden="true">🎓</span>
+                            <h3>Students</h3>
+                            <p>Turn articles and study pages into one PDF you can read on the bus, with no Wi-Fi.</p>
+                            <ul>
+                                <li>Wiki and reference pages</li>
+                                <li>Online notes and tutorials</li>
+                                <li>Exam guides and syllabus pages</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="persona">
+                        <div class="thumb t-dev" aria-hidden="true">
+                            <div class="mini-code">
+                                <span><b>&lt;div</b> class="card"<b>&gt;</b></span>
+                                <span>&nbsp;&nbsp;<b>&lt;h1&gt;</b>Report<b>&lt;/h1&gt;</b></span>
+                                <span>&nbsp;&nbsp;<b>&lt;table&gt;</b>…<b>&lt;/table&gt;</b></span>
+                                <span><b>&lt;/div&gt;</b></span>
+                            </div>
+                            <span class="badge">→ report.pdf</span>
+                        </div>
+                        <div class="p-body">
+                            <span class="p-ic" aria-hidden="true">💻</span>
+                            <h3>Developers</h3>
+                            <p>Paste HTML, CSS and JavaScript and get a polished PDF in seconds, right from your phone.</p>
+                            <ul>
+                                <li>Email templates and invoices</li>
+                                <li>Docs, reports and dashboards</li>
+                                <li>Quick layout tests on the go</li>
+                            </ul>
+                        </div>
+                    </article>
+                    <article class="persona">
+                        <div class="thumb t-pro" aria-hidden="true">
+                            <div class="mini-doc receipt">
+                                <i class="h"></i><i class="row"></i><i class="row"></i><i class="row"></i><i class="total"></i>
+                            </div>
+                            <span class="badge">Receipt-Oct.pdf</span>
+                        </div>
+                        <div class="p-body">
+                            <span class="p-ic" aria-hidden="true">🧾</span>
+                            <h3>Professionals</h3>
+                            <p>Archive receipts, bookings and reports exactly as they appeared, kept privately on your device.</p>
+                            <ul>
+                                <li>Order receipts and invoices</li>
+                                <li>Travel and hotel bookings</li>
+                                <li>Policies and web reports</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">From link to seamless PDF in seconds.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the Web to PDF trailer">
+                    <img src="https://i.ytimg.com/vi/hRPS0xBJJWM/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play-btn"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-home.jpg" alt="Home" loading="lazy"></div>
+                        <figcaption>URL or raw HTML</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-document-preview.jpg" alt="Document preview"
+                                loading="lazy"></div>
+                        <figcaption>Document preview</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/03-erase-edit.jpg" alt="Erase elements"
+                                loading="lazy"></div>
+                        <figcaption>Erase any element</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/05-sticky-bars.jpg" alt="Remove sticky bars"
+                                loading="lazy"></div>
+                        <figcaption>Remove sticky bars</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/04-clean-text.jpg" alt="Clean text" loading="lazy"></div>
+                        <figcaption>Clean text and Markdown</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/06-multi-url.jpg" alt="Multi-URL" loading="lazy"></div>
+                        <figcaption>Multi-URL workspace</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-stitching.jpg" alt="Stitching" loading="lazy"></div>
+                        <figcaption>Stitching pages</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Are my links or code sent to a server?</summary>
+                        <p>No. Pages are loaded and converted on your device using its built-in browser engine. We don’t
+                            log the websites you convert.</p>
+                    </details>
+                    <details>
+                        <summary>Will the PDF have a watermark?</summary>
+                        <p>No. Your PDFs are clean, with no watermark.</p>
+                    </details>
+                    <details>
+                        <summary>Can I still get normal A4 pages?</summary>
+                        <p>Web to PDF is built for seamless output, so long pages stay in one piece and nothing gets cut
+                            in half.</p>
+                    </details>
+                    <details>
+                        <summary>Where are my PDFs kept?</summary>
+                        <p>In the offline Vault inside the app, and wherever you choose to save or share them.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/-YSkETFKDcweeJ6ayK2UQxxgFsk_btZWSut3qu8PY17tkXKNT8O4-bYeUaWT04gNVIpm3tzXNx4V43Az_TmDaQ=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>Save the web, the right way</h2>
+                    <p>Turn any page into one clean, continuous PDF with Web to PDF.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.web_to_pdf" target="_blank"
+                        rel="noopener" class="btn btn-main">View on Google Play</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="webtopdf_privacypolicy.html">Privacy Policy</a>
-                <a href="webtopdf_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">© 2026 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="webtopdf_privacypolicy.html">Privacy policy</a>
+                <a href="webtopdf_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
+
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+        // Each feature runs in its own block so one problem can never stop the others.
+        function safe(fn) { try { fn(); } catch (e) { console.warn('Web to PDF page:', e); } }
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        safe(function () { document.getElementById('year').textContent = new Date().getFullYear(); });
+        safe(function () { if (reduceMotion) document.getElementById('heroLoop').pause(); });
+
+        // ---- HTML playground: live update while typing (sample switching works without JavaScript) ----
+        safe(function () {
+            var areas = document.querySelectorAll('.play .code');
+            Array.prototype.forEach.call(areas, function (ta) {
+                var frame = document.querySelector('.play .out[data-s="' + ta.getAttribute('data-s') + '"]');
+                var timer = null;
+                ta.addEventListener('input', function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        frame.setAttribute('srcdoc', '<!doctype html><html><body style="margin:0">' + ta.value + '</body></html>');
+                    }, 250);
+                });
+            });
+        });
+
+        // ---- YouTube trailer loads only when tapped ----
+        safe(function () {
+            var trailerBtn = document.getElementById('trailerBtn');
+            trailerBtn.addEventListener('click', function () {
+                var f = document.createElement('iframe');
+                f.src = 'https://www.youtube-nocookie.com/embed/hRPS0xBJJWM?autoplay=1&rel=0&modestbranding=1';
+                f.title = 'Web to PDF trailer';
+                f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+                f.allowFullscreen = true;
+                trailerBtn.innerHTML = '';
+                trailerBtn.appendChild(f);
+                trailerBtn.style.cursor = 'default';
+            }, { once: true });
+        });
+
+        // ---- Gallery buttons ----
+        safe(function () {
+            var gal = document.getElementById('gallery');
+            function stepW() { var fig = gal.querySelector('figure'); return (fig ? fig.offsetWidth : 200) + 20; }
+            document.getElementById('galPrev').addEventListener('click', function () { gal.scrollBy({ left: -stepW() * 2, behavior: 'smooth' }); });
+            document.getElementById('galNext').addEventListener('click', function () { gal.scrollBy({ left: stepW() * 2, behavior: 'smooth' }); });
+        });
     </script>
 </body>
 

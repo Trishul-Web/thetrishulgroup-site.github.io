@@ -3,208 +3,184 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Terms & Conditions - TTE Battle | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Terms & Conditions - TTE Battle | DevDuo Software</title>
+    <meta name="theme-color" content="#050816">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/EedjnPdljyNuM6EJng3qMkx_ZKB4nBxm84aJHGbt3ZuD9wNhCkAN073q97RQBsRJ9r5YyEldyivCkgpL08nE7Q=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #00d2ff;
-            --brand-2: #ff2a85;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #050816; --card: #0b1028; --ink: #eaf2ff; --soft: #c0cbea; --mute: #7d8ab3;
+            --line: #1f2a55; --violet: #00d2ff; --violet-soft: rgba(0, 210, 255, .08); --warn: #ff8a80; --warn-soft: rgba(255, 82, 82, .1);
+            --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(5, 8, 22, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: linear-gradient(95deg, #00d2ff, #ff2a85); color: #fff; }
+        .doc-head { position: relative; padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 85% 0%, rgba(255, 42, 133, .2), transparent 60%), radial-gradient(50% 120% at 0% 100%, rgba(0, 210, 255, .12), transparent 60%), var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1, article h2 { font-family: "Space Grotesk", system-ui, sans-serif; }
+        .caps { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 14px; padding: .9rem 1.1rem; list-style: none; margin-left: -1.25rem; }
+        .caps strong { color: var(--warn); }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .summary, .highlight { border: 1px solid rgba(0, 210, 255, .35); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: .93rem; margin: 1rem 0; }
+        .table-wrap { overflow-x: auto; }
+        .data-table th, .data-table td { text-align: left; padding: .75rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .data-table th { color: var(--ink); background: var(--card); }
+        .data-table td { color: var(--soft); }
+        article h3 { color: var(--ink); font-size: 1.05rem; margin: 1.25rem 0 .25rem; }
+        .highlight { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+        .highlight h2 { margin-top: 0 !important; }
+        h1 { color: #fff; font-weight: 900; text-transform: uppercase; text-shadow: 0 0 24px rgba(0, 210, 255, .45); }
+        h1, article h2 { font-family: "Orbitron", system-ui, sans-serif; }
+        article h2 { font-size: 1.15rem; text-transform: uppercase; letter-spacing: .03em; }
+        article h2 { letter-spacing: -.01em; }
+        .app-chip { color: var(--soft); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #ffd6d2; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(0, 210, 255, .14), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(255, 42, 133, .12), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02);
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body, .doc-head, .contact, .summary { background: #fff !important; color: #000; } h1 { color: #000; -webkit-text-fill-color: #000; } article p, article li { color: #222; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <header>
-        <div class="container-header">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="ttebattle_info.html" class="app-bar-link">App Info</a>
-                <a href="ttebattle_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="ttebattle_termsandconditions.html" class="app-bar-link active">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="ttebattle_info.html">Game info</a>
+                <a href="ttebattle_privacypolicy.html">Privacy</a>
+                <a href="ttebattle_termsandconditions.html" aria-current="page">Terms</a>
             </nav>
         </div>
     </header>
-    <main class="container">
-        <h1>Terms & Conditions</h1>
-        <p class="timestamp">Last Updated: August 30, 2026</p>
 
-        <h2>1. Acceptance of Agreement</h2>
-        <p>By downloading, installing, or playing <strong>TTE Battle: Tic Tac Toe Arena</strong>, you agree to be bound
-            by these Terms and Conditions. If you do not agree with any portion of these terms, please uninstall the
-            application.</p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="ttebattle_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/EedjnPdljyNuM6EJng3qMkx_ZKB4nBxm84aJHGbt3ZuD9wNhCkAN073q97RQBsRJ9r5YyEldyivCkgpL08nE7Q=s128-rw" alt="" width="32" height="32">TTE Battle: Tic Tac Toe Arena</a>
+            <h1>Terms &amp; Conditions</h1>
+            <p class="meta">Last Updated: August 30, 2026</p>
+        </div>
+    </div>
 
-        <h2>2. Intellectual Property Rights</h2>
-        <p>The application, custom shaders, neon animations, 3D board styles, audio soundscapes, custom graphic skins,
-            and source code are the proprietary intellectual property of DevDuo. You agree not to decompile, reverse
-            engineer, extract, copy, or redistribute any part of the game.</p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#accept">1. Acceptance of Agreement</a></li>
+                <li><a href="#ip">2. Intellectual Property Rights</a></li>
+                <li><a href="#local">3. Local Progress &amp; Responsibility</a></li>
+                <li><a href="#liability">4. Limitation of Liability</a></li>
+                <li><a href="#changes">5. Changes to Terms</a></li>
+                <li><a href="#contact">6. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
 
-        <h2>3. Local Progress & Responsibility</h2>
-        <p>TTE Battle operates entirely offline and saves match history records locally on your device. DevDuo is not
-            liable for data loss caused by app uninstallation, factory resets, or clearing device application data.</p>
-
-        <h2>4. Limitation of Liability</h2>
-        <p>The application is provided on an "as-is" and "as-available" basis without warranties of any kind. DevDuo
-            shall not be held liable for any direct, indirect, or consequential damages resulting from the use or
-            inability to use this software.</p>
-
-        <h2>5. Changes to Terms</h2>
-        <p>We reserve the right to modify or replace these Terms at our discretion. Any revisions will be published on
-            this page and will become effective immediately upon posting.</p>
-
-        <h2>6. Contact Us</h2>
-        <p>If you have any questions or suggestions regarding these Terms & Conditions, please reach out to: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a>[cite: 1]</p>
+            <section id="accept">
+                <h2>1. Acceptance of Agreement</h2>
+                <p>By downloading, installing, or playing <strong>TTE Battle: Tic Tac Toe Arena</strong>, you agree to be bound by these Terms and Conditions. If you do not agree with any portion of these terms, please uninstall the application.</p>
+            </section>
+            <section id="ip">
+                <h2>2. Intellectual Property Rights</h2>
+                <p>The application, custom shaders, neon animations, 3D board styles, audio soundscapes, custom graphic skins, and source code are the proprietary intellectual property of DevDuo. You agree not to decompile, reverse engineer, extract, copy, or redistribute any part of the game.</p>
+            </section>
+            <section id="local" class="highlight">
+                <h2>3. Local Progress &amp; Responsibility</h2>
+                <p>TTE Battle operates entirely offline and saves match history records locally on your device. DevDuo is not liable for data loss caused by app uninstallation, factory resets, or clearing device application data.</p>
+            </section>
+            <section id="liability">
+                <h2>4. Limitation of Liability</h2>
+                <p>The application is provided on an "as-is" and "as-available" basis without warranties of any kind. DevDuo shall not be held liable for any direct, indirect, or consequential damages resulting from the use or inability to use this software.</p>
+            </section>
+            <section id="changes">
+                <h2>5. Changes to Terms</h2>
+                <p>We reserve the right to modify or replace these Terms at our discretion. Any revisions will be published on this page and will become effective immediately upon posting.</p>
+            </section>
+            <section id="contact">
+                <h2>6. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions or suggestions regarding these Terms &amp; Conditions, please reach out to: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="ttebattle_info.html">Game info</a>
+                <a href="ttebattle_privacypolicy.html">Privacy policy</a>
+                <a href="ttebattle_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

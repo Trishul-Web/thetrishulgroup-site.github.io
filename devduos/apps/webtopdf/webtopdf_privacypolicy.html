@@ -3,253 +3,238 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - Web to PDF | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - Web to PDF | DevDuo Software</title>
+    <meta name="theme-color" content="#0a0d1c">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/-YSkETFKDcweeJ6ayK2UQxxgFsk_btZWSut3qu8PY17tkXKNT8O4-bYeUaWT04gNVIpm3tzXNx4V43Az_TmDaQ=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #0a0d1c; --card: #11152b; --ink: #edf0fb; --soft: #c1c6e2; --mute: #8188ad;
+            --line: #262c52; --violet: #34d399; --violet-soft: rgba(124, 92, 255, .1); --warn: #ff8a80; --warn-soft: rgba(255, 82, 82, .1);
+            --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(10, 13, 28, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: #7c5cff; color: #fff; }
+        .doc-head { position: relative; padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 85% 0%, rgba(124, 92, 255, .25), transparent 60%), radial-gradient(50% 120% at 0% 100%, rgba(52, 211, 153, .1), transparent 60%), var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1, article h2 { font-family: "Manrope", system-ui, sans-serif; font-weight: 800; letter-spacing: -.02em; }
+        .caps { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 14px; padding: .9rem 1.1rem; list-style: none; margin-left: -1.25rem; }
+        .caps strong { color: var(--warn); }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .summary, .highlight { border: 1px solid rgba(124, 92, 255, .35); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: .93rem; margin: 1rem 0; }
+        .table-wrap { overflow-x: auto; }
+        .data-table th, .data-table td { text-align: left; padding: .75rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .data-table th { color: var(--ink); background: var(--card); }
+        .data-table td { color: var(--soft); }
+        article h3 { color: var(--ink); font-size: 1.05rem; margin: 1.25rem 0 .25rem; }
+        .highlight { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+        .highlight h2 { margin-top: 0 !important; }
+        h1 { color: var(--ink); font-weight: 800; letter-spacing: -.02em; }
+        h1, article h2 { font-family: "Manrope", system-ui, sans-serif; font-weight: 800; letter-spacing: -.02em; }
+        article h2 { letter-spacing: -.01em; }
+        .app-chip { color: var(--soft); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #ffd6d2; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .highlight-box {
-            background: rgba(94, 234, 212, 0.1);
-            border: 1px solid var(--brand-1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .highlight-box h2 {
-            margin-top: 0;
-            border-bottom: none;
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body, .doc-head, .contact, .summary { background: #fff !important; color: #000; } h1 { color: #000; -webkit-text-fill-color: #000; } article p, article li { color: #222; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container-header">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="webtopdf_info.html" class="app-bar-link">App Info</a>
-                <a href="webtopdf_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
-                <a href="webtopdf_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="webtopdf_info.html">App info</a>
+                <a href="webtopdf_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="webtopdf_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <h1>Privacy Policy</h1>
-        <p class="timestamp">Last Updated: March 24, 2026</p>
-
-        <p>DevDuo ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we
-            handle your information when you use our Web to PDF mobile application (the "Service").</p>
-
-        <div class="highlight-box">
-            <h2>Data Retention and Deletion Policy</h2>
-            <p>Web to PDF is designed to operate entirely offline on your local device. <strong>We do not collect,
-                    transmit, store, or retain any of your data on external servers.</strong></p>
-
-            <p><strong>Data Retention:</strong><br>
-                Any website URLs you input, HTML code you paste, or PDF documents you generate are stored securely
-                within the app's local database ("Vault") on your device. This data is retained locally only for as long
-                as you keep it within the application.</p>
-
-            <p><strong>Data Deletion:</strong><br>
-                Because your data is strictly local, you have absolute control over its deletion. You can request or
-                enforce data deletion through the following methods:</p>
-            <ul>
-                <li><strong>In-App Deletion:</strong> You can delete individual conversion history items (URLs or HTML)
-                    directly from the "Vault/History" screen within the app by tapping the trash icon.</li>
-                <li><strong>Complete Deletion:</strong> To completely delete all data associated with the app, simply
-                    uninstall the application from your device, or go to your device's <em>Settings > Apps > Web to PDF
-                        > Storage > Clear Data</em>. This will instantly and permanently erase all generated histories.
-                </li>
-                <li><strong>No Server Deletion Required:</strong> Since we do not possess your data on our servers, no
-                    external or web-based deletion request process is necessary. Clearing local app data is absolute.
-                </li>
-            </ul>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="webtopdf_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/-YSkETFKDcweeJ6ayK2UQxxgFsk_btZWSut3qu8PY17tkXKNT8O4-bYeUaWT04gNVIpm3tzXNx4V43Az_TmDaQ=s128-rw" alt="" width="32" height="32">Web to PDF: URL &amp; HTML</a>
+            <h1>Privacy Policy</h1>
+            <p class="meta">Last Updated: October 30, 2026 · Previous version: March 24, 2026</p>
         </div>
+    </div>
 
-        <h2>1. Information We Do Not Collect</h2>
-        <ul>
-            <li><strong>Your Browsing Data:</strong> The URLs you enter and the web pages you convert are processed
-                locally via your device's WebView. We do not track or log what websites you are converting.</li>
-            <li><strong>Your HTML Code:</strong> Any raw HTML/CSS/JS you paste into the developer editor is processed
-                on-device.</li>
-            <li><strong>Personal Information:</strong> We do not require you to create an account, nor do we collect
-                personal details like your name, email, or IP address.</li>
-        </ul>
-
-        <h2>2. Permissions Required</h2>
-        <p>To function properly, the app requires:</p>
-        <ul>
-            <li><strong>Internet Access:</strong> Required strictly for the app's internal engine to load the public
-                websites you explicitly ask it to convert.</li>
-            <li><strong>Storage/Media Access:</strong> Required to save your generated PDF files to your device so you
-                can share or view them.</li>
-        </ul>
-
-        <h2>3. Third-Party Services</h2>
-        <p>We do not use third-party analytics SDKs or tracking tools that harvest your personal browsing behavior.</p>
-
-        <h2>4. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by updating the "Last
-            Updated" date at the top of this policy.</p>
-
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#about">About This Policy</a></li>
+                <li><a href="#local">Data Retention and Deletion Policy</a></li>
+                <li><a href="#notcollect">1. Information We Do Not Collect</a></li>
+                <li><a href="#websites">2. Websites You Convert</a></li>
+                <li><a href="#permissions">3. Permissions Required</a></li>
+                <li><a href="#third">4. Third-Party Services</a></li>
+                <li><a href="#premium">5. Premium Purchases</a></li>
+                <li><a href="#sharing">6. Sharing and Exports</a></li>
+                <li><a href="#security">7. Security</a></li>
+                <li><a href="#children">8. Children's Privacy</a></li>
+                <li><a href="#changes">9. Changes to This Privacy Policy</a></li>
+                <li><a href="#contact">10. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>Pages are loaded and converted into PDFs on your device. We never receive your links, code or PDFs.</li>
+                    <li>Your history and saved PDFs live in the app's local Vault.</li>
+                    <li>No account is needed.</li>
+                    <li>Premium purchases are handled by Google Play. We never see your card details.</li>
+                </ul>
+            </div>
+            <section id="about">
+                <h2>About This Policy</h2>
+                <p>DevDuo ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our Web to PDF mobile application (the "Service").</p>
+            </section>
+            <section id="local" class="highlight">
+                <h2>Data Retention and Deletion Policy</h2>
+                <p>Web to PDF is designed to operate entirely offline on your local device. <strong>We do not collect, transmit, store, or retain any of your data on external servers.</strong></p>
+                <p><strong>Data Retention:</strong><br>Any website URLs you input, HTML code you paste, or PDF documents you generate are stored securely within the app's local database ("Vault") on your device. This data is retained locally only for as long as you keep it within the application.</p>
+                <p><strong>Data Deletion:</strong><br>Because your data is strictly local, you have absolute control over its deletion. You can request or enforce data deletion through the following methods:</p>
+                <ul>
+                    <li><strong>In-App Deletion:</strong> You can delete individual conversion history items (URLs or HTML) directly from the "Vault/History" screen within the app by tapping the trash icon.</li>
+                    <li><strong>Complete Deletion:</strong> To completely delete all data associated with the app, simply uninstall the application from your device, or go to your device's <em>Settings &gt; Apps &gt; Web to PDF &gt; Storage &gt; Clear Data</em>. This will instantly and permanently erase all generated histories.</li>
+                    <li><strong>No Server Deletion Required:</strong> Since we do not possess your data on our servers, no external or web-based deletion request process is necessary. Clearing local app data is absolute.</li>
+                </ul>
+                <p>PDF files you saved to your phone's storage or shared with other apps must be deleted separately from there.</p>
+            </section>
+            <section id="notcollect">
+                <h2>1. Information We Do Not Collect</h2>
+                <ul>
+                    <li><strong>Your Browsing Data:</strong> The URLs you enter and the web pages you convert are processed locally via your device's WebView. We do not track or log what websites you are converting.</li>
+                    <li><strong>Your HTML Code:</strong> Any raw HTML/CSS/JS you paste into the developer editor is processed on-device.</li>
+                    <li><strong>Personal Information:</strong> We do not require you to create an account, nor do we collect personal details like your name, email, or IP address.</li>
+                </ul>
+            </section>
+            <section id="websites">
+                <h2>2. Websites You Convert</h2>
+                <p>When you load a website to convert it, your device connects directly to that website, just like a normal browser visit. That website (and any services it uses) may see your IP address, set cookies inside the app's browser engine, and apply its own privacy policy. We are not responsible for the content or data practices of the websites you choose to convert.</p>
+            </section>
+            <section id="permissions">
+                <h2>3. Permissions Required</h2>
+                <p>To function properly, the app requires:</p>
+                <ul>
+                    <li><strong>Internet Access:</strong> Required strictly for the app's internal engine to load the public websites you explicitly ask it to convert.</li>
+                    <li><strong>Storage/Media Access:</strong> Required to save your generated PDF files to your device so you can share or view them.</li>
+                </ul>
+            </section>
+            <section id="third">
+                <h2>4. Third-Party Services</h2>
+                <p>We do not use third-party analytics SDKs or tracking tools that harvest your personal browsing behavior.</p>
+            </section>
+            <section id="premium">
+                <h2>5. Premium Purchases</h2>
+                <p>If you buy Premium, the payment is processed by Google Play. We never see or store your card or payment details. A purchase status service may receive an anonymous app user ID to confirm that your Premium access is active.</p>
+            </section>
+            <section id="sharing">
+                <h2>6. Sharing and Exports</h2>
+                <p>When you save or share a PDF, the app uses your phone's share menu or file picker. The file goes only to the location, app or person you choose.</p>
+            </section>
+            <section id="security">
+                <h2>7. Security</h2>
+                <p>Your Vault and history are stored in the app's private storage on your device. Anyone with access to your unlocked phone may be able to open the app, so we recommend using a screen lock.</p>
+            </section>
+            <section id="children">
+                <h2>8. Children's Privacy</h2>
+                <p>The Service is not directed at children under 13, and we do not knowingly collect personal information from children. If you believe a child has provided personal information, please contact us.</p>
+            </section>
+            <section id="changes">
+                <h2>9. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by updating the "Last Updated" date at the top of this policy.</p>
+            </section>
+            <section id="contact">
+                <h2>10. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="webtopdf_info.html">App info</a>
+                <a href="webtopdf_privacypolicy.html">Privacy policy</a>
+                <a href="webtopdf_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>
