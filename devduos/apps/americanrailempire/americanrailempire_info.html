@@ -3,320 +3,1257 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>American Rail Empire - Railway Tycoon | DevDuo's</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>American Rail Empire | Railway Tycoon Game by DevDuo Software</title>
+    <meta name="description"
+        content="Build your railroad empire. Assemble custom trains, take passenger and freight contracts, expand your rail yard and grow a busy American terminal.">
+    <meta property="og:title" content="American Rail Empire">
+    <meta property="og:description" content="Build. Assemble. Dispatch. A railway tycoon game.">
+    <meta property="og:image" content="screens/02-station.jpg">
+    <meta name="theme-color" content="#0a0f1e">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚂</text></svg>">
+        href="https://play-lh.googleusercontent.com/XGvxinG9LvvPemw4cQTjVK3yImU9smdzmFGOD4_SHDEg1r3EAy-T-ZfpWlWXR3sHqYARWsktfgwKIpSENI5N6g=s128-rw">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #f59e0b;
-            --brand-2: #10b981;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg: #0a0f1e;
+            --bg-2: #111830;
+            --bg-3: #18213d;
+            --line: #26304f;
+            --text: #eef1f8;
+            --soft: #bcc3d6;
+            --mute: #8a93ad;
+            --gold: #f5b82e;
+            --gold-2: #ffd56b;
+            --green: #22c55e;
+            --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(245, 158, 11, .14), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(16, 185, 129, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
+        a {
+            color: inherit;
         }
 
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        img,
+        video {
+            max-width: 100%;
+            display: block;
         }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        :focus-visible {
+            outline: 2px solid var(--gold);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
+        .wrap {
+            width: min(1140px, 90vw);
             margin: 0 auto;
         }
 
-        section {
-            padding: 6rem 0;
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(10, 15, 30, .85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            background: #111;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 780px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #000;
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
-        }
-
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
-            color: var(--brand-1);
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-links {
+        .nav .wrap {
+            height: 66px;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
             text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 500;
             transition: color .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        .tabs a:hover {
+            color: var(--text);
+        }
+
+        .tabs a[aria-current="page"] {
+            background: var(--gold);
+            color: #1a1204;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+            background:
+                radial-gradient(55% 70% at 80% 10%, rgba(245, 184, 46, .16), transparent 65%),
+                linear-gradient(180deg, #0d1428, var(--bg));
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 18px;
+            background:
+                repeating-linear-gradient(90deg, #3a2a18 0 10px, transparent 10px 34px) 0 6px / 100% 12px no-repeat,
+                linear-gradient(#5b6478, #5b6478) 0 4px / 100% 2px no-repeat,
+                linear-gradient(#5b6478, #5b6478) 0 14px / 100% 2px no-repeat;
+            opacity: .7;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .app-id img {
+            width: 68px;
+            height: 68px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(245, 184, 46, .25);
+        }
+
+        .app-id strong {
+            display: block;
+        }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: clamp(3.2rem, 8vw, 6rem);
+            line-height: .92;
+            letter-spacing: .005em;
+            text-transform: uppercase;
+            margin: 0 0 1.25rem;
+        }
+
+        h1 span {
+            display: block;
+            color: var(--gold);
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 50ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .9rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, box-shadow .2s, border-color .2s;
+        }
+
+        .btn-gold {
+            background: linear-gradient(180deg, var(--gold-2), var(--gold));
+            color: #1a1204;
+            box-shadow: 0 10px 28px rgba(245, 184, 46, .3), inset 0 -2px 0 rgba(0, 0, 0, .15);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .btn-line:hover {
+            border-color: var(--gold);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #05070f;
+            border: 1px solid #2b3556;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .55), 0 0 0 10px rgba(245, 184, 46, .06);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 1080 / 2400;
+            object-fit: cover;
+            background: var(--bg);
+        }
+
+        /* ---------- Departure board ---------- */
+        .board-wrap {
+            padding: 4rem 0 1rem;
+        }
+
+        .board {
+            background: #05070f;
+            border: 1px solid #222a44;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: inset 0 0 0 6px #0d1222, 0 30px 60px rgba(0, 0, 0, .4);
+        }
+
+        .board-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .board-title {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .clock {
+            font-family: var(--mono);
+            color: var(--gold-2);
+            font-size: 1.1rem;
+        }
+
+        .board-scroll {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 640px;
+            border-collapse: separate;
+            border-spacing: 0 6px;
+            font-family: var(--mono);
+            font-size: .95rem;
+        }
+
+        th {
+            text-align: left;
+            font-family: var(--sans);
+            font-size: .72rem;
+            font-weight: 600;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--mute);
+            padding: 0 .75rem .25rem;
+        }
+
+        td {
+            background: #0e1426;
+            padding: .7rem .75rem;
+            color: #f2e6c8;
+            white-space: nowrap;
+        }
+
+        td:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+
+        td:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+
+        .flap {
+            display: inline-block;
+            transform-origin: 50% 50%;
+        }
+
+        .flap.flip {
+            animation: flap .5s ease;
+        }
+
+        @keyframes flap {
+            0% {
+                transform: rotateX(0);
+                opacity: 1;
+            }
+
+            45% {
+                transform: rotateX(90deg);
+                opacity: .2;
+            }
+
+            55% {
+                transform: rotateX(-90deg);
+                opacity: .2;
+            }
+
+            100% {
+                transform: rotateX(0);
+                opacity: 1;
+            }
+        }
+
+        .st {
+            font-weight: 600;
+        }
+
+        .st.board-ing {
+            color: var(--green);
+        }
+
+        .st.loading {
+            color: var(--gold-2);
+        }
+
+        .st.departed {
+            color: var(--mute);
+        }
+
+        .board-note {
+            margin: .75rem 0 0;
+            font-size: .82rem;
+            color: var(--mute);
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 5.5rem 0;
+        }
+
+        h2 {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: clamp(2.3rem, 4.6vw, 3.6rem);
+            line-height: 1;
+            letter-spacing: .01em;
+            text-transform: uppercase;
+            margin: 0 0 .9rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 3rem;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Loop steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            counter-reset: s;
+        }
+
+        .step {
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 1.75rem 1.75rem 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .step .num {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--gold);
+        }
+
+        .step h3 {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: 1.7rem;
+            text-transform: uppercase;
+            margin: .25rem 0 .4rem;
+        }
+
+        .step p {
+            color: var(--mute);
+            margin: 0 0 1.5rem;
+            font-size: .95rem;
+        }
+
+        .step .shot {
+            margin-top: auto;
+            border: 6px solid #05070f;
+            border-bottom: 0;
+            border-radius: 22px 22px 0 0;
+            height: 320px;
+            overflow: hidden;
+        }
+
+        .step .shot img {
+            width: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .feature {
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 1.6rem;
+        }
+
+        .feature .ic {
+            font-size: 1.6rem;
+            line-height: 1;
+            margin-bottom: .9rem;
+        }
+
+        .feature h3 {
+            margin: 0 0 .35rem;
+            font-size: 1.08rem;
+        }
+
+        .feature p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .94rem;
+        }
+
+        /* Station showcase */
+        .showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .showcase ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: .9rem;
+        }
+
+        .showcase li {
+            display: grid;
+            grid-template-columns: 28px 1fr;
+            gap: .75rem;
+            color: var(--soft);
+        }
+
+        .showcase li b {
+            color: var(--text);
+            display: block;
+        }
+
+        .showcase .tick {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            display: grid;
+            place-items: center;
+            background: rgba(245, 184, 46, .12);
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .duo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .duo .phone {
+            width: 230px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) {
+            margin-top: 3.5rem;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img {
+            transform: scale(1.03);
+        }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(10, 15, 30, .6), rgba(10, 15, 30, .1));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(180deg, var(--gold-2), var(--gold));
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span {
+            transform: scale(1.08);
+        }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #1a1204;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover {
+            border-color: var(--gold);
+        }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery figure {
+            flex: 0 0 200px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img {
+            border-radius: 24px;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 780px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--gold);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "–";
+        }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 28px;
+            border: 1px solid #3a3320;
+            background:
+                radial-gradient(70% 120% at 50% 0%, rgba(245, 184, 46, .22), transparent 65%),
+                var(--bg-2);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        .motto {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin: 0 0 .75rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+
+            .hero-grid,
+            .showcase {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .step .shot {
+                height: 280px;
+                max-width: 340px;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .phone {
+                width: 240px;
+            }
+
+            .duo .phone {
+                width: 175px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 0 3.5rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .duo .phone {
+                width: 145px;
+            }
+
+            .gallery figure {
+                flex-basis: 170px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="americanrailempire_info.html" class="app-bar-link active">App Info</a>
-                <a href="americanrailempire_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="americanrailempire_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="Game pages">
+                <a href="americanrailempire_info.html" aria-current="page">Game info</a>
+                <a href="americanrailempire_privacypolicy.html">Privacy</a>
+                <a href="americanrailempire_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
+
     <main>
-        <section class="hero container">
-            <div class="hero-icon">🚂</div>
-            <h1 class="grand-title">Build Your Transcontinental <span class="gradient-text">Rail Empire</span>.</h1>
-            <p class="intro-lede">
-                Design custom rolling stock rakes, balance diesel and electric hauling power, fulfill high-yield
-                intercity contracts, and expand terminal platforms across major American junctions.
-            </p>
-            <a href="https://play.google.com/store/apps/developer?id=DevDuo%27s" target="_blank"
-                class="cta-button">Download on Play Store</a>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/XGvxinG9LvvPemw4cQTjVK3yImU9smdzmFGOD4_SHDEg1r3EAy-T-ZfpWlWXR3sHqYARWsktfgwKIpSENI5N6g=s256-rw"
+                            alt="American Rail Empire game icon" width="68" height="68">
+                        <div>
+                            <strong>American Rail Empire</strong>
+                            <span>Railway tycoon by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>Build your <span>railroad empire</span></h1>
+                    <p class="lede">
+                        Collect locomotives, assemble custom trains, take passenger and freight contracts, and grow a
+                        small terminal into the busiest rail hub in America.
+                    </p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.american_rail_empire"
+                            target="_blank" rel="noopener" class="btn btn-gold">Play on Google Play</a>
+                        <a href="#trailer" class="btn btn-line">Watch the trailer</a>
+                    </div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/02-station.jpg" autoplay muted loop playsinline
+                        preload="metadata" id="heroLoop" aria-label="Trains arriving at the terminal"></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departure board -->
+        <div class="board-wrap">
+            <div class="wrap">
+                <div class="board" aria-label="Sample departure board">
+                    <div class="board-head">
+                        <div class="board-title">Central Terminal · Departures</div>
+                        <div class="clock" id="clock">00:00</div>
+                    </div>
+                    <div class="board-scroll">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Destination</th>
+                                    <th>Service</th>
+                                    <th>Platform</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="boardBody"></tbody>
+                        </table>
+                    </div>
+                    <p class="board-note">Just like the live departure board in the game.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Build, assemble, dispatch -->
+        <section>
+            <div class="wrap">
+                <h2>Build. Assemble. Dispatch.</h2>
+                <p class="section-lede">The core loop that turns a single train into a railway empire.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="num">01</div>
+                        <h3>Assemble your train</h3>
+                        <p>Combine locomotives with coaches, parcel vans and freight cars in the Train Factory,
+                            balance hauling power, then name your formation.</p>
+                        <div class="shot"><img src="screens/07-train-factory.jpg" alt="Train Factory" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="num">02</div>
+                        <h3>Pick a contract</h3>
+                        <p>Choose Branch Line, Intercity or Long Haul jobs carrying passengers, parcels or heavy
+                            freight between American cities.</p>
+                        <div class="shot"><img src="screens/03-contracts.jpg" alt="Contracts board" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="num">03</div>
+                        <h3>Dispatch and earn</h3>
+                        <p>Assign a platform, watch your train board and depart, and collect your rewards as it
+                            completes the route.</p>
+                        <div class="shot"><img src="screens/04-assign-platform.jpg" alt="Assigning a platform"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section class="container">
-            <h2 class="section-title">Tycoon Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v.958" />
-                    </svg>
-                    <h3>Modular Train Factory</h3>
-                    <p>Assemble custom rakes from dozens of single-ended and double-ended locomotives, passenger
-                        coaches, parcel vans (EOGs), and heavy freight cars with real-time power balancing.</p>
+
+        <!-- Living station -->
+        <section style="padding-top:0">
+            <div class="wrap showcase">
+                <div>
+                    <h2>A station that comes alive</h2>
+                    <p class="section-lede" style="margin-bottom:2rem">Watch your trains arrive, board passengers,
+                        load cargo and leave the platform in real time.</p>
+                    <ul>
+                        <li><span class="tick">✓</span><span><b>Expand your terminal</b>Grow Central Station into a
+                                major hub with more platforms and active services.</span></li>
+                        <li><span class="tick">✓</span><span><b>Customise the look</b>Choose architectural styles for
+                                buildings, platforms, tracks and the rail yard.</span></li>
+                        <li><span class="tick">✓</span><span><b>Track every departure</b>Routes, rewards, platforms and
+                                boarding status on the departure board.</span></li>
+                    </ul>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25A2.25 2.25 0 0113.5 8V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" />
-                    </svg>
-                    <h3>Dynamic Dispatch Terminal</h3>
-                    <p>Coordinate branch line, intercity, and long-haul dispatches on synchronized platform tracks with
-                        3-aspect signalling and real-time live departure boards.</p>
+                <div class="duo">
+                    <div class="phone"><img src="screens/02-station.jpg" alt="Trains at the station platforms"
+                            loading="lazy"></div>
+                    <div class="phone"><img src="screens/01-terminal.jpg" alt="Terminal with live departures"
+                            loading="lazy"></div>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <h3>Offline Station Revenue</h3>
-                    <p>Your railway empire operates 24/7. Earn continuous passive cash payouts while away and collect
-                        bonuses upon your return.</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <h2>Everything a tycoon needs</h2>
+                <p class="section-lede">Manage your fleet, your station and your money.</p>
+                <div class="features">
+                    <div class="feature">
+                        <div class="ic" aria-hidden="true">🚂</div>
+                        <h3>Collect locomotives</h3>
+                        <p>Buy engines and passenger coaches, then expand into parcel vans and heavy freight cars.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ic" aria-hidden="true">🛤️</div>
+                        <h3>Grow your rail yard</h3>
+                        <p>Shop the Yard Store and build a fleet ready for every kind of passenger and freight job.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ic" aria-hidden="true">📋</div>
+                        <h3>Higher-value routes</h3>
+                        <p>Match train capacity to each job and unlock bigger contracts as your railway grows.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ic" aria-hidden="true">🏢</div>
+                        <h3>Upgrade the terminal</h3>
+                        <p>Add platform capacity so more trains can board and depart at the same time.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ic" aria-hidden="true">💰</div>
+                        <h3>Earn while away</h3>
+                        <p>Your railway keeps making money offline. Come back and collect your earnings.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ic" aria-hidden="true">🎡</div>
+                        <h3>Daily wheel and vaults</h3>
+                        <p>Spin the daily reward wheel and open bonus vaults for extra rewards.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:0">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">See trains being built, dispatched and running through the terminal.</p>
+                <button type="button" class="trailer" id="trailerBtn"
+                    aria-label="Play the American Rail Empire trailer">
+                    <img src="https://i.ytimg.com/vi/DsKFPgWVC4w/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Screenshots</h2>
+                        <p class="section-lede" style="margin-bottom:3rem">Real screens from the game.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-terminal.jpg" alt="Terminal" loading="lazy"></div>
+                        <figcaption>Central Terminal</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-station.jpg" alt="Station platforms" loading="lazy">
+                        </div>
+                        <figcaption>Live station</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/03-contracts.jpg" alt="Contracts" loading="lazy"></div>
+                        <figcaption>Contracts</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/04-assign-platform.jpg" alt="Assign platform"
+                                loading="lazy"></div>
+                        <figcaption>Assign a platform</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/05-yard-store.jpg" alt="Yard Store" loading="lazy"></div>
+                        <figcaption>Yard Store</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/06-rail-yard.jpg" alt="Rail yard" loading="lazy"></div>
+                        <figcaption>Your rail yard</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-train-factory.jpg" alt="Train Factory" loading="lazy">
+                        </div>
+                        <figcaption>Train Factory</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/08-train-deployed.jpg" alt="Train deployed" loading="lazy">
+                        </div>
+                        <figcaption>Train deployed</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/09-dispatch-ledger.jpg" alt="Dispatch ledger"
+                                loading="lazy"></div>
+                        <figcaption>Dispatch ledger</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Can I play offline?</summary>
+                        <p>Yes. Your game runs and saves on your phone, and your railway keeps earning while you are
+                            away. Rewarded ads and purchases need a connection.</p>
+                    </details>
+                    <details>
+                        <summary>Do I need an account?</summary>
+                        <p>No. There is no sign-up, email or password. Your progress is saved on your device.</p>
+                    </details>
+                    <details>
+                        <summary>Are ads required?</summary>
+                        <p>No. Rewarded ads are optional and give bonuses like 2x contract payouts and extra spins.</p>
+                    </details>
+                    <details>
+                        <summary>What happens to my progress if I change phones?</summary>
+                        <p>Progress is stored only on your current device, so uninstalling, clearing data or moving to
+                            a new phone starts a new game.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/XGvxinG9LvvPemw4cQTjVK3yImU9smdzmFGOD4_SHDEg1r3EAy-T-ZfpWlWXR3sHqYARWsktfgwKIpSENI5N6g=s256-rw"
+                        alt="" width="80" height="80">
+                    <p class="motto">All aboard, tycoon</p>
+                    <p>Your first locomotive is waiting in the yard. Build your own American Rail Empire today.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.american_rail_empire"
+                        target="_blank" rel="noopener" class="btn btn-gold">Play on Google Play</a>
                 </div>
             </div>
         </section>
     </main>
+
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="americanrailempire_privacypolicy.html">Privacy Policy</a>
-                <a href="americanrailempire_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">© 2026 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="americanrailempire_privacypolicy.html">Privacy policy</a>
+                <a href="americanrailempire_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More games</a>
+            </nav>
         </div>
     </footer>
+
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
+
+        // Departure board
+        const routes = [
+            ['Chicago', 'Long Haul', 'Freight'], ['New Orleans', 'Intercity', 'Passenger'],
+            ['Boston', 'Branch Line', 'Parcel'], ['Denver', 'Long Haul', 'Passenger'],
+            ['Seattle', 'Long Haul', 'Freight'], ['Atlanta', 'Intercity', 'Passenger'],
+            ['Pittsburgh', 'Branch Line', 'Freight'], ['San Diego', 'Intercity', 'Parcel'],
+            ['Kansas City', 'Long Haul', 'Freight'], ['Philadelphia', 'Branch Line', 'Passenger'],
+            ['Phoenix', 'Intercity', 'Freight'], ['Baltimore', 'Branch Line', 'Parcel']
+        ];
+        const statuses = [['Boarding', 'board-ing'], ['Loading', 'loading'], ['On time', ''], ['Departed', 'departed']];
+        const body = document.getElementById('boardBody');
+        let mins = 9 * 60 + 15, next = 0;
+        const fmt = m => String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0');
+
+        function row(i) {
+            const r = routes[next++ % routes.length];
+            mins += 7 + (next % 3) * 4;
+            const s = statuses[i] || statuses[2];
+            return `<td><span class="flap">${fmt(mins)}</span></td><td><span class="flap">${r[0]}</span></td>` +
+                `<td><span class="flap">${r[1]} · ${r[2]}</span></td><td><span class="flap">${1 + (next % 6)}</span></td>` +
+                `<td><span class="flap st ${s[1]}">${s[0]}</span></td>`;
+        }
+
+        const rows = [];
+        for (let i = 0; i < 5; i++) {
+            const tr = document.createElement('tr');
+            tr.innerHTML = row(i);
+            body.appendChild(tr);
+            rows.push(tr);
+        }
+
+        function tick() {
+            const first = rows.shift();
+            first.innerHTML = row(4);
+            body.appendChild(first);
+            rows.push(first);
+            rows.forEach((tr, i) => {
+                const s = statuses[i] || statuses[2];
+                const st = tr.querySelector('.st');
+                st.className = 'flap st ' + s[1];
+                st.textContent = s[0];
+                tr.querySelectorAll('.flap').forEach(f => {
+                    f.classList.remove('flip');
+                    void f.offsetWidth;
+                    f.classList.add('flip');
+                });
+            });
+        }
+
+        const clock = document.getElementById('clock');
+        const showClock = () => {
+            const d = new Date();
+            clock.textContent = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+        };
+        showClock();
+        setInterval(showClock, 15000);
+        if (!reduce) setInterval(tick, 3500);
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const frame = document.createElement('iframe');
+            frame.src = 'https://www.youtube-nocookie.com/embed/DsKFPgWVC4w?autoplay=1&rel=0&modestbranding=1';
+            frame.title = 'American Rail Empire trailer';
+            frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            frame.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(frame);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const step = () => (gal.querySelector('figure')?.offsetWidth || 200) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -step() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: step() * 2, behavior: 'smooth' });
     </script>
 </body>
 

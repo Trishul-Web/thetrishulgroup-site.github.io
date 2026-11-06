@@ -3,251 +3,243 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - American Rail Empire | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚂</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - American Rail Empire | DevDuo Software</title>
+    <meta name="theme-color" content="#0a0f1e">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/XGvxinG9LvvPemw4cQTjVK3yImU9smdzmFGOD4_SHDEg1r3EAy-T-ZfpWlWXR3sHqYARWsktfgwKIpSENI5N6g=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #f59e0b;
-            --brand-2: #10b981;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #0a0f1e; --card: #111830; --ink: #eef1f8; --soft: #c3c9db; --mute: #8a93ad;
+            --line: #26304f; --violet: #f5b82e; --violet-soft: rgba(245, 184, 46, .1); --warn: #ff8a80; --warn-soft: rgba(255, 82, 82, .1);
+            --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(10, 15, 30, .85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: var(--violet); color: #1a1204; }
+        .doc-head { position: relative; padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 85% 0%, rgba(245, 184, 46, .2), transparent 60%), radial-gradient(50% 120% at 0% 100%, rgba(34, 197, 94, .08), transparent 60%), var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1, article h2 { font-family: "Space Grotesk", system-ui, sans-serif; }
+        .caps { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 14px; padding: .9rem 1.1rem; list-style: none; margin-left: -1.25rem; }
+        .caps strong { color: var(--warn); }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .summary, .highlight { border: 1px solid rgba(245, 184, 46, .35); }
+        .highlight { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+        .highlight h2 { margin-top: 0 !important; }
+        h1 { color: var(--violet); text-transform: uppercase; font-weight: 900; letter-spacing: .01em; }
+        h1, article h2 { font-family: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif; }
+        article h2 { font-size: 1.7rem; font-weight: 800; letter-spacing: .01em; text-transform: uppercase; }
+        .app-chip { color: var(--soft); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #ffd6d2; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(245, 158, 11, .14), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(16, 185, 129, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .highlight-box {
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid var(--brand-1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .highlight-box h2 {
-            margin-top: 0;
-            border-bottom: none;
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body, .doc-head, .contact, .summary { background: #fff !important; color: #000; } h1 { color: #000; -webkit-text-fill-color: #000; } article p, article li { color: #222; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <header>
-        <div class="container-header">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="americanrailempire_info.html" class="app-bar-link">App Info</a>
-                <a href="americanrailempire_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
-                <a href="americanrailempire_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="americanrailempire_info.html">Game info</a>
+                <a href="americanrailempire_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="americanrailempire_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
-    <main class="container">
-        <h1>Privacy Policy</h1>
-        <p class="timestamp">Last Updated: August 15, 2026</p>
-        <p>DevDuo ("we," "our," or "us") operates the <strong>American Rail Empire</strong> mobile game application (the
-            "Service"). This Privacy Policy describes how player data, local saves, and third-party advertising modules
-            operate within the game for full Google Play Store compliance.</p>
 
-        <div class="highlight-box">
-            <h2>Local-First Game Save & Data Deletion Policy</h2>
-            <p><strong>American Rail Empire runs on a strict offline, local-first architecture.</strong> We do not
-                collect, transmit, or store personal identifiable information (such as your real name, address, or
-                email) on remote servers.</p>
-            <p><strong>Local Data Storage:</strong><br>
-                All game save states—including unlocked platforms, station styles, rolling stock inventory, formed train
-                rakes, career dispatches, and in-game token balances—are saved strictly on your local device via
-                encrypted sandboxed databases.
-            </p>
-            <p><strong>Data Deletion Instructions:</strong><br>
-                Because your game data is entirely on-device, you have full control over resetting or deleting it:
-            </p>
-            <ul>
-                <li><strong>Clear App Storage:</strong> Navigate to your device's <em>Settings &gt; Apps &gt; American
-                        Rail Empire &gt; Storage &gt; Clear Storage / Clear Data</em> to wipe all progress.</li>
-                <li><strong>Uninstall the App:</strong> Removing the app from your device immediately and permanently
-                    erases all local database records.</li>
-                <li><strong>No Remote Server Deletion Needed:</strong> As no personal profile data is uploaded to our
-                    servers, you do not need to submit external web deletion tickets.</li>
-            </ul>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="americanrailempire_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/XGvxinG9LvvPemw4cQTjVK3yImU9smdzmFGOD4_SHDEg1r3EAy-T-ZfpWlWXR3sHqYARWsktfgwKIpSENI5N6g=s128-rw" alt="" width="32" height="32">American Rail Empire</a>
+            <h1>Privacy Policy</h1>
+            <p class="meta">Last updated: October 30, 2026 · Previous version: August 15, 2026</p>
         </div>
+    </div>
 
-        <h2>1. Information We Do Not Collect</h2>
-        <ul>
-            <li><strong>Account Profiles:</strong> No sign-up, email, phone number, or password is required to play.
-            </li>
-            <li><strong>Personal Media & Files:</strong> The game does not read or upload your personal media, photos,
-                or storage files.</li>
-            <li><strong>Precise Location:</strong> The game does not request or track GPS location data.</li>
-        </ul>
-
-        <h2>2. Third-Party Services & Advertising</h2>
-        <p>To provide optional ad-rewarded game multipliers (such as 2x contract payouts and bonus spins), we use
-            certified third-party ad networks:</p>
-        <ul>
-            <li><strong>Google AdMob:</strong> May process non-identifying diagnostic information and device advertising
-                IDs to deliver relevant rewarded and interstitial ads. Please review <a
-                    href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a> for details
-                on their data processing.</li>
-        </ul>
-
-        <h2>3. In-App Purchases & Subscriptions</h2>
-        <p>Optional in-game purchases (such as the VIP Lifetime Pass and Tycoon Cash Packs) are processed exclusively by
-            Google Play In-App Billing. DevDuo does not receive or store your credit card or financial credentials.</p>
-
-        <h2>4. Changes to This Privacy Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated
-            timestamp.</p>
-
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions regarding this policy or the game, reach out to our team at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a>[cite: 1]</p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#about">About This Policy</a></li>
+                <li><a href="#local">Local-First Game Save &amp; Data Deletion Policy</a></li>
+                <li><a href="#notcollect">1. Information We Do Not Collect</a></li>
+                <li><a href="#auto">2. Information Collected Automatically</a></li>
+                <li><a href="#ads">3. Third-Party Services &amp; Advertising</a></li>
+                <li><a href="#consent">4. Ad Personalisation and Consent</a></li>
+                <li><a href="#iap">5. In-App Purchases &amp; Subscriptions</a></li>
+                <li><a href="#use">6. How We Use Information</a></li>
+                <li><a href="#children">7. Children's Privacy</a></li>
+                <li><a href="#security">8. Security</a></li>
+                <li><a href="#changes">9. Changes to This Privacy Policy</a></li>
+                <li><a href="#contact">10. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>No account, name, email or phone number is needed to play.</li>
+                    <li>Your game progress is saved only on your device.</li>
+                    <li>Optional rewarded ads are served by Google AdMob, which uses your device's advertising ID.</li>
+                    <li>Purchases are handled by Google Play. We never see your card details.</li>
+                </ul>
+            </div>
+            <section id="about">
+                <h2>About This Policy</h2>
+                <p>DevDuo ("we," "our," or "us") operates the <strong>American Rail Empire</strong> mobile game application (the "Service"). This Privacy Policy describes how player data, local saves, and third-party advertising modules operate within the game for full Google Play Store compliance.</p>
+            </section>
+            <section id="local" class="highlight">
+                <h2>Local-First Game Save &amp; Data Deletion Policy</h2>
+                <p><strong>American Rail Empire runs on a strict offline, local-first architecture.</strong> We do not collect, transmit, or store personal identifiable information (such as your real name, address, or email) on remote servers.</p>
+                <p><strong>Local Data Storage:</strong><br>All game save states—including unlocked platforms, station styles, rolling stock inventory, formed train rakes, career dispatches, and in-game token balances—are saved strictly on your local device via encrypted sandboxed databases.</p>
+                <p><strong>Data Deletion Instructions:</strong><br>Because your game data is entirely on-device, you have full control over resetting or deleting it:</p>
+                <ul>
+                    <li><strong>Clear App Storage:</strong> Navigate to your device's <em>Settings &gt; Apps &gt; American Rail Empire &gt; Storage &gt; Clear Storage / Clear Data</em> to wipe all progress.</li>
+                    <li><strong>Uninstall the App:</strong> Removing the app from your device immediately and permanently erases all local database records.</li>
+                    <li><strong>No Remote Server Deletion Needed:</strong> As no personal profile data is uploaded to our servers, you do not need to submit external web deletion tickets.</li>
+                </ul>
+            </section>
+            <section id="notcollect">
+                <h2>1. Information We Do Not Collect</h2>
+                <ul>
+                    <li><strong>Account Profiles:</strong> No sign-up, email, phone number, or password is required to play.</li>
+                    <li><strong>Personal Media &amp; Files:</strong> The game does not read or upload your personal media, photos, or storage files.</li>
+                    <li><strong>Precise Location:</strong> The game does not request or track GPS location data.</li>
+                    <li><strong>Contacts, Camera and Microphone:</strong> The game does not request access to your contacts, camera or microphone.</li>
+                </ul>
+            </section>
+            <section id="auto">
+                <h2>2. Information Collected Automatically</h2>
+                <p>When ads are shown, the advertising provider may automatically collect limited technical information, such as:</p>
+                <ul>
+                    <li>your device's advertising ID</li>
+                    <li>device model, operating system version and language</li>
+                    <li>approximate (coarse) location derived from your IP address</li>
+                    <li>ad interactions, such as whether a rewarded ad was completed</li>
+                </ul>
+                <p>This information is collected by the advertising provider to deliver ads, measure performance and prevent fraud. It is not linked by us to your identity.</p>
+            </section>
+            <section id="ads">
+                <h2>3. Third-Party Services &amp; Advertising</h2>
+                <p>To provide optional ad-rewarded game multipliers (such as 2x contract payouts and bonus spins), we use certified third-party ad networks:</p>
+                <ul>
+                    <li><strong>Google AdMob:</strong> May process non-identifying diagnostic information and device advertising IDs to deliver relevant rewarded and interstitial ads. Please review <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> for details on their data processing.</li>
+                </ul>
+            </section>
+            <section id="consent">
+                <h2>4. Ad Personalisation and Consent</h2>
+                <p>Where required by law (for example in the European Economic Area and the United Kingdom), you will be asked for consent before personalised ads are shown. You can also limit ad tracking at any time:</p>
+                <ul>
+                    <li>On Android, go to <em>Settings &gt; Google &gt; Ads</em> (or <em>Settings &gt; Privacy &gt; Ads</em>) to reset or delete your advertising ID.</li>
+                    <li>Turning off personalised ads means you may still see ads, but they will be less relevant to you.</li>
+                    <li>Watching rewarded ads is always optional. You can play the full game without them.</li>
+                </ul>
+            </section>
+            <section id="iap">
+                <h2>5. In-App Purchases &amp; Subscriptions</h2>
+                <p>Optional in-game purchases (such as the VIP Lifetime Pass and Tycoon Cash Packs) are processed exclusively by Google Play In-App Billing. DevDuo does not receive or store your credit card or financial credentials.</p>
+            </section>
+            <section id="use">
+                <h2>6. How We Use Information</h2>
+                <p>We use the limited information described above only to run the game, provide optional rewards, verify purchases and fix technical problems. We do not sell your personal information.</p>
+            </section>
+            <section id="children">
+                <h2>7. Children's Privacy</h2>
+                <p>American Rail Empire is a general audience game and is not directed at children under 13. We do not knowingly collect personal information from children. If you believe a child has provided personal information, please contact us and we will help remove it.</p>
+            </section>
+            <section id="security">
+                <h2>8. Security</h2>
+                <p>Your game save is stored in the app's private storage on your device, protected by Android's app sandbox. No method of storage is completely secure, but we only keep what the game needs to run.</p>
+            </section>
+            <section id="changes">
+                <h2>9. Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated timestamp.</p>
+            </section>
+            <section id="contact">
+                <h2>10. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions regarding this policy or the game, reach out to our team at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="americanrailempire_info.html">Game info</a>
+                <a href="americanrailempire_privacypolicy.html">Privacy policy</a>
+                <a href="americanrailempire_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

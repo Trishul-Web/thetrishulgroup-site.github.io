@@ -3,374 +3,1839 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Newszio - Swipe News App | DevDuo's</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Newszio: Swipe News App | DevDuo Software</title>
+    <meta name="description"
+        content="Swipe through news like cards. Global headlines, local city updates and custom topic mixes, with smart reading tools to understand stories faster.">
+    <meta property="og:title" content="Newszio: Swipe News App">
+    <meta property="og:description" content="Experience news, reimagined. Swipe, save and understand stories faster.">
+    <meta property="og:image" content="screens/01-daily-brief.jpg">
+    <meta name="theme-color" content="#08070c">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📰</text></svg>">
+        href="https://play-lh.googleusercontent.com/DheZ43QvWfA5nPyawQKrnCLxFxQUKgk6pNiy7Od6gzG1pD1GlN61-c6uHgYywL_Hztt6jHeZXdIFCkw-J2At=s128-rw">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg: #08070c;
+            --bg-2: #121019;
+            --bg-3: #1a1724;
+            --line: #26223a;
+            --text: #f1eff7;
+            --soft: #bdb8cf;
+            --mute: #858099;
+            --purple: #a855f7;
+            --pink: #e040fb;
+            --blue: #4f7cff;
+            --red: #ef4444;
+            --green: #22c55e;
+            --serif: "Fraunces", Georgia, "Times New Roman", serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
+        a {
+            color: inherit;
         }
 
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+        img,
+        video {
+            max-width: 100%;
+            display: block;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--pink);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        .wrap {
+            width: min(1140px, 90vw);
+            margin: 0 auto;
+        }
+
+        /* ---------- Nav ---------- */
+        .nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(8, 7, 12, .82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        header .container {
+        .nav .wrap {
+            height: 66px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .2rem;
+            font-size: .88rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .8rem;
+            border-radius: 999px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .tabs a:hover {
+            color: var(--text);
+        }
+
+        .tabs a[aria-current="page"] {
+            background: linear-gradient(95deg, var(--purple), var(--pink));
+            color: #fff;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            right: -200px;
+            top: -320px;
+            background: radial-gradient(closest-side, rgba(168, 85, 247, .26), rgba(224, 64, 251, .08) 55%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
             align-items: center;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
+        .dateline {
+            display: flex;
+            gap: .75rem;
+            align-items: center;
+            font-size: .8rem;
+            font-weight: 600;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--mute);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            padding: .55rem 0;
+            margin-bottom: 1.75rem;
         }
 
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+        .dateline .live {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            color: var(--pink);
+        }
+
+        .dateline .live::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--pink);
+            animation: blink 1.6s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: .25;
+            }
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, .3);
+        }
+
+        .app-id strong {
+            display: block;
+        }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 800;
+            font-size: clamp(2.6rem, 6vw, 4.6rem);
+            line-height: 1;
+            letter-spacing: -.02em;
+            margin: 0 0 1.25rem;
+        }
+
+        h1 em {
+            font-style: italic;
+            background: linear-gradient(95deg, var(--purple), var(--pink));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        /* --- APP BAR STYLES --- */
-        .app-bar {
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
             display: flex;
-            gap: 1.5rem;
+            flex-wrap: wrap;
+            gap: .75rem;
         }
 
-        .app-bar-link {
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: .97rem;
             text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
+            transition: transform .2s, border-color .2s;
         }
 
-        .app-bar-link:hover {
-            color: var(--fg);
+        .btn-main {
+            background: linear-gradient(95deg, var(--purple), var(--pink));
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(168, 85, 247, .35);
         }
 
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
+        .btn-main:hover {
+            transform: translateY(-2px);
         }
 
-        .container {
-            width: min(1000px, 90vw);
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .btn-line:hover {
+            border-color: var(--pink);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #2c2740;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 0 10px rgba(168, 85, 247, .06);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 1080 / 2290;
+            object-fit: cover;
+            background: var(--bg);
+        }
+
+        /* ---------- Swipe demo ---------- */
+        .demo {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .deck {
+            position: relative;
+            height: 360px;
+            max-width: 320px;
+            width: 100%;
+            margin: 0 auto;
+            touch-action: pan-y;
+        }
+
+        .ncard {
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            background: var(--bg-3);
+            border: 1px solid var(--line);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .45);
+            transition: transform .35s ease, opacity .35s ease;
+            user-select: none;
+            cursor: grab;
+        }
+
+        .ncard.dragging {
+            transition: none;
+            cursor: grabbing;
+        }
+
+        .ncard .art {
+            height: 46%;
+            position: relative;
+            display: grid;
+            place-items: center;
+            font-size: 3rem;
+        }
+
+        .ncard .src {
+            position: absolute;
+            left: .8rem;
+            top: .8rem;
+            font-size: .72rem;
+            font-weight: 600;
+            padding: .25rem .6rem;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .55);
+        }
+
+        .ncard .body {
+            padding: 1rem 1.1rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ncard h4 {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            line-height: 1.25;
+            margin: 0 0 .5rem;
+        }
+
+        .ncard p {
+            font-size: .85rem;
+            color: var(--mute);
+            margin: 0;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 1.2rem;
+            padding: .3rem .8rem;
+            border: 3px solid;
+            border-radius: 10px;
+            font-weight: 800;
+            letter-spacing: .1em;
+            font-size: 1.1rem;
+            opacity: 0;
+            z-index: 2;
+        }
+
+        .stamp.pass {
+            right: 1rem;
+            color: var(--red);
+            transform: rotate(12deg);
+        }
+
+        .stamp.save {
+            left: 1rem;
+            color: var(--green);
+            transform: rotate(-12deg);
+        }
+
+        .deck-btns {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .deck-btns button {
+            font: inherit;
+            font-weight: 700;
+            font-size: .9rem;
+            padding: .65rem 1.2rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .deck-btns .p {
+            color: #fca5a5;
+        }
+
+        .deck-btns .s {
+            color: #86efac;
+        }
+
+        .deck-btns button:hover {
+            border-color: var(--pink);
+        }
+
+        .counter {
+            font-size: .9rem;
+            color: var(--soft);
+            margin-top: 1rem;
+        }
+
+        .counter b {
+            color: var(--text);
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 5.5rem 0;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-weight: 800;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.08;
+            letter-spacing: -.015em;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .kicker {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--pink);
+            margin-bottom: .6rem;
+        }
+
+        /* Modes */
+        .modes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .mode {
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .mode .glyph {
+            height: 70px;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 5px;
+            align-items: stretch;
+        }
+
+        .mode .glyph i {
+            flex: 1;
+            border-radius: 7px;
+            background: linear-gradient(160deg, rgba(168, 85, 247, .5), rgba(79, 124, 255, .3));
+        }
+
+        .g-reel {
+            flex-direction: column;
+        }
+
+        .g-reel i:nth-child(2) {
+            opacity: .45;
+            flex: .35;
+        }
+
+        .g-stack i:nth-child(1) {
+            flex: 1.6;
+        }
+
+        .g-stack i:nth-child(2),
+        .g-stack i:nth-child(3) {
+            opacity: .4;
+            flex: .3;
+        }
+
+        .g-paper i {
+            background: repeating-linear-gradient(180deg, rgba(241, 239, 247, .35) 0 4px, transparent 4px 11px);
+        }
+
+        .g-list {
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .g-list i {
+            flex: 1;
+        }
+
+        .mode h3 {
+            margin: 0 0 .3rem;
+            font-size: 1.05rem;
+        }
+
+        .mode p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .92rem;
+        }
+
+        /* Read-your-way live preview */
+        .rw {
+            display: grid;
+            grid-template-columns: 1fr 290px;
+            gap: 2.5rem;
+            align-items: stretch;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        section {
-            padding: 6rem 0;
-        }
-
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 780px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
+        .rw-tabs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr;
+            grid-auto-rows: 1fr;
+            gap: .9rem;
         }
 
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
+        .rw-tab {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .rw-tab strong {
+            font-size: 1.15rem !important;
+        }
+
+        .rw-tab {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .rw-tab strong {
+            font-size: 1.15rem !important;
+        }
+
+        .rw-tab {
+            position: relative;
+            overflow: hidden;
             text-align: left;
+            font: inherit;
+            color: var(--text);
+            padding: 1.3rem 1.4rem 1.5rem;
+            border-radius: 20px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: border-color .2s, background .2s;
         }
 
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
-            color: var(--brand-1);
+        .rw-tab strong {
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: .25rem;
         }
 
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
+        .rw-tab span {
+            color: var(--mute);
+            font-size: .92rem;
         }
 
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
+        .rw-tab:hover {
+            border-color: #3a3356;
         }
 
-        .visual-showcase {
-            background: #080808;
+        .rw-tab[aria-selected="true"] {
+            border-color: var(--purple);
+            background: linear-gradient(160deg, rgba(168, 85, 247, .16), var(--bg-2) 70%);
+        }
+
+        .rw-bar {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, var(--purple), var(--pink));
+        }
+
+        .rw-tab[aria-selected="true"] .rw-bar {
+            animation: rwfill var(--rw-time, 6s) linear forwards;
+        }
+
+        .rw.paused .rw-bar {
+            animation: none;
+            width: 0;
+        }
+
+        @keyframes rwfill {
+            to {
+                width: 100%;
+            }
+        }
+
+        .rw-phone {
+            width: 290px;
+            height: 580px;
+            border-radius: 40px;
+            padding: 14px 12px 12px;
+            background: #000;
+            border: 1px solid #2c2740;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 0 10px rgba(168, 85, 247, .06);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rw-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: .4rem .6rem .7rem;
+        }
+
+        .rw-top b {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+        }
+
+        .rw-top span {
+            font-size: .72rem;
+            font-weight: 700;
+            padding: .2rem .6rem;
+            border-radius: 999px;
+            background: rgba(168, 85, 247, .2);
+            color: #e9d5ff;
+        }
+
+        .rw-screen {
+            position: relative;
+            flex: 1;
+            overflow: hidden;
+            border-radius: 22px;
+            background: #0d0b13;
+        }
+
+        .rw-nav {
+            display: flex;
+            justify-content: space-around;
+            padding: .7rem .5rem .2rem;
+        }
+
+        .rw-nav i {
+            width: 22px;
+            height: 5px;
+            border-radius: 3px;
+            background: #2c2740;
+        }
+
+        .rw-nav i:first-child {
+            background: var(--pink);
+        }
+
+        .rw-track {
+            position: absolute;
+            inset: 0;
+            transition: transform .6s cubic-bezier(.5, 0, .2, 1);
+        }
+
+        .rw-art {
+            position: relative;
+            display: grid;
+            place-items: center;
+            font-size: 2.6rem;
+        }
+
+        .rw-src {
+            position: absolute;
+            left: .6rem;
+            top: .6rem;
+            font-size: .62rem;
+            font-weight: 700;
+            padding: .2rem .5rem;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .55);
+        }
+
+        .rw-h {
+            font-family: var(--serif);
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .rw-p {
+            color: var(--mute);
+            font-size: .78rem;
+            line-height: 1.5;
+            margin: .4rem 0 0;
+        }
+
+        /* Reel */
+        .m-reel .rw-item {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .m-reel .rw-art {
+            flex: 1;
+            font-size: 3.6rem;
+        }
+
+        .m-reel .rw-body {
+            padding: .9rem 1rem 1.1rem;
+            background: linear-gradient(0deg, #0d0b13 70%, transparent);
+            margin-top: -3rem;
+            position: relative;
+        }
+
+        .m-reel .rw-h {
+            font-size: 1.15rem;
+        }
+
+        /* Stack */
+        .m-stack .rw-track {
+            display: flex;
+            gap: 10px;
+            padding: 14px 0;
+        }
+
+        .m-stack .rw-item {
+            flex: 0 0 82%;
             border-radius: 18px;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
+            overflow: hidden;
+            background: var(--bg-3);
+            border: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
         }
 
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
+        .m-stack .rw-art {
+            height: 52%;
         }
 
-        .footer-links {
+        .m-stack .rw-body {
+            padding: .8rem .9rem;
+        }
+
+        .m-stack .rw-h {
+            font-size: 1rem;
+        }
+
+        .rw-actions {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 10px;
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: .5rem;
+            font-size: .68rem;
+            font-weight: 700;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .rw-actions span {
+            padding: .3rem .7rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .08);
+        }
+
+        /* Paper */
+        .m-paper {
+            background: #f4efe6;
+            color: #1b1712;
+        }
+
+        .m-paper .rw-track {
+            padding: 1rem 1rem 3rem;
+        }
+
+        .m-paper .mast {
+            text-align: center;
+            border-top: 2px solid #1b1712;
+            border-bottom: 1px solid #1b1712;
+            padding: .3rem 0;
+            font-family: var(--serif);
+            font-weight: 800;
+            font-size: .95rem;
+            letter-spacing: .06em;
+            margin-bottom: .8rem;
+        }
+
+        .m-paper .rw-h {
+            font-size: 1.25rem;
+        }
+
+        .m-paper .by {
+            font-size: .64rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            color: #6b6255;
+            margin: .5rem 0 .7rem;
+        }
+
+        .m-paper .rw-art {
+            height: 110px;
+            border-radius: 6px;
+            margin-bottom: .7rem;
+        }
+
+        .m-paper p {
+            font-family: Georgia, serif;
+            font-size: .8rem;
+            line-height: 1.6;
+            margin: 0 0 .6rem;
+            color: #3a332a;
+        }
+
+        .m-paper p:first-of-type::first-letter {
+            float: left;
+            font-family: var(--serif);
+            font-weight: 800;
+            font-size: 2.4rem;
+            line-height: .9;
+            padding: .1rem .3rem 0 0;
+        }
+
+        /* List */
+        .m-list .rw-track {
+            padding: .6rem;
+        }
+
+        .m-list .rw-item {
+            display: grid;
+            grid-template-columns: 54px 1fr;
+            gap: .7rem;
+            align-items: center;
+            padding: .6rem;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .m-list .rw-art {
+            width: 54px;
+            height: 54px;
+            border-radius: 10px;
+            font-size: 1.5rem;
+        }
+
+        .m-list .rw-h {
+            font-family: var(--sans);
+            font-weight: 600;
+            font-size: .82rem;
+        }
+
+        .m-list small {
+            display: block;
+            color: var(--mute);
+            font-size: .66rem;
+            margin-top: .2rem;
+        }
+
+        @media (max-width: 960px) {
+            .rw {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .rw-phone {
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .rw-tabs {
+                grid-template-columns: 1fr 1fr;
+                gap: .6rem;
+            }
+
+            .rw-tab {
+                padding: 1rem;
+            }
+
+            .rw-tab span {
+                display: none;
+            }
+
+            .rw-phone {
+                width: 270px;
+                height: 540px;
+            }
+        }
+
+        /* Split features */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split.flip .split-text {
+            order: 2;
+        }
+
+        .split ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split li {
+            margin-bottom: .4rem;
+        }
+
+        .duo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .duo .phone {
+            width: 220px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) {
+            margin-top: 3rem;
+        }
+
+        /* Extras */
+        .extras {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .extra {
+            padding: 1.4rem;
+            border-radius: 18px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .extra .ic {
+            font-size: 1.4rem;
+            margin-bottom: .6rem;
+        }
+
+        .extra h3 {
+            margin: 0 0 .25rem;
+            font-size: 1rem;
+        }
+
+        .extra p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        /* Trailer */
+        .center {
+            text-align: center;
+        }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img {
+            transform: scale(1.03);
+        }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(8, 7, 12, .6), rgba(8, 7, 12, .1));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span {
+            transform: scale(1.08);
+        }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #fff;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover {
+            border-color: var(--pink);
+        }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery figure {
+            flex: 0 0 200px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img {
+            border-radius: 24px;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 780px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--pink);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "–";
+        }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(60% 120% at 0% 0%, rgba(168, 85, 247, .25), transparent 60%),
+                radial-gradient(60% 120% at 100% 100%, rgba(224, 64, 251, .18), transparent 60%),
+                var(--bg-2);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        .note {
+            margin: 2rem auto 0;
+            max-width: 80ch;
+            font-size: .85rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        .note a {
+            color: var(--soft);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
             text-decoration: none;
-            transition: color .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        footer a:hover {
+            color: var(--text);
         }
 
-        @media (max-width: 640px) {
-            header .container {
-                flex-direction: column;
-                gap: .5rem;
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+
+            .hero-grid,
+            .demo,
+            .split {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
             }
 
-            .app-bar {
-                gap: .5rem;
-                flex-wrap: wrap;
-                justify-content: center;
+            .split.flip .split-text {
+                order: 0;
             }
 
-            .app-bar-link {
-                font-size: .9rem;
+            .demo {
+                padding: 2rem 1.5rem;
+            }
+
+            .modes,
+            .extras {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .phone {
+                width: 240px;
+            }
+
+            .duo .phone {
+                width: 170px;
+            }
+        }
+
+        @media (max-width: 680px) {
+            .tabs a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .duo .phone {
+                width: 145px;
+            }
+
+            .gallery figure {
+                flex-basis: 170px;
+            }
+        }
+
+        @media (max-width: 460px) {
+
+            .modes,
+            .extras {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+                animation: none !important;
             }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="newszio_info.html" class="app-bar-link active">App Info</a>
-                <a href="newszio_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="newszio_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
-                <a href="newszio-contact.html" class="app-bar-link">Contact Us</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="newszio_info.html" aria-current="page">App info</a>
+                <a href="newszio_privacypolicy.html">Privacy</a>
+                <a href="newszio_termsandconditions.html">Terms</a>
+                <a href="newszio-contact.html">Contact</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://play-lh.googleusercontent.com/DheZ43QvWfA5nPyawQKrnCLxFxQUKgk6pNiy7Od6gzG1pD1GlN61-c6uHgYywL_Hztt6jHeZXdIFCkw-J2At=s512-rw"
-                alt="Newszio App Icon" class="hero-icon">
-            <h1 class="grand-title">Experience News, <span class="gradient-text">Reimagined</span>.</h1>
-            <p class="intro-lede">
-                Instead of endless scrolling, Newszio lets you swipe through news just like a card feed — quickly
-                skipping what you don’t care about and diving deeper into what matters to you. Read smarter, not harder.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduo.devduonewszio" target="_blank"
-                class="cta-button">Download on Play Store</a>
-        </section>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="dateline"><span class="live">Live</span><span id="today">Today</span><span>Your daily
+                            brief</span></div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/DheZ43QvWfA5nPyawQKrnCLxFxQUKgk6pNiy7Od6gzG1pD1GlN61-c6uHgYywL_Hztt6jHeZXdIFCkw-J2At=s256-rw"
+                            alt="Newszio app icon" width="64" height="64">
+                        <div>
+                            <strong>Newszio: Swipe News App</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>Experience news, <em>reimagined</em>.</h1>
+                    <p class="lede">Swipe through news like cards. Skip what you don’t care about, save what matters,
+                        and understand every story faster with smart reading tools.</p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.devduonewszio" target="_blank"
+                            rel="noopener" class="btn btn-main">View on Google Play</a>
+                        <a href="#swipe" class="btn btn-line">Try a swipe</a>
+                    </div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/01-daily-brief.jpg" autoplay muted loop
+                        playsinline preload="metadata" id="heroLoop"
+                        aria-label="Swiping news cards to pass or save"></video>
+                </div>
+            </div>
+        </div>
 
-        <section class="container">
-            <h2 class="section-title">Why Newszio is Different</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-.813 2.846a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-                    </svg>
-                    <h3>Smart Reading Tools</h3>
-                    <p>Don’t just read headlines — understand the story. Get instant bullet-point summaries, simplify
-                        complex topics into plain language, and ask questions directly about the article.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M2.25 7.125C2.25 6.504 2.754 6 3.375 6h6c.621 0 1.125.504 1.125 1.125v3.75c0 .621-.504 1.125-1.125 1.125h-6a1.125 1.125 0 01-1.125-1.125v-3.75zM14.25 8.625c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v8.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-8.25zM3.75 16.125c0-.621.504-1.125 1.125-1.125h5.25c.621 0 1.125.504 1.125 1.125v2.25c0 .621-.504 1.125-1.125 1.125h-5.25a1.125 1.125 0 01-1.125-1.125v-2.25z" />
-                    </svg>
-                    <h3>Read Your Way</h3>
-                    <p>Switch reading styles instantly to match your mood: Reel Mode for fast vertical scrolling, Stack
-                        Mode to swipe horizontally, Paper Mode for deep reading, or List Mode for efficient scanning.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
-                    </svg>
-                    <h3>Build Your Super Feed</h3>
-                    <p>You are the editor. Create Custom Mixes that combine exactly what you care about: Keywords
-                        (Crypto, AI), Trusted publishers, or specific cities. Pin them for one-tap access.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-                    </svg>
-                    <h3>Global Reach, Local Focus</h3>
-                    <p>Stay informed at every level. Switch between multiple country editions, follow news from any city
-                        worldwide, and compare how outlets around the world report the same story.</p>
+        <!-- Swipe demo -->
+        <section id="swipe" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="demo">
+                    <div>
+                        <div class="deck" id="deck" aria-label="Sample news cards. Swipe or use the buttons."></div>
+                        <div class="deck-btns">
+                            <button type="button" class="p" id="passBtn">✕ Pass</button>
+                            <button type="button" class="s" id="saveBtn">♥ Save</button>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="kicker">Try it here</span>
+                        <h2>Swipe left to pass, right to save</h2>
+                        <p class="section-lede" style="margin-bottom:1rem">This is how your feed works in Newszio. Drag
+                            a
+                            card or use the buttons. Made a mistake? The app has smart undo.</p>
+                        <p class="counter" id="counter">Saved <b>0</b> · Passed <b>0</b></p>
+                        <p class="counter" style="font-size:.8rem;color:var(--mute)">Sample headlines for this demo
+                            only.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Visual Showcase</h2>
-            <div class="visual-showcase">
-                <p>[Your App Screenshots or a Demo Video Can Go Here]</p>
+        <!-- Reading modes -->
+        <section style="padding-top:2rem">
+            <div class="wrap">
+                <span class="kicker">Read your way</span>
+                <h2>Four ways to read</h2>
+                <p class="section-lede">Switch reading styles instantly to match your mood. Tap a mode to preview it.
+                </p>
+                <div class="rw">
+                    <div class="rw-tabs" role="tablist" aria-label="Reading modes">
+                        <button type="button" role="tab" class="rw-tab" data-mode="reel" aria-selected="true">
+                            <strong>Reel mode</strong><span>Fast vertical scrolling for quick updates.</span>
+                            <i class="rw-bar"></i>
+                        </button>
+                        <button type="button" role="tab" class="rw-tab" data-mode="stack" aria-selected="false">
+                            <strong>Stack mode</strong><span>Swipe through news cards side to side.</span>
+                            <i class="rw-bar"></i>
+                        </button>
+                        <button type="button" role="tab" class="rw-tab" data-mode="paper" aria-selected="false">
+                            <strong>Paper mode</strong><span>Classic, distraction-free reading.</span>
+                            <i class="rw-bar"></i>
+                        </button>
+                        <button type="button" role="tab" class="rw-tab" data-mode="list" aria-selected="false">
+                            <strong>List mode</strong><span>Scan headlines efficiently.</span>
+                            <i class="rw-bar"></i>
+                        </button>
+                    </div>
+                    <div class="rw-phone" aria-live="polite">
+                        <div class="rw-top"><b id="rwTitle">Daily Brief</b><span id="rwPill">Reel</span></div>
+                        <div class="rw-screen" id="rwScreen"></div>
+                        <div class="rw-nav"><i></i><i></i><i></i><i></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Smart reading tools</span>
+                        <h2>Don’t just read headlines. Understand the story.</h2>
+                        <ul>
+                            <li>Instant summaries in clear bullet points</li>
+                            <li>Simplify complex topics into plain language</li>
+                            <li>Ask questions directly about the article</li>
+                            <li>Explore tone, framing and different perspectives</li>
+                            <li>Listen to articles with an AI narrator</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/02-article.jpg" alt="Article reader" loading="lazy"></div>
+                        <div class="phone"><img src="screens/03-ai-narrator.jpg" alt="AI narrator settings"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split flip">
+                    <div class="split-text">
+                        <span class="kicker">Build your super feed</span>
+                        <h2>You are the editor</h2>
+                        <ul>
+                            <li>Create Custom Mixes from keywords like AI, startups or crypto</li>
+                            <li>Add trusted publishers and news sources</li>
+                            <li>Include countries or specific cities</li>
+                            <li>Pin your favourite mixes for one-tap access</li>
+                            <li>Tune how much of each interest you see</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/09-mix-builder.jpg" alt="Mix Builder" loading="lazy"></div>
+                        <div class="phone"><img src="screens/05-feed-tuning.jpg" alt="Feed tuning" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Global reach, local focus</span>
+                        <h2>From world headlines to your street</h2>
+                        <ul>
+                            <li>Switch between country editions</li>
+                            <li>Follow news from any city worldwide</li>
+                            <li>Tap anywhere on the map to read local news</li>
+                            <li>Read global perspectives with translation support</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/08-news-map.jpg" alt="Tap the map for local news"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/06-editions.jpg" alt="Country editions" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Extras -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">Included right now</span>
+                <h2>Premium features, unlocked for now</h2>
+                <p class="section-lede">No login required. Open the app and start reading instantly.</p>
+                <div class="extras">
+                    <div class="extra">
+                        <div class="ic" aria-hidden="true">💾</div>
+                        <h3>Offline reading</h3>
+                        <p>Save stories and read them later without a connection.</p>
+                    </div>
+                    <div class="extra">
+                        <div class="ic" aria-hidden="true">🌙</div>
+                        <h3>Premium dark mode</h3>
+                        <p>A dark interface that is easy on the eyes.</p>
+                    </div>
+                    <div class="extra">
+                        <div class="ic" aria-hidden="true">↩️</div>
+                        <h3>Smart undo</h3>
+                        <p>Bring back a card you swiped by accident.</p>
+                    </div>
+                    <div class="extra">
+                        <div class="ic" aria-hidden="true">📤</div>
+                        <h3>Share as a post</h3>
+                        <p>Turn a story into a styled image for social apps.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">See the swipe feed, smart tools and custom mixes in action.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the Newszio trailer">
+                    <img src="https://i.ytimg.com/vi/iKAelwm7Tas/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-daily-brief.jpg" alt="Daily Brief" loading="lazy">
+                        </div>
+                        <figcaption>Daily Brief</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-discover.jpg" alt="Discover" loading="lazy"></div>
+                        <figcaption>Discover</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-article.jpg" alt="Article" loading="lazy"></div>
+                        <figcaption>Clean article view</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/09-mix-builder.jpg" alt="Mix Builder" loading="lazy">
+                        </div>
+                        <figcaption>Mix Builder</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/11-topics.jpg" alt="Topics" loading="lazy"></div>
+                        <figcaption>Topics</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/08-news-map.jpg" alt="News map" loading="lazy"></div>
+                        <figcaption>News map</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/04-share-post.jpg" alt="Share post" loading="lazy">
+                        </div>
+                        <figcaption>Share as a post</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/10-library.jpg" alt="Library" loading="lazy"></div>
+                        <figcaption>Library</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Do I need to create an account?</summary>
+                        <p>No. Open the app and start reading instantly. Your preferences are saved on your device.</p>
+                    </details>
+                    <details>
+                        <summary>Where does the news come from?</summary>
+                        <p>Newszio brings together headlines from public news feeds, and every story links back to its
+                            original publisher. You can also add your own RSS feeds.</p>
+                    </details>
+                    <details>
+                        <summary>Can I read without internet?</summary>
+                        <p>Yes. Save stories and read them later offline from your Library.</p>
+                    </details>
+                    <details>
+                        <summary>I’m a publisher. How do I request a change?</summary>
+                        <p>Visit our <a href="newszio-contact.html" style="color:var(--pink)">contact page</a> and send
+                            us the article link. We act promptly on content requests.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/DheZ43QvWfA5nPyawQKrnCLxFxQUKgk6pNiy7Od6gzG1pD1GlN61-c6uHgYywL_Hztt6jHeZXdIFCkw-J2At=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>Read smarter, not harder</h2>
+                    <p>Upgrade your daily reading habit with a feed built around you.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.devduonewszio" target="_blank"
+                        rel="noopener" class="btn btn-main">View on Google Play</a>
+                </div>
+                <p class="note">Newszio is a news aggregator. Headlines, articles and images belong to their
+                    respective publishers.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="newszio_privacypolicy.html">Privacy Policy</a>
-                <a href="newszio_termsandconditions.html">Terms of Service</a>
-                <a href="newszio-contact.html">Contact Us</a>
-            </div>
-            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="newszio_privacypolicy.html">Privacy policy</a>
+                <a href="newszio_termsandconditions.html">Terms and conditions</a>
+                <a href="newszio-contact.html">Contact us</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
-    </script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        document.getElementById('today').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
 
+        // Swipe deck (sample headlines)
+        const stories = [
+            ['🤖', '#4f46e5', 'Tech Desk', 'New on-device AI tools promise faster phones with better privacy', 'A look at how smartphones are running smarter features without the cloud.'],
+            ['🏏', '#059669', 'Sports Wire', 'Young batter hits a century in a thrilling final over finish', 'Fans call it the match of the season as the chase goes down to the last ball.'],
+            ['📈', '#b45309', 'Markets Today', 'Markets close higher as tech stocks lead the rally', 'Investors cheered strong results from major technology companies.'],
+            ['🚀', '#7c3aed', 'Science Weekly', 'Space agency shares stunning new images of a distant nebula', 'The pictures reveal stars forming in clouds of gas and dust.'],
+            ['🌧️', '#0369a1', 'City Pulse', 'Monsoon arrives early, bringing relief from the heatwave', 'Commuters are advised to plan for traffic delays this week.'],
+            ['💡', '#be185d', 'Startup Daily', 'Student founders build an app that cuts food waste in hostels', 'The idea started as a college project and now runs in ten campuses.']
+        ];
+        const deck = document.getElementById('deck');
+        let idx = 0, saved = 0, passed = 0;
+
+        function makeCard(i) {
+            const s = stories[i % stories.length];
+            const c = document.createElement('div');
+            c.className = 'ncard';
+            c.innerHTML = `<span class="stamp save">SAVE</span><span class="stamp pass">PASS</span>
+                <div class="art" style="background:linear-gradient(135deg, ${s[1]}, #1a1724)"><span class="src">${s[2]}</span>${s[0]}</div>
+                <div class="body"><h4>${s[3]}</h4><p>${s[4]}</p></div>`;
+            return c;
+        }
+
+        function layout() {
+            [...deck.children].forEach((c, k) => {
+                const depth = deck.children.length - 1 - k;
+                c.style.transform = `translateY(${depth * 10}px) scale(${1 - depth * .05})`;
+                c.style.opacity = depth > 2 ? 0 : 1;
+                c.style.zIndex = 10 - depth;
+            });
+        }
+
+        function fill() {
+            while (deck.children.length < 3) {
+                deck.prepend(makeCard(idx + deck.children.length));
+            }
+            layout();
+            bindTop();
+        }
+
+        function topCard() { return deck.lastElementChild; }
+
+        function fling(dir) {
+            const c = topCard();
+            if (!c) return;
+            c.style.transform = `translateX(${dir * 140}%) rotate(${dir * 18}deg)`;
+            c.style.opacity = 0;
+            if (dir > 0) saved++; else passed++;
+            document.getElementById('counter').innerHTML = `Saved <b>${saved}</b> · Passed <b>${passed}</b>`;
+            idx++;
+            setTimeout(() => { c.remove(); fill(); }, 300);
+        }
+
+        function bindTop() {
+            const c = topCard();
+            if (!c || c.dataset.bound) return;
+            c.dataset.bound = '1';
+            let sx = 0, dx = 0, down = false;
+            c.addEventListener('pointerdown', e => { down = true; sx = e.clientX; c.classList.add('dragging'); c.setPointerCapture(e.pointerId); });
+            c.addEventListener('pointermove', e => {
+                if (!down) return;
+                dx = e.clientX - sx;
+                c.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`;
+                c.querySelector('.save').style.opacity = Math.max(0, Math.min(1, dx / 90));
+                c.querySelector('.pass').style.opacity = Math.max(0, Math.min(1, -dx / 90));
+            });
+            const up = () => {
+                if (!down) return;
+                down = false;
+                c.classList.remove('dragging');
+                if (Math.abs(dx) > 90) fling(dx > 0 ? 1 : -1);
+                else { c.querySelectorAll('.stamp').forEach(s => s.style.opacity = 0); layout(); }
+                dx = 0;
+            };
+            c.addEventListener('pointerup', up);
+            c.addEventListener('pointercancel', up);
+        }
+
+        fill();
+        document.getElementById('passBtn').onclick = () => fling(-1);
+        document.getElementById('saveBtn').onclick = () => fling(1);
+
+        // Read-your-way live preview
+        (function () {
+            const rw = document.querySelector('.rw');
+            const screen = document.getElementById('rwScreen');
+            const tabs = [...document.querySelectorAll('.rw-tab')];
+            const names = { reel: 'Reel', stack: 'Stack', paper: 'Paper', list: 'List' };
+            const art = (s, h) => `<div class="rw-art" style="background:linear-gradient(135deg, ${s[1]}, #1a1724);${h ? 'height:' + h : ''}"><span class="rw-src">${s[2]}</span>${s[0]}</div>`;
+            let timer = null, step = 0, current = 'reel', auto = !reduce;
+            const MODE_TIME = 6000;
+            rw.style.setProperty('--rw-time', MODE_TIME + 'ms');
+
+            function build(mode) {
+                screen.className = 'rw-screen m-' + mode;
+                let html = '';
+                if (mode === 'reel') {
+                    html = stories.map(s => `<div class="rw-item">${art(s)}<div class="rw-body"><div class="rw-h">${s[3]}</div><p class="rw-p">${s[4]}</p></div></div>`).join('');
+                } else if (mode === 'stack') {
+                    html = stories.map(s => `<div class="rw-item">${art(s)}<div class="rw-body"><div class="rw-h">${s[3]}</div><p class="rw-p">${s[4]}</p></div></div>`).join('');
+                } else if (mode === 'paper') {
+                    const s = stories[3];
+                    html = `<div class="mast">THE DAILY BRIEF</div><div class="rw-h">${s[3]}</div><div class="by">${s[2]} · 4 min read</div>${art(s)}
+                        <p>${s[4]} Astronomers say the new view shows details that were never visible before, from glowing dust lanes to young stars still wrapped in gas.</p>
+                        <p>The images were captured over several nights and combined to bring out faint colours across the cloud.</p>
+                        <p>Researchers will now study how fast these stars are forming and what the region may look like in a few million years.</p>
+                        <p>Readers can explore the full gallery and an interactive map of the nebula on the agency website.</p>`;
+                } else {
+                    const more = stories.concat(stories);
+                    html = more.map((s, i) => `<div class="rw-item">${art(s)}<div><div class="rw-h">${s[3]}</div><small>${s[2]} · ${(i % 5) + 1}h ago</small></div></div>`).join('');
+                }
+                screen.innerHTML = `<div class="rw-track" id="rwTrack">${html}</div>` + (mode === 'stack' ? '<div class="rw-actions"><span>✕ Pass</span><span>♥ Save</span><span>↗ Read</span></div>' : '');
+                document.getElementById('rwPill').textContent = names[mode];
+                document.getElementById('rwTitle').textContent = mode === 'paper' ? 'Paper' : 'Daily Brief';
+                step = 0;
+            }
+
+            function move() {
+                const t = document.getElementById('rwTrack');
+                if (!t) return;
+                step++;
+                if (current === 'reel') {
+                    t.style.transform = `translateY(-${(step % stories.length) * 100}%)`;
+                } else if (current === 'stack') {
+                    const w = t.firstElementChild.offsetWidth + 10;
+                    const pad = (screen.offsetWidth - t.firstElementChild.offsetWidth) / 2;
+                    t.style.transform = `translateX(${pad - (step % stories.length) * w}px)`;
+                } else {
+                    const max = Math.max(0, t.scrollHeight - screen.offsetHeight);
+                    const y = Math.min(max, (step % 4) * (max / 3));
+                    t.style.transform = `translateY(-${y}px)`;
+                }
+            }
+
+            function show(mode, byUser) {
+                current = mode;
+                tabs.forEach(b => b.setAttribute('aria-selected', b.dataset.mode === mode));
+                build(mode);
+                if (current === 'stack') {
+                    const t = document.getElementById('rwTrack');
+                    const pad = (screen.offsetWidth - t.firstElementChild.offsetWidth) / 2;
+                    t.style.transform = `translateX(${pad}px)`;
+                }
+                if (byUser) { auto = false; rw.classList.add('paused'); }
+                clearInterval(timer);
+                if (!reduce) timer = setInterval(move, 1500);
+            }
+
+            tabs.forEach(b => b.addEventListener('click', () => show(b.dataset.mode, true)));
+
+            const order = ['reel', 'stack', 'paper', 'list'];
+            if (!reduce) {
+                setInterval(() => {
+                    if (!auto) return;
+                    show(order[(order.indexOf(current) + 1) % order.length], false);
+                    tabs.forEach(b => {
+                        const bar = b.querySelector('.rw-bar');
+                        bar.style.animation = 'none';
+                        void bar.offsetWidth;
+                        bar.style.animation = '';
+                    });
+                }, MODE_TIME);
+            }
+            show('reel', false);
+        })();
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const frame = document.createElement('iframe');
+            frame.src = 'https://www.youtube-nocookie.com/embed/iKAelwm7Tas?autoplay=1&rel=0&modestbranding=1';
+            frame.title = 'Newszio trailer';
+            frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            frame.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(frame);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const step = () => (gal.querySelector('figure')?.offsetWidth || 200) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -step() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: step() * 2, behavior: 'smooth' });
+    </script>
 </body>
 
 </html>

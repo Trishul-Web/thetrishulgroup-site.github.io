@@ -3,134 +3,236 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - 10 Min Stretch</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - 10 Min Stretch | DevDuo Software</title>
+    <meta name="theme-color" content="#f7f6fb">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s128-rw">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #f7f6fb; --card: #ffffff; --ink: #15132b; --soft: #4a4861; --mute: #7a7890;
+            --line: #e7e5f0; --violet: #5b3df5; --violet-soft: #ece8ff; --warn: #b42318; --warn-soft: #fef3f2;
+            --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.6;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(247, 246, 251, .85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: var(--ink); color: #fff; }
+        .doc-head { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #5b1a14; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: #fff;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        h2 {
-            margin-top: 2rem;
-            font-size: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        ul {
-            color: var(--muted);
-        }
-
-        a {
-            color: var(--brand-1);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: var(--brand-2);
-            font-weight: 500;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 10px;
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body { background: #fff; } }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <a href="10minstretch_info.html" class="back-btn">&larr; Back to App Info</a>
-        <h1>Privacy Policy</h1>
-        <p><strong>Effective Date:</strong> January 1, 2025</p>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="10minstretch_info.html">App info</a>
+                <a href="10minstretch_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="10minstretch_termsandconditions.html">Terms</a>
+            </nav>
+        </div>
+    </header>
 
-        <p>Devduos ("we", "us", or "our") operates the 10 Min Stretch mobile application (the "App"). This page informs
-            you of our policies regarding the collection, use, and disclosure of personal data when you use our App.</p>
-
-        <h2>1. Information We Collect</h2>
-        <p>10 Min Stretch is designed to respect your privacy. We do not require you to create an account, and we do not
-            collect personally identifiable information (PII) such as your name, email, or physical address to use the
-            core features of the app.</p>
-
-        <h2>2. Local Data Storage</h2>
-        <p>Your app preferences, completed onboarding status, and workout history are stored locally on your device
-            using local storage mechanisms. This data is not transmitted to our servers and remains on your device.</p>
-
-        <h2>3. Data Retention and Deletion</h2>
-        <p><strong>Data Retention:</strong> Because your data (such as workout history, routine preferences, and
-            streaks) is stored exclusively on your local device and not on any external servers, we retain this data for
-            only as long as you keep the App installed on your device.</p>
-        <p><strong>Data Deletion:</strong> You have full control over your data. To completely delete all of your data
-            associated with the App, you can do either of the following:</p>
-        <ul>
-            <li><strong>Uninstall the App:</strong> Deleting the 10 Min Stretch app from your device will permanently
-                erase all locally stored data.</li>
-            <li><strong>Clear App Data:</strong> You can clear the app's data through your device's system settings
-                (e.g., Settings > Apps > 10 Min Stretch > Storage > Clear Data / Clear Storage).</li>
-        </ul>
-
-        <h2>4. Third-Party Services</h2>
-        <p>We may use third-party services (such as analytics or crash reporting tools) to monitor and analyze the use
-            of our Service, or to serve advertisements. These third parties have access to your usage data only to
-            perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
-
-        <h2>5. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new
-            Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
-
-        <h2>6. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="10minstretch_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s128-rw" alt="" width="32" height="32">10 Min Stretch: Posture &amp; Back</a>
+            <h1>Privacy Policy</h1>
+            <p class="meta">Effective date: January 1, 2025 · Last updated: October 30, 2026</p>
+        </div>
     </div>
+
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#intro">1. Who we are</a></li>
+                <li><a href="#collect">2. Information we collect</a></li>
+                <li><a href="#local">3. Information stored on your device</a></li>
+                <li><a href="#permissions">4. Device permissions</a></li>
+                <li><a href="#purchases">5. In-app purchases</a></li>
+                <li><a href="#third">6. Third-party services</a></li>
+                <li><a href="#share">7. How we use and share information</a></li>
+                <li><a href="#retention">8. Data retention and deletion</a></li>
+                <li><a href="#security">9. Security</a></li>
+                <li><a href="#children">10. Children's privacy</a></li>
+                <li><a href="#rights">11. Your choices</a></li>
+                <li><a href="#changes">12. Changes to this Privacy Policy</a></li>
+                <li><a href="#contact">13. Contact us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>No account is needed and we do not ask for your name, email or address.</li>
+                    <li>Your setup answers, workout history, streaks and progress photos stay on your device.</li>
+                    <li>Purchases are handled by Google Play. We never see your card details.</li>
+                    <li>Uninstalling the app or clearing its data deletes everything.</li>
+                </ul>
+            </div>
+            <section id="intro">
+                <h2>1. Who we are</h2>
+                <p>DevDuo Software ("we", "us" or "our"), a Trishul Group company, operates the 10 Min Stretch: Posture &amp; Back mobile application (the "App"). This page explains what information the App uses, how it is used and the choices you have. By using the App, you agree to the practices described here.</p>
+            </section>
+            <section id="collect">
+                <h2>2. Information we collect</h2>
+                <p>10 Min Stretch is designed to respect your privacy. We do not require you to create an account, and we do not collect personally identifiable information (PII) such as your name, email or physical address to use the core features of the App.</p>
+            </section>
+            <section id="local">
+                <h2>3. Information stored on your device</h2>
+                <p>To personalise your routines, the App saves the following information <strong>locally on your device only</strong>. This data is not transmitted to our servers.</p>
+                <ul>
+                    <li><strong>Setup answers:</strong> your experience level, goal, lifestyle and the body areas where you feel tension, used to generate your daily flow.</li>
+                    <li><strong>Activity and progress:</strong> completed sessions, active minutes, streaks, daily milestones, XP, levels and mobility skill progress.</li>
+                    <li><strong>Preferences:</strong> onboarding status, chosen coach voice, sound settings and reminder settings.</li>
+                    <li><strong>Progress timelines:</strong> any photos you choose to add to a timeline to track your posture over time.</li>
+                </ul>
+            </section>
+            <section id="permissions">
+                <h2>4. Device permissions</h2>
+                <p>The App only asks for permissions needed for features you choose to use:</p>
+                <ul>
+                    <li><strong>Notifications:</strong> to send Smart Stretch Reminders at the interval you set. You can turn these off in the App or in your device settings.</li>
+                    <li><strong>Camera and photos:</strong> only if you add progress photos to a timeline. Photos are saved inside the App on your device and are never uploaded by us.</li>
+                    <li><strong>Internet access:</strong> used for purchases, advertising (if shown) and the services described below. Core stretching routines work offline.</li>
+                </ul>
+            </section>
+            <section id="purchases">
+                <h2>5. In-app purchases</h2>
+                <p>If you buy PRO features, the payment is processed by Google Play. We receive only a confirmation that a purchase is valid so we can unlock your features. We do not receive or store your payment card, bank or billing details. Google's handling of payment information is covered by the Google Payments privacy notice.</p>
+            </section>
+            <section id="third">
+                <h2>6. Third-party services</h2>
+                <p>We may use third-party services (such as analytics or crash reporting tools) to monitor and analyze the use of our Service, or to serve advertisements. These third parties have access to your usage data only to perform these tasks on our behalf and are obligated not to disclose or use it for any other purpose.</p>
+                <p>Where these services are used, they may automatically collect limited technical information such as device model, operating system version, app version, crash logs and an advertising identifier. This information does not identify you personally. You can reset or limit your advertising identifier at any time in your device settings.</p>
+                <p>These providers have their own privacy policies, for example the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</p>
+            </section>
+            <section id="share">
+                <h2>7. How we use and share information</h2>
+                <p>We use information only to run the App, personalise your routines, fix problems and improve features. We do not sell your personal information, and we do not share your setup answers, workout history or photos with anyone.</p>
+            </section>
+            <section id="retention">
+                <h2>8. Data retention and deletion</h2>
+                <p><strong>Data Retention:</strong> Because your data (such as workout history, routine preferences, and streaks) is stored exclusively on your local device and not on any external servers, we retain this data for only as long as you keep the App installed on your device.</p>
+                <p><strong>Data Deletion:</strong> You have full control over your data. To completely delete all of your data associated with the App, you can do either of the following:</p>
+                <ul>
+                    <li><strong>Uninstall the App:</strong> Deleting the 10 Min Stretch app from your device will permanently erase all locally stored data.</li>
+                    <li><strong>Clear App Data:</strong> You can clear the app's data through your device's system settings (e.g., Settings &gt; Apps &gt; 10 Min Stretch &gt; Storage &gt; Clear Data / Clear Storage).</li>
+                </ul>
+                <p>Because we do not hold your data on our servers, we cannot recover it after it is deleted.</p>
+            </section>
+            <section id="security">
+                <h2>9. Security</h2>
+                <p>Your data is kept inside the App's private storage provided by Android. Anyone with access to your unlocked phone may be able to open the App and view your progress, so we recommend using a screen lock on your device.</p>
+            </section>
+            <section id="children">
+                <h2>10. Children's privacy</h2>
+                <p>The App is intended for a general audience and is not directed at children under 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us and we will help remove it.</p>
+            </section>
+            <section id="rights">
+                <h2>11. Your choices</h2>
+                <ul>
+                    <li>Turn reminders off in the App or in your device notification settings.</li>
+                    <li>Remove progress photos at any time from inside the App.</li>
+                    <li>Reset your advertising identifier or opt out of personalised ads in your device settings.</li>
+                    <li>Delete all your data by clearing the App's storage or uninstalling it.</li>
+                    <li>Contact us with any privacy question or request at the address below.</li>
+                </ul>
+            </section>
+            <section id="changes">
+                <h2>12. Changes to this Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. You are advised to review this Privacy Policy periodically for any changes.</p>
+            </section>
+            <section id="contact">
+                <h2>13. Contact us</h2>
+                <div class="contact">
+                <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="10minstretch_info.html">App info</a>
+                <a href="10minstretch_privacypolicy.html">Privacy policy</a>
+                <a href="10minstretch_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

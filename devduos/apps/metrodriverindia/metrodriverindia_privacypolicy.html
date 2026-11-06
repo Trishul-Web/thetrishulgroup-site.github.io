@@ -3,333 +3,297 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - Metro Driver India | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚇</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - Metro Driver India | DevDuo Software</title>
+    <meta name="theme-color" content="#03070d">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/s7c8oRTZYmab9St-56EOkKf6zqFBmFrxyZzwLg8EyGJIpskMjbhYQVodZQr8ogfkaYcTvNwVp_X2gP24lHsaeA=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #03070d;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #1c2733;
-            --brand-1: #39c2ff;
-            --brand-2: #ffc21f;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #03070d; --card: #0a121d; --ink: #e9eef5; --soft: #c0cad7; --mute: #7f8ca0;
+            --line: #1c2a3b; --violet: #ffc21f; --violet-soft: rgba(57, 194, 255, .08); --warn: #ff8a80; --warn-soft: rgba(255, 82, 82, .1);
+            --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
         * { box-sizing: border-box; }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
-        }
-
-        .container { width: min(800px, 90vw); margin: 0 auto; padding: 4rem 0; }
-
-        h1, h2 { font-family: var(--font-display); color: var(--brand-1); }
-
-        h1 { font-size: clamp(2.2rem, 6vw, 3rem); margin-bottom: 0.5rem; }
-
-        h2 {
-            font-size: 1.7rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        h3 { color: var(--fg); font-size: 1.2rem; margin: 1.5rem 0 .25rem; }
-
-        p, li { color: var(--muted); font-size: 1.08rem; }
-
-        strong { color: #d7dde4; }
-
-        a { color: var(--brand-2); text-decoration: none; }
-
-        a:hover { text-decoration: underline; }
-
-        ul { padding-left: 2rem; }
-
-        .timestamp { font-style: italic; color: var(--muted); }
-
-        .bg-wrap { position: fixed; inset: -20vmax; pointer-events: none; z-index: -1; }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(57, 194, 255, .12), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(255, 194, 31, .08), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty { to { transform: translate3d(0, -2%, 0) scale(1.02); } }
-
-        @media (prefers-reduced-motion: reduce) { .aurora { animation: none; } }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(3, 7, 13, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; text-decoration: none; }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover { color: var(--fg); text-decoration: none; }
-
-        .app-bar-link.active { color: var(--brand-1); border-bottom-color: var(--brand-1); }
-
-        .highlight-box {
-            background: rgba(57, 194, 255, 0.07);
-            border: 1px solid var(--brand-1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .highlight-box h2 { margin-top: 0; border-bottom: none; }
-
-        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
-
-        th, td {
-            text-align: left;
-            padding: 0.7rem 0.8rem;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-            font-size: 1rem;
-        }
-
-        th { color: var(--fg); font-weight: 700; }
-
-        td { color: var(--muted); }
-
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(3, 7, 13, .82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: var(--violet); color: #1a1300; }
+        .doc-head { position: relative; padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 85% 0%, rgba(57, 194, 255, .2), transparent 60%), radial-gradient(50% 120% at 0% 100%, rgba(255, 194, 31, .08), transparent 60%), var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1, article h2 { font-family: "Space Grotesk", system-ui, sans-serif; }
+        .caps { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 14px; padding: .9rem 1.1rem; list-style: none; margin-left: -1.25rem; }
+        .caps strong { color: var(--warn); }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .summary, .highlight { border: 1px solid rgba(57, 194, 255, .35); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: .93rem; margin: 1rem 0; }
         .table-wrap { overflow-x: auto; }
-
-        footer {
-            padding: 2.5rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-            font-size: .95rem;
+        .data-table th, .data-table td { text-align: left; padding: .75rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .data-table th { color: var(--ink); background: var(--card); }
+        .data-table td { color: var(--soft); }
+        article h3 { color: var(--ink); font-size: 1.05rem; margin: 1.25rem 0 .25rem; }
+        .highlight { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+        .highlight h2 { margin-top: 0 !important; }
+        h1 { color: #39c2ff; font-weight: 800; letter-spacing: -.02em; }
+        h1, article h2 { font-family: "Sora", system-ui, sans-serif; }
+        article h2 { letter-spacing: -.01em; }
+        .app-chip { color: var(--soft); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #ffd6d2; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body, .doc-head, .contact, .summary { background: #fff !important; color: #000; } h1 { color: #000; -webkit-text-fill-color: #000; } article p, article li { color: #222; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <header>
-        <div class="container-header">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="metrodriverindia_info.html" class="app-bar-link">App Info</a>
-                <a href="metrodriverindia_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
-                <a href="metrodriverindia_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="metrodriverindia_info.html">Game info</a>
+                <a href="metrodriverindia_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="metrodriverindia_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
-    <main class="container">
-        <h1>Privacy Policy</h1>
-        <p class="timestamp">Last Updated: October 17, 2026</p>
-        <p>DevDuo Software ("DevDuo", "we", "our" or "us") makes the <strong>Metro Driver India</strong> mobile game
-            (the "Game"). This Privacy Policy explains what information the Game uses, where it is stored, which
-            third-party services are involved, and how you can delete your data.</p>
 
-        <div class="highlight-box">
-            <h2>Local Data Retention & Deletion Policy</h2>
-            <p><strong>Metro Driver India saves your game on your device only.</strong> We do not run our own game
-                servers, and we do not upload, synchronize or store your game data in the cloud. You do not need an
-                account to play.</p>
-            <p><strong>What is saved on your device:</strong><br>
-                Your settings (sound on or off, map view, announcement on or off, English and Hindi voice choices),
-                the metros and routes you build in <em>My metros</em> (lines, stations, colours, trains and
-                distances), Hindi station names you type or that were translated on your device, and the Hindi
-                language pack if you download it. This is kept in the Game's private app storage on your phone.</p>
-            <p><strong>How to delete your data:</strong></p>
-            <ul>
-                <li><strong>Delete one metro:</strong> Open <em>Start Driving &gt; My metros</em>, select the metro
-                    and tap the delete icon.</li>
-                <li><strong>Clear all game data:</strong> Go to your device's <em>Settings &gt; Apps &gt; Metro Driver
-                        India &gt; Storage &gt; Clear storage / Clear data</em>. This permanently erases all settings
-                    and saved metros.</li>
-                <li><strong>Uninstall the Game:</strong> Uninstalling permanently removes all locally saved data.</li>
-                <li><strong>Feedback you sent us:</strong> Email us at the address below and we will delete your
-                    feedback messages.</li>
-            </ul>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="metrodriverindia_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/s7c8oRTZYmab9St-56EOkKf6zqFBmFrxyZzwLg8EyGJIpskMjbhYQVodZQr8ogfkaYcTvNwVp_X2gP24lHsaeA=s128-rw" alt="" width="32" height="32">Metro Driver India</a>
+            <h1>Privacy Policy</h1>
+            <p class="meta">Last Updated: October 30, 2026 · Previous version: October 17, 2026</p>
         </div>
+    </div>
 
-        <h2>1. Information We Do Not Collect</h2>
-        <ul>
-            <li><strong>No account:</strong> The Game does not ask for a name, phone number, password or login.</li>
-            <li><strong>No location:</strong> The Game does not access your GPS or location. Cities and station names
-                in the Game are built in or typed by you.</li>
-            <li><strong>No camera, microphone, contacts or photos:</strong> The Game does not access them.</li>
-            <li><strong>No files without your choice:</strong> The Game only opens a file when you pick it yourself
-                with <em>Import</em>, or when you open a metro file in the Game from another app.</li>
-        </ul>
-
-        <h2>2. Feedback & Support</h2>
-        <p>If you choose to send a message through the in-game <em>Feedback &amp; support</em> window, we receive:</p>
-        <ul>
-            <li>the topic you selected and the message you wrote,</li>
-            <li>your email address, only if you choose to enter it (so we can reply),</li>
-            <li>the Game version and your device brand, model and Android version, so we can fix problems.</li>
-        </ul>
-        <p>The message is sent through Google Forms and stored in our Google account. We use it only to answer you,
-            fix bugs and improve the Game. We never sell it or use it for advertising.</p>
-
-        <h2>3. Advertising (Google AdMob)</h2>
-        <p>Metro Driver India shows ads served by <strong>Google AdMob</strong>:</p>
-        <ul>
-            <li><strong>Interstitial ads</strong> may appear at natural breaks, for example when you start a drive,
-                end or leave a trip, save, share, import, copy, edit or delete a metro, or start building a new one.
-                We show at most one of these every few minutes.</li>
-            <li><strong>Rewarded ads</strong> are optional. You choose to watch one to unlock a feature for your
-                current trip plan or building session, for example a train livery, a longer train, depot starts,
-                infinite rounds, announcements, custom distances, extra lines or a quick retry after a missed
-                station.</li>
-        </ul>
-        <p>To show ads, AdMob may collect and use your device's advertising ID, IP address, device information and ad
-            interaction data. It uses this to show ads, limit how often you see them, measure performance and
-            prevent fraud. Where required by law (for example in the EEA, UK and Switzerland), you will be asked for
-            consent before personalised ads are shown, and you can change your choice later. You can reset or delete
-            your advertising ID in your device's Google settings. Learn more in <a
-                href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>
-            and <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How
-                Google uses information from apps that use its services</a>.</p>
-
-        <h2>4. Premium</h2>
-        <p>A one-time Premium purchase is planned for a future update. When it is available, payment will be handled
-            entirely by <strong>Google Play</strong>. We will never see or store your card or payment details; the
-            Game will only store on your device that Premium is active.</p>
-
-        <h2>5. Announcements & Hindi Station Names</h2>
-        <ul>
-            <li><strong>Train announcements</strong> use the text-to-speech voice already on your phone. The text is
-                spoken on your device. If a voice is missing, the Game can open your phone's voice settings so you
-                can download it from Google.</li>
-            <li><strong>Hindi station names</strong> are translated on your device using Google ML Kit. The Hindi
-                language pack (about 30 MB) is downloaded once from Google; after that, translation works offline on
-                your device. The station names you translate are not sent to us.</li>
-        </ul>
-
-        <h2>6. Sharing & Importing Metros</h2>
-        <p>When you tap <em>Share</em> on a metro, the Game creates a <em>.metrodriverindia</em> file and opens your
-            phone's share menu (for example WhatsApp). The file contains only the metro itself: its name, lines,
-            stations, colours, trains and distances. It never contains personal information, and it is sent only
-            when and to whom you choose. When you import a metro file, it is read on your device and saved in <em>My
-                metros</em>.</p>
-
-        <h2>7. More from DevDuo</h2>
-        <p>The <em>More from DevDuo</em> page downloads a list of our other apps and their pictures from GitHub. Like
-            any website, GitHub receives your IP address to deliver this list. No personal information is sent. Store
-            links open in Google Play or your browser.</p>
-
-        <h2>8. Summary of Data</h2>
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Data</th>
-                        <th>Where it goes</th>
-                        <th>Why</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Settings, saved metros, Hindi station names</td>
-                        <td>Your device only</td>
-                        <td>To save your game</td>
-                    </tr>
-                    <tr>
-                        <td>Advertising ID, IP address, device info, ad interactions</td>
-                        <td>Google AdMob</td>
-                        <td>Showing and measuring ads, fraud prevention</td>
-                    </tr>
-                    <tr>
-                        <td>Feedback message, optional email, Game version, device model</td>
-                        <td>DevDuo (via Google Forms)</td>
-                        <td>Support and bug fixing</td>
-                    </tr>
-                    <tr>
-                        <td>Language pack and voice downloads</td>
-                        <td>Google (ML Kit, text-to-speech)</td>
-                        <td>Hindi names and announcements on your device</td>
-                    </tr>
-                    <tr>
-                        <td>IP address when opening <em>More from DevDuo</em></td>
-                        <td>GitHub</td>
-                        <td>Loading our app list</td>
-                    </tr>
-                    <tr>
-                        <td>Shared metro files</td>
-                        <td>Only the people you send them to</td>
-                        <td>Sharing metros you built</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2>9. Security</h2>
-        <p>Data the Game sends to Google services (ads, feedback, language and voice downloads) and to GitHub is
-            transferred over encrypted connections (HTTPS). Your saved game stays in the Game's private storage on
-            your device.</p>
-
-        <h2>10. Children's Privacy</h2>
-        <p>Metro Driver India is intended for users aged 13 and older. We do not knowingly collect personal
-            information from children under 13. If you believe a child has sent us personal information through the
-            feedback form, contact us and we will delete it.</p>
-
-        <h2>11. Changes to This Privacy Policy</h2>
-        <p>We may update this Privacy Policy from time to time. Changes will appear on this page with a new "Last
-            Updated" date.</p>
-
-        <h2>12. Contact Us</h2>
-        <p>For questions about this Privacy Policy or to request deletion of feedback you sent, contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#about">About This Policy</a></li>
+                <li><a href="#local">Local Data Retention &amp; Deletion Policy</a></li>
+                <li><a href="#notcollect">1. Information We Do Not Collect</a></li>
+                <li><a href="#feedback">2. Feedback &amp; Support</a></li>
+                <li><a href="#ads">3. Advertising (Google AdMob)</a></li>
+                <li><a href="#premium">4. Premium</a></li>
+                <li><a href="#voice">5. Announcements &amp; Hindi Station Names</a></li>
+                <li><a href="#share">6. Sharing &amp; Importing Metros</a></li>
+                <li><a href="#more">7. More from DevDuo</a></li>
+                <li><a href="#summary">8. Summary of Data</a></li>
+                <li><a href="#permissions">9. Device Permissions</a></li>
+                <li><a href="#choices">10. Your Choices</a></li>
+                <li><a href="#security">11. Security</a></li>
+                <li><a href="#transfers">12. International Transfers</a></li>
+                <li><a href="#children">13. Children's Privacy</a></li>
+                <li><a href="#changes">14. Changes to This Privacy Policy</a></li>
+                <li><a href="#contact">15. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>No account, location, camera, microphone, contacts or photos are used.</li>
+                    <li>Your settings and the metros you build are saved only on your device.</li>
+                    <li>Ads are served by Google AdMob, which uses your advertising ID. Rewarded ads are optional.</li>
+                    <li>Feedback you choose to send reaches us through Google Forms, and we delete it on request.</li>
+                </ul>
+            </div>
+            <section id="about">
+                <h2>About This Policy</h2>
+                <p>DevDuo Software ("DevDuo", "we", "our" or "us") makes the Metro Driver India mobile game (the "Game"). This Privacy Policy explains what information the Game uses, where it is stored, which third-party services are involved, and how you can delete your data.</p>
+            </section>
+            <section id="local" class="highlight">
+                <h2>Local Data Retention &amp; Deletion Policy</h2>
+                <p><strong>Metro Driver India saves your game on your device only.</strong> We do not run our own game servers, and we do not upload, synchronize or store your game data in the cloud. You do not need an account to play.</p>
+                <p><strong>What is saved on your device:</strong><br>Your settings (sound on or off, map view, announcement on or off, English and Hindi voice choices), the metros and routes you build in My metros (lines, stations, colours, trains and distances), Hindi station names you type or that were translated on your device, and the Hindi language pack if you download it. This is kept in the Game's private app storage on your phone.</p>
+                <p><strong>How to delete your data:</strong></p>
+                <ul>
+                    <li><strong>Delete one metro:</strong> Open Start Driving &gt; My metros, select the metro and tap the delete icon.</li>
+                    <li><strong>Clear all game data:</strong> Go to your device's <em>Settings &gt; Apps &gt; Metro Driver India &gt; Storage &gt; Clear storage / Clear data</em>. This permanently erases all settings and saved metros.</li>
+                    <li><strong>Uninstall the Game:</strong> Uninstalling permanently removes all locally saved data.</li>
+                    <li><strong>Feedback you sent us:</strong> Email us at the address below and we will delete your feedback messages.</li>
+                </ul>
+            </section>
+            <section id="notcollect">
+                <h2>1. Information We Do Not Collect</h2>
+                <ul>
+                    <li><strong>No account:</strong> The Game does not ask for a name, phone number, password or login.</li>
+                    <li><strong>No location:</strong> The Game does not access your GPS or location. Cities and station names in the Game are built in or typed by you.</li>
+                    <li><strong>No camera, microphone, contacts or photos:</strong> The Game does not access them.</li>
+                    <li><strong>No files without your choice:</strong> The Game only opens a file when you pick it yourself with Import, or when you open a metro file in the Game from another app.</li>
+                </ul>
+            </section>
+            <section id="feedback">
+                <h2>2. Feedback &amp; Support</h2>
+                <p>If you choose to send a message through the in-game Feedback &amp; support window, we receive:</p>
+                <ul>
+                    <li>the topic you selected and the message you wrote,</li>
+                    <li>your email address, only if you choose to enter it (so we can reply),</li>
+                    <li>the Game version and your device brand, model and Android version, so we can fix problems.</li>
+                </ul>
+                <p>The message is sent through Google Forms and stored in our Google account. We use it only to answer you, fix bugs and improve the Game. We never sell it or use it for advertising.</p>
+            </section>
+            <section id="ads">
+                <h2>3. Advertising (Google AdMob)</h2>
+                <p>Metro Driver India shows ads served by Google AdMob:</p>
+                <ul>
+                    <li><strong>Interstitial ads</strong> may appear at natural breaks, for example when you start a drive, end or leave a trip, save, share, import, copy, edit or delete a metro, or start building a new one. We show at most one of these every few minutes.</li>
+                    <li><strong>Rewarded ads</strong> are optional. You choose to watch one to unlock a feature for your current trip plan or building session, for example a train livery, a longer train, depot starts, infinite rounds, announcements, custom distances, extra lines or a quick retry after a missed station.</li>
+                </ul>
+                <p>To show ads, AdMob may collect and use your device's advertising ID, IP address, device information and ad interaction data. It uses this to show ads, limit how often you see them, measure performance and prevent fraud. Where required by law (for example in the EEA, UK and Switzerland), you will be asked for consent before personalised ads are shown, and you can change your choice later. You can reset or delete your advertising ID in your device's Google settings. Learn more in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a> and <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses information from apps that use its services</a>.</p>
+            </section>
+            <section id="premium">
+                <h2>4. Premium</h2>
+                <p>A one-time Premium purchase is planned for a future update. When it is available, payment will be handled entirely by Google Play. We will never see or store your card or payment details; the Game will only store on your device that Premium is active.</p>
+            </section>
+            <section id="voice">
+                <h2>5. Announcements &amp; Hindi Station Names</h2>
+                <ul>
+                    <li><strong>Train announcements</strong> use the text-to-speech voice already on your phone. The text is spoken on your device. If a voice is missing, the Game can open your phone's voice settings so you can download it from Google.</li>
+                    <li><strong>Hindi station names</strong> are translated on your device using Google ML Kit. The Hindi language pack (about 30 MB) is downloaded once from Google; after that, translation works offline on your device. The station names you translate are not sent to us.</li>
+                </ul>
+            </section>
+            <section id="share">
+                <h2>6. Sharing &amp; Importing Metros</h2>
+                <p>When you tap <strong>Share</strong> on a metro, the Game creates a .metrodriverindia file and opens your phone's share menu (for example WhatsApp). The file contains only the metro itself: its name, lines, stations, colours, trains and distances. It never contains personal information, and it is sent only when and to whom you choose. When you import a metro file, it is read on your device and saved in <strong>My metros</strong>.</p>
+            </section>
+            <section id="more">
+                <h2>7. More from DevDuo</h2>
+                <p>The <strong>More from DevDuo</strong> page downloads a list of our other apps and their pictures from GitHub. Like any website, GitHub receives your IP address to deliver this list. No personal information is sent. Store links open in Google Play or your browser.</p>
+            </section>
+            <section id="summary">
+                <h2>8. Summary of Data</h2>
+                <div class="table-wrap">
+                <table class="data-table">
+                    <thead><tr><th>Data</th><th>Where it goes</th><th>Why</th></tr></thead>
+                    <tbody>
+                        <tr><td>Settings, saved metros, Hindi station names</td><td>Your device only</td><td>To save your game</td></tr>
+                        <tr><td>Advertising ID, IP address, device info, ad interactions</td><td>Google AdMob</td><td>Showing and measuring ads, fraud prevention</td></tr>
+                        <tr><td>Feedback message, optional email, Game version, device model</td><td>DevDuo (via Google Forms)</td><td>Support and bug fixing</td></tr>
+                        <tr><td>Language pack and voice downloads</td><td>Google (ML Kit, text-to-speech)</td><td>Hindi names and announcements on your device</td></tr>
+                        <tr><td>IP address when opening More from DevDuo</td><td>GitHub</td><td>Loading our app list</td></tr>
+                        <tr><td>Shared metro files</td><td>Only the people you send them to</td><td>Sharing metros you built</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </section>
+            <section id="permissions">
+                <h2>9. Device Permissions</h2>
+                <p>The Game requests only the permissions it needs:</p>
+                <ul>
+                    <li><strong>Internet and network state:</strong> to load ads, send feedback you choose to submit, download the Hindi language pack and load the More from DevDuo list.</li>
+                    <li><strong>Advertising ID:</strong> used by Google AdMob as described in section 3.</li>
+                    <li>The Game does <strong>not</strong> request location, camera, microphone, contacts, phone or storage-wide file access.</li>
+                </ul>
+            </section>
+            <section id="choices">
+                <h2>10. Your Choices</h2>
+                <ul>
+                    <li>Play without any account and without sharing personal information.</li>
+                    <li>Skip rewarded ads. They are always optional.</li>
+                    <li>Change your ad consent choice where offered, or reset or delete your advertising ID in your device settings.</li>
+                    <li>Delete individual metros, clear all game data, or uninstall the Game at any time.</li>
+                    <li>Ask us to delete any feedback you sent by emailing the address below.</li>
+                </ul>
+            </section>
+            <section id="security">
+                <h2>11. Security</h2>
+                <p>Data the Game sends to Google services (ads, feedback, language and voice downloads) and to GitHub is transferred over encrypted connections (HTTPS). Your saved game stays in the Game's private storage on your device.</p>
+            </section>
+            <section id="transfers">
+                <h2>12. International Transfers</h2>
+                <p>Google and GitHub may process data on servers outside your country. They apply their own safeguards as described in their privacy policies.</p>
+            </section>
+            <section id="children">
+                <h2>13. Children's Privacy</h2>
+                <p>Metro Driver India is intended for users aged 13 and older. We do not knowingly collect personal information from children under 13. If you believe a child has sent us personal information through the feedback form, contact us and we will delete it.</p>
+            </section>
+            <section id="changes">
+                <h2>14. Changes to This Privacy Policy</h2>
+                <p>We may update this Privacy Policy from time to time. Changes will appear on this page with a new "Last Updated" date.</p>
+            </section>
+            <section id="contact">
+                <h2>15. Contact Us</h2>
+                <div class="contact">
+                <p>For questions about this Privacy Policy or to request deletion of feedback you sent, contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
     </main>
-    <footer>&copy; 2026 DevDuo Software. All rights reserved.</footer>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="metrodriverindia_info.html">Game info</a>
+                <a href="metrodriverindia_privacypolicy.html">Privacy policy</a>
+                <a href="metrodriverindia_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

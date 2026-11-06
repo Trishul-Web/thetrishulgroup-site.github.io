@@ -3,502 +3,1268 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Metro Driver India - Metro Train Simulator | DevDuo's</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Metro Driver India | Metro Driving Game by DevDuo Software</title>
     <meta name="description"
-        content="Metro Driver India by DevDuo: drive metro trains through 11 Indian cities on viaducts, at street level and underground, or build your own metro network.">
+        content="Drive metro trains on viaducts, street-level corridors and tunnels across 11 Indian city metros, or build a metro for your own city.">
+    <meta property="og:title" content="Metro Driver India">
+    <meta property="og:description" content="Drive the metro. Build the metro your city deserves.">
+    <meta property="og:image" content="screens/11-river-bridge.jpg">
+    <meta name="theme-color" content="#03070d">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚇</text></svg>">
+        href="https://play-lh.googleusercontent.com/s7c8oRTZYmab9St-56EOkKf6zqFBmFrxyZzwLg8EyGJIpskMjbhYQVodZQr8ogfkaYcTvNwVp_X2gP24lHsaeA=s128-rw">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@500;600&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
     <style>
         :root {
             --bg: #03070d;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #1c2733;
-            --brand-1: #39c2ff;
-            --brand-2: #ffc21f;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            margin: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg-2: #0a121d;
+            --bg-3: #101b2a;
+            --line: #1c2a3b;
+            --text: #e9eef5;
+            --soft: #b5c0cf;
+            --mute: #7f8ca0;
+            --blue: #39c2ff;
+            --yellow: #ffc21f;
+            --red: #ff4d5e;
+            --green: #2ee08a;
+            --display: "Sora", system-ui, sans-serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --hindi: "Noto Sans Devanagari", "Mangal", sans-serif;
         }
 
         * { box-sizing: border-box; }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(57, 194, 255, .14), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(255, 194, 31, .10), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        .grid-lines {
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(rgba(57, 194, 255, .05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(57, 194, 255, .05) 1px, transparent 1px);
-            background-size: 48px 48px;
+        a { color: inherit; }
+
+        img, video { max-width: 100%; display: block; }
+
+        :focus-visible {
+            outline: 2px solid var(--yellow);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        @keyframes floaty { to { transform: translate3d(0, -2%, 0) scale(1.02); } }
+        .wrap {
+            width: min(1180px, 90vw);
+            margin: 0 auto;
+        }
 
-        @media (prefers-reduced-motion: reduce) { .aurora { animation: none; } }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(3, 7, 13, 0.7);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+        /* ---------- Nav ---------- */
+        .nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(3, 7, 13, .82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        header .container {
+        .nav .wrap {
+            height: 66px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar { display: flex; gap: 1.5rem; flex-wrap: wrap; }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover { color: var(--fg); }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container { width: min(1000px, 90vw); margin: 0 auto; }
-
-        section { padding: 5rem 0; }
-
-        .hero { padding-top: 6rem; text-align: center; }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            background: #0b1118;
-            border: 2px solid rgba(57, 194, 255, .5);
-            box-shadow: 0 0 40px rgba(57, 194, 255, .25);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .eyebrow {
-            color: var(--brand-1);
-            font-weight: 700;
-            letter-spacing: .3em;
-            font-size: .85rem;
-            margin-bottom: 1rem;
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 780px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 700;
-            color: #1a1205;
-            background: linear-gradient(90deg, #ffe9a8, var(--brand-2), #ff9800);
-            padding: 0.85rem 1.9rem;
-            border-radius: 10px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 24px rgba(255, 194, 31, 0.25);
-        }
-
-        .line-strip {
-            display: flex;
-            justify-content: center;
-            gap: .5rem;
-            margin: 2.5rem auto 0;
-            flex-wrap: wrap;
-        }
-
-        .line-strip span {
-            width: 46px;
-            height: 7px;
-            border-radius: 4px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
             gap: 1rem;
         }
 
-        .stat {
-            background: rgba(11, 17, 24, .8);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.4rem;
-            text-align: center;
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
         }
 
-        .stat b {
-            display: block;
-            font-family: var(--font-display);
-            font-size: 2.2rem;
-            color: var(--brand-2);
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
         }
 
-        .stat span { color: var(--muted); }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
         }
 
-        .feature-grid {
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .tabs a:hover { color: var(--text); }
+
+        .tabs a[aria-current="page"] {
+            background: var(--yellow);
+            color: #1a1300;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 4.5rem 0 3.5rem;
+            overflow: hidden;
+            background:
+                radial-gradient(50% 60% at 85% 0%, rgba(57, 194, 255, .18), transparent 70%),
+                radial-gradient(40% 50% at 0% 100%, rgba(255, 194, 31, .08), transparent 70%);
+        }
+
+        .hero-top {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: 1fr auto;
             gap: 2rem;
+            align-items: end;
+            margin-bottom: 2.5rem;
         }
 
-        .feature-card {
-            background: rgba(11, 17, 24, .75);
-            border: 1px solid var(--border);
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(57, 194, 255, .25);
+        }
+
+        .app-id strong { display: block; }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+            line-height: 1.03;
+            letter-spacing: -.03em;
+            margin: 0 0 1rem;
+            max-width: 15ch;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--blue);
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 56ch;
+            margin: 0;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+            min-width: 230px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .9rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .btn-yellow {
+            background: var(--yellow);
+            color: #1a1300;
+            box-shadow: 0 10px 28px rgba(255, 194, 31, .25);
+        }
+
+        .btn-yellow:hover { transform: translateY(-2px); }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .btn-line:hover { border-color: var(--blue); }
+
+        .screen {
+            border-radius: 22px;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #22314a;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .55);
+        }
+
+        .screen video,
+        .screen img {
+            width: 100%;
+            aspect-ratio: 2400 / 1080;
+            object-fit: cover;
+            border-radius: 15px;
+            background: #0a121d;
+        }
+
+        /* ---------- Line strip (signature) ---------- */
+        .linebar {
+            margin-top: 1.25rem;
+            padding: 1.1rem 1.4rem 1.4rem;
             border-radius: 18px;
-            padding: 1.75rem;
-            transition: border-color .2s, transform .2s;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
         }
 
-        .feature-card:hover {
-            border-color: rgba(57, 194, 255, .6);
-            transform: translateY(-3px);
+        .linebar-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
 
-        .feature-card .emoji { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            color: #f0f0f0;
+        .next {
+            display: flex;
+            align-items: baseline;
+            gap: .75rem;
+            flex-wrap: wrap;
         }
 
-        .feature-card p { color: var(--muted); line-height: 1.6; margin: 0; }
+        .next small {
+            color: var(--mute);
+            font-weight: 600;
+            font-size: .75rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
 
+        .next strong {
+            font-family: var(--display);
+            font-size: 1.15rem;
+        }
+
+        .next .hi {
+            font-family: var(--hindi);
+            color: var(--yellow);
+        }
+
+        .level-pill {
+            font-size: .8rem;
+            font-weight: 700;
+            padding: .3rem .7rem;
+            border-radius: 999px;
+            background: rgba(57, 194, 255, .12);
+            color: var(--blue);
+        }
+
+        .track {
+            position: relative;
+            height: 44px;
+        }
+
+        .track::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 20px;
+            height: 5px;
+            border-radius: 3px;
+            background: #8b5cf6;
+        }
+
+        .stn {
+            position: absolute;
+            top: 14px;
+            width: 17px;
+            height: 17px;
+            margin-left: -8.5px;
+            border-radius: 50%;
+            background: var(--bg-2);
+            border: 4px solid #8b5cf6;
+            transition: border-color .3s, transform .3s;
+        }
+
+        .stn.done { border-color: #4b3a7a; }
+
+        .stn.here {
+            border-color: var(--yellow);
+            transform: scale(1.25);
+        }
+
+        .stn span {
+            position: absolute;
+            top: 22px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: .72rem;
+            color: var(--mute);
+        }
+
+        .train {
+            position: absolute;
+            top: 13px;
+            width: 46px;
+            height: 19px;
+            margin-left: -23px;
+            border-radius: 9px;
+            background: linear-gradient(90deg, #f1f5f9, #cbd5e1);
+            box-shadow: 0 0 0 2px #8b5cf6, 0 4px 14px rgba(0, 0, 0, .5);
+            transition: left 2.6s cubic-bezier(.45, 0, .2, 1);
+        }
+
+        .train::after {
+            content: "";
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            width: 9px;
+            height: 6px;
+            border-radius: 2px;
+            background: #0f172a;
+        }
+
+        /* ---------- Sections ---------- */
+        section { padding: 5.5rem 0; }
+
+        h2 {
+            font-family: var(--display);
+            font-weight: 800;
+            font-size: clamp(1.9rem, 3.8vw, 2.9rem);
+            line-height: 1.08;
+            letter-spacing: -.025em;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 62ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .center { text-align: center; }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Three worlds */
+        .worlds {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .world {
+            border-radius: 22px;
+            overflow: hidden;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .world img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+        }
+
+        .world > div:not(.tunnel) { padding: 1.25rem 1.4rem 1.5rem; }
+
+        .tunnel {
+            position: relative;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background:
+                radial-gradient(60% 75% at 50% 52%, #1a2433 0 38%, #0d141f 39% 55%, #05080d 56%),
+                #05080d;
+        }
+
+        .tunnel::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 18%;
+            height: 4px;
+            background: repeating-linear-gradient(90deg, var(--yellow) 0 18px, transparent 18px 36px);
+            opacity: .7;
+        }
+
+        .tunnel span {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 34%;
+            aspect-ratio: 2.4;
+            transform: translate(-50%, -40%);
+            border-radius: 10px 10px 4px 4px;
+            background: linear-gradient(180deg, #e5e9f0, #b7c0cc);
+            box-shadow: 0 0 40px rgba(255, 220, 140, .35);
+        }
+
+        .tunnel span::before,
+        .tunnel span::after {
+            content: "";
+            position: absolute;
+            bottom: 22%;
+            width: 12%;
+            height: 16%;
+            border-radius: 50%;
+            background: #fff6c8;
+            box-shadow: 0 0 18px 6px rgba(255, 230, 150, .7);
+        }
+
+        .tunnel span::before { left: 12%; }
+
+        .tunnel span::after { right: 12%; }
+
+        .world .tag {
+            display: inline-block;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-bottom: .35rem;
+        }
+
+        .world h3 {
+            margin: 0 0 .35rem;
+            font-family: var(--display);
+            font-size: 1.25rem;
+        }
+
+        .world p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .95rem;
+        }
+
+        /* Controls */
+        .controls {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .ctl-list {
+            display: grid;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .ctl-list li {
+            display: grid;
+            grid-template-columns: 64px 1fr;
+            gap: 1rem;
+            align-items: center;
+            color: var(--soft);
+        }
+
+        .key {
+            height: 44px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            font-weight: 800;
+            font-family: var(--display);
+            font-size: .95rem;
+        }
+
+        .k-up { background: #14532d; color: #bbf7d0; }
+
+        .k-down { background: #7f1d1d; color: #fecaca; }
+
+        .k-zero { background: #1e293b; color: var(--text); }
+
+        .k-stop { background: var(--yellow); color: #1a1300; }
+
+        .k-door { background: rgba(57, 194, 255, .15); color: var(--blue); }
+
+        /* Cities */
         .cities {
             display: flex;
             flex-wrap: wrap;
+            gap: .6rem;
             justify-content: center;
-            gap: .75rem;
+            margin-bottom: 2.5rem;
         }
 
-        .city {
+        .cities span {
             padding: .6rem 1.1rem;
-            border-radius: 30px;
-            background: rgba(57, 194, 255, .08);
-            border: 1px solid rgba(57, 194, 255, .35);
+            border-radius: 999px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
             font-weight: 600;
+            font-size: .95rem;
         }
 
-        .steps {
+        .cities span:nth-child(3n+1) { border-color: rgba(139, 92, 246, .5); }
+
+        .cities span:nth-child(3n+2) { border-color: rgba(57, 194, 255, .5); }
+
+        .cities span:nth-child(3n) { border-color: rgba(255, 194, 31, .5); }
+
+        .pair {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: 1fr 1fr;
             gap: 1.25rem;
-            counter-reset: s;
         }
 
-        .step {
-            background: rgba(11, 17, 24, .75);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            color: var(--muted);
-            line-height: 1.6;
+        .pair figure { margin: 0; }
+
+        .pair figcaption {
+            margin-top: .7rem;
+            text-align: center;
+            color: var(--mute);
+            font-size: .9rem;
         }
 
-        .step::before {
-            counter-increment: s;
-            content: counter(s);
-            display: inline-flex;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
+        /* Build */
+        .build {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
             align-items: center;
-            justify-content: center;
-            background: var(--brand-2);
-            color: #1a1205;
-            font-weight: 800;
+        }
+
+        .ticks {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: .8rem;
+        }
+
+        .ticks li {
+            display: grid;
+            grid-template-columns: 26px 1fr;
+            gap: .7rem;
+            color: var(--soft);
+        }
+
+        .ticks li::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            margin: .45rem 0 0 6px;
+            border-radius: 50%;
+            border: 3px solid var(--blue);
+        }
+
+        .stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stack .screen:nth-child(2) {
+            width: 82%;
+            margin-left: auto;
+            margin-top: -3.5rem;
+        }
+
+        /* Feature grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .card {
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 1.6rem;
+        }
+
+        .card .ic {
+            font-size: 1.5rem;
             margin-bottom: .75rem;
         }
 
-        .step b { display: block; color: #f0f0f0; margin-bottom: .25rem; }
-
-        .note {
-            background: rgba(11, 17, 24, .8);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
-            line-height: 1.7;
+        .card h3 {
+            margin: 0 0 .35rem;
+            font-size: 1.08rem;
         }
 
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
+        .card p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .94rem;
         }
 
-        .footer-links {
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img { transform: scale(1.03); }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(3, 7, 13, .6), rgba(3, 7, 13, .1));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--yellow);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span { transform: scale(1.08); }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #1a1300;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
             flex-wrap: wrap;
         }
 
-        .footer-links a { color: var(--muted); text-decoration: none; transition: color .2s; }
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
 
-        .footer-links a:hover { color: var(--brand-1); }
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover { border-color: var(--blue); }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar { display: none; }
+
+        .gallery figure {
+            flex: 0 0 min(560px, 82vw);
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .9rem;
+            color: var(--mute);
+            margin-top: .75rem;
+        }
+
+        /* FAQ */
+        .faq { max-width: 800px; }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::after {
+            content: "+";
+            color: var(--yellow);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after { content: "–"; }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 28px;
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(60% 120% at 0% 0%, rgba(57, 194, 255, .2), transparent 60%),
+                radial-gradient(60% 120% at 100% 100%, rgba(255, 194, 31, .14), transparent 60%),
+                var(--bg-2);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 48ch;
+            margin: 0 auto 2rem;
+        }
+
+        .note {
+            margin: 2rem auto 0;
+            max-width: 80ch;
+            font-size: .85rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        .note a { color: var(--soft); }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a { text-decoration: none; }
+
+        footer a:hover { color: var(--text); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero-top, .controls, .build { grid-template-columns: 1fr; gap: 2rem; }
+            .actions { flex-direction: row; flex-wrap: wrap; min-width: 0; }
+            .worlds, .grid { grid-template-columns: 1fr 1fr; }
+            .worlds .world:last-child { grid-column: span 2; }
+        }
+
+        @media (max-width: 640px) {
+            .tabs a:not([aria-current="page"]) { display: none; }
+            .hero { padding: 3rem 0 2.5rem; }
+            section { padding: 4rem 0; }
+            .worlds, .grid, .pair { grid-template-columns: 1fr; }
+            .worlds .world:last-child { grid-column: auto; }
+            .stn span { display: none; }
+            .stn.here span { display: block; }
+            .stack .screen:nth-child(2) { width: 100%; margin-top: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
+        }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-        <div class="grid-lines"></div>
-    </div>
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="metrodriverindia_info.html" class="app-bar-link active">App Info</a>
-                <a href="metrodriverindia_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="metrodriverindia_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="Game pages">
+                <a href="metrodriverindia_info.html" aria-current="page">Game info</a>
+                <a href="metrodriverindia_privacypolicy.html">Privacy</a>
+                <a href="metrodriverindia_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
+
     <main>
-        <section class="hero container">
-            <div class="hero-icon">🚇</div>
-            <div class="eyebrow">INDIA'S METRO DRIVING GAME</div>
-            <h1 class="grand-title">Take the controls of <span class="gradient-text">the metro.</span></h1>
-            <p class="intro-lede">
-                Drive metro trains through eleven Indian cities, high on viaducts above busy roads, along street-level
-                corridors and deep in tunnels under the old city. Stop at the yellow marker, open the doors, let the
-                passengers board and keep the line on time. Or design a whole metro network of your own.
-            </p>
-            <a href="https://play.google.com/store/apps/dev?id=4747892129266629665" target="_blank" rel="noopener"
-                class="cta-button">Get it on your phone</a>
-            <div class="line-strip" aria-hidden="true">
-                <span style="background:#e53935"></span><span style="background:#ffc107"></span>
-                <span style="background:#1e88e5"></span><span style="background:#8e24aa"></span>
-                <span style="background:#00acc1"></span><span style="background:#43a047"></span>
-                <span style="background:#fb8c00"></span>
-            </div>
-        </section>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap">
+                <div class="hero-top">
+                    <div>
+                        <div class="app-id">
+                            <img src="https://play-lh.googleusercontent.com/s7c8oRTZYmab9St-56EOkKf6zqFBmFrxyZzwLg8EyGJIpskMjbhYQVodZQr8ogfkaYcTvNwVp_X2gP24lHsaeA=s256-rw"
+                                alt="Metro Driver India game icon" width="64" height="64">
+                            <div>
+                                <strong>Metro Driver India</strong>
+                                <span>Metro driving game by DevDuo Software</span>
+                            </div>
+                        </div>
+                        <h1>Take the controls of <em>your city’s metro</em>.</h1>
+                        <p class="lede">Drive high on viaducts, along the street and deep in tunnels. Stop at the
+                            yellow marker, open the doors and keep the line moving across 11 Indian city metros, or
+                            build one for your own town.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.metro_driver_india"
+                            target="_blank" rel="noopener" class="btn btn-yellow">Play on Google Play</a>
+                        <a href="#trailer" class="btn btn-line">Watch the trailer</a>
+                    </div>
+                </div>
 
-        <section class="container" style="padding-top:0">
-            <div class="stats">
-                <div class="stat"><b>11</b><span>City metros</span></div>
-                <div class="stat"><b>32</b><span>Train liveries</span></div>
-                <div class="stat"><b>3</b><span>Track levels</span></div>
-                <div class="stat"><b>2</b><span>Announcement languages</span></div>
-            </div>
-        </section>
+                <div class="screen">
+                    <video src="screens/hero-loop.mp4" poster="screens/11-river-bridge.jpg" autoplay muted loop
+                        playsinline preload="metadata" id="heroLoop"
+                        aria-label="A metro train crossing a river bridge"></video>
+                </div>
 
-        <section class="container">
-            <h2 class="section-title">What you can do</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🏙️</span>
-                    <h3>Drive real city lines</h3>
-                    <p>Station order and levels follow the real lines of eleven Indian cities, with distances shortened
-                        for play.</p>
+                <div class="linebar" aria-label="Sample next-station display">
+                    <div class="linebar-head">
+                        <div class="next">
+                            <small>Next station</small>
+                            <strong id="nextEn">Sant Tukaram Nagar</strong>
+                            <span class="hi" id="nextHi" lang="hi">संत तुकाराम नगर</span>
+                        </div>
+                        <span class="level-pill" id="levelPill">Elevated</span>
+                    </div>
+                    <div class="track" id="track"><div class="train" id="train"></div></div>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🌉</span>
-                    <h3>Viaduct, street and tunnel</h3>
-                    <p>Climb onto viaducts, glide along fenced corridors and dive into tunnels, with smooth ramps
-                        between every level.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🚦</span>
-                    <h3>Signals and speed limits</h3>
-                    <p>Set your speed with simple +5 and −5 controls, obey every signal and limit, and stop right at
-                        the marker for a perfect score.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🚪</span>
-                    <h3>Doors and passengers</h3>
-                    <p>Open the doors, watch passengers get off and board, wait for the doors-closing call and depart
-                        on time.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🔀</span>
-                    <h3>Interchanges</h3>
-                    <p>Big stations where several lines meet on different floors, with other trains arriving and
-                        leaving above and below you.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🛠️</span>
-                    <h3>Build your own metro</h3>
-                    <p>Add lines and stations, choose elevated, street or underground for each one, pick colours and
-                        trains, and the route between them builds itself.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">⚡</span>
-                    <h3>Quick route</h3>
-                    <p>Name two stations and start driving in seconds, one way or as an endless round with cab changes
-                        at both ends.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">📢</span>
-                    <h3>Announcements</h3>
-                    <p>Next station, arrival, doors and safety calls in English and Hindi, spoken by your phone's own
-                        voice.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🌧️</span>
-                    <h3>Time and weather</h3>
-                    <p>Morning, noon, golden evenings and city nights, with clouds, rain and thunder that change as you
-                        drive.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🗺️</span>
-                    <h3>City maps in 3D</h3>
-                    <p>See every metro as a city map with parks, rivers, roads and buildings, top-down or in a tilted
-                        3D view.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🚆</span>
-                    <h3>Pick your train</h3>
-                    <p>Choose from 32 liveries and set the train length from one coach up to eight coaches between the
-                        engines.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">📤</span>
-                    <h3>Share your metros</h3>
-                    <p>Send a metro you built to friends as a file. They tap it and it opens straight in the game.</p>
+            </div>
+        </div>
+
+        <!-- Three worlds -->
+        <section>
+            <div class="wrap">
+                <h2>One metro, three worlds</h2>
+                <p class="section-lede">Every line climbs and dives with smooth ramps between levels, just like the
+                    real thing.</p>
+                <div class="worlds">
+                    <div class="world">
+                        <img src="screens/08-viaduct.jpg" alt="Metro on an elevated viaduct above traffic"
+                            loading="lazy">
+                        <div>
+                            <span class="tag" style="color:var(--blue)">Elevated</span>
+                            <h3>High above the traffic</h3>
+                            <p>Viaducts over busy roads, markets, rivers and railway yards.</p>
+                        </div>
+                    </div>
+                    <div class="world">
+                        <img src="screens/12-street-level.jpg" alt="Metro at street level" loading="lazy">
+                        <div>
+                            <span class="tag" style="color:var(--green)">Street level</span>
+                            <h3>Through the city</h3>
+                            <p>Corridors past parks, lakes, canals and stations.</p>
+                        </div>
+                    </div>
+                    <div class="world">
+                        <div class="tunnel" aria-hidden="true"><span></span></div>
+                        <div>
+                            <span class="tag" style="color:var(--yellow)">Underground</span>
+                            <h3>Deep below the streets</h3>
+                            <p>Tunnels and station halls under the busiest parts of town.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Cities on the network</h2>
-            <div class="cities">
-                <span class="city">Pune</span><span class="city">Delhi</span><span class="city">Mumbai</span>
-                <span class="city">Bengaluru</span><span class="city">Chennai</span>
-                <span class="city">Hyderabad</span><span class="city">Kolkata</span><span class="city">Nagpur</span>
-                <span class="city">Kochi</span><span class="city">Gurugram</span>
-                <span class="city">Delhi–Meerut Regional</span>
+        <!-- Controls -->
+        <section style="padding-top:0">
+            <div class="wrap controls">
+                <div>
+                    <h2>Easy to drive, fun to master</h2>
+                    <p class="section-lede" style="margin-bottom:2rem">Set your speed and the train does the rest.
+                        Your job is to read the signals and stop right on the mark.</p>
+                    <ul class="ctl-list">
+                        <li><span class="key k-up">+5</span>Raise your set speed and the train speeds up by itself.
+                        </li>
+                        <li><span class="key k-down">−5</span>Slow down for curves, limits and signals.</li>
+                        <li><span class="key k-zero">Set 0</span>Bring the train to a smooth stop.</li>
+                        <li><span class="key k-stop">STOP</span>Halt at the yellow marker for a perfect score.</li>
+                        <li><span class="key k-door">Doors</span>Open up, let everyone board, close and depart.</li>
+                    </ul>
+                </div>
+                <div class="screen"><img src="screens/09-skyline.jpg" alt="Driving view with speed controls"
+                        loading="lazy"></div>
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">How a trip works</h2>
-            <div class="steps">
-                <div class="step"><b>Choose a city</b>Pick a city metro or one you built yourself.</div>
-                <div class="step"><b>Plan your trip</b>Set start and end stations, your train, time of day,
-                    weather and distance.</div>
-                <div class="step"><b>Drive</b>Follow the signals and limits, then stop at the yellow marker.</div>
-                <div class="step"><b>Serve the station</b>Open the doors, let everyone board, close up and move on.
+        <!-- Cities -->
+        <section style="padding-top:0">
+            <div class="wrap center">
+                <h2>11 ready-made city metros</h2>
+                <p class="section-lede">Station order and levels follow the real lines, with distances shortened for
+                    play. Interchanges, real scenery and city maps in 2D and 3D.</p>
+                <div class="cities">
+                    <span>Pune</span><span>Delhi</span><span>Mumbai</span><span>Bengaluru</span><span>Chennai</span>
+                    <span>Hyderabad</span><span>Kolkata</span><span>Nagpur</span><span>Kochi</span><span>Gurugram</span>
+                    <span>Delhi–Meerut</span>
+                </div>
+                <div class="pair">
+                    <figure>
+                        <div class="screen"><img src="screens/02-choose-metro.jpg" alt="Choosing a city metro"
+                                loading="lazy"></div>
+                        <figcaption>Pick your city and line</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/03-city-map.jpg" alt="City metro map" loading="lazy">
+                        </div>
+                        <figcaption>City maps in 2D and 3D</figcaption>
+                    </figure>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Visual Showcase</h2>
-            <div class="note">
-                <p>Hand-drawn Indian cities with markets, temples, IT parks, rivers with ferries, lakefronts,
-                    mountains and railway yards. Live traffic below the viaduct, passengers on every platform,
-                    station boards in English and Hindi, and sounds and music made right inside the game.</p>
+        <!-- Build -->
+        <section style="padding-top:0">
+            <div class="wrap build">
+                <div>
+                    <h2>Build the metro your city deserves</h2>
+                    <p class="section-lede" style="margin-bottom:2rem">No metro in your town yet? Design one in
+                        minutes and drive it yourself.</p>
+                    <ul class="ticks">
+                        <li>Add lines and stations, each elevated, street or underground</li>
+                        <li>The track between stations builds itself, with new scenery every drive</li>
+                        <li>Pick line colours, trains and the gap between stations</li>
+                        <li>Give two lines the same station to make an interchange</li>
+                        <li>Quick route: name two stations and start driving in seconds</li>
+                        <li>Share your metro as a file. Friends tap it and it opens in the game</li>
+                    </ul>
+                </div>
+                <div class="stack">
+                    <div class="screen"><img src="screens/07-my-metro.jpg" alt="Building your own metro lines"
+                            loading="lazy"></div>
+                    <div class="screen"><img src="screens/06-build-route.jpg" alt="Building a route"
+                            loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <h2>Every trip, your way</h2>
+                <p class="section-lede">Plan the run, choose the train and set the mood.</p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🗺️</div>
+                        <h3>Plan every trip</h3>
+                        <p>Pick start and end stations or a round trip, with short, normal, long or custom runs.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🌇</div>
+                        <h3>Time and weather</h3>
+                        <p>Morning, noon, golden evening or night, with clear skies, clouds or rain and thunder.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🚆</div>
+                        <h3>32 train liveries</h3>
+                        <p>Trains from 1 to 8 coaches between the engines, in the colours you like.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">📢</div>
+                        <h3>English and Hindi</h3>
+                        <p>Next-station, door and safety announcements, plus station boards translated on your
+                            phone.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🔁</div>
+                        <h3>Depot to depot</h3>
+                        <p>Start your day from the depot, change cab at the end of the line and drive back, round
+                            after round.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🎧</div>
+                        <h3>Sound and music</h3>
+                        <p>Motor hum, wheels on the rails, door chimes, the two-tone horn and calm planning music.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:0">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">See the line climb from the tunnel to the viaduct.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the Metro Driver India trailer">
+                    <img src="https://i.ytimg.com/vi/5J__jXpQnCA/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Screenshots</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the game.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="screen"><img src="screens/01-home.jpg" alt="Home screen" loading="lazy"></div>
+                        <figcaption>Start driving</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/11-river-bridge.jpg" alt="River bridge" loading="lazy">
+                        </div>
+                        <figcaption>Over the river</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/04-plan-trip.jpg" alt="Plan your trip" loading="lazy">
+                        </div>
+                        <figcaption>Plan your trip</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/05-choose-train.jpg" alt="Choose your train"
+                                loading="lazy"></div>
+                        <figcaption>Choose your train</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/08-viaduct.jpg" alt="Viaduct" loading="lazy"></div>
+                        <figcaption>On the viaduct</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/10-station.jpg" alt="Station" loading="lazy"></div>
+                        <figcaption>Arriving at the platform</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/07-my-metro.jpg" alt="My metro" loading="lazy"></div>
+                        <figcaption>Build your metro</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Do I need an account or internet to play?</summary>
+                        <p>No account is needed. You can drive without internet. Ads, the Hindi language pack and
+                            optional rewarded unlocks need a connection.</p>
+                    </details>
+                    <details>
+                        <summary>Can I add my own city?</summary>
+                        <p>Yes. Build a metro for any city or town, add lines and stations, then drive it. You can
+                            also share it with friends as a file.</p>
+                    </details>
+                    <details>
+                        <summary>Are the lines and maps real?</summary>
+                        <p>Station order and levels follow the real lines, but distances are shortened for play and
+                            the maps are illustrations, not real maps.</p>
+                    </details>
+                    <details>
+                        <summary>My city is missing. Can you add it?</summary>
+                        <p>Write to <a href="mailto:support.devduos@thetrishulgroup.com"
+                                style="color:var(--yellow)">support.devduos@thetrishulgroup.com</a> or use Feedback
+                            &amp; support in the game.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/s7c8oRTZYmab9St-56EOkKf6zqFBmFrxyZzwLg8EyGJIpskMjbhYQVodZQr8ogfkaYcTvNwVp_X2gP24lHsaeA=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>The cab is yours</h2>
+                    <p>Whether you love trains, enjoy a calm drive or want to design your city’s metro, step in and
+                        take the controls.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.metro_driver_india"
+                        target="_blank" rel="noopener" class="btn btn-yellow">Play on Google Play</a>
+                </div>
+                <p class="note">Metro Driver India is an entertainment game. City, line and station names are used
+                    only to create an authentic setting; the game is not affiliated with, or endorsed by, any metro
+                    rail corporation, railway company or train manufacturer. Made in India by DevDuo Software.</p>
             </div>
         </section>
     </main>
+
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="metrodriverindia_privacypolicy.html">Privacy Policy</a>
-                <a href="metrodriverindia_termsandconditions.html">Terms of Service</a>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="metrodriverindia_privacypolicy.html">Privacy policy</a>
+                <a href="metrodriverindia_termsandconditions.html">Terms and conditions</a>
                 <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
-            </div>
-            <p>&copy; 2026 DevDuo Software. All rights reserved.</p>
+                <a href="../../../devduos.html">More games</a>
+            </nav>
         </div>
     </footer>
+
     <script>
-        if (window.gsap && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-            gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.4, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
+
+        // Next-station line strip
+        const stations = [
+            ['PCMC', 'पीसीएमसी', 'Elevated'],
+            ['Sant Tukaram Nagar', 'संत तुकाराम नगर', 'Elevated'],
+            ['Bhosari', 'भोसरी', 'Elevated'],
+            ['Kasarwadi', 'कासारवाडी', 'Elevated'],
+            ['Phugewadi', 'फुगेवाडी', 'Elevated'],
+            ['Dapodi', 'दापोडी', 'Elevated']
+        ];
+        const track = document.getElementById('track');
+        const train = document.getElementById('train');
+        const dots = stations.map((s, i) => {
+            const d = document.createElement('div');
+            d.className = 'stn';
+            d.style.left = (4 + i * 92 / (stations.length - 1)) + '%';
+            d.innerHTML = `<span>${s[0]}</span>`;
+            track.appendChild(d);
+            return d;
+        });
+        let at = 0;
+        function goTo(i) {
+            dots.forEach((d, k) => {
+                d.classList.toggle('done', k < i);
+                d.classList.toggle('here', k === i);
+            });
+            const n = stations[Math.min(i + 1, stations.length - 1)];
+            train.style.left = dots[i].style.left;
+            document.getElementById('nextEn').textContent = n[0];
+            document.getElementById('nextHi').textContent = n[1];
+            document.getElementById('levelPill').textContent = n[2];
         }
+        goTo(0);
+        if (!reduce) {
+            setInterval(() => {
+                at = (at + 1) % stations.length;
+                if (at === 0) { train.style.transition = 'none'; }
+                goTo(at);
+                requestAnimationFrame(() => { train.style.transition = ''; });
+            }, 3400);
+        }
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const frame = document.createElement('iframe');
+            frame.src = 'https://www.youtube-nocookie.com/embed/5J__jXpQnCA?autoplay=1&rel=0&modestbranding=1';
+            frame.title = 'Metro Driver India trailer';
+            frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            frame.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(frame);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const step = () => (gal.querySelector('figure')?.offsetWidth || 560) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -step(), behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: step(), behavior: 'smooth' });
     </script>
 </body>
 

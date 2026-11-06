@@ -3,131 +3,167 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Terms & Conditions - 10 Min Stretch</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Terms & Conditions - 10 Min Stretch | DevDuo Software</title>
+    <meta name="theme-color" content="#f7f6fb">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s128-rw">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #f7f6fb; --card: #ffffff; --ink: #15132b; --soft: #4a4861; --mute: #7a7890;
+            --line: #e7e5f0; --violet: #5b3df5; --violet-soft: #ece8ff; --warn: #b42318; --warn-soft: #fef3f2;
+            --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.6;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(247, 246, 251, .85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: var(--ink); color: #fff; }
+        .doc-head { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #5b1a14; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: #fff;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        h2 {
-            margin-top: 2rem;
-            font-size: 1.5rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        ul {
-            color: var(--muted);
-        }
-
-        a {
-            color: var(--brand-1);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: var(--brand-2);
-            font-weight: 500;
-        }
-
-        .disclaimer {
-            background: rgba(255, 50, 50, 0.1);
-            border-left: 4px solid #ff4444;
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-            margin: 1.5rem 0;
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body { background: #fff; } }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <a href="10minstretch_info.html" class="back-btn">&larr; Back to App Info</a>
-        <h1>Terms & Conditions</h1>
-        <p><strong>Effective Date:</strong> January 1, 2025</p>
-
-        <p>Please read these Terms and Conditions carefully before using the 10 Min Stretch application operated by
-            Devduos.</p>
-
-        <div class="disclaimer">
-            <h2>1. Medical & Health Disclaimer</h2>
-            <p>10 Min Stretch provides exercise and stretching routines designed for educational and informational
-                purposes only. You should consult your physician or other health care professional before starting this
-                or any other fitness program to determine if it is right for your needs. Do not start this fitness
-                program if your physician or health care provider advises against it. If you experience faintness,
-                dizziness, pain, or shortness of breath at any time while exercising you should stop immediately.</p>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="10minstretch_info.html">App info</a>
+                <a href="10minstretch_privacypolicy.html">Privacy</a>
+                <a href="10minstretch_termsandconditions.html" aria-current="page">Terms</a>
+            </nav>
         </div>
+    </header>
 
-        <h2>2. Use of the App</h2>
-        <p>By downloading or using the app, these terms will automatically apply to you. You should make sure therefore
-            that you read them carefully before using the app. You are not allowed to copy, or modify the app, any part
-            of the app, or our trademarks in any way.</p>
-
-        <h2>3. Intellectual Property</h2>
-        <p>The app itself, and all the trade marks, copyright, database rights and other intellectual property rights
-            related to it, still belong to Devduos.</p>
-
-        <h2>4. Limitation of Liability</h2>
-        <p>Devduos shall not be liable for any injuries, damages, or losses resulting from your use of the routines,
-            exercises, or information provided within 10 Min Stretch. You use the application completely at your own
-            risk.</p>
-
-        <h2>5. Changes to This Agreement</h2>
-        <p>We reserve the right to modify these terms at any time. We do so by posting and drawing attention to the
-            updated terms on this site. Your decision to continue to visit and make use of the App after such changes
-            have been made constitutes your formal acceptance of the new Terms.</p>
-
-        <h2>6. Contact Us</h2>
-        <p>If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="10minstretch_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s128-rw" alt="" width="32" height="32">10 Min Stretch: Posture &amp; Back</a>
+            <h1>Terms &amp; Conditions</h1>
+            <p class="meta">Effective date: January 1, 2025</p>
+        </div>
     </div>
+
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#disclaimer">1. Medical &amp; Health Disclaimer</a></li>
+                <li><a href="#use">2. Use of the App</a></li>
+                <li><a href="#ip">3. Intellectual Property</a></li>
+                <li><a href="#liability">4. Limitation of Liability</a></li>
+                <li><a href="#changes">5. Changes to This Agreement</a></li>
+                <li><a href="#contact">6. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+                <p>Please read these Terms and Conditions carefully before using the 10 Min Stretch application operated by Devduos.</p>
+            <section id="disclaimer" class="disclaimer">
+                <h2>1. Medical &amp; Health Disclaimer</h2>
+                <p>10 Min Stretch provides exercise and stretching routines designed for educational and informational purposes only. You should consult your physician or other health care professional before starting this or any other fitness program to determine if it is right for your needs. Do not start this fitness program if your physician or health care provider advises against it. If you experience faintness, dizziness, pain, or shortness of breath at any time while exercising you should stop immediately.</p>
+            </section>
+            <section id="use">
+                <h2>2. Use of the App</h2>
+                <p>By downloading or using the app, these terms will automatically apply to you. You should make sure therefore that you read them carefully before using the app. You are not allowed to copy, or modify the app, any part of the app, or our trademarks in any way.</p>
+            </section>
+            <section id="ip">
+                <h2>3. Intellectual Property</h2>
+                <p>The app itself, and all the trade marks, copyright, database rights and other intellectual property rights related to it, still belong to Devduos.</p>
+            </section>
+            <section id="liability">
+                <h2>4. Limitation of Liability</h2>
+                <p>Devduos shall not be liable for any injuries, damages, or losses resulting from your use of the routines, exercises, or information provided within 10 Min Stretch. You use the application completely at your own risk.</p>
+            </section>
+            <section id="changes">
+                <h2>5. Changes to This Agreement</h2>
+                <p>We reserve the right to modify these terms at any time. We do so by posting and drawing attention to the updated terms on this site. Your decision to continue to visit and make use of the App after such changes have been made constitutes your formal acceptance of the new Terms.</p>
+            </section>
+            <section id="contact">
+                <h2>6. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions or suggestions about our Terms and Conditions, do not hesitate to contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="10minstretch_info.html">App info</a>
+                <a href="10minstretch_privacypolicy.html">Privacy policy</a>
+                <a href="10minstretch_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

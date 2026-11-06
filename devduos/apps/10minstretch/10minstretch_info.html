@@ -3,342 +3,1194 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>10 Min Stretch - Daily Mobility | DevDuo's</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>10 Min Stretch: Posture & Back | DevDuo Software</title>
+    <meta name="description"
+        content="Fix tech neck and back pain with daily AI posture stretches. Guided 10-minute routines with a voice coach, desk resets and streaks. No equipment needed.">
+    <meta property="og:title" content="10 Min Stretch: Posture & Back">
+    <meta property="og:description" content="Daily AI posture stretches in 10 minutes. No equipment needed.">
+    <meta property="og:image" content="screens/01-home.jpg">
+    <meta name="theme-color" content="#f7f6fb">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧘</text></svg>">
+        href="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s128-rw">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg: #f7f6fb;
+            --card: #ffffff;
+            --ink: #15132b;
+            --soft: #4a4861;
+            --mute: #7a7890;
+            --line: #e7e5f0;
+            --violet: #5b3df5;
+            --violet-soft: #ece8ff;
+            --orange: #f97316;
+            --orange-soft: #fff1e6;
+            --font: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
+        a {
+            color: inherit;
         }
 
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        img {
+            max-width: 100%;
+            display: block;
         }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        :focus-visible {
+            outline: 2px solid var(--violet);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
+        .wrap {
+            width: min(1120px, 90vw);
             margin: 0 auto;
         }
 
-        section {
-            padding: 6rem 0;
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(247, 246, 251, .85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
         }
 
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 780px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
-        }
-
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
-            color: var(--brand-1);
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .visual-showcase {
-            background: #080808;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-links {
+        .nav .wrap {
+            height: 66px;
             display: flex;
-            justify-content: center;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 500;
+            transition: color .2s, background .2s;
+        }
+
+        .tabs a:hover {
+            color: var(--ink);
+        }
+
+        .tabs a[aria-current="page"] {
+            background: var(--ink);
+            color: #fff;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .app-id img {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            box-shadow: 0 10px 24px rgba(91, 61, 245, .2);
+        }
+
+        .app-id strong {
+            display: block;
+            font-size: 1.05rem;
+        }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-size: clamp(2.3rem, 5vw, 3.6rem);
+            line-height: 1.08;
+            letter-spacing: -.02em;
+            margin: 0 0 1.25rem;
+            font-weight: 700;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--violet);
+        }
+
+        .lede {
+            font-size: 1.1rem;
+            color: var(--soft);
+            max-width: 50ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, box-shadow .2s, background .2s;
+        }
+
+        .btn-dark {
+            background: var(--ink);
+            color: #fff;
+            box-shadow: 0 10px 24px rgba(21, 19, 43, .18);
+        }
+
+        .btn-dark:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            color: var(--ink);
+            background: var(--card);
+            border: 1px solid var(--line);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--violet);
+        }
+
+        .pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 2rem;
+        }
+
+        .pill {
+            font-size: .85rem;
+            font-weight: 500;
+            padding: .35rem .8rem;
+            border-radius: 999px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            color: var(--soft);
+        }
+
+        /* Phones */
+        .phones {
+            position: relative;
+            height: 560px;
+        }
+
+        .phones::before {
+            content: "";
+            position: absolute;
+            inset: 8% 4% 4% 10%;
+            border-radius: 50%;
+            background: radial-gradient(closest-side, rgba(91, 61, 245, .22), rgba(249, 115, 22, .1) 60%, transparent 80%);
+        }
+
+        .phone {
+            position: absolute;
+            width: 250px;
+            border-radius: 36px;
+            padding: 8px;
+            background: #111;
+            box-shadow: 0 30px 60px rgba(21, 19, 43, .25);
+        }
+
+        .phone img {
+            border-radius: 28px;
+            width: 100%;
+            aspect-ratio: 832 / 1740;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        .phone video {
+            display: block;
+            border-radius: 28px;
+            width: 100%;
+            aspect-ratio: 832 / 1740;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        .phone.back {
+            right: 4%;
+            top: 0;
+            transform: rotate(6deg);
+        }
+
+        .phone.front {
+            left: 6%;
+            top: 60px;
+            transform: rotate(-4deg);
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 5.5rem 0;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 3.4vw, 2.5rem);
+            line-height: 1.15;
+            letter-spacing: -.015em;
+            margin: 0 0 .75rem;
+            font-weight: 700;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 3rem;
+        }
+
+        /* Pain strip */
+        .pain {
+            background: var(--ink);
+            color: #fff;
+            padding: 3rem 0;
+        }
+
+        .pain .wrap {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .pain h2 {
+            font-size: 1.6rem;
+            margin: 0;
+        }
+
+        .pain-list {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .pain-item {
+            padding: 1rem 1.1rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .1);
+        }
+
+        .pain-item strong {
+            display: block;
+            font-size: .98rem;
+        }
+
+        .pain-item span {
+            font-size: .85rem;
+            color: #b9b7cc;
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
-            text-decoration: none;
-            transition: color .2s;
+        .step {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 1.5rem 1.5rem 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        .step .num {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: var(--violet-soft);
+            color: var(--violet);
+            font-weight: 700;
+            font-size: .95rem;
+            margin-bottom: 1rem;
+        }
+
+        .step h3 {
+            margin: 0 0 .35rem;
+            font-size: 1.15rem;
+        }
+
+        .step p {
+            margin: 0 0 1.5rem;
+            color: var(--mute);
+            font-size: .95rem;
+        }
+
+        .step .shot {
+            margin-top: auto;
+            border-radius: 20px 20px 0 0;
+            border: 6px solid #111;
+            border-bottom: 0;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .step .shot img {
+            width: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 28px;
+            overflow: hidden;
+            border: 0;
+            padding: 0;
+            cursor: pointer;
+            background: var(--ink);
+            box-shadow: 0 24px 50px rgba(21, 19, 43, .2);
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img {
+            transform: scale(1.03);
+        }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(21, 19, 43, .45), rgba(21, 19, 43, .05));
+        }
+
+        .trailer .play span {
+            width: 84px;
+            height: 84px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span {
+            transform: scale(1.08);
+        }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: var(--violet);
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .trailer-head {
+            text-align: center;
+        }
+
+        .trailer-head .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 1.25rem;
+        }
+
+        .feature {
+            grid-column: span 2;
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 1.75rem;
+        }
+
+        .feature.wide {
+            grid-column: span 3;
+        }
+
+        .feature .ic {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 1.1rem;
+            background: var(--violet-soft);
+            color: var(--violet);
+        }
+
+        .feature.warm .ic {
+            background: var(--orange-soft);
+            color: var(--orange);
+        }
+
+        .feature .ic svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .feature h3 {
+            margin: 0 0 .4rem;
+            font-size: 1.1rem;
+        }
+
+        .feature p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .95rem;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 3rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover {
+            border-color: var(--violet);
+        }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery figure {
+            flex: 0 0 220px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .frame {
+            border-radius: 30px;
+            padding: 6px;
+            background: #111;
+            box-shadow: 0 16px 32px rgba(21, 19, 43, .16);
+        }
+
+        .gallery img {
+            border-radius: 24px;
+            width: 100%;
+            aspect-ratio: 864 / 1740;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* Library */
+        .library {
+            background: var(--card);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .lib-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .lib {
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+        }
+
+        .lib strong {
+            display: block;
+            margin-bottom: .35rem;
+        }
+
+        .lib span {
+            color: var(--mute);
+            font-size: .92rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 780px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--violet);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "–";
+        }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 32px;
+            background:
+                radial-gradient(80% 120% at 0% 0%, rgba(91, 61, 245, .35), transparent 60%),
+                radial-gradient(70% 120% at 100% 100%, rgba(249, 115, 22, .3), transparent 60%),
+                var(--ink);
+            color: #fff;
+        }
+
+        .cta img {
+            width: 76px;
+            height: 76px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: #c9c7da;
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        .cta .btn {
+            background: #fff;
+            color: var(--ink);
+        }
+
+        .note {
+            margin-top: 2rem;
+            font-size: .85rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--ink);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .phones {
+                height: 480px;
+                max-width: 460px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .phone {
+                width: 210px;
+            }
+
+            .pain .wrap {
+                grid-template-columns: 1fr;
+            }
+
+            .pain-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .step .shot {
+                height: 260px;
+                max-width: 320px;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .feature,
+            .feature.wide {
+                grid-column: span 1;
+            }
+
+            .lib-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .phone {
+                width: 170px;
+            }
+
+            .phones {
+                height: 400px;
+            }
+
+            .features,
+            .lib-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery figure {
+                flex-basis: 180px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="10minstretch_info.html" class="app-bar-link active">App Info</a>
-                <a href="10minstretch_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="10minstretch_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="10minstretch_info.html" aria-current="page">App info</a>
+                <a href="10minstretch_privacypolicy.html">Privacy</a>
+                <a href="10minstretch_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s512-rw"
-                alt="10 Min Stretch App Icon" class="hero-icon">
-            <h1 class="grand-title">Revitalize Your Body in <span class="gradient-text">10 Minutes</span>.</h1>
-            <p class="intro-lede">
-                Say goodbye to stiffness. Whether you're fighting "Tech Neck" at your desk, recovering from a workout,
-                or winding down for bed, 10 Min Stretch offers guided, science-backed routines to improve your mobility
-                and melt away pain.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduo.tenminstretch" target="_blank"
-                class="cta-button">Download on Play Store</a>
-        </section>
-
-        <section class="container">
-            <h2 class="section-title">Built for Your Daily Life</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <h3>Office & Desk Relief</h3>
-                    <p>Combat long hours of sitting with targeted routines like "The Desk Reset," "Tech Neck Fix," and
-                        "Mouse & Keyboard Relief" to instantly correct your posture and soothe your joints.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-                    </svg>
-                    <h3>Targeted Pain Management</h3>
-                    <p>Suffer from a stiff lower back or tension headaches? We provide specific flows designed to deeply
-                        release tension from your neck, shoulders, spine, and hips.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                    </svg>
-                    <h3>Over 90+ Unique Exercises</h3>
-                    <p>From the soothing Cat-Cow stretch to specialized Digital Eye Strain relief. Every exercise
-                        includes clear visual guides, timed durations, and built-in rest periods to ensure perfect form.
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s256-rw"
+                            alt="10 Min Stretch app icon" width="72" height="72">
+                        <div>
+                            <strong>10 Min Stretch: Posture & Back</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>Fix tech neck and back pain in <em>10 minutes</em> a day.</h1>
+                    <p class="lede">
+                        Sitting at a desk all day? Get a personalised daily stretch flow, guided by a voice coach, that
+                        targets your neck, back, hips and wrists. No equipment needed.
                     </p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.tenminstretch" target="_blank"
+                            rel="noopener" class="btn btn-dark">View on Google Play</a>
+                        <a href="#how" class="btn btn-ghost">See how it works</a>
+                    </div>
+                    <div class="pills">
+                        <span class="pill">AI daily flows</span>
+                        <span class="pill">Voice coach</span>
+                        <span class="pill">Works offline</span>
+                        <span class="pill">No account needed</span>
+                    </div>
+                </div>
+                <div class="phones" aria-hidden="true">
+                    <div class="phone back"><img src="screens/04-player.jpg" alt=""></div>
+                    <div class="phone front">
+                        <video src="screens/hero-loop.mp4" poster="screens/01-home.jpg" autoplay muted loop playsinline
+                            preload="metadata" id="heroLoop"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pain strip -->
+        <div class="pain">
+            <div class="wrap">
+                <h2>Built for the aches of modern life</h2>
+                <div class="pain-list">
+                    <div class="pain-item"><strong>Tech neck</strong><span>From looking down at screens</span>
+                    </div>
+                    <div class="pain-item"><strong>Lower back</strong><span>From long hours of sitting</span></div>
+                    <div class="pain-item"><strong>Tight hips</strong><span>From desks, cars and sofas</span></div>
+                    <div class="pain-item"><strong>Mouse arm</strong><span>From typing and scrolling</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How it works -->
+        <section id="how">
+            <div class="wrap">
+                <h2>How it works</h2>
+                <p class="section-lede">Answer a few questions once. The app builds a new flow for you every day.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="num">1</div>
+                        <h3>Tell us your goal</h3>
+                        <p>Choose your level, your goal, your lifestyle and where you carry tension.</p>
+                        <div class="shot"><img src="screens/02-goal.jpg" alt="Choosing a goal in 10 Min Stretch"
+                                loading="lazy"></div>
+                    </div>
+                    <div class="step">
+                        <div class="num">2</div>
+                        <h3>Get your daily flow</h3>
+                        <p>A custom routine is generated with each stretch picked for your problem areas.</p>
+                        <div class="shot"><img src="screens/03-daily-flow.jpg" alt="Generated daily flow"
+                                loading="lazy"></div>
+                    </div>
+                    <div class="step">
+                        <div class="num">3</div>
+                        <h3>Stretch along</h3>
+                        <p>Follow clear demos, timers and a voice coach, with rest built in between moves.</p>
+                        <div class="shot"><img src="screens/04-player.jpg" alt="Guided stretch player" loading="lazy">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Visual Showcase</h2>
-            <div class="visual-showcase">
-                <p>[Your App Screenshots or a Demo Video Can Go Here]</p>
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:0">
+            <div class="wrap">
+                <div class="trailer-head">
+                    <h2>Watch the trailer</h2>
+                    <p class="section-lede">See a full session, from your daily flow to the voice-guided player.</p>
+                </div>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the 10 Min Stretch trailer">
+                    <img src="https://i.ytimg.com/vi/Jx4b0VrBRwk/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <h2>Everything you need to move better</h2>
+                <p class="section-lede">Five reasons people keep stretching with 10 Min Stretch.</p>
+                <div class="features">
+                    <div class="feature wide">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                aria-hidden="true">
+                                <path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"
+                                    stroke-linejoin="round" />
+                                <path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"
+                                    stroke-linejoin="round" />
+                            </svg></div>
+                        <h3>Personalised AI daily flows</h3>
+                        <p>Stop guessing which stretches to do. A smart algorithm builds a fresh routine from your
+                            needs, experience level and lifestyle, targeting your exact areas of tension.</p>
+                    </div>
+                    <div class="feature wide warm">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                aria-hidden="true">
+                                <rect x="3" y="4" width="18" height="12" rx="2" />
+                                <path d="M8 20h8M12 16v4" stroke-linecap="round" />
+                            </svg></div>
+                        <h3>Office and desk reset</h3>
+                        <p>Targeted routines like Long Sitting Rescue, Mouse Arm Relief and Tech Neck stretches help
+                            realign your spine, open your chest and release your shoulders.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                aria-hidden="true">
+                                <path d="M4 14v-2a8 8 0 0116 0v2" />
+                                <rect x="3" y="14" width="4" height="6" rx="1.5" />
+                                <rect x="17" y="14" width="4" height="6" rx="1.5" />
+                            </svg></div>
+                        <h3>Hands-free voice coach</h3>
+                        <p>Choose from many coach voices with countdowns and video demos, so you never need to stare
+                            at the screen.</p>
+                    </div>
+                    <div class="feature warm">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                aria-hidden="true">
+                                <path
+                                    d="M12 3c1 3 4 4.5 4 8.5a4 4 0 01-8 0c0-1.5.5-2.5 1.5-3.5.2 1.6 1 2.4 2 2.5-.5-2.5 0-5 .5-7.5z"
+                                    stroke-linejoin="round" />
+                                <path d="M6 21h12" stroke-linecap="round" />
+                            </svg></div>
+                        <h3>Streaks and reminders</h3>
+                        <p>Daily milestones, a calendar, active minutes and Smart Stretch Reminders keep the habit
+                            going.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                aria-hidden="true">
+                                <path d="M4 5h6v14H4zM14 5h6v14h-6z" stroke-linejoin="round" />
+                            </svg></div>
+                        <h3>90+ exercise library</h3>
+                        <p>From Cat-Cow to deep hip mobility, every move has a visual guide, timer and rest
+                            period.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:3rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="frame"><img src="screens/01-home.jpg" alt="Home screen with daily milestones"
+                                loading="lazy"></div>
+                        <figcaption>Your day at a glance</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/03-daily-flow.jpg" alt="AI generated daily flow"
+                                loading="lazy"></div>
+                        <figcaption>AI daily flow</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/04-player.jpg" alt="Guided stretch player" loading="lazy">
+                        </div>
+                        <figcaption>Guided player</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/06-neck-tilt.jpg" alt="Neck tilt exercise guide"
+                                loading="lazy"></div>
+                        <figcaption>Step-by-step demos</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/05-library.jpg" alt="Routine library" loading="lazy">
+                        </div>
+                        <figcaption>Routine library</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/08-quick-launch.jpg" alt="Quick launch search"
+                                loading="lazy"></div>
+                        <figcaption>Quick launch</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/09-voice-coach.jpg" alt="Choosing a coach voice"
+                                loading="lazy"></div>
+                        <figcaption>Pick your coach voice</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/07-activity.jpg" alt="Activity and reminders"
+                                loading="lazy"></div>
+                        <figcaption>Activity and reminders</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="frame"><img src="screens/10-level-up.jpg" alt="Gamified progress" loading="lazy">
+                        </div>
+                        <figcaption>Level up your mobility</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- Library -->
+        <section class="library">
+            <div class="wrap">
+                <h2>A routine for every moment</h2>
+                <p class="section-lede">Explore stretching routines for every level, from your first stretch to
+                    athlete recovery.</p>
+                <div class="lib-grid">
+                    <div class="lib"><strong>Daily essentials</strong><span>Morning wake-up flows and bedtime
+                            wind-down stretches.</span></div>
+                    <div class="lib"><strong>Target areas</strong><span>Deep hip mobility, chest openers and leg
+                            stretches.</span></div>
+                    <div class="lib"><strong>Pain relief</strong><span>Lower back, neck and shoulder tension
+                            routines.</span></div>
+                    <div class="lib"><strong>Athlete recovery</strong><span>Dynamic warm-ups and post-workout
+                            cool-downs.</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section>
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Do I need any equipment?</summary>
+                        <p>No. Every routine uses only your body, so you can stretch at your desk, at home or while
+                            travelling.</p>
+                    </details>
+                    <details>
+                        <summary>How long does a session take?</summary>
+                        <p>Most flows take around 10 minutes. There are also quick 3 to 5 minute routines for short
+                            breaks.</p>
+                    </details>
+                    <details>
+                        <summary>Do I need to create an account?</summary>
+                        <p>No. Your answers, history and streaks are stored on your phone. See our <a
+                                href="10minstretch_privacypolicy.html" style="color:var(--violet)">privacy policy</a>
+                            for details.</p>
+                    </details>
+                    <details>
+                        <summary>Is it suitable for beginners?</summary>
+                        <p>Yes. You choose beginner, intermediate or advanced during setup and the app adapts your
+                            daily flow to your level.</p>
+                    </details>
+                    <details>
+                        <summary>Can it replace physiotherapy?</summary>
+                        <p>No. The app is for general wellness and flexibility. If you have an injury or ongoing pain,
+                            please talk to a doctor or physiotherapist first.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:0">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/rQSzSGKDpG3EZLuA0oLN8JruZAgA3rraJu2PHV4OLU5qBRhrXOnITYi69wTQGsqnskjFLRGG8CXVhlewiet_jq4=s256-rw"
+                        alt="" width="76" height="76">
+                    <h2>Start your first 10 minutes today</h2>
+                    <p>Build a healthier spine and a more flexible body, one short session at a time.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.tenminstretch" target="_blank"
+                        rel="noopener" class="btn">View on Google Play</a>
+                </div>
+                <p class="note">10 Min Stretch is for general wellness only and is not medical advice. Read the <a
+                        href="10minstretch_termsandconditions.html">health disclaimer</a>.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="10minstretch_privacypolicy.html">Privacy Policy</a>
-                <a href="10minstretch_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="10minstretch_privacypolicy.html">Privacy policy</a>
+                <a href="10minstretch_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const frame = document.createElement('iframe');
+            frame.src = 'https://www.youtube-nocookie.com/embed/Jx4b0VrBRwk?autoplay=1&rel=0&modestbranding=1';
+            frame.title = '10 Min Stretch trailer';
+            frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            frame.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(frame);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Respect reduced motion for the hero loop
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            const v = document.getElementById('heroLoop');
+            v.removeAttribute('autoplay');
+            v.pause();
+        }
+
+        const gal = document.getElementById('gallery');
+        const step = () => (gal.querySelector('figure')?.offsetWidth || 220) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -step() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: step() * 2, behavior: 'smooth' });
     </script>
 </body>
 

@@ -3,330 +3,1284 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Photo Compressor - Smart Image Optimization | DevDuo's</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Photo Compressor & Resizer | DevDuo Software</title>
+    <meta name="description"
+        content="Compress photos to an exact KB size, batch compress hundreds of images, resize for any form and export as ZIP. 100% offline and private.">
+    <meta property="og:title" content="Photo Compressor & Resizer">
+    <meta property="og:description" content="Shrink photos to any KB size, in batches, without leaving your phone.">
+    <meta property="og:image" content="screens/05-batch-saved.jpg">
+    <meta name="theme-color" content="#0a0a12">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗜️</text></svg>">
+        href="https://play-lh.googleusercontent.com/3PIP6CtS9TKEkOGoyyqcXO_g-Ze5FDWR2DnGe-94UH0zV2BZJbIXEQwl4lnIKhWvxegaTHOgtZsNdlg70n4asw=s128-rw">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600;700&display=swap"
         rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg: #0a0a12;
+            --bg-2: #12121e;
+            --bg-3: #1a1a2b;
+            --line: #262640;
+            --text: #eeeef8;
+            --soft: #bdbdd6;
+            --mute: #8585a3;
+            --violet: #7c5cff;
+            --violet-2: #a18bff;
+            --green: #34d399;
+            --display: "Space Grotesk", system-ui, sans-serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
+        a {
+            color: inherit;
         }
 
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        img,
+        video {
+            max-width: 100%;
+            display: block;
         }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        :focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
+        .wrap {
+            width: min(1140px, 90vw);
             margin: 0 auto;
         }
 
-        section {
-            padding: 6rem 0;
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(10, 10, 18, .82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            object-fit: cover;
-            background: #111;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 680px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
-        }
-
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
-            color: var(--brand-1);
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-links {
+        .nav .wrap {
+            height: 66px;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
             text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 500;
             transition: color .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        .tabs a:hover {
+            color: var(--text);
+        }
+
+        .tabs a[aria-current="page"] {
+            background: var(--violet);
+            color: #fff;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 820px;
+            height: 820px;
+            right: -240px;
+            top: -320px;
+            background: radial-gradient(closest-side, rgba(124, 92, 255, .25), rgba(52, 211, 153, .08) 55%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(124, 92, 255, .3);
+        }
+
+        .app-id strong {
+            display: block;
+        }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(2.5rem, 5.6vw, 4.3rem);
+            line-height: 1.02;
+            letter-spacing: -.03em;
+            margin: 0 0 1.25rem;
+        }
+
+        .squeeze {
+            display: inline-block;
+            color: var(--green);
+            animation: squeeze 3.2s ease-in-out infinite;
+            transform-origin: left center;
+        }
+
+        @keyframes squeeze {
+
+            0%,
+            20% {
+                transform: scaleX(1);
+            }
+
+            45%,
+            70% {
+                transform: scaleX(.72);
+            }
+
+            95%,
+            100% {
+                transform: scaleX(1);
+            }
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .btn-main {
+            background: var(--violet);
+            color: #fff;
+            box-shadow: 0 10px 30px rgba(124, 92, 255, .35);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .btn-line:hover {
+            border-color: var(--green);
+        }
+
+        .formats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 2rem;
+        }
+
+        .formats span {
+            font-family: var(--mono);
+            font-size: .8rem;
+            padding: .3rem .7rem;
+            border-radius: 8px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+            color: var(--soft);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #2b2b48;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 0 10px rgba(124, 92, 255, .06);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 864 / 1850;
+            object-fit: cover;
+            background: var(--bg);
+        }
+
+        /* ---------- Squeeze lab (signature) ---------- */
+        .lab {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .compare {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border-radius: 20px;
+            overflow: hidden;
+            user-select: none;
+            touch-action: none;
+            cursor: ew-resize;
+            background: #000;
+        }
+
+        .compare svg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .compare .after {
+            clip-path: inset(0 0 0 var(--pos, 50%));
+        }
+
+        .compare .tag {
+            position: absolute;
+            top: .75rem;
+            font-size: .72rem;
+            font-weight: 700;
+            padding: .3rem .65rem;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .6);
+            z-index: 2;
+        }
+
+        .compare .t-before {
+            left: .75rem;
+        }
+
+        .compare .t-after {
+            right: .75rem;
+            color: var(--green);
+        }
+
+        .handle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: var(--pos, 50%);
+            width: 3px;
+            margin-left: -1.5px;
+            background: #fff;
+            z-index: 3;
+        }
+
+        .handle::after {
+            content: "‹ ›";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #fff;
+            color: #111;
+            font-weight: 800;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, .4);
+        }
+
+        .meter {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: .75rem;
+            margin: 1.5rem 0 1rem;
+            font-family: var(--mono);
+        }
+
+        .meter div {
+            padding: .9rem 1rem;
+            border-radius: 14px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+        }
+
+        .meter small {
+            display: block;
+            font-family: var(--sans);
+            font-size: .72rem;
+            color: var(--mute);
+            font-weight: 600;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+        }
+
+        .meter b {
+            font-size: 1.35rem;
+        }
+
+        .meter .new b {
+            color: var(--green);
+        }
+
+        .arrow {
+            color: var(--mute);
+        }
+
+        .bar {
+            height: 10px;
+            border-radius: 6px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            overflow: hidden;
+        }
+
+        .bar i {
+            display: block;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, var(--green), var(--violet));
+            transition: width .4s ease;
+        }
+
+        .saved {
+            margin: .6rem 0 1.25rem;
+            font-size: .95rem;
+            color: var(--soft);
+        }
+
+        .saved b {
+            color: var(--green);
+        }
+
+        .targets {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .targets button {
+            font: inherit;
+            font-family: var(--mono);
+            font-size: .9rem;
+            font-weight: 700;
+            padding: .55rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--soft);
+            cursor: pointer;
+        }
+
+        .targets button[aria-pressed="true"] {
+            background: var(--green);
+            color: #052e1c;
+            border-color: var(--green);
+        }
+
+        .lab-note {
+            margin: 1rem 0 0;
+            font-size: .82rem;
+            color: var(--mute);
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 5.5rem 0;
+        }
+
+        h2 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+            line-height: 1.08;
+            letter-spacing: -.025em;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .kicker {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: .6rem;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Use cases */
+        .uses {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .use {
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .use .ic {
+            font-size: 1.5rem;
+            margin-bottom: .7rem;
+        }
+
+        .use h3 {
+            margin: 0 0 .3rem;
+            font-size: 1.05rem;
+        }
+
+        .use p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .92rem;
+        }
+
+        /* Split features */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split.flip .split-text {
+            order: 2;
+        }
+
+        .split ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split li {
+            margin-bottom: .4rem;
+        }
+
+        .duo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .duo .phone {
+            width: 220px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) {
+            margin-top: 3rem;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img {
+            transform: scale(1.03);
+        }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(10, 10, 18, .6), rgba(10, 10, 18, .1));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--violet);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span {
+            transform: scale(1.08);
+        }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #fff;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover {
+            border-color: var(--green);
+        }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery figure {
+            flex: 0 0 200px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img {
+            border-radius: 24px;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 780px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--green);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "–";
+        }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(60% 120% at 0% 0%, rgba(124, 92, 255, .25), transparent 60%),
+                radial-gradient(60% 120% at 100% 100%, rgba(52, 211, 153, .15), transparent 60%),
+                var(--bg-2);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+
+            .hero-grid,
+            .lab,
+            .split {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .split.flip .split-text {
+                order: 0;
+            }
+
+            .lab {
+                padding: 2rem 1.5rem;
+            }
+
+            .uses {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .phone {
+                width: 240px;
+            }
+
+            .duo .phone {
+                width: 170px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .uses {
+                grid-template-columns: 1fr;
+            }
+
+            .duo .phone {
+                width: 145px;
+            }
+
+            .gallery figure {
+                flex-basis: 170px;
+            }
+
+            .meter b {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+                animation: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="photocompressor_info.html" class="app-bar-link active">App Info</a>
-                <a href="photocompressor_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="photocompressor_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="photocompressor_info.html" aria-current="page">App info</a>
+                <a href="photocompressor_privacypolicy.html">Privacy</a>
+                <a href="photocompressor_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://play-lh.googleusercontent.com/3PIP6CtS9TKEkOGoyyqcXO_g-Ze5FDWR2DnGe-94UH0zV2BZJbIXEQwl4lnIKhWvxegaTHOgtZsNdlg70n4asw=s512-rw"
-                alt="Photo Compressor App Icon" class="hero-icon">
-            <h1 class="grand-title">Optimize Your Images, <span class="gradient-text">Instantly</span>.</h1>
-            <p class="intro-lede">
-                Photo Compressor reduces the file size of your images without sacrificing quality. Featuring an
-                interactive compare slider, batch processing, and complete on-device privacy.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduo.photocompressor" target="_blank"
-                class="cta-button">View on Play Store</a>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/3PIP6CtS9TKEkOGoyyqcXO_g-Ze5FDWR2DnGe-94UH0zV2BZJbIXEQwl4lnIKhWvxegaTHOgtZsNdlg70n4asw=s256-rw"
+                            alt="Photo Compressor app icon" width="64" height="64">
+                        <div>
+                            <strong>Photo Compressor &amp; Resizer</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>Shrink any photo to the <span class="squeeze">exact KB</span> you need.</h1>
+                    <p class="lede">Compress to a target size for online forms, batch compress hundreds of photos in
+                        seconds, resize for any platform and share as one ZIP. All on your phone, fully offline.</p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.photocompressor"
+                            target="_blank" rel="noopener" class="btn btn-main">View on Google Play</a>
+                        <a href="#lab" class="btn btn-line">Try the slider</a>
+                    </div>
+                    <div class="formats"><span>JPEG</span><span>JPG</span><span>PNG</span><span>WEBP</span><span>ZIP
+                            export</span></div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/05-batch-saved.jpg" autoplay muted loop
+                        playsinline preload="metadata" id="heroLoop"
+                        aria-label="Batch compressing photos and saving space"></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Squeeze lab -->
+        <section id="lab" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="lab">
+                    <div>
+                        <div class="compare" id="compare" aria-label="Before and after comparison. Drag to compare.">
+                            <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0" stop-color="#ff9a5a" />
+                                        <stop offset=".55" stop-color="#ff5e7e" />
+                                        <stop offset="1" stop-color="#5b3bbf" />
+                                    </linearGradient>
+                                </defs>
+                                <rect width="400" height="300" fill="url(#sky)" />
+                                <circle cx="290" cy="120" r="38" fill="#ffe08a" />
+                                <path d="M0 210 L70 140 L130 190 L200 110 L270 180 L330 140 L400 190 V300 H0Z"
+                                    fill="#3a1f6e" />
+                                <path d="M0 240 L90 190 L170 235 L250 200 L330 240 L400 215 V300 H0Z" fill="#24124a" />
+                                <rect y="262" width="400" height="38" fill="#150b2e" />
+                                <g fill="#1e7a5a">
+                                    <path d="M40 262 l12 -40 l12 40z" />
+                                    <path d="M62 262 l10 -30 l10 30z" />
+                                    <path d="M330 262 l14 -48 l14 48z" />
+                                    <path d="M356 262 l10 -32 l10 32z" />
+                                </g>
+                            </svg>
+                            <svg class="after" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"
+                                aria-hidden="true">
+                                <defs>
+                                    <filter id="jpeg">
+                                        <feGaussianBlur stdDeviation="0" id="blurAmt" />
+                                    </filter>
+                                </defs>
+                                <g filter="url(#jpeg)">
+                                    <rect width="400" height="300" fill="url(#sky)" />
+                                    <circle cx="290" cy="120" r="38" fill="#ffe08a" />
+                                    <path d="M0 210 L70 140 L130 190 L200 110 L270 180 L330 140 L400 190 V300 H0Z"
+                                        fill="#3a1f6e" />
+                                    <path d="M0 240 L90 190 L170 235 L250 200 L330 240 L400 215 V300 H0Z"
+                                        fill="#24124a" />
+                                    <rect y="262" width="400" height="38" fill="#150b2e" />
+                                    <g fill="#1e7a5a">
+                                        <path d="M40 262 l12 -40 l12 40z" />
+                                        <path d="M62 262 l10 -30 l10 30z" />
+                                        <path d="M330 262 l14 -48 l14 48z" />
+                                        <path d="M356 262 l10 -32 l10 32z" />
+                                    </g>
+                                </g>
+                            </svg>
+                            <span class="tag t-before">Original</span>
+                            <span class="tag t-after">Compressed</span>
+                            <div class="handle"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="kicker">Try it here</span>
+                        <h2>Pick a target. Drag to compare.</h2>
+                        <div class="meter">
+                            <div><small>Original</small><b>4.8 MB</b></div>
+                            <span class="arrow">→</span>
+                            <div class="new"><small>Compressed</small><b id="newSize">1 MB</b></div>
+                        </div>
+                        <div class="bar"><i id="barFill"></i></div>
+                        <p class="saved">You save <b id="savedPct">79%</b> of the space.</p>
+                        <div class="targets" role="group" aria-label="Target size">
+                            <button type="button" data-kb="100" aria-pressed="false">100 KB</button>
+                            <button type="button" data-kb="200" aria-pressed="false">200 KB</button>
+                            <button type="button" data-kb="500" aria-pressed="false">500 KB</button>
+                            <button type="button" data-kb="1024" aria-pressed="true">1 MB</button>
+                        </div>
+                        <p class="lab-note">A sample image for illustration. In the app, the compare slider shows your
+                            own photo before and after.</p>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Key Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M6 6h12v12H6zM4 4h16v16H4zM10 10l4 4m0-4l-4 4" />
-                    </svg>
-                    <h3>Batch Processing</h3>
-                    <p>Save time by compressing multiple photos at once. Select an entire album and let our smart
-                        algorithm handle the rest efficiently.</p>
+        <!-- Use cases -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">How it helps</span>
+                <h2>Made for everyday photo problems</h2>
+                <p class="section-lede">From strict upload limits to a phone that’s out of space.</p>
+                <div class="uses">
+                    <div class="use">
+                        <div class="ic" aria-hidden="true">📝</div>
+                        <h3>Web forms</h3>
+                        <p>Meet exact size limits for job applications, school portals and government forms.</p>
+                    </div>
+                    <div class="use">
+                        <div class="ic" aria-hidden="true">✉️</div>
+                        <h3>Emails and chats</h3>
+                        <p>Avoid attachment limit errors by shrinking camera photos before sending.</p>
+                    </div>
+                    <div class="use">
+                        <div class="ic" aria-hidden="true">📱</div>
+                        <h3>Social media</h3>
+                        <p>Resize to the right dimensions and post sharp images every time.</p>
+                    </div>
+                    <div class="use">
+                        <div class="ic" aria-hidden="true">💾</div>
+                        <h3>Storage relief</h3>
+                        <p>Shrink heavy photos in bulk and get gigabytes of space back.</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                    </svg>
-                    <h3>Compare Slider</h3>
-                    <p>See exactly what you're getting. Our interactive before/after slider lets you visually compare
-                        quality and file size in real-time before saving.</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Batch compression</span>
+                        <h2>Stop shrinking photos one by one</h2>
+                        <ul>
+                            <li>Select dozens or hundreds of photos and compress them all at once</li>
+                            <li>See the original size, new size and total space saved</li>
+                            <li>Pick JPG or WEBP and the quality or target size for the whole batch</li>
+                            <li>Export everything as a single ZIP for easy sharing</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/04-batch.jpg" alt="Batch compress list" loading="lazy">
+                        </div>
+                        <div class="phone"><img src="screens/05-batch-saved.jpg" alt="Space saved after batch"
+                                loading="lazy"></div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <h3>100% On-Device</h3>
-                    <p>Your photos never leave your phone. All compression is done locally on your device ensuring
-                        maximum privacy and zero data usage.</p>
+
+                <div class="split flip">
+                    <div class="split-text">
+                        <span class="kicker">Precise control</span>
+                        <h2>Exact size, right format, clean metadata</h2>
+                        <ul>
+                            <li>Set a target size like under 100 KB, 200 KB or 500 KB</li>
+                            <li>Smart presets for WhatsApp, Instagram stories and email</li>
+                            <li>Remove EXIF data such as location before sharing</li>
+                            <li>Compare before and after with an interactive slider</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/03-editor.jpg" alt="Editor with presets and quality"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/02-compare-slider.jpg" alt="Before and after slider"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Smart tools</span>
+                        <h2>More than a compressor</h2>
+                        <ul>
+                            <li><b>Image Resizer:</b> exact dimensions, passport sizes and quick presets</li>
+                            <li><b>No-Crop Blur Canvas:</b> fit any photo into 1:1, 9:16 or 16:9 with a blurred
+                                background</li>
+                            <li><b>Storage Sweeper:</b> find and shrink heavy photos to free space</li>
+                            <li><b>Snap &amp; Compress:</b> capture a photo and compress it instantly</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/08-image-resizer.jpg" alt="Image Resizer" loading="lazy">
+                        </div>
+                        <div class="phone"><img src="screens/07-storage-sweeper.jpg" alt="Storage Sweeper"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">See a full batch go from megabytes to kilobytes.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the Photo Compressor trailer">
+                    <img src="https://i.ytimg.com/vi/DLDazfEBueY/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-home.jpg" alt="Home screen" loading="lazy"></div>
+                        <figcaption>Home</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/04-batch.jpg" alt="Batch compress" loading="lazy"></div>
+                        <figcaption>Batch compress</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/05-batch-saved.jpg" alt="Space saved" loading="lazy">
+                        </div>
+                        <figcaption>Space saved</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-compare-slider.jpg" alt="Compare slider" loading="lazy">
+                        </div>
+                        <figcaption>Compare slider</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/03-editor.jpg" alt="Editor" loading="lazy"></div>
+                        <figcaption>Presets and quality</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/06-smart-tools.jpg" alt="Smart tools" loading="lazy">
+                        </div>
+                        <figcaption>Smart tools</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/08-image-resizer.jpg" alt="Image Resizer" loading="lazy">
+                        </div>
+                        <figcaption>Image Resizer</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/09-canvas-preview.jpg" alt="Canvas preview" loading="lazy">
+                        </div>
+                        <figcaption>Canvas preview</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-storage-sweeper.jpg" alt="Storage Sweeper"
+                                loading="lazy"></div>
+                        <figcaption>Storage Sweeper</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Are my photos uploaded anywhere?</summary>
+                        <p>No. All compression and resizing happens on your phone, and your photos never leave your
+                            device. See our <a href="photocompressor_privacypolicy.html"
+                                style="color:var(--green)">privacy policy</a>.</p>
+                    </details>
+                    <details>
+                        <summary>Can I compress to an exact KB size?</summary>
+                        <p>Yes. Enter a target such as 100 KB or 200 KB and the app adjusts the photo to fit.</p>
+                    </details>
+                    <details>
+                        <summary>Are my original photos changed?</summary>
+                        <p>Compressed copies are saved separately. Always keep a backup of important originals before
+                            batch processing.</p>
+                    </details>
+                    <details>
+                        <summary>Which formats are supported?</summary>
+                        <p>JPEG, JPG, PNG and WEBP, with JPG or WEBP output and ZIP export for batches.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/3PIP6CtS9TKEkOGoyyqcXO_g-Ze5FDWR2DnGe-94UH0zV2BZJbIXEQwl4lnIKhWvxegaTHOgtZsNdlg70n4asw=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>Lighter photos, in seconds</h2>
+                    <p>Start shrinking and sharing your photos with Photo Compressor &amp; Resizer.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.photocompressor" target="_blank"
+                        rel="noopener" class="btn btn-main">View on Google Play</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="photocompressor_privacypolicy.html">Privacy Policy</a>
-                <a href="photocompressor_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="photocompressor_privacypolicy.html">Privacy policy</a>
+                <a href="photocompressor_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
+
+        // Compare slider
+        const cmp = document.getElementById('compare');
+        let dragging = false;
+        function setPos(clientX) {
+            const r = cmp.getBoundingClientRect();
+            const p = Math.max(0, Math.min(100, ((clientX - r.left) / r.width) * 100));
+            cmp.style.setProperty('--pos', p + '%');
+        }
+        cmp.addEventListener('pointerdown', e => { dragging = true; cmp.setPointerCapture(e.pointerId); setPos(e.clientX); });
+        cmp.addEventListener('pointermove', e => { if (dragging) setPos(e.clientX); });
+        cmp.addEventListener('pointerup', () => { dragging = false; });
+        cmp.addEventListener('pointercancel', () => { dragging = false; });
+
+        // Target size buttons
+        const ORIGINAL_KB = 4.8 * 1024;
+        const blur = document.getElementById('blurAmt');
+        function pick(kb) {
+            document.getElementById('newSize').textContent = kb >= 1024 ? (kb / 1024) + ' MB' : kb + ' KB';
+            const pct = Math.round((1 - kb / ORIGINAL_KB) * 100);
+            document.getElementById('savedPct').textContent = pct + '%';
+            document.getElementById('barFill').style.width = Math.max(3, (kb / ORIGINAL_KB) * 100) + '%';
+            blur.setAttribute('stdDeviation', kb <= 100 ? 1.6 : kb <= 200 ? .9 : kb <= 500 ? .4 : 0);
+            document.querySelectorAll('.targets button').forEach(b => b.setAttribute('aria-pressed', +b.dataset.kb === kb));
+        }
+        document.querySelectorAll('.targets button').forEach(b => b.addEventListener('click', () => pick(+b.dataset.kb)));
+        pick(1024);
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const frame = document.createElement('iframe');
+            frame.src = 'https://www.youtube-nocookie.com/embed/DLDazfEBueY?autoplay=1&rel=0&modestbranding=1';
+            frame.title = 'Photo Compressor trailer';
+            frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            frame.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(frame);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const stepW = () => (gal.querySelector('figure')?.offsetWidth || 200) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -stepW() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: stepW() * 2, behavior: 'smooth' });
     </script>
 </body>
 
