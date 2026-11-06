@@ -3,204 +3,169 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Terms & Conditions - ResuMate AI | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Terms & Conditions - ResuMateAI | DevDuo Software</title>
+    <meta name="theme-color" content="#f6f7fb">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Exact Copy of Safekeep Styles */
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #f6f7fb; --card: #ffffff; --ink: #111827; --soft: #4b5563; --mute: #7c8494;
+            --line: #e5e8f0; --violet: #3355ff; --violet-soft: #eef1ff; --warn: #b42318; --warn-soft: #fef3f2;
+            --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(246, 247, 251, .86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: var(--ink); color: #fff; }
+        .doc-head { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 90% 0%, rgba(51, 85, 255, .12), transparent 60%), var(--card); }
+        h1, article h2 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; }
+        h1 { font-size: clamp(2.3rem, 5vw, 3.3rem); }
+        article h2 { font-size: 1.55rem; }
+        .tabs a[aria-current="page"] { background: var(--violet) !important; }
+        .caps { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 14px; padding: .9rem 1.1rem; }
+        .caps strong { color: var(--warn); }
+        ol { color: var(--soft); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #5b1a14; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body { background: #fff; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container-header">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="resumateai_info.html" class="app-bar-link">App Info</a>
-                <a href="resumateai_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="resumateai_termsandconditions.html" class="app-bar-link active">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="resumateai_info.html">App info</a>
+                <a href="resumateai_privacypolicy.html">Privacy</a>
+                <a href="resumateai_termsandconditions.html" aria-current="page">Terms</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <h1>Terms & Conditions</h1>
-        <p class="timestamp">Last Updated: December 09, 2025</p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="resumateai_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=s128-rw" alt="" width="32" height="32">ResuMateAI: Smart Resume Tools</a>
+            <h1>Terms &amp; Conditions</h1>
+            <p class="meta">Last Updated: December 09, 2025</p>
+        </div>
+    </div>
 
-        <h2>1. Agreement to Terms</h2>
-        <p>By downloading or using the app, these terms will automatically apply to you – you should make sure therefore
-            that you read them carefully before using the app.</p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#agree">1. Agreement to Terms</a></li>
+                <li><a href="#disclaimer">2. AI Content Disclaimer</a></li>
+                <li><a href="#use">3. Use of Service</a></li>
+                <li><a href="#changes">4. Changes to Terms</a></li>
+                <li><a href="#contact">5. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
 
-        <h2>2. AI Content Disclaimer</h2>
-        <p>ResuMate AI utilizes artificial intelligence (Gemini) to generate resumes, cover letters, and other text.
-            While we strive for high quality, <strong>you acknowledge that AI content may contain errors or
-                inaccuracies.</strong> It is your responsibility to review and verify all generated content before
-            sending it to employers.</p>
-
-        <h2>3. Use of Service</h2>
-        <p>You agree not to use the app for any unlawful purpose. You are solely responsible for the content you create
-            and store within the application.</p>
-
-        <h2>4. Changes to Terms</h2>
-        <p>We reserve the right to modify these terms at any time. Continued use of the app constitutes acceptance of
-            any changes.</p>
-
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions about these Terms, please contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+            <section id="agree">
+                <h2>1. Agreement to Terms</h2>
+                <p>By downloading or using the app, these terms will automatically apply to you – you should make sure therefore that you read them carefully before using the app.</p>
+            </section>
+            <section id="disclaimer" class="disclaimer">
+                <h2>2. AI Content Disclaimer</h2>
+                <p>ResuMate AI utilizes artificial intelligence (Gemini) to generate resumes, cover letters, and other text. While we strive for high quality, <strong>you acknowledge that AI content may contain errors or inaccuracies.</strong> It is your responsibility to review and verify all generated content before sending it to employers.</p>
+            </section>
+            <section id="use">
+                <h2>3. Use of Service</h2>
+                <p>You agree not to use the app for any unlawful purpose. You are solely responsible for the content you create and store within the application.</p>
+            </section>
+            <section id="changes">
+                <h2>4. Changes to Terms</h2>
+                <p>We reserve the right to modify these terms at any time. Continued use of the app constitutes acceptance of any changes.</p>
+            </section>
+            <section id="contact">
+                <h2>5. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions about these Terms, please contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="resumateai_info.html">App info</a>
+                <a href="resumateai_privacypolicy.html">Privacy policy</a>
+                <a href="resumateai_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

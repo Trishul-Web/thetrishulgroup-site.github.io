@@ -3,354 +3,1393 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>SkillSprint - Learn 200+ Skills | DevDuo Softwares</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>SkillSprint: Learn Skills | DevDuo Software</title>
     <meta name="description"
-        content="SkillSprint by DevDuo Softwares: 200+ interactive courses, audio lessons, tests, certificates, skill cards, and an on-device AI course creator.">
+        content="200+ interactive courses in coding, languages, business, design and exam prep. Quizzes, sentence builders, audio lessons, tests, certificates and an on-device AI course creator.">
+    <meta property="og:title" content="SkillSprint: Learn Skills">
+    <meta property="og:description" content="Learn any skill in short, fun sprints.">
+    <meta property="og:image" content="screens/01-explore.jpg">
+    <meta name="theme-color" content="#f6f6fd">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+        href="https://play-lh.googleusercontent.com/tJKzTaRWh-QRKpwSa5UkYj4nFSLVbUaw5obCS0Wad2k8V5R23P6XZNv0AVyclelnrLEAXK_KefqbKYtFxAjIcQ=s128-rw">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #f6f6fd;
+            --card: #ffffff;
+            --ink: #16153a;
+            --soft: #4b4a6e;
+            --mute: #7f7ea0;
+            --line: #e4e3f3;
+            --indigo: #5b4cf5;
+            --indigo-soft: #eeecff;
+            --amber: #f5b301;
+            --green: #16a34a;
+            --red: #ef4444;
+            --font: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
+
+        * { box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
             margin: 0;
-            padding: 0;
             background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            color: var(--ink);
+            font-family: var(--font);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        * {
-            box-sizing: border-box;
+        a { color: inherit; }
+
+        img, video { max-width: 100%; display: block; }
+
+        :focus-visible {
+            outline: 2px solid var(--indigo);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        .wrap {
+            width: min(1140px, 90vw);
+            margin: 0 auto;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .aurora {
-                animation: none;
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+        /* ---------- Nav ---------- */
+        .nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(246, 246, 253, .86);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        header .container {
+        .nav .wrap {
+            height: 66px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .tabs a:hover { color: var(--ink); }
+
+        .tabs a[aria-current="page"] {
+            background: var(--indigo);
+            color: #fff;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 820px;
+            height: 820px;
+            right: -240px;
+            top: -340px;
+            background: radial-gradient(closest-side, rgba(91, 76, 245, .18), rgba(245, 179, 1, .07) 60%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 24px rgba(91, 76, 245, .25);
+        }
+
+        .app-id strong { display: block; }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: clamp(2.5rem, 5.6vw, 4.2rem);
+            line-height: 1.04;
+            letter-spacing: -.035em;
+            margin: 0 0 1.25rem;
+        }
+
+        h1 .hl {
+            color: var(--indigo);
+            position: relative;
+            white-space: nowrap;
+        }
+
+        h1 .hl::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: .05em;
+            height: .22em;
+            background: rgba(245, 179, 1, .45);
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .btn-main {
+            background: var(--indigo);
+            color: #fff;
+            box-shadow: 0 12px 28px rgba(91, 76, 245, .3);
+        }
+
+        .btn-main:hover { transform: translateY(-2px); }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--card);
+        }
+
+        .btn-line:hover { border-color: var(--indigo); }
+
+        .counts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2.25rem;
+        }
+
+        .counts b {
+            display: block;
+            font-size: 1.7rem;
+            line-height: 1;
+            color: var(--indigo);
+        }
+
+        .counts span {
+            font-size: .85rem;
+            color: var(--mute);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #16153a;
+            box-shadow: 0 40px 80px rgba(22, 21, 58, .22);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 864 / 1850;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        /* ---------- Mini lesson (signature) ---------- */
+        .lesson {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            box-shadow: 0 30px 60px rgba(22, 21, 58, .06);
+        }
+
+        .kicker {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--indigo);
+            margin-bottom: .6rem;
+        }
+
+        .game {
+            border-radius: 24px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            padding: 1.25rem;
+        }
+
+        .game-top {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: 1.1rem;
+        }
+
+        .bar {
+            flex: 1;
+            height: 10px;
+            border-radius: 6px;
+            background: var(--line);
+            overflow: hidden;
+        }
+
+        .bar i {
+            display: block;
+            height: 100%;
+            width: 0;
+            border-radius: 6px;
+            background: var(--indigo);
+            transition: width .4s ease;
+        }
+
+        .xp {
+            font-size: .85rem;
+            font-weight: 700;
+            color: var(--amber);
+            white-space: nowrap;
+        }
+
+        .q-type {
+            display: inline-flex;
+            gap: .4rem;
+            align-items: center;
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--indigo);
+            margin-bottom: .4rem;
+        }
+
+        .prompt {
+            font-weight: 600;
+            margin: 0 0 1rem;
+        }
+
+        .answer-zone {
+            min-height: 92px;
+            border-radius: 16px;
+            border: 2px dashed #cfcdec;
+            background: var(--card);
+            padding: .7rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+            align-content: flex-start;
+            margin-bottom: 1rem;
+            transition: border-color .2s, background .2s;
+        }
+
+        .answer-zone.ok { border-color: var(--green); background: #f0fdf4; }
+
+        .answer-zone.bad { border-color: var(--red); background: #fef2f2; }
+
+        .bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+            min-height: 46px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .word {
+            font: inherit;
+            font-weight: 600;
+            font-size: .92rem;
+            padding: .5rem .9rem;
+            border-radius: 999px;
+            border: 0;
+            background: var(--indigo);
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 3px 0 #3f33c4;
+            transition: transform .1s;
+        }
+
+        .word:active { transform: translateY(2px); box-shadow: none; }
+
+        .answer-zone .word {
+            background: var(--indigo-soft);
+            color: var(--indigo);
+            box-shadow: none;
+        }
+
+        .check {
+            font: inherit;
+            width: 100%;
+            padding: .85rem;
+            border-radius: 14px;
+            border: 0;
+            background: var(--indigo);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .check:disabled {
+            background: #c9c6ef;
+            cursor: not-allowed;
+        }
+
+        .feedback {
+            min-height: 1.5em;
+            margin: .75rem 0 0;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .feedback.ok { color: var(--green); }
+
+        .feedback.bad { color: var(--red); }
+
+        .skillcard {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem 1.1rem;
+            border-radius: 18px;
+            color: #fff;
+            background: linear-gradient(135deg, #5b4cf5, #8b5cf6 60%, #f59e0b);
+            box-shadow: 0 16px 30px rgba(91, 76, 245, .3);
+            animation: rise .5s ease;
+        }
+
+        .skillcard.show { display: block; }
+
+        @keyframes rise { from { opacity: 0; transform: translateY(10px) scale(.97); } }
+
+        .skillcard small {
+            font-size: .72rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            opacity: .85;
+        }
+
+        .skillcard b {
+            display: block;
+            font-size: 1.15rem;
+            margin: .1rem 0;
+        }
+
+        .skillcard span { font-size: .85rem; opacity: .9; }
+
+        /* ---------- Sections ---------- */
+        section { padding: 5.5rem 0; }
+
+        h2 {
+            font-weight: 800;
+            font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+            line-height: 1.08;
+            letter-spacing: -.03em;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.5rem;
+        }
+
+        .center { text-align: center; }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Catalog */
+        .cat-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cat-tabs button {
+            font: inherit;
+            font-weight: 600;
+            font-size: .92rem;
+            padding: .6rem 1.1rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--soft);
+            cursor: pointer;
+        }
+
+        .cat-tabs button[aria-selected="true"] {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+
+        .cat-panel {
+            padding: 1.75rem;
+            border-radius: 24px;
+            background: var(--card);
+            border: 1px solid var(--line);
+        }
+
+        .group + .group { margin-top: 1.25rem; }
+
+        .group h3 {
+            margin: 0 0 .6rem;
+            font-size: .95rem;
+            color: var(--mute);
+            font-weight: 600;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+        }
+
+        .chips span {
+            font-size: .9rem;
+            font-weight: 500;
+            padding: .4rem .85rem;
+            border-radius: 10px;
+            background: var(--indigo-soft);
+            color: var(--indigo);
+            animation: pop .3s ease both;
+        }
+
+        @keyframes pop { from { opacity: 0; transform: scale(.92); } }
+
+        /* Split */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split.flip .split-text { order: 2; }
+
+        .split ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split li { margin-bottom: .4rem; }
+
+        .duo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .duo .phone {
+            width: 220px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) { margin-top: 3rem; }
+
+        /* Certificate */
+        .cert {
+            position: relative;
+            max-width: 520px;
+            margin: 0 auto;
+            aspect-ratio: 1.414;
+            border-radius: 12px;
+            padding: 6%;
+            background: #fffdf6;
+            border: 10px solid #fff;
+            box-shadow: 0 0 0 2px #e9d9a6, 0 30px 60px rgba(22, 21, 58, .15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .cert::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border: 2px solid #d9b85a;
+            border-radius: 6px;
+            pointer-events: none;
+        }
+
+        .cert small {
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            font-size: .68rem;
+            color: #a07c1a;
+        }
+
+        .cert h3 {
+            margin: .3rem 0 .8rem;
+            font-size: clamp(1.2rem, 3vw, 1.7rem);
+        }
+
+        .cert .name {
+            font-size: clamp(1.4rem, 4vw, 2.1rem);
+            font-weight: 700;
+            color: var(--indigo);
+            border-bottom: 2px solid #e9d9a6;
+            padding: 0 1rem .2rem;
+            margin-bottom: .6rem;
+            min-width: 60%;
+        }
+
+        .cert p {
+            margin: 0;
+            font-size: .82rem;
+            color: var(--soft);
+        }
+
+        .cert .seal {
+            position: absolute;
+            right: 8%;
+            bottom: 10%;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle, #f8d36a, #d9a521);
+            color: #5a3d00;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, .15);
+        }
+
+        .cert-input {
+            display: flex;
+            gap: .5rem;
+            max-width: 520px;
+            margin: 1.25rem auto 0;
+        }
+
+        .cert-input input {
+            flex: 1;
+            font: inherit;
+            padding: .75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+        }
+
+        .cert-input select {
+            font: inherit;
+            padding: .75rem;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+        }
+
+        .cert-note {
+            max-width: 520px;
+            margin: .75rem auto 0;
+            font-size: .8rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img { transform: scale(1.03); }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(22, 21, 58, .45), rgba(22, 21, 58, .05));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--indigo);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span { transform: scale(1.08); }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #fff;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
+            align-items: end;
             gap: 1rem;
             flex-wrap: wrap;
         }
 
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .hero {
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin: 0 auto 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            background: #111;
+        .gal-btns {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            gap: .5rem;
+            margin-bottom: 2.75rem;
         }
 
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            font-size: 1.1rem;
+            cursor: pointer;
         }
 
-        .intro-lede {
-            font-size: 1.2rem;
-            color: #c5c8ce;
-            max-width: 680px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
+        .gal-btns button:hover { border-color: var(--indigo); }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
         }
 
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
+        .gallery::-webkit-scrollbar { display: none; }
 
-        .cta-button:hover,
-        .cta-button:focus-visible {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .dev-line {
-            margin-top: 1.25rem;
-            color: var(--muted);
-            font-size: 0.95rem;
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 2.75rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-        }
-
-        .feature-card .emoji {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.4rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
+        .gallery figure {
+            flex: 0 0 200px;
             margin: 0;
+            scroll-snap-align: center;
         }
 
-        footer {
-            padding: 4rem 0;
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img { border-radius: 24px; }
+
+        .gallery figcaption {
             text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
         }
 
-        .footer-links {
+        /* FAQ */
+        .faq { max-width: 780px; }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::after {
+            content: "+";
+            color: var(--indigo);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after { content: "–"; }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            color: #fff;
+            background:
+                radial-gradient(60% 120% at 100% 0%, rgba(245, 179, 1, .35), transparent 60%),
+                linear-gradient(135deg, #5b4cf5, #3b2fc9);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: #e0ddff;
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        .cta .btn {
+            background: #fff;
+            color: var(--indigo);
+        }
+
+        .note {
+            margin: 2rem auto 0;
+            max-width: 80ch;
+            font-size: .82rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        .note a { color: var(--soft); }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
             flex-wrap: wrap;
         }
 
-        .footer-links a {
-            color: var(--muted);
-            text-decoration: none;
-            transition: color .2s;
+        footer a { text-decoration: none; }
+
+        footer a:hover { color: var(--ink); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero-grid, .lesson, .split { grid-template-columns: 1fr; gap: 2.5rem; }
+            .split.flip .split-text { order: 0; }
+            .lesson { padding: 2rem 1.25rem; }
+            .phone { width: 240px; }
+            .duo .phone { width: 170px; }
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) { display: none; }
+            .hero { padding: 3rem 0; }
+            section { padding: 4rem 0; }
+            .duo .phone { width: 145px; }
+            .gallery figure { flex-basis: 170px; }
+            .cert-input { flex-direction: column; }
+            .cert .seal { width: 42px; height: 42px; font-size: 1rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; animation: none !important; }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="skillsprint_info.html" class="app-bar-link active">App Info</a>
-                <a href="skillsprint_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="skillsprint_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="skillsprint_info.html" aria-current="page">App info</a>
+                <a href="skillsprint_privacypolicy.html">Privacy</a>
+                <a href="skillsprint_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://play-lh.googleusercontent.com/kMJRO7ugt48BruvM5B0vbOsmV1ilERJTViiSw8KJgOpa8vHhN4z7JFWctkmXYfGJqHcj=w480-h960-rw"
-                alt="SkillSprint App Icon" class="hero-icon" style="background:#222;">
-            <h1 class="grand-title">Learn any skill in short, fun sprints.</h1>
-            <p class="intro-lede">
-                200+ interactive courses in coding, languages, design, business, exams, and life skills. Learn with
-                quizzes, audio lessons, and tests, then earn certificates and collect skill cards as you grow.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduos.skillsprint" target="_blank"
-                rel="noopener" class="cta-button">View on Play Store</a>
-            <p class="dev-line">SkillSprint is made by DevDuo Softwares.</p>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/tJKzTaRWh-QRKpwSa5UkYj4nFSLVbUaw5obCS0Wad2k8V5R23P6XZNv0AVyclelnrLEAXK_KefqbKYtFxAjIcQ=s256-rw"
+                            alt="SkillSprint app icon" width="64" height="64">
+                        <div>
+                            <strong>SkillSprint: Learn Skills</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>Learn any skill in <span class="hl">short, fun sprints</span>.</h1>
+                    <p class="lede">200+ interactive courses in coding, languages, business, design and exam prep. Learn
+                        with quizzes, word games and audio lessons, then earn certificates as you grow.</p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduos.skillsprint" target="_blank"
+                            rel="noopener" class="btn btn-main">View on Google Play</a>
+                        <a href="#lesson" class="btn btn-line">Try a lesson</a>
+                    </div>
+                    <div class="counts">
+                        <div><b>200+</b><span>courses</span></div>
+                        <div><b>40</b><span>languages</span></div>
+                        <div><b>70%</b><span>to pass a test</span></div>
+                    </div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/04-concept.jpg" autoplay muted loop playsinline
+                        preload="metadata" id="heroLoop" aria-label="A lesson with highlighted narration and a question"></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mini lesson -->
+        <section id="lesson" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="lesson">
+                    <div>
+                        <span class="kicker">Try it here</span>
+                        <h2>Learn by doing, not just reading</h2>
+                        <p class="section-lede" style="margin-bottom:1.25rem">Every lesson is an interactive challenge.
+                            Tap the words in the right order to build the sentence, just like the Sentence Builder in
+                            the app.</p>
+                        <p style="color:var(--soft);margin:0">Get it right to earn XP and unlock a skill card.</p>
+                    </div>
+                    <div class="game">
+                        <div class="game-top">
+                            <div class="bar"><i id="progress"></i></div>
+                            <span class="xp" id="xp">⚡ 0 XP</span>
+                        </div>
+                        <span class="q-type">🧩 Sentence builder · <span id="qNum">1</span>/3</span>
+                        <p class="prompt" id="prompt"></p>
+                        <div class="answer-zone" id="answer" aria-label="Your sentence"></div>
+                        <div class="bank" id="bank" aria-label="Word bank"></div>
+                        <button type="button" class="check" id="checkBtn" disabled>Check answer</button>
+                        <p class="feedback" id="feedback" aria-live="polite"></p>
+                        <div class="skillcard" id="skillcard">
+                            <small>Skill card unlocked</small>
+                            <b>Public Speaking · Module 1</b>
+                            <span>3/3 correct · +30 XP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">What you can do</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">📚</span>
-                    <h3>200+ courses</h3>
-                    <p>Python, Java, web development, AI, Excel, design, 40 languages, business skills, and competitive
-                        exam prep, all in one app.</p>
+        <!-- Catalog -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">200+ courses</span>
+                <h2>What will you learn first?</h2>
+                <p class="section-lede">From your first line of code to your next exam.</p>
+                <div class="cat-tabs" role="tablist" id="catTabs"></div>
+                <div class="cat-panel" id="catPanel" role="tabpanel"></div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Interactive lessons</span>
+                        <h2>Quizzes, matching and word games</h2>
+                        <ul>
+                            <li>Short concept cards with narration that highlights as it reads</li>
+                            <li>Multiple choice, matching pairs and sentence builders</li>
+                            <li>Hints when you get stuck, and instant feedback</li>
+                            <li>Smart progress saving, so you resume exactly where you left off</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/04-concept.jpg" alt="Concept card" loading="lazy"></div>
+                        <div class="phone"><img src="screens/06-sentence-builder.jpg" alt="Sentence builder"
+                                loading="lazy"></div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🎮</span>
-                    <h3>Learn by doing</h3>
-                    <p>Quizzes, sentence builders, matching games, and writing practice turn every lesson into an
-                        interactive challenge.</p>
+
+                <div class="split flip">
+                    <div class="split-text">
+                        <span class="kicker">Story mode and podcasts</span>
+                        <h2>Learn with your ears, too</h2>
+                        <ul>
+                            <li>Listen to lessons read aloud with live highlighted text</li>
+                            <li>Auto-play lessons for uninterrupted focus</li>
+                            <li>Switch to a cinematic dark story mode for hands-free learning</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/08-audio-lesson.jpg" alt="Audio lesson transcript"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/03-course.jpg" alt="Course overview" loading="lazy"></div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🎧</span>
-                    <h3>Story mode and podcasts</h3>
-                    <p>Listen to lessons read aloud with live highlighted text, or switch to story mode for a guided,
-                        hands-free experience.</p>
+
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">On-device AI</span>
+                        <h2>Create a course on any topic</h2>
+                        <ul>
+                            <li>Type a topic and pick beginner, intermediate or advanced</li>
+                            <li>The AI builds a course blueprint and lessons for you</li>
+                            <li>It runs entirely on your phone, so your topics never leave your device</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/10-ai-course.jpg" alt="SkillSprint AI" loading="lazy">
+                        </div>
+                        <div class="phone"><img src="screens/11-ai-engine.jpg" alt="AI core settings" loading="lazy">
+                        </div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">📝</span>
-                    <h3>Module tests and grand exams</h3>
-                    <p>Check your knowledge at the end of every module, then take the full grand test once you finish
-                        the
-                        course. Score 70% to pass.</p>
+            </div>
+        </section>
+
+        <!-- Certificate -->
+        <section style="padding-top:1rem">
+            <div class="wrap center">
+                <span class="kicker">Tests and certificates</span>
+                <h2>Pass the test. Earn your certificate.</h2>
+                <p class="section-lede">Take a module test after every module and a grand test when you finish. Score
+                    70% to pass, then save or share your certificate as an image or PDF.</p>
+                <div class="cert" aria-label="Sample certificate preview">
+                    <small>Certificate of completion</small>
+                    <h3>SkillSprint</h3>
+                    <div class="name" id="certName">Your Name</div>
+                    <p>has completed the course</p>
+                    <p><b id="certCourse" style="color:var(--ink)">Python Programming</b></p>
+                    <p style="margin-top:.6rem">Issued by SkillSprint · <span id="certDate"></span></p>
+                    <div class="seal" aria-hidden="true">★</div>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🏆</span>
-                    <h3>Certificates and skill cards</h3>
-                    <p>Earn a certificate of completion for every course you finish and collect a skill card for every
-                        module you pass. Save or share them as an image or PDF.</p>
+                <div class="cert-input">
+                    <input id="nameIn" type="text" maxlength="28" placeholder="Type your name"
+                        aria-label="Name on certificate">
+                    <select id="courseIn" aria-label="Course">
+                        <option>Python Programming</option>
+                        <option>Public Speaking</option>
+                        <option>UI/UX Design</option>
+                        <option>Spanish</option>
+                        <option>Digital Marketing</option>
+                    </select>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🤖</span>
-                    <h3>On-device AI courses</h3>
-                    <p>Type any topic and create your own course with an AI that runs fully on your phone. Your topics
-                        never leave your device.</p>
+                <p class="cert-note">Preview only. SkillSprint certificates confirm course completion in the app and are
+                    not accredited qualifications.</p>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">See a learning sprint from first lesson to certificate.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the SkillSprint trailer">
+                    <img src="https://i.ytimg.com/vi/5HaIQ9LSuSQ/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
                 </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-explore.jpg" alt="Explore" loading="lazy"></div>
+                        <figcaption>Explore courses</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-courses.jpg" alt="Popular courses" loading="lazy">
+                        </div>
+                        <figcaption>Popular courses</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/05-quiz.jpg" alt="Quiz" loading="lazy"></div>
+                        <figcaption>Instant feedback</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-grand-test.jpg" alt="Grand test" loading="lazy"></div>
+                        <figcaption>Module and grand tests</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/09-my-learning.jpg" alt="My learning" loading="lazy">
+                        </div>
+                        <figcaption>My learning</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/12-exams.jpg" alt="Exam prep" loading="lazy"></div>
+                        <figcaption>Exam prep</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/13-profile.jpg" alt="Profile" loading="lazy"></div>
+                        <figcaption>Certificates and profile</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Who is SkillSprint for?</summary>
+                        <p>Students, professionals and lifelong learners, from complete beginners to advanced learners.
+                        </p>
+                    </details>
+                    <details>
+                        <summary>Can I learn offline?</summary>
+                        <p>Yes. Your progress is saved on your device and you can continue lessons offline.</p>
+                    </details>
+                    <details>
+                        <summary>Are the certificates official?</summary>
+                        <p>They confirm that you completed a course inside SkillSprint. They are not accredited
+                            qualifications or government-recognised certifications.</p>
+                    </details>
+                    <details>
+                        <summary>What does Lifetime Pro include?</summary>
+                        <p>A one-time purchase that unlocks all modules, removes ads and adds extras like the gold
+                            certificate design. No subscription.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/tJKzTaRWh-QRKpwSa5UkYj4nFSLVbUaw5obCS0Wad2k8V5R23P6XZNv0AVyclelnrLEAXK_KefqbKYtFxAjIcQ=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>Start your learning sprint today</h2>
+                    <p>A few minutes a day adds up. Pick a course and take your first lesson.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduos.skillsprint" target="_blank"
+                        rel="noopener" class="btn">View on Google Play</a>
+                </div>
+                <p class="note">Course titles mention technologies and exams only to describe the topic taught. All
+                    trademarks belong to their owners. Read our <a href="skillsprint_termsandconditions.html">terms and
+                        conditions</a>.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="skillsprint_privacypolicy.html">Privacy Policy</a>
-                <a href="skillsprint_termsandconditions.html">Terms & Conditions</a>
-                <a href="mailto:support.devduos@thetrishulgroup.com">Contact Support</a>
-            </div>
-            <p>© 2026 DevDuo Softwares. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="skillsprint_privacypolicy.html">Privacy policy</a>
+                <a href="skillsprint_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        if (window.gsap && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.2, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
+
+        // ---- Sentence builder mini lesson ----
+        const QUESTIONS = [
+            { prompt: 'Build the sentence: why does public speaking matter?', answer: ['Speaking', 'well', 'builds', 'your', 'confidence'] },
+            { prompt: 'Build the sentence about practice.', answer: ['Practice', 'makes', 'every', 'talk', 'better'] },
+            { prompt: 'Build the sentence about your audience.', answer: ['Always', 'know', 'your', 'audience', 'first'] }
+        ];
+        let qi = 0, xp = 0, picked = [];
+        const answerEl = document.getElementById('answer');
+        const bankEl = document.getElementById('bank');
+        const checkBtn = document.getElementById('checkBtn');
+        const fb = document.getElementById('feedback');
+
+        function shuffle(a) {
+            const b = a.slice();
+            for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; }
+            if (b.join() === a.join()) b.push(b.shift());
+            return b;
         }
+
+        function wordBtn(w, inAnswer) {
+            const b = document.createElement('button');
+            b.type = 'button'; b.className = 'word'; b.textContent = w;
+            b.onclick = () => {
+                if (checkBtn.dataset.mode === 'next') return;
+                if (inAnswer) { picked.splice(picked.indexOf(w), 1); }
+                else { picked.push(w); }
+                renderQ(false);
+            };
+            return b;
+        }
+
+        let bankOrder = [];
+        function renderQ(fresh) {
+            const q = QUESTIONS[qi];
+            if (fresh) { picked = []; bankOrder = shuffle(q.answer); fb.textContent = ''; fb.className = 'feedback'; answerEl.className = 'answer-zone'; }
+            document.getElementById('qNum').textContent = qi + 1;
+            document.getElementById('prompt').textContent = q.prompt;
+            answerEl.innerHTML = ''; bankEl.innerHTML = '';
+            picked.forEach(w => answerEl.appendChild(wordBtn(w, true)));
+            const left = bankOrder.slice();
+            picked.forEach(w => left.splice(left.indexOf(w), 1));
+            left.forEach(w => bankEl.appendChild(wordBtn(w, false)));
+            checkBtn.disabled = picked.length !== q.answer.length && checkBtn.dataset.mode !== 'next';
+        }
+
+        checkBtn.onclick = () => {
+            const q = QUESTIONS[qi];
+            if (checkBtn.dataset.mode === 'next') {
+                checkBtn.dataset.mode = '';
+                checkBtn.textContent = 'Check answer';
+                qi++;
+                if (qi >= QUESTIONS.length) {
+                    document.getElementById('skillcard').classList.add('show');
+                    fb.className = 'feedback ok';
+                    fb.textContent = '🏆 Module complete!';
+                    checkBtn.textContent = 'Play again';
+                    checkBtn.dataset.mode = 'restart';
+                    checkBtn.disabled = false;
+                    answerEl.innerHTML = ''; bankEl.innerHTML = '';
+                    return;
+                }
+                renderQ(true);
+                return;
+            }
+            if (checkBtn.dataset.mode === 'restart') {
+                qi = 0; xp = 0; checkBtn.dataset.mode = ''; checkBtn.textContent = 'Check answer';
+                document.getElementById('skillcard').classList.remove('show');
+                document.getElementById('xp').textContent = '⚡ 0 XP';
+                document.getElementById('progress').style.width = '0%';
+                renderQ(true);
+                return;
+            }
+            if (picked.join(' ') === q.answer.join(' ')) {
+                xp += 10;
+                document.getElementById('xp').textContent = '⚡ ' + xp + ' XP';
+                document.getElementById('progress').style.width = ((qi + 1) / QUESTIONS.length * 100) + '%';
+                answerEl.className = 'answer-zone ok';
+                fb.className = 'feedback ok';
+                fb.textContent = '✓ Correct! +10 XP';
+                checkBtn.dataset.mode = 'next';
+                checkBtn.textContent = qi === QUESTIONS.length - 1 ? 'Finish module' : 'Next question';
+                checkBtn.disabled = false;
+            } else {
+                answerEl.className = 'answer-zone bad';
+                fb.className = 'feedback bad';
+                fb.textContent = '✕ Not quite. Tap words to move them back and try again.';
+            }
+        };
+        renderQ(true);
+
+        // ---- Course catalog ----
+        const CATALOG = {
+            '💻 Coding': [
+                ['Core languages', 'Python, Java, C++, C, JavaScript, TypeScript, Go, Rust, Kotlin, Swift'],
+                ['Web and app', 'HTML5, CSS3, React.js, Next.js, Angular, Node.js, Flutter, Android, iOS'],
+                ['Data and AI', 'Machine Learning, AI, Deep Learning, Data Science, SQL, MongoDB, Power BI'],
+                ['Tech', 'AWS, Google Cloud, Cyber Security, Ethical Hacking, Blockchain, Git']
+            ],
+            '🌍 Languages': [
+                ['Global', 'Spanish, French, German, Mandarin, Japanese, Korean, Arabic, Russian, Portuguese, Italian'],
+                ['Indian', 'Hindi, Marathi, Tamil, Telugu, Gujarati, Bengali, Punjabi, Urdu, Sanskrit']
+            ],
+            '📊 Business': [
+                ['Business', 'Digital Marketing, SEO, Entrepreneurship, Sales Mastery, Business Strategy'],
+                ['Finance', 'Stock Market Investing, Financial Literacy, Accounting'],
+                ['Tools', 'Microsoft Excel, PowerPoint, Google Drive, ChatGPT, Notion, Trello']
+            ],
+            '🎓 Exams': [
+                ['Engineering and medical', 'JEE (PCM), NEET (PCB)'],
+                ['Government jobs', 'UPSC (IAS), SSC, Banking (IBPS), Railway (RRB)'],
+                ['Higher studies', 'CAT (MBA), GATE, Olympiads']
+            ],
+            '🎨 Design and soft skills': [
+                ['Creative', 'UI/UX Design (Figma), Graphic Design, Video Editing, 3D Modeling (Blender)'],
+                ['Growth', 'Public Speaking, Leadership, Resume Building, Interview Prep, Time Management']
+            ]
+        };
+        const catTabs = document.getElementById('catTabs');
+        const catPanel = document.getElementById('catPanel');
+        function showCat(name) {
+            catTabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', b.dataset.c === name));
+            catPanel.innerHTML = CATALOG[name].map(([title, list]) =>
+                `<div class="group"><h3>${title}</h3><div class="chips">${list.split(', ').map((c, i) => `<span style="animation-delay:${i * 25}ms">${c}</span>`).join('')}</div></div>`
+            ).join('');
+        }
+        Object.keys(CATALOG).forEach(name => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.setAttribute('role', 'tab'); b.dataset.c = name; b.textContent = name;
+            b.onclick = () => showCat(name);
+            catTabs.appendChild(b);
+        });
+        showCat('💻 Coding');
+
+        // ---- Certificate preview ----
+        const nameIn = document.getElementById('nameIn');
+        const courseIn = document.getElementById('courseIn');
+        document.getElementById('certDate').textContent = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+        nameIn.addEventListener('input', () => { document.getElementById('certName').textContent = nameIn.value.trim() || 'Your Name'; });
+        courseIn.addEventListener('change', () => { document.getElementById('certCourse').textContent = courseIn.value; });
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/5HaIQ9LSuSQ?autoplay=1&rel=0&modestbranding=1';
+            f.title = 'SkillSprint trailer';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            f.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(f);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const stepW = () => (gal.querySelector('figure')?.offsetWidth || 200) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -stepW() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: stepW() * 2, behavior: 'smooth' });
     </script>
 </body>
 

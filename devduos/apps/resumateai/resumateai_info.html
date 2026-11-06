@@ -3,358 +3,1355 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ResuMate AI - AI Resume Builder | DevDuo's</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>ResuMateAI: Smart Resume Tools | DevDuo Software</title>
+    <meta name="description"
+        content="Build an ATS-friendly resume in minutes. AI writing, ATS match score, 50+ templates, interview coach, cover letters and a personal portfolio website.">
+    <meta property="og:title" content="ResuMateAI: Smart Resume Tools">
+    <meta property="og:description" content="Build a job-winning resume in minutes.">
+    <meta property="og:image" content="screens/01-templates.jpg">
+    <meta name="theme-color" content="#f6f7fb">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+        href="https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=s128-rw">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #5eead4;
-            /* Teal */
-            --brand-2: #60a5fa;
-            /* Blue */
-            --brand-3: #a78bfa;
-            /* Purple */
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg: #f6f7fb;
+            --card: #ffffff;
+            --ink: #111827;
+            --soft: #4b5563;
+            --mute: #7c8494;
+            --line: #e5e8f0;
+            --blue: #3355ff;
+            --blue-soft: #eef1ff;
+            --green: #16a34a;
+            --amber: #d97706;
+            --red: #dc2626;
+            --serif: "DM Serif Display", Georgia, serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
+        a {
+            color: inherit;
         }
 
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+        img,
+        video {
+            max-width: 100%;
+            display: block;
         }
 
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        :focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
+        .wrap {
+            width: min(1140px, 90vw);
             margin: 0 auto;
         }
 
-        section {
-            padding: 6rem 0;
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(246, 247, 251, .86);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            object-fit: cover;
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 680px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
-        }
-
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
-            color: var(--brand-1);
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .visual-showcase {
-            background: #080808;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-links {
+        .nav .wrap {
+            height: 66px;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
             text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 600;
             transition: color .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        .tabs a:hover {
+            color: var(--ink);
+        }
+
+        .tabs a[aria-current="page"] {
+            background: var(--blue);
+            color: #fff;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 36px 36px;
+            mask-image: radial-gradient(70% 70% at 70% 30%, #000, transparent 75%);
+            -webkit-mask-image: radial-gradient(70% 70% at 70% 30%, #000, transparent 75%);
+            opacity: .7;
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 24px rgba(51, 85, 255, .2);
+        }
+
+        .app-id strong {
+            display: block;
+        }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(2.7rem, 6vw, 4.6rem);
+            line-height: 1;
+            letter-spacing: -.01em;
+            margin: 0 0 1.25rem;
+        }
+
+        h1 em {
+            font-style: italic;
+            color: var(--blue);
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .btn-main {
+            background: var(--blue);
+            color: #fff;
+            box-shadow: 0 12px 28px rgba(51, 85, 255, .28);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--card);
+        }
+
+        .btn-line:hover {
+            border-color: var(--blue);
+        }
+
+        .for {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 2rem;
+        }
+
+        .for span {
+            font-size: .85rem;
+            font-weight: 600;
+            padding: .35rem .8rem;
+            border-radius: 999px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            color: var(--soft);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #111827;
+            box-shadow: 0 40px 80px rgba(17, 24, 39, .22);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 864 / 1850;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        /* ---------- ATS demo (signature) ---------- */
+        .ats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            box-shadow: 0 30px 60px rgba(17, 24, 39, .05);
+        }
+
+        .kicker {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: .6rem;
+        }
+
+        .roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin: 1.25rem 0;
+        }
+
+        .roles button {
+            font: inherit;
+            font-size: .9rem;
+            font-weight: 600;
+            padding: .55rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--soft);
+            cursor: pointer;
+        }
+
+        .roles button[aria-pressed="true"] {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+
+        .jd {
+            padding: 1rem 1.1rem;
+            border-radius: 14px;
+            background: var(--bg);
+            border: 1px dashed #c9cfdc;
+            font-size: .9rem;
+            color: var(--soft);
+            min-height: 92px;
+        }
+
+        .jd b {
+            color: var(--ink);
+        }
+
+        .scan-btn {
+            font: inherit;
+            margin-top: 1rem;
+            width: 100%;
+            padding: .9rem;
+            border: 0;
+            border-radius: 12px;
+            background: var(--blue);
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .scan-btn:disabled {
+            opacity: .6;
+            cursor: progress;
+        }
+
+        .result {
+            display: grid;
+            gap: 1.1rem;
+            align-content: start;
+        }
+
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .ring {
+            --p: 0;
+            --c: var(--mute);
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: conic-gradient(var(--c) calc(var(--p) * 1%), #edf0f6 0);
+            flex-shrink: 0;
+        }
+
+        .ring div {
+            width: 92px;
+            height: 92px;
+            border-radius: 50%;
+            background: var(--card);
+            display: grid;
+            place-items: center;
+            font-family: var(--serif);
+            font-size: 2rem;
+        }
+
+        .verdict b {
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .verdict span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        .r-label {
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--mute);
+            margin-bottom: .45rem;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+        }
+
+        .chip {
+            font-size: .82rem;
+            font-weight: 600;
+            padding: .3rem .7rem;
+            border-radius: 8px;
+        }
+
+        .chip.ok {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .chip.miss {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .plan {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+            font-size: .92rem;
+        }
+
+        .plan li {
+            margin-bottom: .3rem;
+        }
+
+        .demo-note {
+            font-size: .8rem;
+            color: var(--mute);
+            margin: 0;
+        }
+
+        .result.empty .when-done {
+            opacity: .35;
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 5.5rem 0;
+        }
+
+        h2 {
+            font-family: var(--serif);
+            font-weight: 400;
+            font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+            line-height: 1.05;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Split features */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split.flip .split-text {
+            order: 2;
+        }
+
+        .split ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split li {
+            margin-bottom: .4rem;
+        }
+
+        .duo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .duo .phone {
+            width: 220px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) {
+            margin-top: 3rem;
+        }
+
+        .tpl-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 1.25rem;
+        }
+
+        .tpl-tags span {
+            font-size: .85rem;
+            font-weight: 600;
+            padding: .35rem .8rem;
+            border-radius: 8px;
+            background: var(--blue-soft);
+            color: var(--blue);
+        }
+
+        /* Tools grid */
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .tool {
+            padding: 1.4rem;
+            border-radius: 18px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            transition: border-color .2s, transform .2s;
+        }
+
+        .tool:hover {
+            border-color: #c7d0ff;
+            transform: translateY(-3px);
+        }
+
+        .tool .ic {
+            font-size: 1.4rem;
+            margin-bottom: .6rem;
+        }
+
+        .tool h3 {
+            margin: 0 0 .25rem;
+            font-size: 1rem;
+        }
+
+        .tool p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img {
+            transform: scale(1.03);
+        }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(17, 24, 39, .45), rgba(17, 24, 39, .05));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--blue);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span {
+            transform: scale(1.08);
+        }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #fff;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover {
+            border-color: var(--blue);
+        }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery figure {
+            flex: 0 0 200px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img {
+            border-radius: 24px;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 780px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--blue);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "–";
+        }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            color: #fff;
+            background:
+                radial-gradient(70% 120% at 100% 0%, rgba(255, 255, 255, .18), transparent 60%),
+                linear-gradient(135deg, #3355ff, #1e2fbf);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: #dbe2ff;
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        .cta .btn {
+            background: #fff;
+            color: var(--blue);
+        }
+
+        .note {
+            margin: 2rem auto 0;
+            max-width: 80ch;
+            font-size: .85rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        .note a {
+            color: var(--soft);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--ink);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+
+            .hero-grid,
+            .ats,
+            .split {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .split.flip .split-text {
+                order: 0;
+            }
+
+            .ats {
+                padding: 2rem 1.5rem;
+            }
+
+            .tools {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .phone {
+                width: 240px;
+            }
+
+            .duo .phone {
+                width: 170px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .tools {
+                grid-template-columns: 1fr;
+            }
+
+            .duo .phone {
+                width: 145px;
+            }
+
+            .gallery figure {
+                flex-basis: 170px;
+            }
+
+            .ring {
+                width: 100px;
+                height: 100px;
+            }
+
+            .ring div {
+                width: 76px;
+                height: 76px;
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="resumateai_info.html" class="app-bar-link active">App Info</a>
-                <a href="resumateai_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="resumateai_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="resumateai_info.html" aria-current="page">App info</a>
+                <a href="resumateai_privacypolicy.html">Privacy</a>
+                <a href="resumateai_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://lh3.googleusercontent.com/K0SIktwU92Q-dTN2zGNJ55-hMnuhkV-Gf45ZRwBLH27wETfRH0YRI4wbQAxy8Niz6L9jJ_cIoSLlaDMt3FqtfQ"
-                alt="ResuMate AI App Icon" class="hero-icon"
-                onerror="this.src='https://ui-avatars.com/api/?name=R+A&background=random&size=128'">
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=s256-rw"
+                            alt="ResuMateAI app icon" width="64" height="64">
+                        <div>
+                            <strong>ResuMateAI: Smart Resume Tools</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>Build a resume that gets you the <em>interview</em>.</h1>
+                    <p class="lede">An AI resume builder, ATS scanner and career coach in one app. Write, tailor and
+                        export a polished resume in minutes, then turn it into your own portfolio website.</p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduos.resumateai" target="_blank"
+                            rel="noopener" class="btn btn-main">View on Google Play</a>
+                        <a href="#ats" class="btn btn-line">Try an ATS scan</a>
+                    </div>
+                    <div class="for"><span>Students</span><span>Professionals</span><span>Career
+                            changers</span><span>Freshers</span></div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/04-portfolio-live.jpg" autoplay muted loop
+                        playsinline preload="metadata" id="heroLoop"
+                        aria-label="Turning a resume into a portfolio website"></video>
+                </div>
+            </div>
+        </div>
 
-            <h1 class="grand-title">Your Career, <span class="gradient-text">Accelerated</span>.</h1>
-            <p class="intro-lede">
-                ResuMate AI is your personal career coach. Build professional resumes, scan them against job
-                descriptions, and prepare for interviews—all powered by advanced AI.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduos.resumateai" class="cta-button">Download
-                on Play Store</a>
-        </section>
-
-        <section class="container">
-            <h2 class="section-title">AI Power Tools</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                    </svg>
-                    <h3>AI Resume Builder</h3>
-                    <p>Create resumes from scratch or upload a PDF. Our AI parses your details and auto-fills
-                        professional templates for you.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                    </svg>
-                    <h3>ATS Scanner</h3>
-                    <p>Beat the bots. Scan your resume against any job description to get a match score and actionable
-                        fix-it plan.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-                    </svg>
-                    <h3>Interview Coach</h3>
-                    <p>Practice with AI-generated technical and behavioral questions tailored specifically to your
-                        resume and target role.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
-                    </svg>
-                    <h3>AI Writer</h3>
-                    <p>Stuck on what to say? Let the AI generate high-quality Cover Letters, Cold Emails, and LinkedIn
-                        headlines for you.</p>
+        <!-- ATS demo -->
+        <section id="ats" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="ats">
+                    <div>
+                        <span class="kicker">Try it here</span>
+                        <h2>See how a resume matches a job</h2>
+                        <p class="section-lede" style="margin-bottom:0">Pick a role and run a sample ATS scan. In the
+                            app, you scan your own resume against any job description.</p>
+                        <div class="roles" id="roles" role="group" aria-label="Sample job role"></div>
+                        <div class="jd" id="jd"></div>
+                        <button type="button" class="scan-btn" id="scanBtn">Scan resume</button>
+                    </div>
+                    <div class="result empty" id="result" aria-live="polite">
+                        <div class="score-row">
+                            <div class="ring" id="ring">
+                                <div id="scoreNum">–</div>
+                            </div>
+                            <div class="verdict"><b id="verdict">Ready to scan</b><span id="verdictSub">Your match score
+                                    appears here.</span></div>
+                        </div>
+                        <div class="when-done">
+                            <div class="r-label">Keywords found</div>
+                            <div class="chips" id="found"></div>
+                        </div>
+                        <div class="when-done">
+                            <div class="r-label">Missing keywords</div>
+                            <div class="chips" id="missing"></div>
+                        </div>
+                        <div class="when-done">
+                            <div class="r-label">Improvement plan</div>
+                            <ol class="plan" id="plan"></ol>
+                        </div>
+                        <p class="demo-note">Sample results for illustration only.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Why ResuMate?</h2>
-            <div class="visual-showcase">
-                <p>Designed for privacy and performance. Your resume data stays on your device. We provide the tools;
-                    you keep the control.</p>
+        <!-- Features -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">50+ premium templates</span>
+                        <h2>Look professional from page one</h2>
+                        <p style="color:var(--soft)">Switch templates in one tap with a live preview. Customise fonts,
+                            spacing, layout and margins, then export a print-ready PDF.</p>
+                        <div class="tpl-tags">
+                            <span>ATS-friendly</span><span>Modern</span><span>Creative</span><span>Tech</span><span>Executive</span>
+                        </div>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/01-templates.jpg" alt="Template gallery" loading="lazy">
+                        </div>
+                        <div class="phone"><img src="screens/03-preview-export.jpg" alt="Preview and PDF export"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split flip">
+                    <div class="split-text">
+                        <span class="kicker">Smart AI builder</span>
+                        <h2>Write less. Say more.</h2>
+                        <ul>
+                            <li><b>AI write and rewrite</b> for summaries, bullet points and skills</li>
+                            <li><b>PDF import</b> turns your old resume into editable sections</li>
+                            <li><b>Start from scratch</b> with guided steps</li>
+                            <li><b>Chat with your resume</b> for instant AI feedback</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/02-ai-assistant.jpg" alt="Resume AI assistant"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/08-ai-writer.jpg" alt="AI Writer" loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Resume to website</span>
+                        <h2>Your resume, as a portfolio website</h2>
+                        <ul>
+                            <li>Build a personal site from your resume with AI or a ready layout</li>
+                            <li>Pick from styles like Clean Apple, Swiss Grid, Cyberpunk and Comic Pop</li>
+                            <li>Live preview and save the website as an HTML file</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/04-portfolio-live.jpg" alt="Portfolio live preview"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/05-portfolio-themes.jpg" alt="Portfolio styles"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">AI career tools</span>
+                <h2>Everything after the resume, too</h2>
+                <p class="section-lede">A full toolkit for every step of your job search.</p>
+                <div class="tools">
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">🎤</div>
+                        <h3>Interview Coach</h3>
+                        <p>Practise technical, behavioural and HR questions with sample answers.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">✂️</div>
+                        <h3>Job Tailor</h3>
+                        <p>Rewrite your resume for any job description.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">✉️</div>
+                        <h3>Cover Letters</h3>
+                        <p>Personalised cover letters in seconds.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">💼</div>
+                        <h3>LinkedIn Optimizer</h3>
+                        <p>Turn your resume into a strong profile.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">💰</div>
+                        <h3>Salary Estimator</h3>
+                        <p>Discover your market value.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">🧩</div>
+                        <h3>Skill Gap Analyzer</h3>
+                        <p>Find the skills your target role needs.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">🎯</div>
+                        <h3>Job Matcher</h3>
+                        <p>Get role ideas based on your experience.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">📨</div>
+                        <h3>Cold Email Writer</h3>
+                        <p>Reach recruiters with ready outreach messages.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">👁️</div>
+                        <h3>Recruiter Vision</h3>
+                        <p>See where a recruiter’s attention goes on your resume.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">🚩</div>
+                        <h3>Red Flag Scan</h3>
+                        <p>Spot weak phrases before a recruiter does.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">🗂️</div>
+                        <h3>Career Hub</h3>
+                        <p>Track every application and interview.</p>
+                    </div>
+                    <div class="tool">
+                        <div class="ic" aria-hidden="true">🏆</div>
+                        <h3>Daily Challenges</h3>
+                        <p>Earn XP and keep your prep streak alive.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">From blank page to job-ready resume.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the ResuMateAI trailer">
+                    <img src="https://i.ytimg.com/vi/OeF1q1KCHhc/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-templates.jpg" alt="Templates" loading="lazy"></div>
+                        <figcaption>Pick a design</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/03-preview-export.jpg" alt="Preview and export"
+                                loading="lazy"></div>
+                        <figcaption>Preview and export</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-ai-assistant.jpg" alt="AI assistant" loading="lazy">
+                        </div>
+                        <figcaption>Resume AI assistant</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/10-recruiter-vision.jpg" alt="Recruiter Vision"
+                                loading="lazy"></div>
+                        <figcaption>Recruiter Vision</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/09-cold-email.jpg" alt="Templates" loading="lazy"></div>
+                        <figcaption>Ready-made messages</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/06-portfolio-hub.jpg" alt="Portfolio hub" loading="lazy">
+                        </div>
+                        <figcaption>Web Portfolio Hub</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-career-hub.jpg" alt="Career Hub" loading="lazy"></div>
+                        <figcaption>Career Hub</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/11-challenges.jpg" alt="Challenges" loading="lazy">
+                        </div>
+                        <figcaption>Daily challenges</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/12-ai-engine.jpg" alt="AI engine settings" loading="lazy">
+                        </div>
+                        <figcaption>On-device AI engine</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Will my resume pass ATS systems?</summary>
+                        <p>ATS-friendly templates and the ATS scanner help you match keywords and structure. No tool
+                            can guarantee results, so always review your resume before applying.</p>
+                    </details>
+                    <details>
+                        <summary>Where is my resume stored?</summary>
+                        <p>Your resumes are saved on your device. Text is processed only when you use an AI feature.
+                            See our <a href="resumateai_privacypolicy.html" style="color:var(--blue)">privacy
+                                policy</a> for details.</p>
+                    </details>
+                    <details>
+                        <summary>Can I import my existing resume?</summary>
+                        <p>Yes. Upload a PDF and the app turns it into editable sections.</p>
+                    </details>
+                    <details>
+                        <summary>Should I check AI-written content?</summary>
+                        <p>Yes. AI can make mistakes, so always review and edit anything it writes before sending it to
+                            employers.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>Start your best resume today</h2>
+                    <p>Write it, scan it, tailor it and share it, all from your phone.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduos.resumateai" target="_blank"
+                        rel="noopener" class="btn">View on Google Play</a>
+                </div>
+                <p class="note">AI-generated content may contain errors. Please review everything before sending it to
+                    employers. Read our <a href="resumateai_termsandconditions.html">terms and conditions</a>.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="resumateai_privacypolicy.html">Privacy Policy</a>
-                <a href="resumateai_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="resumateai_privacypolicy.html">Privacy policy</a>
+                <a href="resumateai_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
+
+        // Sample ATS scan
+        const ROLES = {
+            'Software Engineer': {
+                jd: 'Looking for a <b>Software Engineer</b> with <b>Python</b>, <b>REST APIs</b>, <b>SQL</b>, <b>Git</b> and <b>cloud</b> experience. <b>Unit testing</b> and <b>Agile</b> teamwork preferred.',
+                found: ['Python', 'SQL', 'Git', 'Agile'], missing: ['REST APIs', 'Cloud', 'Unit testing'], score: 72,
+                plan: ['Add a project where you built or used a REST API.', 'Mention any cloud platform you have deployed to.', 'Add one bullet on writing unit tests and the result.']
+            },
+            'Marketing Executive': {
+                jd: 'Hiring a <b>Marketing Executive</b> skilled in <b>SEO</b>, <b>social media</b>, <b>content strategy</b>, <b>Google Analytics</b> and <b>campaign reporting</b>.',
+                found: ['Social media', 'Content strategy'], missing: ['SEO', 'Google Analytics', 'Campaign reporting'], score: 54,
+                plan: ['Add SEO results with numbers, like traffic growth.', 'List Google Analytics under tools.', 'Show one campaign with its budget and outcome.']
+            },
+            'Data Analyst': {
+                jd: 'Seeking a <b>Data Analyst</b> with <b>SQL</b>, <b>Excel</b>, <b>Power BI</b>, <b>statistics</b> and strong <b>data visualisation</b> skills.',
+                found: ['SQL', 'Excel', 'Statistics', 'Data visualisation'], missing: ['Power BI'], score: 86,
+                plan: ['Add Power BI or a similar dashboard tool you have used.', 'Quantify one analysis with the business impact.', 'Move your strongest project to the top.']
+            }
+        };
+        let role = 'Software Engineer';
+        const rolesBox = document.getElementById('roles');
+        Object.keys(ROLES).forEach(name => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.textContent = name;
+            b.onclick = () => { role = name; resetScan(); document.getElementById('scanBtn').click(); };
+            rolesBox.appendChild(b);
+        });
+
+        const ring = document.getElementById('ring');
+        const result = document.getElementById('result');
+        function chip(t, cls) { return `<span class="chip ${cls}">${t}</span>`; }
+
+        function resetScan() {
+            document.querySelectorAll('#roles button').forEach(b => b.setAttribute('aria-pressed', b.textContent === role));
+            document.getElementById('jd').innerHTML = ROLES[role].jd;
+            ring.style.setProperty('--p', 0);
+            ring.style.setProperty('--c', 'var(--mute)');
+            document.getElementById('scoreNum').textContent = '–';
+            document.getElementById('verdict').textContent = 'Ready to scan';
+            document.getElementById('verdictSub').textContent = 'Your match score appears here.';
+            ['found', 'missing', 'plan'].forEach(id => document.getElementById(id).innerHTML = '');
+            result.classList.add('empty');
+        }
+
+        document.getElementById('scanBtn').onclick = () => {
+            const r = ROLES[role];
+            const btn = document.getElementById('scanBtn');
+            btn.disabled = true; btn.textContent = 'Scanning…';
+            const color = r.score >= 80 ? 'var(--green)' : r.score >= 60 ? 'var(--amber)' : 'var(--red)';
+            ring.style.setProperty('--c', color);
+            let p = 0;
+            const tickFn = () => {
+                p = Math.min(r.score, p + 2);
+                ring.style.setProperty('--p', p);
+                document.getElementById('scoreNum').textContent = p;
+                if (p < r.score && !reduce) requestAnimationFrame(tickFn);
+                else {
+                    ring.style.setProperty('--p', r.score);
+                    document.getElementById('scoreNum').textContent = r.score;
+                    document.getElementById('verdict').textContent = r.score >= 80 ? 'Strong match' : r.score >= 60 ? 'Good, can improve' : 'Needs work';
+                    document.getElementById('verdictSub').textContent = r.missing.length + ' keyword' + (r.missing.length > 1 ? 's' : '') + ' missing for this role.';
+                    document.getElementById('found').innerHTML = r.found.map(t => chip('✓ ' + t, 'ok')).join('');
+                    document.getElementById('missing').innerHTML = r.missing.map(t => chip('+ ' + t, 'miss')).join('');
+                    document.getElementById('plan').innerHTML = r.plan.map(t => `<li>${t}</li>`).join('');
+                    result.classList.remove('empty');
+                    btn.disabled = false; btn.textContent = 'Scan again';
+                }
+            };
+            tickFn();
+        };
+        resetScan();
+
+        // Run the sample scan automatically the first time the section is visible
+        const atsBox = document.getElementById('ats');
+        if ('IntersectionObserver' in window) {
+            const autoScan = new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    document.getElementById('scanBtn').click();
+                    autoScan.disconnect();
+                }
+            }, { threshold: 0.35 });
+            autoScan.observe(atsBox);
+        } else {
+            document.getElementById('scanBtn').click();
+        }
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/OeF1q1KCHhc?autoplay=1&rel=0&modestbranding=1';
+            f.title = 'ResuMateAI trailer';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            f.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(f);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const stepW = () => (gal.querySelector('figure')?.offsetWidth || 200) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -stepW() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: stepW() * 2, behavior: 'smooth' });
     </script>
 </body>
 

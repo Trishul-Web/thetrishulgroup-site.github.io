@@ -3,228 +3,239 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - SaveAnything | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - SaveAnything | DevDuo Software</title>
+    <meta name="theme-color" content="#0b0a18">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/ddvFW3biXwZqg5CRC3Kz3shsYXH4eP7bLaIHuwUr3nTOcnhybmLZXzerzCppRk4w7lTRUdyM-z7rVOdBu2EdrA=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #0b0a18; --card: #13122a; --ink: #eeedfb; --soft: #c3c0e3; --mute: #8582ad;
+            --line: #2a2852; --violet: #a594ff; --violet-soft: rgba(124, 92, 255, .12); --warn: #ff8a80; --warn-soft: rgba(255, 82, 82, .1);
+            --font: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(11, 10, 24, .8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: #7c5cff; color: #fff; }
+        .doc-head { position: relative; padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 85% 0%, rgba(124, 92, 255, .3), transparent 60%), radial-gradient(50% 120% at 0% 100%, rgba(236, 72, 153, .1), transparent 60%), var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1, article h2 { font-family: "Outfit", system-ui, sans-serif; font-weight: 800; }
+        .caps { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 14px; padding: .9rem 1.1rem; list-style: none; margin-left: -1.25rem; }
+        .caps strong { color: var(--warn); }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .summary, .highlight { border: 1px solid rgba(124, 92, 255, .35); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: .93rem; margin: 1rem 0; }
+        .table-wrap { overflow-x: auto; }
+        .data-table th, .data-table td { text-align: left; padding: .75rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .data-table th { color: var(--ink); background: var(--card); }
+        .data-table td { color: var(--soft); }
+        article h3 { color: var(--ink); font-size: 1.05rem; margin: 1.25rem 0 .25rem; }
+        .highlight { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+        .highlight h2 { margin-top: 0 !important; }
+        h1 { color: var(--ink); font-weight: 800; letter-spacing: -.02em; }
+        h1, article h2 { font-family: "Outfit", system-ui, sans-serif; font-weight: 800; }
+        article h2 { letter-spacing: -.01em; }
+        .app-chip { color: var(--soft); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #ffd6d2; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body, .doc-head, .contact, .summary { background: #fff !important; color: #000; } h1 { color: #000; -webkit-text-fill-color: #000; } article p, article li { color: #222; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container-header">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="saveanything_info.html" class="app-bar-link">App Info</a>
-                <a href="saveanything_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
-                <a href="saveanything_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="saveanything_info.html">App info</a>
+                <a href="saveanything_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="saveanything_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <h1>Privacy Policy for SaveAnything</h1>
-        <p class="timestamp">Last Updated: March 22, 2026</p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="saveanything_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/ddvFW3biXwZqg5CRC3Kz3shsYXH4eP7bLaIHuwUr3nTOcnhybmLZXzerzCppRk4w7lTRUdyM-z7rVOdBu2EdrA=s128-rw" alt="" width="32" height="32">SaveAnything: Link &amp; File Save</a>
+            <h1>Privacy Policy for SaveAnything</h1>
+            <p class="meta">Last Updated: October 30, 2026 · Previous version: March 22, 2026</p>
+        </div>
+    </div>
 
-        <p>DevDuo ("we", "us", or "our") built the SaveAnything app as a Free application. This SERVICE is provided by
-            DevDuo at no cost and is intended for use as is. This page is used to inform users regarding our policies
-            with the collection, use, and disclosure of Personal Information.</p>
-
-        <h2>1. Data Collection and Use</h2>
-        <p><strong>SaveAnything is a 100% offline, privacy-first application.</strong> We do NOT collect, transmit,
-            upload, or store your personal data, links, files, media, or notes on any external servers. All data you
-            save within the app is processed and stored strictly locally on your device using a secure local database.
-        </p>
-        <ul>
-            <li><strong>Internet Permission:</strong> The app requests internet access solely to fetch rich link
-                previews (titles, descriptions, and thumbnails) directly from the public websites you bookmark. We do
-                not track or log the URLs you save.</li>
-            <li><strong>Storage/Media Permission:</strong> The app requests storage access to allow you to select local
-                files and images to save into your vault. The app does not scan your storage or upload your files to the
-                cloud.</li>
-        </ul>
-
-        <h2>2. Data Retention Policy</h2>
-        <p>Because SaveAnything is an offline application, the data you save within your vault is retained strictly
-            locally on your specific device for <strong>as long as the application remains installed</strong>. We do not
-            possess a centralized server, and therefore we do not hold, backup, or retain any of your data ourselves.
-        </p>
-
-        <h2>3. Data Deletion Policy (How to Delete Your Data)</h2>
-        <p>You have complete control over your data. Since your data is not stored on our servers, we cannot delete it
-            for you remotely. However, you can easily and permanently delete your data from the app at any time using
-            any of the following methods:</p>
-        <ul>
-            <li><strong>In-App Deletion:</strong> You can delete individual vault items (links, files, notes) directly
-                within the SaveAnything app by tapping the options menu on any item and selecting "Delete".</li>
-            <li><strong>Clear App Data:</strong> You can wipe your entire vault instantly by navigating to your device's
-                <strong>Settings > Apps > SaveAnything > Storage > Clear Data</strong>.
-            </li>
-            <li><strong>Uninstall the App:</strong> Uninstalling the SaveAnything app from your device will permanently
-                and irreversibly delete the local database and all saved vault items from your phone.</li>
-        </ul>
-
-        <h2>4. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. You are advised to review this page periodically for any
-            changes. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
-
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions or suggestions about our Privacy Policy, data retention, or data deletion
-            practices, do not hesitate to contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#about">About This Policy</a></li>
+                <li><a href="#collect">1. Data Collection and Use</a></li>
+                <li><a href="#previews">2. Link Previews</a></li>
+                <li><a href="#locking">3. Passcode and Locked Items</a></li>
+                <li><a href="#widgets">4. Home Screen Widgets and Sharing</a></li>
+                <li><a href="#insights">5. Insights and Statistics</a></li>
+                <li><a href="#retention">6. Data Retention Policy</a></li>
+                <li><a href="#deletion">7. Data Deletion Policy (How to Delete Your Data)</a></li>
+                <li><a href="#feedback">8. Feedback</a></li>
+                <li><a href="#children">9. Children's Privacy</a></li>
+                <li><a href="#changes">10. Changes to This Privacy Policy</a></li>
+                <li><a href="#contact">11. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>Everything you save stays in a local database on your device. Nothing is uploaded to us.</li>
+                    <li>No account, no cloud sign-up and no background tracking.</li>
+                    <li>The internet is used only to fetch previews for links you save.</li>
+                    <li>Uninstalling the app or clearing its data deletes your vault.</li>
+                </ul>
+            </div>
+            <section id="about">
+                <h2>About This Policy</h2>
+                <p>DevDuo ("we", "us", or "our") built the SaveAnything app. This SERVICE is provided by DevDuo and is intended for use as is. This page is used to inform users regarding our policies with the collection, use, and disclosure of Personal Information.</p>
+            </section>
+            <section id="collect">
+                <h2>1. Data Collection and Use</h2>
+                <p><strong>SaveAnything is a 100% offline, privacy-first application.</strong> We do NOT collect, transmit, upload, or store your personal data, links, files, media, or notes on any external servers. All data you save within the app is processed and stored strictly locally on your device using a secure local database.</p>
+                <ul>
+                    <li><strong>Internet Permission:</strong> The app requests internet access solely to fetch rich link previews (titles, descriptions, and thumbnails) directly from the public websites you bookmark. We do not track or log the URLs you save.</li>
+                    <li><strong>Storage/Media Permission:</strong> The app requests storage access to allow you to select local files and images to save into your vault. The app does not scan your storage or upload your files to the cloud.</li>
+                </ul>
+            </section>
+            <section id="previews">
+                <h2>2. Link Previews</h2>
+                <p>When a link preview is fetched, your device connects directly to the website you saved (for example YouTube or a news site) to read its public title, description and images. Like any visit to a website, that website can see your IP address and basic device information. This connection is between your device and that website only; it does not pass through our servers.</p>
+            </section>
+            <section id="locking">
+                <h2>3. Passcode and Locked Items</h2>
+                <ul>
+                    <li>Your master passcode, security questions and the list of locked items or tags are stored only on your device.</li>
+                    <li>We cannot see or reset your passcode. If you forget it, use the recovery option in the app.</li>
+                    <li>Locked items stay on your device in the same local database and are hidden from your feed until unlocked.</li>
+                </ul>
+            </section>
+            <section id="widgets">
+                <h2>4. Home Screen Widgets and Sharing</h2>
+                <ul>
+                    <li><strong>Widgets:</strong> if you add Quick Add, Recent Vault or Master Board widgets, recent item titles may be visible on your home screen to anyone who can see your phone.</li>
+                    <li><strong>Sharing into SaveAnything:</strong> when you share a link or file from another app, it is saved to your local vault only.</li>
+                    <li><strong>Sharing out:</strong> when you share an item, your phone's share menu sends it only to the app and people you choose.</li>
+                </ul>
+            </section>
+            <section id="insights">
+                <h2>5. Insights and Statistics</h2>
+                <p>The Insights tab (totals, favourites, top sources and most used tags) is calculated on your device from your own vault. These statistics are never sent to us.</p>
+            </section>
+            <section id="retention">
+                <h2>6. Data Retention Policy</h2>
+                <p>Because SaveAnything is an offline application, the data you save within your vault is retained strictly locally on your specific device for <strong>as long as the application remains installed</strong>. We do not possess a centralized server, and therefore we do not hold, backup, or retain any of your data ourselves.</p>
+            </section>
+            <section id="deletion">
+                <h2>7. Data Deletion Policy (How to Delete Your Data)</h2>
+                <p>You have complete control over your data. Since your data is not stored on our servers, we cannot delete it for you remotely. However, you can easily and permanently delete your data from the app at any time using any of the following methods:</p>
+                <ul>
+                    <li><strong>In-App Deletion:</strong> You can delete individual vault items (links, files, notes) directly within the SaveAnything app by tapping the options menu on any item and selecting "Delete".</li>
+                    <li><strong>Clear App Data:</strong> You can wipe your entire vault instantly by navigating to your device's <strong>Settings &gt; Apps &gt; SaveAnything &gt; Storage &gt; Clear Data</strong>.</li>
+                    <li><strong>Uninstall the App:</strong> Uninstalling the SaveAnything app from your device will permanently and irreversibly delete the local database and all saved vault items from your phone.</li>
+                </ul>
+            </section>
+            <section id="feedback">
+                <h2>8. Feedback</h2>
+                <p>If you contact us or use "Help Us Improve" to send feedback, we receive only what you choose to send, such as your message and email address, and use it only to reply and improve the app.</p>
+            </section>
+            <section id="children">
+                <h2>9. Children's Privacy</h2>
+                <p>SaveAnything is not directed at children under 13, and we do not knowingly collect personal information from children. If you believe a child has sent us personal information, please contact us and we will delete it.</p>
+            </section>
+            <section id="changes">
+                <h2>10. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. You are advised to review this page periodically for any changes. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+            </section>
+            <section id="contact">
+                <h2>11. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions or suggestions about our Privacy Policy, data retention, or data deletion practices, do not hesitate to contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="saveanything_info.html">App info</a>
+                <a href="saveanything_privacypolicy.html">Privacy policy</a>
+                <a href="saveanything_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

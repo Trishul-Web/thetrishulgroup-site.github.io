@@ -3,368 +3,1340 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Train Driver India - Railway Simulator | DevDuo's</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Train Driver India | Train Driving Game by DevDuo Software</title>
+    <meta name="description"
+        content="Become a loco pilot. Plan any route, build your own train, shunt in the yard, obey 4-aspect signals, wait in loops for crossings and run round at reversal stations.">
+    <meta property="og:title" content="Train Driver India">
+    <meta property="og:description" content="Plan the route. Build the train. Drive the line.">
+    <meta property="og:image" content="screens/10-golden-hour.jpg">
+    <meta name="theme-color" content="#0b0f0c">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚆</text></svg>">
+        href="https://play-lh.googleusercontent.com/U9EfjGYsYzqA18P2iY44iVSlqnuGoo0SzcX6ZjGOnK_Zwn9o1yHoVSOv2-SgtTu0mLutidiOyuO4XxLrCyR0XA=s128-rw">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Inter:wght@400;500;600&family=Noto+Sans+Devanagari:wght@600;700&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #f59e0b;
-            --brand-2: #10b981;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg: #0b0f0c;
+            --bg-2: #121a14;
+            --bg-3: #19241b;
+            --line: #26352a;
+            --text: #eef3ee;
+            --soft: #bccabd;
+            --mute: #85978a;
+            --amber: #f5a524;
+            --amber-2: #ffc861;
+            --green: #22c55e;
+            --red: #ef4444;
+            --board: #f6c400;
+            --display: "Archivo", system-ui, sans-serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --hindi: "Noto Sans Devanagari", "Mangal", sans-serif;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            display: block;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--amber);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        .wrap {
+            width: min(1180px, 90vw);
+            margin: 0 auto;
+        }
+
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(11, 15, 12, .85);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav .wrap {
+            height: 66px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 500;
+            transition: color .2s;
+        }
+
+        .tabs a:hover {
+            color: var(--text);
+        }
+
+        .tabs a[aria-current="page"] {
+            background: var(--amber);
+            color: #1b1100;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 4.5rem 0 3.5rem;
+            overflow: hidden;
+            background:
+                radial-gradient(50% 60% at 85% 0%, rgba(245, 165, 36, .16), transparent 70%),
+                radial-gradient(40% 60% at 0% 100%, rgba(34, 197, 94, .08), transparent 70%);
+        }
+
+        .hero-top {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 2rem;
+            align-items: end;
+            margin-bottom: 2.5rem;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(245, 165, 36, .25);
+        }
+
+        .app-id strong {
+            display: block;
+        }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: clamp(2.6rem, 6.2vw, 5rem);
+            line-height: .98;
+            letter-spacing: -.03em;
+            text-transform: uppercase;
+            margin: 0 0 1rem;
+        }
+
+        h1 span {
+            color: var(--amber);
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 58ch;
+            margin: 0;
+        }
+
+        .actions {
+            display: flex;
+            flex-direction: column;
+            gap: .75rem;
+            min-width: 230px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            padding: .9rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .btn-amber {
+            background: linear-gradient(180deg, var(--amber-2), var(--amber));
+            color: #1b1100;
+            box-shadow: 0 10px 28px rgba(245, 165, 36, .3);
+        }
+
+        .btn-amber:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .btn-line:hover {
+            border-color: var(--amber);
+        }
+
+        .screen {
+            border-radius: 22px;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #2c3d30;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .55);
+        }
+
+        .screen video,
+        .screen img {
+            width: 100%;
+            aspect-ratio: 2400 / 1080;
+            object-fit: cover;
+            border-radius: 15px;
+            background: var(--bg-2);
+        }
+
+        .boards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .board {
+            background: var(--board);
+            color: #111;
+            border: 3px solid #111;
+            border-radius: 4px;
+            padding: .3rem 1rem .35rem;
+            text-align: center;
+            line-height: 1.15;
+            box-shadow: 0 6px 0 #4a3a00;
+            min-width: 150px;
+        }
+
+        .board .hi {
+            display: block;
+            font-family: var(--hindi);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .board .en {
+            display: block;
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: .95rem;
+            letter-spacing: .06em;
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 5.5rem 0;
+        }
+
+        h2 {
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: clamp(2rem, 4.2vw, 3.2rem);
+            line-height: 1;
+            letter-spacing: -.02em;
+            text-transform: uppercase;
+            margin: 0 0 .9rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 62ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .kicker {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: .6rem;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ---------- Signal lab (signature) ---------- */
+        .signal-lab {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .post {
+            position: relative;
+            width: 120px;
+            margin: 0 auto;
+        }
+
+        .head {
+            width: 120px;
+            padding: 14px 0;
+            border-radius: 60px;
+            background: #0a0a0a;
+            border: 4px solid #2a2a2a;
+            display: grid;
+            gap: 12px;
+            justify-items: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, .5);
+        }
+
+        .lamp {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: #1b1b1b;
+            box-shadow: inset 0 4px 10px rgba(0, 0, 0, .7);
+            transition: background .25s, box-shadow .25s;
+        }
+
+        .lamp.y.on {
+            background: #ffcc1a;
+            box-shadow: 0 0 26px 6px rgba(255, 204, 26, .7);
+        }
+
+        .lamp.g.on {
+            background: #2bff7a;
+            box-shadow: 0 0 26px 6px rgba(43, 255, 122, .6);
+        }
+
+        .lamp.r.on {
+            background: #ff3030;
+            box-shadow: 0 0 26px 6px rgba(255, 48, 48, .7);
+        }
+
+        .pole {
+            width: 14px;
+            height: 120px;
+            margin: 0 auto;
+            background: linear-gradient(90deg, #555, #999, #555);
+        }
+
+        .aspects {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin: 1.5rem 0;
+        }
+
+        .aspects button {
+            font: inherit;
+            font-weight: 700;
+            font-size: .9rem;
+            padding: .6rem 1rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--soft);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .aspects button i {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .aspects button[aria-pressed="true"] {
+            border-color: var(--amber);
+            color: var(--text);
+            background: var(--bg-3);
+        }
+
+        .meaning {
+            padding: 1.25rem 1.4rem;
+            border-radius: 18px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+        }
+
+        .meaning h3 {
+            margin: 0 0 .3rem;
+            font-family: var(--display);
+            font-size: 1.4rem;
+            text-transform: uppercase;
+        }
+
+        .meaning p {
+            margin: 0 0 1rem;
+            color: var(--soft);
+        }
+
+        .speedbar {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: .75rem;
+            align-items: center;
+            font-size: .85rem;
+            color: var(--mute);
+        }
+
+        .track {
+            height: 12px;
+            border-radius: 6px;
+            background: var(--bg-3);
+            overflow: hidden;
+        }
+
+        .track i {
+            display: block;
+            height: 100%;
+            width: 0;
+            border-radius: 6px;
+            transition: width .6s ease, background .3s;
+        }
+
+        .speedbar b {
+            font-family: var(--display);
+            font-size: 1.1rem;
+            color: var(--text);
+            min-width: 6ch;
+            text-align: right;
+        }
+
+        .auto-note {
+            margin: .9rem 0 0;
+            font-size: .82rem;
+            color: var(--mute);
+        }
+
+        /* Journey timeline */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: .75rem;
+            counter-reset: step;
+        }
+
+        .tl {
+            position: relative;
+            padding: 1.25rem 1rem;
+            border-radius: 18px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .tl::before {
+            counter-increment: step;
+            content: counter(step, decimal-leading-zero);
+            display: block;
+            font-family: var(--display);
+            font-weight: 900;
+            font-size: 1.6rem;
+            color: var(--amber);
+            line-height: 1;
+            margin-bottom: .5rem;
+        }
+
+        .tl h3 {
+            margin: 0 0 .25rem;
+            font-size: .98rem;
+        }
+
+        .tl p {
+            margin: 0;
+            font-size: .85rem;
+            color: var(--mute);
+        }
+
+        /* Split */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 3.5rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split.flip .split-text {
+            order: 2;
+        }
+
+        .split ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split li {
+            margin-bottom: .4rem;
+        }
+
+        .stack {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .stack .screen:nth-child(2) {
+            width: 82%;
+            margin-left: auto;
+            margin-top: -3rem;
+        }
+
+        /* Feature grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .card {
+            padding: 1.4rem;
+            border-radius: 18px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .card .ic {
+            font-size: 1.5rem;
+            margin-bottom: .6rem;
+        }
+
+        .card h3 {
+            margin: 0 0 .3rem;
+            font-size: 1.02rem;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img {
+            transform: scale(1.03);
+        }
+
+        .trailer .play {
             position: absolute;
             inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(245, 158, 11, .14), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(16, 185, 129, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(11, 15, 12, .6), rgba(11, 15, 12, .1));
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02);
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--amber);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span {
+            transform: scale(1.08);
+        }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #1b1100;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover {
+            border-color: var(--amber);
+        }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery figure {
+            flex: 0 0 min(560px, 82vw);
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .9rem;
+            color: var(--mute);
+            margin-top: .75rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 800px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--amber);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "–";
+        }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 28px;
+            border: 1px solid #3a3420;
+            background:
+                radial-gradient(70% 120% at 50% 0%, rgba(245, 165, 36, .2), transparent 65%),
+                var(--bg-2);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 48ch;
+            margin: 0 auto 2rem;
+        }
+
+        .note {
+            margin: 2rem auto 0;
+            max-width: 80ch;
+            font-size: .85rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        .note a {
+            color: var(--soft);
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--text);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 1000px) {
+            .timeline {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 960px) {
+
+            .hero-top,
+            .split,
+            .signal-lab {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .split.flip .split-text {
+                order: 0;
+            }
+
+            .signal-lab {
+                padding: 2rem 1.5rem;
+            }
+
+            .actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+                min-width: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .tabs a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 0 2.5rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .timeline,
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stack .screen:nth-child(2) {
+                width: 100%;
+                margin-top: 0;
+            }
+
+            .board {
+                min-width: 120px;
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .aurora {
-                animation: none;
+            html {
+                scroll-behavior: auto;
             }
-        }
 
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        section {
-            padding: 6rem 0;
-        }
-
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            background: #111;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 780px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #000;
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.2);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
-        }
-
-        .feature-card .emoji {
-            font-size: 2rem;
-            margin-bottom: 0.75rem;
-            display: block;
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        .visual-showcase {
-            background: #080808;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--muted);
-            text-decoration: none;
-            transition: color .2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--brand-1);
+            * {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <header>
-        <div class="container">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="traindriverindia_info.html" class="app-bar-link active">App Info</a>
-                <a href="traindriverindia_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="traindriverindia_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="Game pages">
+                <a href="traindriverindia_info.html" aria-current="page">Game info</a>
+                <a href="traindriverindia_privacypolicy.html">Privacy</a>
+                <a href="traindriverindia_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
+
     <main>
-        <section class="hero container">
-            <div class="hero-icon">🚆</div>
-            <h1 class="grand-title">Drive India's Railways.</h1>
-            <p class="intro-lede">
-                Plan your own route across India, build your train coach by coach, and drive it through ghats,
-                deserts, coasts and cities. Obey the signals, stop at the board, wait in the loop for crossings, run
-                round your loco and bring the rake home to the yard.
-            </p>
-            <a href="https://play.google.com/store/apps/developer?id=DevDuo%27s" target="_blank" rel="noopener"
-                class="cta-button">Download on Play Store</a>
-        </section>
-        <section class="container">
-            <h2 class="section-title">What you can do</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🗺️</span>
-                    <h3>Plan your own route</h3>
-                    <p>Pick any start, stops and destination, add loco reversals and banker engines, and choose how long
-                        the journey should be.</p>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap">
+                <div class="hero-top">
+                    <div>
+                        <div class="app-id">
+                            <img src="https://play-lh.googleusercontent.com/U9EfjGYsYzqA18P2iY44iVSlqnuGoo0SzcX6ZjGOnK_Zwn9o1yHoVSOv2-SgtTu0mLutidiOyuO4XxLrCyR0XA=s256-rw"
+                                alt="Train Driver India game icon" width="64" height="64">
+                            <div>
+                                <strong>Train Driver India</strong>
+                                <span>Train driving game by DevDuo Software</span>
+                            </div>
+                        </div>
+                        <h1>Become the <span>loco pilot</span>.</h1>
+                        <p class="lede">Plan your own route, build your train coach by coach and handle every part of
+                            the job: yard shunting, departures, signals, loop crossings, banker engines and loco
+                            reversal, from city terminals to the ghats.</p>
+                    </div>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.train_driver_india"
+                            target="_blank" rel="noopener" class="btn btn-amber">Play on Google Play</a>
+                        <a href="#trailer" class="btn btn-line">Watch the trailer</a>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🚦</span>
-                    <h3>Real signalling</h3>
-                    <p>Distant, home, starter and automatic signals with red, yellow, double yellow and green aspects.
-                        Pass one at danger and your journey ends.</p>
+
+                <div class="screen">
+                    <video src="screens/hero-loop.mp4" poster="screens/09-station.jpg" autoplay muted loop playsinline
+                        preload="metadata" id="heroLoop" aria-label="A train running through a loop station"></video>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🔀</span>
-                    <h3>Crossings & overtakes</h3>
-                    <p>Wait in the loop while express trains cross or overtake you, sometimes both at once, or run
-                        through while others wait for you.</p>
+
+                <div class="boards" aria-label="Sample station boards">
+                    <div class="board"><span class="hi">मुंबई</span><span class="en">MUMBAI</span></div>
+                    <div class="board"><span class="hi">पुणे</span><span class="en">PUNE</span></div>
+                    <div class="board"><span class="hi">नई दिल्ली</span><span class="en">NEW DELHI</span></div>
+                    <div class="board"><span class="hi">बेंगलुरु</span><span class="en">BENGALURU</span></div>
+                    <div class="board"><span class="hi">चेन्नई</span><span class="en">CHENNAI</span></div>
+                    <div class="board"><span class="hi">हैदराबाद</span><span class="en">HYDERABAD</span></div>
                 </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🔧</span>
-                    <h3>Yard shunting</h3>
-                    <p>Place the rake with the yard shunter, bring your loco out, couple up, run round at reversal
-                        stations and stable everything at journey's end.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🚂</span>
-                    <h3>Build your train</h3>
-                    <p>Electric and diesel locos, trainsets, LHB and ICF coaches, power cars and freight wagons, all
-                        arranged the way you want.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">📢</span>
-                    <h3>Station announcements</h3>
-                    <p>Platform announcements in English, Hindi and your local language, with station boards in the
-                        same languages.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🌧️</span>
-                    <h3>Live weather & time</h3>
-                    <p>Sunrise, night, monsoon storms and winter fog change as you drive across ten Indian landscapes.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <span class="emoji" aria-hidden="true">🏆</span>
-                    <h3>Create & share activities</h3>
-                    <p>Design your own scenarios with loop stations and train movements, then share them with friends
-                        as a code.</p>
+            </div>
+        </div>
+
+        <!-- Signal lab -->
+        <section id="signals" style="padding-top:2rem">
+            <div class="wrap">
+                <div class="signal-lab">
+                    <div class="post" aria-hidden="true">
+                        <div class="head">
+                            <div class="lamp y" id="lampY1"></div>
+                            <div class="lamp g" id="lampG"></div>
+                            <div class="lamp r" id="lampR"></div>
+                            <div class="lamp y" id="lampY2"></div>
+                        </div>
+                        <div class="pole"></div>
+                    </div>
+                    <div>
+                        <span class="kicker">Read the signal</span>
+                        <h2>Four aspects. One rule: never pass a red.</h2>
+                        <div class="aspects" id="aspects" role="group" aria-label="Signal aspect"></div>
+                        <div class="meaning" aria-live="polite">
+                            <h3 id="mTitle"></h3>
+                            <p id="mText"></p>
+                            <div class="speedbar">
+                                <span>Your speed</span>
+                                <div class="track"><i id="speedFill"></i></div>
+                                <b id="speedNum">0 km/h</b>
+                            </div>
+                        </div>
+                        <p class="auto-note">Tap an aspect, or watch the signal change by itself.</p>
+                    </div>
                 </div>
             </div>
         </section>
-        <section class="container">
-            <h2 class="section-title">Visual Showcase</h2>
-            <div class="visual-showcase">
-                <p>Hand-painted Indian scenery with tunnels, bridges, level crossings and busy stations, head and tail
-                    lamps at night, diesel smoke, synthesised train sounds and background music.</p>
+
+        <!-- Journey timeline -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">Every part of the job</span>
+                <h2>From the yard to right away</h2>
+                <p class="section-lede">Each journey follows the real sequence a loco pilot works through.</p>
+                <div class="timeline">
+                    <div class="tl">
+                        <h3>Plan the route</h3>
+                        <p>Pick stations, stops, reversals and bankers.</p>
+                    </div>
+                    <div class="tl">
+                        <h3>Build the train</h3>
+                        <p>Locos, LHB and ICF coaches, power cars or wagons.</p>
+                    </div>
+                    <div class="tl">
+                        <h3>Shunt in the yard</h3>
+                        <p>Place the rake, bring your loco and couple under 8 km/h.</p>
+                    </div>
+                    <div class="tl">
+                        <h3>Brake check</h3>
+                        <p>Guard’s brake check, the whistle and announcements.</p>
+                    </div>
+                    <div class="tl">
+                        <h3>Drive the line</h3>
+                        <p>Obey signals, limits, loops and crossings.</p>
+                    </div>
+                    <div class="tl">
+                        <h3>Stable at the end</h3>
+                        <p>Stop at the board, then stable the loco in the yard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Plan any route</span>
+                        <h2>Your line, your rules</h2>
+                        <ul>
+                            <li>Choose your start, stops and destination, with boards in Hindi and English</li>
+                            <li>Add loco reversal at any stop and up to 3 banker engines for the ghats</li>
+                            <li>Let the game set distances and limits, or set your own km and km/h</li>
+                            <li>Pick journey length, line traffic, weather and time of day</li>
+                        </ul>
+                    </div>
+                    <div class="stack">
+                        <div class="screen"><img src="screens/02-plan-route.jpg" alt="Plan your route" loading="lazy">
+                        </div>
+                        <div class="screen"><img src="screens/03-banker-engines.jpg" alt="Choosing banker engines"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split flip">
+                    <div class="split-text">
+                        <span class="kicker">Build your own train</span>
+                        <h2>Coach by coach</h2>
+                        <ul>
+                            <li>Electric and diesel locomotives, trainsets and power cars</li>
+                            <li>LHB and ICF coaches: sleeper, chair car, AC, general and more</li>
+                            <li>Freight wagons for goods trains</li>
+                            <li>Arrange every coach, or start from a ready-made formation</li>
+                        </ul>
+                    </div>
+                    <div class="stack">
+                        <div class="screen"><img src="screens/04-build-train.jpg" alt="Build your train" loading="lazy">
+                        </div>
+                        <div class="screen"><img src="screens/13-announcements.jpg"
+                                alt="Journey settings and announcements" loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Yards, loops and crossings</span>
+                        <h2>The busiest part of the job</h2>
+                        <ul>
+                            <li>The yard shunter places your rake on the platform</li>
+                            <li>Wait in the loop while expresses cross or overtake you</li>
+                            <li>Run through at full speed while others wait for you</li>
+                            <li>Every passing train is named and announced</li>
+                        </ul>
+                    </div>
+                    <div class="stack">
+                        <div class="screen"><img src="screens/05-yard-shunting.jpg" alt="Yard shunting at a terminal"
+                                loading="lazy"></div>
+                        <div class="screen"><img src="screens/08-overtake.jpg" alt="Overtake at a loop station"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature grid -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">In the cab</span>
+                <h2>Everything a loco pilot needs</h2>
+                <p class="section-lede">Real procedures, made fun to play.</p>
+                <div class="grid">
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🔁</div>
+                        <h3>Loco reversal</h3>
+                        <p>Uncouple, run round your train and leave the other way.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">⛰️</div>
+                        <h3>Banker engines</h3>
+                        <p>Attach up to 3 at the rear for steep ghat sections.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">📢</div>
+                        <h3>Announcements</h3>
+                        <p>In English, Hindi and your local language.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🎛️</div>
+                        <h3>Cab controls</h3>
+                        <p>Speedometer, set speed, horn, headlight, emergency brake and cab signal.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🌄</div>
+                        <h3>10+ landscapes</h3>
+                        <p>Snow galleries, gorges, ghats, coasts, deserts and suburbs.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">⛈️</div>
+                        <h3>Live weather</h3>
+                        <p>Sunshine, monsoon storms with lightning and winter fog.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🏆</div>
+                        <h3>Create activities</h3>
+                        <p>Build scenarios and share them as a file with friends.</p>
+                    </div>
+                    <div class="card">
+                        <div class="ic" aria-hidden="true">🔊</div>
+                        <h3>Immersive sound</h3>
+                        <p>Track sounds change on bridges and in tunnels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day and night -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">Day and night</span>
+                <h2>Time moves as you drive</h2>
+                <p class="section-lede">Sunrise, golden hour and night runs with headlights and lit coaches.</p>
+                <div class="stack" style="grid-template-columns:1fr 1fr;display:grid;gap:1rem">
+                    <div class="screen"><img src="screens/10-golden-hour.jpg" alt="City terminal at golden hour"
+                            loading="lazy"></div>
+                    <div class="screen" style="width:100%;margin:0"><img src="screens/11-night-run.jpg"
+                            alt="Night run with headlight" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">From the yard to the open line.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the Train Driver India trailer">
+                    <img src="https://i.ytimg.com/vi/ASTyLY-WKpo/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Screenshots</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the game.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="screen"><img src="screens/01-home.jpg" alt="Home screen" loading="lazy"></div>
+                        <figcaption>Start your journey</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/07-signals.jpg" alt="Waiting at a red signal"
+                                loading="lazy"></div>
+                        <figcaption>Wait for the signal</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/06-city-terminal.jpg" alt="City terminal" loading="lazy">
+                        </div>
+                        <figcaption>Busy city terminals</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/12-loop-station.jpg" alt="Loop station" loading="lazy">
+                        </div>
+                        <figcaption>Running through a loop station</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/05-yard-shunting.jpg" alt="Yard shunting" loading="lazy">
+                        </div>
+                        <figcaption>Yard shunting</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/11-night-run.jpg" alt="Night run" loading="lazy"></div>
+                        <figcaption>Night runs</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="screen"><img src="screens/04-build-train.jpg" alt="Build your train" loading="lazy">
+                        </div>
+                        <figcaption>Build your train</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Do I need an account?</summary>
+                        <p>No. There is no sign-up. Your settings and Activities are saved on your device.</p>
+                    </details>
+                    <details>
+                        <summary>What happens if I pass a red signal?</summary>
+                        <p>Your journey ends, just like the real rule. Watch for yellow and double yellow to slow down
+                            in
+                            time.</p>
+                    </details>
+                    <details>
+                        <summary>Can I share my own scenarios?</summary>
+                        <p>Yes. Create an Activity with stops, loops, crossings, weather and time, then share it with
+                            friends to import and play.</p>
+                    </details>
+                    <details>
+                        <summary>Are ads required?</summary>
+                        <p>Rewarded ads are optional and unlock extra features for your next journey. Premium is a
+                            one-time purchase that removes ads and unlocks everything.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/U9EfjGYsYzqA18P2iY44iVSlqnuGoo0SzcX6ZjGOnK_Zwn9o1yHoVSOv2-SgtTu0mLutidiOyuO4XxLrCyR0XA=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>The cab is waiting</h2>
+                    <p>Whether you love shunting in busy yards, waiting in the loop or running at 130 km/h through the
+                        night, start your first journey.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.train_driver_india"
+                        target="_blank" rel="noopener" class="btn btn-amber">Play on Google Play</a>
+                </div>
+                <p class="note">Train Driver India is an entertainment game. Signals, routes and operations are
+                    simplified for gameplay. Train and station names are used only to create an authentic setting.
+                    Read our <a href="traindriverindia_termsandconditions.html">terms and conditions</a>.</p>
             </div>
         </section>
     </main>
+
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="traindriverindia_privacypolicy.html">Privacy Policy</a>
-                <a href="traindriverindia_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">&copy; 2026 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="traindriverindia_privacypolicy.html">Privacy policy</a>
+                <a href="traindriverindia_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More games</a>
+            </nav>
         </div>
     </footer>
+
     <script>
-        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-            gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-            gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
+
+        // ---- Signal lab ----
+        const ASPECTS = [
+            { id: 'green', label: 'Green', dot: '#2bff7a', lamps: ['lampG'], title: 'Proceed', text: 'The line ahead is clear. Run at the line speed limit.', speed: 130, color: '#22c55e' },
+            { id: 'dy', label: 'Double yellow', dot: '#ffcc1a', lamps: ['lampY1', 'lampY2'], title: 'Attention', text: 'The next signal is at yellow. Be ready to slow down.', speed: 100, color: '#f5a524' },
+            { id: 'yellow', label: 'Yellow', dot: '#ffcc1a', lamps: ['lampY2'], title: 'Caution', text: 'The next signal is at red. Slow down and be ready to stop at it.', speed: 45, color: '#f59e0b' },
+            { id: 'red', label: 'Red', dot: '#ff3030', lamps: ['lampR'], title: 'Danger: stop', text: 'Stop before the signal. Pass a red and your journey ends.', speed: 0, color: '#ef4444' }
+        ];
+        const aspBox = document.getElementById('aspects');
+        let current = 0, userTouched = false;
+
+        ASPECTS.forEach((a, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.innerHTML = `<i style="background:${a.dot}"></i>${a.label}`;
+            b.onclick = () => { userTouched = true; show(i); };
+            aspBox.appendChild(b);
+        });
+
+        function show(i) {
+            current = i;
+            const a = ASPECTS[i];
+            ['lampY1', 'lampG', 'lampR', 'lampY2'].forEach(id => document.getElementById(id).classList.toggle('on', a.lamps.includes(id)));
+            aspBox.querySelectorAll('button').forEach((b, k) => b.setAttribute('aria-pressed', k === i));
+            document.getElementById('mTitle').textContent = a.title;
+            document.getElementById('mTitle').style.color = a.color;
+            document.getElementById('mText').textContent = a.text;
+            const fill = document.getElementById('speedFill');
+            fill.style.width = (a.speed / 130 * 100) + '%';
+            fill.style.background = a.color;
+            animateSpeed(a.speed);
         }
+
+        let shown = 0, raf = null;
+        function animateSpeed(target) {
+            cancelAnimationFrame(raf);
+            const step = () => {
+                shown += Math.sign(target - shown) * Math.max(1, Math.round(Math.abs(target - shown) / 8));
+                if (Math.abs(target - shown) < 1 || reduce) shown = target;
+                document.getElementById('speedNum').textContent = shown + ' km/h';
+                if (shown !== target) raf = requestAnimationFrame(step);
+            };
+            step();
+        }
+
+        show(0);
+        if (!reduce) {
+            setInterval(() => { if (!userTouched) show((current + 1) % ASPECTS.length); }, 3200);
+        }
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/ASTyLY-WKpo?autoplay=1&rel=0&modestbranding=1';
+            f.title = 'Train Driver India trailer';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            f.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(f);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const stepW = () => (gal.querySelector('figure')?.offsetWidth || 560) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -stepW(), behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: stepW(), behavior: 'smooth' });
     </script>
 </body>
 

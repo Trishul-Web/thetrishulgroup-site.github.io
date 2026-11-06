@@ -3,328 +3,1443 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>QR Code Generator - Create QR | DevDuo's</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Custom QR: All Links in One QR | DevDuo Software</title>
+    <meta name="description"
+        content="Turn one QR code into your own links page with Instagram, WhatsApp, website, payments and more. Plus a full QR designer, home screen QR widgets and a fast scanner.">
+    <meta property="og:title" content="Custom QR: All Links in One QR">
+    <meta property="og:description" content="One QR code. All your links. Your own page.">
+    <meta property="og:image" content="screens/04-link-page.jpg">
+    <meta name="theme-color" content="#f5f7fc">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔳</text></svg>">
+        href="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=s128-rw">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
     <style>
-        /* ... PASTE ALL THE CSS FROM safekeep_info.html HERE ... */
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --brand-3: #a78bfa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            --bg: #f5f7fc;
+            --card: #ffffff;
+            --ink: #0f172a;
+            --soft: #475569;
+            --mute: #7b8496;
+            --line: #e3e8f2;
+            --blue: #2563eb;
+            --purple: #9333ea;
+            --pink: #db2777;
+            --grad: linear-gradient(120deg, #2563eb, #7c3aed 55%, #db2777);
+            --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
         * {
             box-sizing: border-box;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
+        a {
+            color: inherit;
         }
 
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
+        img,
+        video {
+            max-width: 100%;
+            display: block;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--blue);
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        .wrap {
+            width: min(1140px, 90vw);
+            margin: 0 auto;
+        }
+
+        /* ---------- Nav ---------- */
+        .nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(245, 247, 252, .86);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        header .container {
+        .nav .wrap {
+            height: 66px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: color .2s;
+        }
+
+        .tabs a:hover {
+            color: var(--ink);
+        }
+
+        .tabs a[aria-current="page"] {
+            background: var(--ink);
+            color: #fff;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 900px;
+            height: 900px;
+            right: -260px;
+            top: -380px;
+            background: radial-gradient(closest-side, rgba(124, 58, 237, .18), rgba(37, 99, 235, .1) 55%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
             align-items: center;
         }
 
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
         }
 
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 24px rgba(124, 58, 237, .25);
+        }
+
+        .app-id strong {
+            display: block;
+        }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-weight: 800;
+            font-size: clamp(2.5rem, 5.6vw, 4.3rem);
+            line-height: 1.02;
+            letter-spacing: -.035em;
+            margin: 0 0 1.25rem;
+        }
+
+        .grad {
+            background: var(--grad);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
         }
 
-        .app-bar {
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
             display: flex;
-            gap: 1.5rem;
+            flex-wrap: wrap;
+            gap: .75rem;
         }
 
-        .app-bar-link {
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: .97rem;
             text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
+            transition: transform .2s, border-color .2s;
         }
 
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        section {
-            padding: 6rem 0;
-        }
-
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 680px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
+        .btn-main {
+            background: var(--grad);
             color: #fff;
-            text-align: center;
+            box-shadow: 0 12px 30px rgba(124, 58, 237, .3);
         }
 
-        .feature-grid {
+        .btn-main:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--card);
+        }
+
+        .btn-line:hover {
+            border-color: var(--blue);
+        }
+
+        .ticks {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: 2rem;
+            font-size: .9rem;
+            font-weight: 600;
+            color: var(--soft);
+        }
+
+        .ticks span::before {
+            content: "✓ ";
+            color: var(--blue);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #0f172a;
+            box-shadow: 0 40px 80px rgba(15, 23, 42, .25);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 864 / 1850;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        /* ---------- Design studio (signature) ---------- */
+        .studio-box {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: 1fr 320px;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, .06);
         }
 
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
+        .kicker {
+            display: inline-block;
+            font-size: .78rem;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: .6rem;
         }
 
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
+        .picker-label {
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--mute);
+            margin: 1.5rem 0 .6rem;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+        }
+
+        .layouts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .45rem;
+        }
+
+        .layouts button,
+        .themes button {
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .layouts button {
+            font-size: .85rem;
+            font-weight: 700;
+            padding: .5rem .9rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--bg);
+            color: var(--soft);
+        }
+
+        .layouts button[aria-pressed="true"] {
+            background: var(--ink);
+            border-color: var(--ink);
+            color: #fff;
+        }
+
+        .themes {
+            display: flex;
+            gap: .6rem;
+        }
+
+        .themes button {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 1px var(--line);
+        }
+
+        .themes button[aria-pressed="true"] {
+            box-shadow: 0 0 0 3px var(--blue);
+        }
+
+        .studio-note {
+            margin: 1.25rem 0 0;
+            font-size: .85rem;
+            color: var(--mute);
+        }
+
+        .live-phone {
+            width: 320px;
+            height: 640px;
+            border-radius: 44px;
+            padding: 10px;
+            background: #0f172a;
+            box-shadow: 0 40px 80px rgba(15, 23, 42, .28);
+            position: relative;
+        }
+
+        .live-phone iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            border-radius: 34px;
+            background: #fff;
+        }
+
+        .live-phone .loading {
+            position: absolute;
+            inset: 10px;
+            border-radius: 34px;
+            display: grid;
+            place-items: center;
+            color: #94a3b8;
+            font-size: .9rem;
+            pointer-events: none;
+            background: #fff;
+            z-index: 2;
+            transition: opacity .25s;
+        }
+
+        .live-phone.ready .loading {
+            opacity: 0;
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding: 5.5rem 0;
+        }
+
+        h2 {
+            font-weight: 800;
+            font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+            line-height: 1.08;
+            letter-spacing: -.03em;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Steps */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .step {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 24px;
+            padding: 1.75rem 1.75rem 0;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .step .num {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: var(--grad);
+            color: #fff;
+            font-weight: 800;
             margin-bottom: 1rem;
-            color: var(--brand-1);
         }
 
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
+        .step h3 {
+            margin: 0 0 .35rem;
+            font-size: 1.15rem;
         }
 
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
+        .step p {
+            margin: 0 0 1.5rem;
+            color: var(--mute);
+            font-size: .95rem;
         }
 
-        .visual-showcase {
-            background: #080808;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
+        .step .shot {
+            margin-top: auto;
+            border: 6px solid #0f172a;
+            border-bottom: 0;
+            border-radius: 22px 22px 0 0;
+            height: 300px;
+            overflow: hidden;
         }
 
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
+        .step .shot img {
+            width: 100%;
+            object-fit: cover;
+            object-position: top;
         }
 
-        .footer-links {
+        /* Split features */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split.flip .split-text {
+            order: 2;
+        }
+
+        .split ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split li {
+            margin-bottom: .4rem;
+        }
+
+        .duo {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            align-items: flex-start;
+            gap: 1rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .duo .phone {
+            width: 220px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) {
+            margin-top: 3rem;
+        }
+
+        /* Widget mock */
+        .home-mock {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #0f172a;
+            box-shadow: 0 40px 80px rgba(15, 23, 42, .25);
+        }
+
+        .home-screen {
+            border-radius: 30px;
+            aspect-ratio: 864 / 1850;
+            padding: 2.2rem 1.1rem 1rem;
+            background:
+                radial-gradient(80% 50% at 20% 10%, rgba(255, 255, 255, .25), transparent 60%),
+                linear-gradient(160deg, #6366f1, #a855f7 50%, #ec4899);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 52px;
+            gap: .9rem .7rem;
+            align-content: start;
+        }
+
+        .home-screen .clock {
+            grid-column: 1 / -1;
+            grid-row: span 2;
+            color: #fff;
+            text-align: center;
+            font-weight: 300;
+            font-size: 3rem;
+            line-height: 1;
+            padding-top: .4rem;
+        }
+
+        .home-screen .clock small {
+            display: block;
+            font-size: .8rem;
+            font-weight: 600;
+            opacity: .85;
+            margin-top: .4rem;
+        }
+
+        .home-screen .ico {
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .28);
+        }
+
+        .widget {
+            grid-column: span 2;
+            grid-row: span 3;
+            border-radius: 20px;
+            background: #fff;
+            padding: .6rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: .3rem;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, .2);
+        }
+
+        .widget svg {
+            width: 82%;
+            height: auto;
+        }
+
+        .widget b {
+            font-size: .68rem;
+            color: var(--ink);
+        }
+
+        /* Types */
+        .types {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .type {
+            padding: 1.4rem;
+            border-radius: 20px;
+            background: var(--card);
+            border: 1px solid var(--line);
+        }
+
+        .type .ic {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            font-size: 1.3rem;
+            margin-bottom: .8rem;
+        }
+
+        .type h3 {
+            margin: 0 0 .25rem;
+            font-size: 1rem;
+        }
+
+        .type p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        /* Pro */
+        .pro {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 32px;
+            color: #fff;
+            background:
+                radial-gradient(70% 120% at 100% 0%, rgba(219, 39, 119, .35), transparent 60%),
+                linear-gradient(140deg, #1e1b4b, #312e81 55%, #4c1d95);
+        }
+
+        .pro h2 {
+            color: #fff;
+        }
+
+        .pro p {
+            color: #c7d2fe;
+            margin: 0;
+        }
+
+        .pro ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: .75rem 1.5rem;
+        }
+
+        .pro li {
+            display: flex;
+            gap: .6rem;
+            color: #e0e7ff;
+            font-weight: 500;
+        }
+
+        .pro li::before {
+            content: "★";
+            color: #fbbf24;
+        }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img {
+            transform: scale(1.03);
+        }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(15, 23, 42, .45), rgba(15, 23, 42, .05));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--grad);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span {
+            transform: scale(1.08);
+        }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #fff;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--card);
+            color: var(--ink);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover {
+            border-color: var(--blue);
+        }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery figure {
+            flex: 0 0 200px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img {
+            border-radius: 24px;
+        }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* FAQ */
+        .faq {
+            max-width: 780px;
+        }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 700;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: "+";
+            color: var(--purple);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after {
+            content: "–";
+        }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            background: var(--card);
+            border: 1px solid var(--line);
+            box-shadow: 0 30px 60px rgba(15, 23, 42, .06);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a {
             text-decoration: none;
-            transition: color .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        footer a:hover {
+            color: var(--ink);
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+
+            .hero-grid,
+            .studio-box,
+            .split,
+            .pro {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .split.flip .split-text {
+                order: 0;
+            }
+
+            .studio-box,
+            .pro {
+                padding: 2rem 1.5rem;
+            }
+
+            .live-phone {
+                margin: 0 auto;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .step .shot {
+                height: 260px;
+                max-width: 320px;
+            }
+
+            .types {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .phone,
+            .home-mock {
+                width: 240px;
+            }
+
+            .duo .phone {
+                width: 170px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 0;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .types,
+            .pro ul {
+                grid-template-columns: 1fr;
+            }
+
+            .duo .phone {
+                width: 145px;
+            }
+
+            .gallery figure {
+                flex-basis: 170px;
+            }
+
+            .live-phone {
+                width: 290px;
+                height: 580px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            * {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <header>
-        <div class="container">
-            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="qrcode_info.html" class="app-bar-link active">App Info</a>
-                <a href="qrcode_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="qrcode_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="qrcode_info.html" aria-current="page">App info</a>
+                <a href="qrcode_privacypolicy.html">Privacy</a>
+                <a href="qrcode_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://via.placeholder.com/150/111111/5eead4?text=%E2%96%A3" alt="QR Code Generator App Icon"
-                class="hero-icon" style="object-fit: cover;">
-            <h1 class="grand-title">The Ultimate <span class="gradient-text">QR Studio</span></h1>
-            <p class="intro-lede">
-                Create custom QR codes, scan instantly from your camera or gallery, and generate UPI, Wi-Fi, and Contact
-                cards with beautiful call-to-action frames and brand colors.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduos.qrcodegenerator" target="_blank"
-                class="cta-button">View on Play Store</a>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=s256-rw"
+                            alt="Custom QR app icon" width="64" height="64">
+                        <div>
+                            <strong>Custom QR: All Links in One QR</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>One QR code. <span class="grad">All your links.</span> Your own page.</h1>
+                    <p class="lede">Turn a single QR into your own links page with Instagram, WhatsApp, your website,
+                        payments and more. Plus a full QR designer, home screen QR widgets and a fast scanner.</p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator"
+                            target="_blank" rel="noopener" class="btn btn-main">View on Google Play</a>
+                        <a href="#designs" class="btn btn-line">Preview page designs</a>
+                    </div>
+                    <div class="ticks"><span>No account</span><span>No monthly fee</span><span>Page never
+                            expires</span></div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/04-link-page.jpg" autoplay muted loop playsinline
+                        preload="metadata" id="heroLoop"
+                        aria-label="Building a links page and previewing its design"></video>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live design studio -->
+        <section id="designs" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="studio-box">
+                    <div>
+                        <span class="kicker">Live preview</span>
+                        <h2>11 page designs. 6 colour themes.</h2>
+                        <p class="section-lede" style="margin-bottom:0">This is the real page people see when they
+                            scan your Custom QR. Pick a design and a theme to preview it with sample details.</p>
+                        <div class="picker-label">Page design</div>
+                        <div class="layouts" id="layouts" role="group" aria-label="Page design"></div>
+                        <div class="picker-label">Colour theme</div>
+                        <div class="themes" id="themes" role="group" aria-label="Colour theme"></div>
+                        <p class="studio-note">Sample details are shown and links are disabled in preview.</p>
+                    </div>
+                    <div class="live-phone">
+                        <div class="loading">Loading preview…</div>
+                        <iframe id="cardFrame" title="Links page design preview"></iframe>
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Core Features</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
-                    </svg>
-                    <h3>Premium Customization</h3>
-                    <p>Stop using boring black-and-white barcodes. Add custom frames like "Scan Me", apply sleek
-                        gradients, round the dots, and embed your logo right in the center.</p>
+        <!-- How it works -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">All your links in one QR</span>
+                <h2>Ready in about a minute</h2>
+                <p class="section-lede">Perfect for shops, cafés, freelancers, creators, events, flyers and product
+                    packaging.</p>
+                <div class="steps">
+                    <div class="step">
+                        <div class="num">1</div>
+                        <h3>Add your links</h3>
+                        <p>Instagram, WhatsApp, website, YouTube, payments and more. Type a username or paste a link.
+                        </p>
+                        <div class="shot"><img src="screens/02-link-builder.jpg" alt="Adding links" loading="lazy">
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="num">2</div>
+                        <h3>Pick a design</h3>
+                        <p>Choose a page layout and colour theme, with custom button titles like “Order on WhatsApp”.
+                        </p>
+                        <div class="shot"><img src="screens/03-page-designs.jpg" alt="Choosing a page design"
+                                loading="lazy"></div>
+                    </div>
+                    <div class="step">
+                        <div class="num">3</div>
+                        <h3>Share one QR</h3>
+                        <p>People scan once and see everything, with a Save Contact button for your number and email.
+                        </p>
+                        <div class="shot"><img src="screens/04-link-page.jpg" alt="The links page after scanning"
+                                loading="lazy"></div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
-                    </svg>
-                    <h3>Smart Image Scanner</h3>
-                    <p>Received a QR code in an image or screenshot? Upload it directly from your gallery and our smart
-                        scanner will instantly decode the information.</p>
+            </div>
+        </section>
+
+        <!-- Designer -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">QR designer</span>
+                        <h2>QR codes that people want to scan</h2>
+                        <ul>
+                            <li>12 call-to-action frames: Ticket, Speech Bubble, Polaroid, Neon, Stamp and more</li>
+                            <li>Frame text on top or bottom, with quick picks like “SCAN ME”</li>
+                            <li>Branding banner with your photo, title and description</li>
+                            <li>Brand colours, gradients, rounded dots and transparent backgrounds</li>
+                            <li>Scannability Check makes sure your colours have enough contrast</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/06-scan-me.jpg" alt="QR with Scan Me frame" loading="lazy">
+                        </div>
+                        <div class="phone"><img src="screens/05-cta-frames.jpg" alt="Call-to-action frames"
+                                loading="lazy"></div>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                    <h3>Offline History</h3>
-                    <p>Never lose a generated code. Every QR code you create is automatically saved to your secure,
-                        offline history on your device so you can view, edit, or share it anytime.</p>
+
+                <div class="split flip">
+                    <div class="split-text">
+                        <span class="kicker">New · Home screen widgets</span>
+                        <h2>Your QR, one tap away</h2>
+                        <ul>
+                            <li>Add any QR code to your home screen as a widget</li>
+                            <li>Resize it to any size, even 1×1</li>
+                            <li>Name each one, like “Shop UPI” or “Guest WiFi”</li>
+                            <li>Tap to show it full screen with brightness boosted for easy scanning</li>
+                        </ul>
+                    </div>
+                    <div class="home-mock" aria-hidden="true">
+                        <div class="home-screen">
+                            <div class="clock">10:24<small>Thursday, 30 October</small></div>
+                            <div class="widget">
+                                <svg viewBox="0 0 21 21" shape-rendering="crispEdges" id="widgetQr"></svg>
+                                <b>Shop UPI</b>
+                            </div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                            <div class="ico"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Types -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">Create any type</span>
+                <h2>Every QR you need</h2>
+                <p class="section-lede">Plus bulk creation with ZIP export and password-protected codes.</p>
+                <div class="types">
+                    <div class="type">
+                        <div class="ic" style="background:#dbeafe">🔗</div>
+                        <h3>Website link</h3>
+                        <p>Send people straight to any page.</p>
+                    </div>
+                    <div class="type">
+                        <div class="ic" style="background:#fef3c7">📶</div>
+                        <h3>WiFi</h3>
+                        <p>Guests scan to join your network.</p>
+                    </div>
+                    <div class="type">
+                        <div class="ic" style="background:#ede9fe">📇</div>
+                        <h3>Contact card</h3>
+                        <p>Name, phone and email in one scan.</p>
+                    </div>
+                    <div class="type">
+                        <div class="ic" style="background:#ccfbf1">₹</div>
+                        <h3>UPI payment</h3>
+                        <p>Get paid in India, with an optional fixed amount.</p>
+                    </div>
+                    <div class="type">
+                        <div class="ic" style="background:#ffe4e6">✉️</div>
+                        <h3>Email</h3>
+                        <p>Pre-filled subject and message.</p>
+                    </div>
+                    <div class="type">
+                        <div class="ic" style="background:#cffafe">📅</div>
+                        <h3>Calendar event</h3>
+                        <p>Start and end time ready to save.</p>
+                    </div>
+                    <div class="type">
+                        <div class="ic" style="background:#f1f5f9">📦</div>
+                        <h3>Bulk creation</h3>
+                        <p>Make many codes and share them as one ZIP.</p>
+                    </div>
+                    <div class="type">
+                        <div class="ic" style="background:#fee2e2">🔒</div>
+                        <h3>Password protected</h3>
+                        <p>Scanners must enter a password to see the content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pro -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="pro">
+                    <div>
+                        <span class="kicker" style="color:#fbbf24">Custom QR PRO</span>
+                        <h2>One-time purchase. No subscription.</h2>
+                        <p>Unlock everything once and keep it. The standard version is supported by ads.</p>
+                    </div>
+                    <ul>
+                        <li>No ads</li>
+                        <li>All premium frames and banners</li>
+                        <li>All 11 page designs and 6 themes</li>
+                        <li>Up to 8 links on your page</li>
+                        <li>Remove the app credit from your page</li>
+                        <li>Custom brand colours</li>
+                        <li>Unlimited password-protected QR codes</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">See a links page built, designed and scanned.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the Custom QR trailer">
+                    <img src="https://i.ytimg.com/vi/Ah0CfmTuh04/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-home.jpg" alt="Home" loading="lazy"></div>
+                        <figcaption>Studio home</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/04-link-page.jpg" alt="Links page" loading="lazy"></div>
+                        <figcaption>Your links page</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-link-builder.jpg" alt="Link builder" loading="lazy">
+                        </div>
+                        <figcaption>Link builder</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/06-scan-me.jpg" alt="Scan me frame" loading="lazy">
+                        </div>
+                        <figcaption>Scan Me frame</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-branding-banner.jpg" alt="Branding banner"
+                                loading="lazy"></div>
+                        <figcaption>Branding banner</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/08-qr-types.jpg" alt="QR types" loading="lazy"></div>
+                        <figcaption>All QR types</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/09-bulk-batch.jpg" alt="Bulk batch" loading="lazy">
+                        </div>
+                        <figcaption>Bulk batch</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/11-history.jpg" alt="History" loading="lazy"></div>
+                        <figcaption>History</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/10-unlocked.jpg" alt="Unlocked password QR" loading="lazy">
+                        </div>
+                        <figcaption>Password QR unlocked</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Do I need an account for my links page?</summary>
+                        <p>No. Your page details live inside the QR link itself, so there is no sign-up, no server
+                            account and no monthly fee.</p>
+                    </details>
+                    <details>
+                        <summary>Will my links page expire?</summary>
+                        <p>No. Because the details are stored in the QR link, your page keeps working as long as the QR
+                            exists.</p>
+                    </details>
+                    <details>
+                        <summary>Can I change my links later?</summary>
+                        <p>Open the code from History, edit it and create it again. Remember that people need the new
+                            QR to see the changes.</p>
+                    </details>
+                    <details>
+                        <summary>Is PRO a subscription?</summary>
+                        <p>No. PRO is a one-time purchase through Google Play.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>Turn every scan into a <span class="grad">connection</span></h2>
+                    <p>Create your links page and your first custom QR in about a minute.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduo.qrcodegenerator" target="_blank"
+                        rel="noopener" class="btn btn-main">View on Google Play</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="qrcode_privacypolicy.html">Privacy Policy</a>
-                <a href="qrcode_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">© 2026 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="qrcode_privacypolicy.html">Privacy policy</a>
+                <a href="qrcode_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
+
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
+
+        // Live design preview: uses the real card.html in preview mode (sample details, links disabled)
+        const LAYOUTS = [
+            ['stack', 'Classic List'], ['minimal', 'Minimal'], ['grid', 'Grid Tiles'], ['cover', 'Cover Banner'],
+            ['pill', 'Pills'], ['glass', 'Glass'], ['bento', 'Bento'], ['neon', 'Neon'], ['retro', 'Retro Pop'],
+            ['iconbar', 'Icon Bubbles'], ['card', 'Business Card']
+        ];
+        const THEMES = [
+            ['classic', '#dbeafe'], ['midnight', '#0f172a'], ['sunset', 'linear-gradient(135deg,#F97316,#DB2777)'],
+            ['ocean', 'linear-gradient(135deg,#0EA5E9,#1E3A8A)'], ['forest', 'linear-gradient(135deg,#10B981,#064E3B)'],
+            ['royal', 'linear-gradient(135deg,#4C1D95,#6D28D9)']
+        ];
+        let layout = 'bento', theme = 'royal';
+        const frame = document.getElementById('cardFrame');
+
+        function enc(obj) {
+            const bytes = new TextEncoder().encode(JSON.stringify(obj));
+            let bin = '';
+            bytes.forEach(b => { bin += String.fromCharCode(b); });
+            return btoa(bin).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+
+        const livePhone = document.querySelector('.live-phone');
+        let previewCount = 0;
+        frame.addEventListener('load', () => {
+            try {
+                const doc = frame.contentDocument;
+                const st = doc.createElement('style');
+                st.textContent = 'html,body{scrollbar-width:none;-ms-overflow-style:none}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none;width:0;height:0}';
+                doc.head.appendChild(st);
+            } catch (e) { /* preview still works if the browser blocks this */ }
+            livePhone.classList.add('ready');
+        });
+
+        function updateFrame() {
+            previewCount++;
+            livePhone.classList.remove('ready');
+            frame.src = 'card.html?v=' + previewCount + '#d=' + enc({ t: theme, y: layout, p: 1, f: 0 });
+            document.querySelectorAll('#layouts button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === layout));
+            document.querySelectorAll('#themes button').forEach(b => b.setAttribute('aria-pressed', b.dataset.v === theme));
+        }
+
+        const lBox = document.getElementById('layouts');
+        LAYOUTS.forEach(([v, label]) => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.dataset.v = v; b.textContent = label;
+            b.onclick = () => { layout = v; updateFrame(); };
+            lBox.appendChild(b);
+        });
+        const tBox = document.getElementById('themes');
+        THEMES.forEach(([v, bg]) => {
+            const b = document.createElement('button');
+            b.type = 'button'; b.dataset.v = v; b.style.background = bg;
+            b.setAttribute('aria-label', v.charAt(0).toUpperCase() + v.slice(1) + ' theme');
+            b.onclick = () => { theme = v; updateFrame(); };
+            tBox.appendChild(b);
+        });
+        updateFrame();
+
+        // Decorative QR pattern for the widget mock (not a real code)
+        (function () {
+            const svg = document.getElementById('widgetQr');
+            const n = 21;
+            let seed = 7;
+            const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+            let out = '';
+            const finder = (x, y) => `<rect x="${x}" y="${y}" width="7" height="7" fill="#4c1d95"/><rect x="${x + 1}" y="${y + 1}" width="5" height="5" fill="#fff"/><rect x="${x + 2}" y="${y + 2}" width="3" height="3" fill="#4c1d95"/>`;
+            for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+                const inFinder = (x < 8 && y < 8) || (x > 12 && y < 8) || (x < 8 && y > 12);
+                if (!inFinder && rnd() > .5) out += `<rect x="${x}" y="${y}" width="1" height="1" fill="#4c1d95"/>`;
+            }
+            svg.innerHTML = out + finder(0, 0) + finder(14, 0) + finder(0, 14);
+        })();
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/Ah0CfmTuh04?autoplay=1&rel=0&modestbranding=1';
+            f.title = 'Custom QR trailer';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            f.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(f);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const stepW = () => (gal.querySelector('figure')?.offsetWidth || 200) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -stepW() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: stepW() * 2, behavior: 'smooth' });
     </script>
 </body>
 

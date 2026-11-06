@@ -3,215 +3,247 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - ResuMate AI | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - ResuMateAI | DevDuo Software</title>
+    <meta name="theme-color" content="#f6f7fb">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Exact Copy of Safekeep Styles */
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #f6f7fb; --card: #ffffff; --ink: #111827; --soft: #4b5563; --mute: #7c8494;
+            --line: #e5e8f0; --violet: #3355ff; --violet-soft: #eef1ff; --warn: #b42318; --warn-soft: #fef3f2;
+            --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(246, 247, 251, .86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: var(--ink); color: #fff; }
+        .doc-head { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 90% 0%, rgba(51, 85, 255, .12), transparent 60%), var(--card); }
+        h1, article h2 { font-family: "DM Serif Display", Georgia, serif; font-weight: 400; }
+        h1 { font-size: clamp(2.3rem, 5vw, 3.3rem); }
+        article h2 { font-size: 1.55rem; }
+        .tabs a[aria-current="page"] { background: var(--violet) !important; }
+        .caps { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 14px; padding: .9rem 1.1rem; }
+        .caps strong { color: var(--warn); }
+        ol { color: var(--soft); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #5b1a14; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body { background: #fff; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container-header">
-            <a href="../../../devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="resumateai_info.html" class="app-bar-link">App Info</a>
-                <a href="resumateai_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
-                <a href="resumateai_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="resumateai_info.html">App info</a>
+                <a href="resumateai_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="resumateai_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <h1>Privacy Policy for ResuMate AI</h1>
-        <p class="timestamp">Last Updated: December 09, 2025</p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="resumateai_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/PSf_7c1gVKWyxJFuuVXwxFDievaG8rma1wBfV90bcm_EhXBBV5TkHKHmS3yKV7WNUPA_vLQpKqxqQG2-F8Ov=s128-rw" alt="" width="32" height="32">ResuMateAI: Smart Resume Tools</a>
+            <h1>Privacy Policy for ResuMate AI</h1>
+            <p class="meta">Last Updated: October 30, 2026 · Previous version: December 09, 2025</p>
+        </div>
+    </div>
 
-        <p>DevDuo's built the ResuMate AI app as a Free, Ad-Supported app. This SERVICE is provided by DevDuos at no
-            cost and is intended for use as is.</p>
-
-        <h2>1. Data Storage & Privacy</h2>
-        <p>ResuMate AI follows a **local-first** principle. All resume data (names, contact info, experience, etc.) you
-            enter is stored securely on your device using a local database. We (DevDuos) generally do not have access to
-            this data.</p>
-
-        <h2>2. Third-Party Services</h2>
-        <p>The app uses third-party services that may collect information used to identify you or provide functionality:
-        </p>
-        <ul>
-            <li><strong>Google AdMob:</strong> Used to display advertisements. AdMob may collect data such as
-                Advertising ID, coarse location, and usage metrics to serve relevant ads.</li>
-            <li><strong>Google Gemini API:</strong> When you use AI features (e.g., "AI Writer", "ATS Scanner", "Review
-                Resume"), the text content (resume data, job descriptions) is sent to Google's Gemini API for
-                processing. This data is used solely to generate the response and is not used to train Google's models.
-            </li>
-        </ul>
-
-        <h2>3. Log Data</h2>
-        <p>In a case of an error in the app, we collect data and information (through third-party products like Google
-            Play Services) on your phone called Log Data. This may include your device IP address, device name,
-            operating system version, and the time and date of your use of the Service.</p>
-
-        <h2>4. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. You are advised to review this page periodically for any
-            changes. These changes are effective immediately after they are posted on this page.</p>
-
-        <h2>5. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#about">About This Policy</a></li>
+                <li><a href="#local">1. Data Storage &amp; Privacy</a></li>
+                <li><a href="#third">2. Third-Party Services</a></li>
+                <li><a href="#ondevice">3. On-Device AI Models</a></li>
+                <li><a href="#pdf">4. PDF Import and Export</a></li>
+                <li><a href="#permissions">5. Device Permissions</a></li>
+                <li><a href="#premium">6. Premium Purchases</a></li>
+                <li><a href="#log">7. Log Data</a></li>
+                <li><a href="#choices">8. Your Choices</a></li>
+                <li><a href="#delete">9. Data Retention and Deletion</a></li>
+                <li><a href="#security">10. Security</a></li>
+                <li><a href="#children">11. Children's Privacy</a></li>
+                <li><a href="#changes">12. Changes to This Privacy Policy</a></li>
+                <li><a href="#contact">13. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>Your resumes and career data are stored on your device. No account is needed.</li>
+                    <li>Text is sent to an AI service only when you use a cloud AI feature, and only to generate that result.</li>
+                    <li>On-device AI models, when selected, process your text entirely on your phone.</li>
+                    <li>The app shows ads from Google AdMob. Premium purchases are handled by Google Play.</li>
+                </ul>
+            </div>
+            <section id="about">
+                <h2>About This Policy</h2>
+                <p>DevDuo's built the ResuMate AI app as an Ad-Supported app. This SERVICE is provided by DevDuos and is intended for use as is.</p>
+                <p>This Privacy Policy explains what information ResuMateAI: Smart Resume Tools (the "app") uses, how it is processed and the choices you have.</p>
+            </section>
+            <section id="local">
+                <h2>1. Data Storage &amp; Privacy</h2>
+                <p>ResuMate AI follows a <strong>local-first</strong> principle. All resume data (names, contact info, experience, etc.) you enter is stored securely on your device using a local database. We (DevDuos) generally do not have access to this data.</p>
+                <p>This also includes your resume versions, autosave history, cover letters and messages you generate, Career Hub job tracking, interview notes, challenge progress and XP, theme choice and settings.</p>
+            </section>
+            <section id="third">
+                <h2>2. Third-Party Services</h2>
+                <p>The app uses third-party services that may collect information used to identify you or provide functionality:</p>
+                <ul>
+                    <li><strong>Google AdMob:</strong> Used to display advertisements. AdMob may collect data such as Advertising ID, coarse location, and usage metrics to serve relevant ads.</li>
+                    <li><strong>Google Gemini API:</strong> When you use AI features (e.g., "AI Writer", "ATS Scanner", "Review Resume"), the text content (resume data, job descriptions) is sent to Google's Gemini API for processing. This data is used solely to generate the response and is not used to train Google's models.</li>
+                </ul>
+            </section>
+            <section id="ondevice">
+                <h2>3. On-Device AI Models</h2>
+                <p>The app can also offer offline AI models that you choose to download. When an on-device model is active, your resume text is processed entirely on your phone and is not sent to any AI service. Downloaded models are stored in the app's storage and can be removed in Settings.</p>
+            </section>
+            <section id="pdf">
+                <h2>4. PDF Import and Export</h2>
+                <ul>
+                    <li><strong>PDF import:</strong> when you upload an existing resume, the file is read from your device to fill in editable sections. If an AI feature is used to understand the text, that text is processed as described in section 2.</li>
+                    <li><strong>PDF and website export:</strong> resumes exported as PDF and portfolio websites saved as HTML files are created on your device and saved where you choose. They are shared only when you share them.</li>
+                </ul>
+            </section>
+            <section id="permissions">
+                <h2>5. Device Permissions</h2>
+                <ul>
+                    <li><strong>Files and storage:</strong> to import a resume PDF and save exported PDFs or HTML files.</li>
+                    <li><strong>Internet:</strong> to use cloud AI features, show ads, process purchases and download optional AI models.</li>
+                    <li>The app does not need access to your contacts, camera, microphone or location to build resumes.</li>
+                </ul>
+            </section>
+            <section id="premium">
+                <h2>6. Premium Purchases</h2>
+                <p>Premium features are purchased through Google Play. We never see or store your card or payment details. We only receive confirmation that your purchase is valid so your features can be unlocked.</p>
+            </section>
+            <section id="log">
+                <h2>7. Log Data</h2>
+                <p>In a case of an error in the app, we collect data and information (through third-party products like Google Play Services) on your phone called Log Data. This may include your device IP address, device name, operating system version, and the time and date of your use of the Service.</p>
+            </section>
+            <section id="choices">
+                <h2>8. Your Choices</h2>
+                <ul>
+                    <li>Use on-device AI models when you prefer your text never to leave your phone.</li>
+                    <li>Avoid entering details you do not want processed by a cloud AI feature, such as government ID numbers.</li>
+                    <li>Reset or delete your advertising ID in your device's Google settings. Where required by law, you will be asked for consent before personalised ads are shown.</li>
+                    <li>Delete individual resumes inside the app at any time.</li>
+                </ul>
+            </section>
+            <section id="delete">
+                <h2>9. Data Retention and Deletion</h2>
+                <p>Because your data is stored on your device, it stays there until you remove it:</p>
+                <ul>
+                    <li><strong>Delete in the app:</strong> remove any resume, document or tracked job.</li>
+                    <li><strong>Clear app data:</strong> go to your device's <em>Settings &gt; Apps &gt; ResuMateAI &gt; Storage &gt; Clear storage</em>.</li>
+                    <li><strong>Uninstall:</strong> uninstalling the app permanently removes all locally stored data.</li>
+                </ul>
+                <p>Exported PDF and HTML files saved to your device must be deleted separately.</p>
+            </section>
+            <section id="security">
+                <h2>10. Security</h2>
+                <p>Data sent to AI services travels over encrypted HTTPS connections. Your saved data is kept in the app's private storage on your device. We recommend using a screen lock, because anyone with access to your unlocked phone could open the app.</p>
+            </section>
+            <section id="children">
+                <h2>11. Children's Privacy</h2>
+                <p>ResuMateAI is intended for users aged 13 and older. We do not knowingly collect personal information from children under 13. If you believe a child has provided personal information, please contact us.</p>
+            </section>
+            <section id="changes">
+                <h2>12. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. You are advised to review this page periodically for any changes. These changes are effective immediately after they are posted on this page.</p>
+            </section>
+            <section id="contact">
+                <h2>13. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="resumateai_info.html">App info</a>
+                <a href="resumateai_privacypolicy.html">Privacy policy</a>
+                <a href="resumateai_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

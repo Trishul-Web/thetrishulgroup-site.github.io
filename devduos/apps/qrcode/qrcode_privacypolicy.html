@@ -3,241 +3,234 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - QR Code Generator | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔳</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - Custom QR | DevDuo Software</title>
+    <meta name="theme-color" content="#f5f7fc">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* ... PASTE ALL CSS FROM safekeep_privacypolicy.html HERE ... */
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #f5f7fc; --card: #ffffff; --ink: #0f172a; --soft: #475569; --mute: #7b8496;
+            --line: #e3e8f2; --violet: #2563eb; --violet-soft: #eef2ff; --warn: #b42318; --warn-soft: #fef3f2;
+            --font: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(245, 247, 252, .86); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: var(--ink); color: #fff; }
+        .doc-head { padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 90% 0%, rgba(124, 58, 237, .12), transparent 60%), var(--card); }
+        .caps { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 14px; padding: .9rem 1.1rem; }
+        .caps strong { color: var(--warn); }
+        ol { color: var(--soft); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid #fecdca; border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #5b1a14; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body { background: #fff; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-    <header>
-        <div class="container-header">
-            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="qrcode_info.html" class="app-bar-link">App Info</a>
-                <a href="qrcode_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
-                <a href="qrcode_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="qrcode_info.html">App info</a>
+                <a href="qrcode_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="qrcode_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <h1>Privacy Policy</h1>
-        <p class="timestamp">Last Updated: March 23, 2026</p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="qrcode_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/SRu8BZtULcUm_d3wI5TJennrBnad1iaFk0WoLvSFsGKljHv1K4E70URcM6O01uGtUv7vRl9-xXWAL7Nbo3Mq=s128-rw" alt="" width="32" height="32">Custom QR: All Links in One QR</a>
+            <h1>Privacy Policy</h1>
+            <p class="meta">Last Updated: October 30, 2026 · Previous version: March 23, 2026</p>
+        </div>
+    </div>
 
-        <p>DevDuo's ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we
-            handle your information when you use our <strong>QR Code Generator – Create QR</strong> mobile application
-            (the "Service").</p>
-
-        <h2>1. Information We Collect and Process</h2>
-        <p>Our app functions entirely offline and on your device. However, to provide its core features, it requests the
-            following local device permissions:</p>
-        <ul>
-            <li><strong>Camera Permission:</strong> Required solely to scan QR codes in real-time. Video data from your
-                camera is processed locally and is never recorded, saved, or transmitted to any server.</li>
-            <li><strong>Photos / Storage Permission:</strong> Required to allow you to upload images from your gallery
-                to scan existing QR codes, and to save newly generated QR codes directly to your device's photo gallery.
-            </li>
-            <li><strong>User Inputs:</strong> Data you input to generate a QR code (such as URLs, Wi-Fi passwords,
-                contact information, or UPI IDs) is processed entirely locally on your device to create the QR code
-                image.</li>
-        </ul>
-
-        <h2>2. Data Storage and Retention</h2>
-        <p><strong>Zero Cloud Uploads:</strong> We do NOT upload, collect, or transmit any of your generated QR codes,
-            scanned data, or personal information to our servers or any third-party databases. All processing is 100%
-            on-device.</p>
-        <p><strong>Local History (SQLite):</strong> To provide a seamless experience, the app automatically saves the QR
-            codes you generate into a local SQLite database stored securely within the app's isolated directory on your
-            specific device. This allows you to view your "History" offline.</p>
-        <p><strong>Data Retention Period:</strong> Your generated QR code history is retained locally on your device
-            indefinitely, strictly for your convenience, <em>as long as the application remains installed.</em></p>
-
-        <h2>3. Data Deletion Policy</h2>
-        <p>Because your data is never sent to our servers, you have complete and immediate control over its deletion.
-            You can delete your data at any time through the following methods:</p>
-        <ul>
-            <li><strong>Individual Deletion:</strong> Inside the app, navigate to the "History" tab. Tap the
-                "Trash/Delete" icon next to any saved QR code to immediately and permanently delete that specific record
-                from your device's database.</li>
-            <li><strong>Complete Data Deletion:</strong> You can completely and permanently delete all saved history and
-                user inputs at once by doing either of the following:
-                <ol>
-                    <li>Uninstalling the application from your device.</li>
-                    <li>Going to your device Settings > Apps > QR Code Generator > Storage, and tapping "Clear Data".
-                    </li>
-                </ol>
-            </li>
-        </ul>
-        <p><em>Since we do not collect your data on our servers, there is no need to submit a data deletion request to
-                us. You hold the only copy of your data.</em></p>
-
-        <h2>4. Third-Party Services</h2>
-        <p>We may use anonymous, aggregated usage data (such as app crash logs) through standard analytics tools (like
-            Google Play Console) to improve app stability. This data contains no personally identifiable information or
-            content from your QR codes.</p>
-
-        <h2>5. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new
-            Privacy Policy on this page.</p>
-
-        <h2>6. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#about">About This Policy</a></li>
+                <li><a href="#collect">1. Information We Collect and Process</a></li>
+                <li><a href="#links">2. Your Links Page</a></li>
+                <li><a href="#password">3. Password-Protected QR Codes</a></li>
+                <li><a href="#widgets">4. Home Screen Widgets</a></li>
+                <li><a href="#storage">5. Data Storage and Retention</a></li>
+                <li><a href="#delete">6. Data Deletion Policy</a></li>
+                <li><a href="#third">7. Third-Party Services</a></li>
+                <li><a href="#scanned">8. Scanned Content</a></li>
+                <li><a href="#children">9. Children's Privacy</a></li>
+                <li><a href="#changes">10. Changes to This Privacy Policy</a></li>
+                <li><a href="#contact">11. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>QR codes are created and scanned on your device. Nothing is uploaded to our servers.</li>
+                    <li>Your links page details live inside the QR link itself. There is no account or sign-up.</li>
+                    <li>Your History is stored only on your device, and you can delete it any time.</li>
+                    <li>The standard version shows ads from Google AdMob. PRO is a one-time Google Play purchase.</li>
+                </ul>
+            </div>
+            <section id="about">
+                <h2>About This Policy</h2>
+                <p>DevDuo's ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our <strong>Custom QR: All Links in One QR</strong> mobile application, previously named QR Code Generator – Create QR (the "Service").</p>
+            </section>
+            <section id="collect">
+                <h2>1. Information We Collect and Process</h2>
+                <p>Our app functions on your device. However, to provide its core features, it requests the following local device permissions:</p>
+                <ul>
+                    <li><strong>Camera Permission:</strong> Required solely to scan QR codes in real-time. Video data from your camera is processed locally and is never recorded, saved, or transmitted to any server.</li>
+                    <li><strong>Photos / Storage Permission:</strong> Required to allow you to upload images from your gallery to scan existing QR codes, and to save newly generated QR codes directly to your device's photo gallery.</li>
+                    <li><strong>User Inputs:</strong> Data you input to generate a QR code (such as URLs, Wi-Fi passwords, contact information, or UPI IDs) is processed entirely locally on your device to create the QR code image.</li>
+                    <li><strong>Flashlight:</strong> used only when you turn on the light while scanning.</li>
+                </ul>
+            </section>
+            <section id="links">
+                <h2>2. Your Links Page</h2>
+                <p>When you create an "All Your Links in One QR" page, the details you enter (your name, short bio, links, button titles, page design and colour theme) are packed into the QR link itself. We do not store them on any server and there is no account.</p>
+                <ul>
+                    <li>When someone scans your QR, their browser opens our links page on our website, which reads the details from the part of the link after the "#" sign. Browsers do not send this part to the website server.</li>
+                    <li>Like any website, our web host may record basic technical information about page visits, such as IP address, browser type and time, for security and reliability.</li>
+                    <li>The page loads icons from a public icon library (Font Awesome via a content delivery network), which may also see the visitor's IP address.</li>
+                    <li>Anyone who has your QR or its link can see the details on your page, so only add information you are happy to share publicly.</li>
+                </ul>
+            </section>
+            <section id="password">
+                <h2>3. Password-Protected QR Codes</h2>
+                <p>When you lock a QR code with a password, the content is scrambled on your device before it is placed in the QR link. When someone scans it, our unlock page in their browser asks for the password and unscrambles the content locally. We never receive or store your password.</p>
+                <p>This feature is meant to keep casual viewers out. It is not designed to protect highly sensitive secrets, so avoid using it for bank passwords or similar information.</p>
+            </section>
+            <section id="widgets">
+                <h2>4. Home Screen Widgets</h2>
+                <p>If you add a QR code widget to your home screen, the QR image and the name you give it are shown on your home screen and may be visible to anyone who can see your phone. You can remove a widget at any time.</p>
+            </section>
+            <section id="storage">
+                <h2>5. Data Storage and Retention</h2>
+                <p><strong>Zero Cloud Uploads:</strong> We do NOT upload, collect, or transmit any of your generated QR codes, scanned data, or personal information to our servers or any third-party databases. All processing is 100% on-device.</p>
+                <p><strong>Local History (SQLite):</strong> To provide a seamless experience, the app automatically saves the QR codes you generate into a local SQLite database stored securely within the app's isolated directory on your specific device. This allows you to view your "History" offline.</p>
+                <p><strong>Data Retention Period:</strong> Your generated QR code history is retained locally on your device indefinitely, strictly for your convenience, <em>as long as the application remains installed.</em></p>
+            </section>
+            <section id="delete">
+                <h2>6. Data Deletion Policy</h2>
+                <p>Because your data is never sent to our servers, you have complete and immediate control over its deletion. You can delete your data at any time through the following methods:</p>
+                <ul>
+                    <li><strong>Individual Deletion:</strong> Inside the app, navigate to the "History" tab. Tap the "Trash/Delete" icon next to any saved QR code to immediately and permanently delete that specific record from your device's database.</li>
+                    <li><strong>Complete Data Deletion:</strong> You can completely and permanently delete all saved history and user inputs at once by doing either of the following:<ol><li>Uninstalling the application from your device.</li><li>Going to your device Settings &gt; Apps &gt; Custom QR &gt; Storage, and tapping "Clear Data".</li></ol></li>
+                </ul>
+                <p><em>Since we do not collect your data on our servers, there is no need to submit a data deletion request to us. You hold the only copy of your data.</em></p>
+            </section>
+            <section id="third">
+                <h2>7. Third-Party Services</h2>
+                <p>We may use anonymous, aggregated usage data (such as app crash logs) through standard analytics tools (like Google Play Console) to improve app stability. This data contains no personally identifiable information or content from your QR codes.</p>
+                <ul>
+                    <li><strong>Google AdMob:</strong> the standard version shows ads. AdMob may use your device's advertising ID, IP address and device information to show and measure ads. Where required by law, you will be asked for consent before personalised ads are shown.</li>
+                    <li><strong>Google Play Billing:</strong> PRO is a one-time purchase processed by Google Play. We never see or store your card or payment details.</li>
+                </ul>
+                <p>Learn more in <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</p>
+            </section>
+            <section id="scanned">
+                <h2>8. Scanned Content</h2>
+                <p>When you open a scanned link, payment request or WiFi network, that action is handled by your browser, UPI app or phone settings. Websites and apps you open have their own privacy policies.</p>
+            </section>
+            <section id="children">
+                <h2>9. Children's Privacy</h2>
+                <p>The Service is not directed at children under 13, and we do not knowingly collect personal information from children. If you believe a child has provided personal information, please contact us.</p>
+            </section>
+            <section id="changes">
+                <h2>10. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</p>
+            </section>
+            <section id="contact">
+                <h2>11. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions about this Privacy Policy or how your data is handled, please contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="qrcode_info.html">App info</a>
+                <a href="qrcode_privacypolicy.html">Privacy policy</a>
+                <a href="qrcode_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>

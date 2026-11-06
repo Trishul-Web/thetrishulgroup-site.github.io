@@ -3,349 +3,1464 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Safekeep - Secure File Encryption | DevDuo's</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Safekeep: Secure Folder Vault | DevDuo Software</title>
+    <meta name="description"
+        content="Hide photos, videos and documents behind AES-256 encryption. Offline-first, zero-knowledge vault with folders, tags, secure sharing, calculator disguise and decoy vault.">
+    <meta property="og:title" content="Safekeep: Secure Folder Vault">
+    <meta property="og:description" content="Encrypt, hide and organise your private files. Zero-knowledge, offline-first.">
+    <meta property="og:image" content="screens/01-home.jpg">
+    <meta name="theme-color" content="#050a07">
     <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+        href="https://play-lh.googleusercontent.com/xvj_ERCVi1zPcRyiZSuz7F9uPmyUXQm5eHvuCLAK5QOIQFBvBOgiAZdJnEMgO5heVNQ1cuXkJ_8IsoT6V0QY=s128-rw">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap"
         rel="stylesheet">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --card: #111;
-            --border: #222;
-            --brand-1: #5eead4;
-            /* Teal */
-            --brand-2: #60a5fa;
-            /* Blue */
-            --brand-3: #a78bfa;
-            /* Purple */
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #050a07;
+            --bg-2: #0b140e;
+            --bg-3: #112016;
+            --line: #1c3324;
+            --text: #e8f3ec;
+            --soft: #b3c9ba;
+            --mute: #7a9583;
+            --green: #2fe07a;
+            --green-2: #18b85c;
+            --display: "Space Grotesk", system-ui, sans-serif;
+            --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
         }
+
+        * { box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
             margin: 0;
-            padding: 0;
             background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
+            color: var(--text);
+            font-family: var(--sans);
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        * {
-            box-sizing: border-box;
+        a { color: inherit; }
+
+        img, video { max-width: 100%; display: block; }
+
+        :focus-visible {
+            outline: 2px solid var(--green);
+            outline-offset: 3px;
+            border-radius: 6px;
         }
 
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%),
-                radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* --- NEW APP BAR STYLES --- */
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
-
-        .container {
-            width: min(1000px, 90vw);
+        .wrap {
+            width: min(1140px, 90vw);
             margin: 0 auto;
         }
 
-        section {
-            padding: 6rem 0;
+        /* ---------- Nav ---------- */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(5, 10, 7, .84);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
         }
 
-        .hero {
-            padding-top: 6rem;
-            text-align: center;
-        }
-
-        .hero-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 28px;
-            margin-bottom: 2rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .grand-title {
-            font-family: var(--font-display);
-            font-size: clamp(3rem, 7vw, 5rem);
-            line-height: 1.05;
-            margin: 0 0 1rem;
-            font-weight: 800;
-            color: #fafafa;
-        }
-
-        .intro-lede {
-            font-size: 1.25rem;
-            color: #c5c8ce;
-            max-width: 680px;
-            margin: .25rem auto 2.5rem;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--bg);
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            padding: 0.8rem 1.8rem;
-            border-radius: 8px;
-            text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(94, 234, 212, 0.15);
-        }
-
-        .section-title {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin: 0 0 3rem;
-            color: #fff;
-            text-align: center;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(17, 17, 17, .7);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 1.75rem;
-            text-align: left;
-        }
-
-        .feature-card svg {
-            width: 32px;
-            height: 32px;
-            margin-bottom: 1rem;
-            color: var(--brand-1);
-        }
-
-        .feature-card h3 {
-            margin: 0 0 0.5rem 0;
-            font-family: var(--font-display);
-            font-size: 1.5rem;
-            color: #f0f0f0;
-        }
-
-        .feature-card p {
-            color: var(--muted);
-            line-height: 1.6;
-        }
-
-        .visual-showcase {
-            background: #080808;
-            border-radius: 18px;
-            border: 1px solid var(--border);
-            padding: 2rem;
-            text-align: center;
-            color: var(--muted);
-        }
-
-        footer {
-            padding: 4rem 0;
-            text-align: center;
-            color: var(--muted);
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-links {
+        .nav .wrap {
+            height: 66px;
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
         }
 
-        .footer-links a {
-            color: var(--muted);
+        .studio {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
             text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+        }
+
+        .studio img {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: .25rem;
+            font-size: .9rem;
+        }
+
+        .tabs a {
+            text-decoration: none;
+            color: var(--mute);
+            padding: .45rem .85rem;
+            border-radius: 999px;
+            font-weight: 500;
             transition: color .2s;
         }
 
-        .footer-links a:hover {
-            color: var(--brand-1);
+        .tabs a:hover { color: var(--text); }
+
+        .tabs a[aria-current="page"] {
+            background: var(--green);
+            color: #03140a;
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            padding: 5rem 0 4rem;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 900px;
+            height: 900px;
+            right: -260px;
+            top: -360px;
+            background: radial-gradient(closest-side, rgba(47, 224, 122, .2), rgba(24, 184, 92, .06) 55%, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(rgba(47, 224, 122, .14) 1px, transparent 1px);
+            background-size: 22px 22px;
+            mask-image: radial-gradient(60% 60% at 75% 40%, #000, transparent 75%);
+            -webkit-mask-image: radial-gradient(60% 60% at 75% 40%, #000, transparent 75%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .app-id {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .app-id img {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(47, 224, 122, .25);
+        }
+
+        .app-id strong { display: block; }
+
+        .app-id span {
+            color: var(--mute);
+            font-size: .9rem;
+        }
+
+        h1 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(2.5rem, 5.6vw, 4.3rem);
+            line-height: 1.02;
+            letter-spacing: -.03em;
+            margin: 0 0 1.25rem;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--green);
+            text-shadow: 0 0 30px rgba(47, 224, 122, .35);
+        }
+
+        .lede {
+            font-size: 1.12rem;
+            color: var(--soft);
+            max-width: 52ch;
+            margin: 0 0 2rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.4rem;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: .97rem;
+            text-decoration: none;
+            transition: transform .2s, border-color .2s;
+        }
+
+        .btn-main {
+            background: var(--green);
+            color: #03140a;
+            box-shadow: 0 10px 30px rgba(47, 224, 122, .3);
+        }
+
+        .btn-main:hover { transform: translateY(-2px); }
+
+        .btn-line {
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .btn-line:hover { border-color: var(--green); }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            margin-top: 2rem;
+        }
+
+        .badges span {
+            font-family: var(--mono);
+            font-size: .78rem;
+            padding: .35rem .7rem;
+            border-radius: 8px;
+            background: rgba(47, 224, 122, .08);
+            border: 1px solid rgba(47, 224, 122, .25);
+            color: var(--green);
+        }
+
+        .phone {
+            width: 270px;
+            margin: 0 auto;
+            border-radius: 38px;
+            padding: 8px;
+            background: #000;
+            border: 1px solid #1d3a27;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .65), 0 0 0 10px rgba(47, 224, 122, .05);
+        }
+
+        .phone video,
+        .phone img {
+            border-radius: 30px;
+            width: 100%;
+            aspect-ratio: 1080 / 2300;
+            object-fit: cover;
+            background: var(--bg);
+        }
+
+        /* ---------- Crypto lab (signature) ---------- */
+        .lab {
+            padding: 3rem;
+            border-radius: 32px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .lab-head {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 1.5rem;
+            align-items: end;
+            margin-bottom: 2rem;
+        }
+
+        .lab-grid {
+            display: grid;
+            grid-template-columns: 1fr 70px 1fr;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .pane {
+            border-radius: 18px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            padding: 1.1rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+
+        .pane label,
+        .pane .lbl {
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--mute);
+        }
+
+        .pane textarea,
+        .pane input {
+            font: inherit;
+            width: 100%;
+            padding: .75rem .85rem;
+            border-radius: 12px;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            resize: none;
+        }
+
+        .pane textarea { min-height: 110px; }
+
+        .pane textarea:focus,
+        .pane input:focus {
+            outline: none;
+            border-color: var(--green);
+        }
+
+        .cipher {
+            font-family: var(--mono);
+            font-size: .82rem;
+            line-height: 1.55;
+            color: var(--green);
+            word-break: break-all;
+            min-height: 110px;
+            padding: .75rem .85rem;
+            border-radius: 12px;
+            background: #020503;
+            border: 1px solid #143020;
+        }
+
+        .arrow {
+            display: grid;
+            place-items: center;
+        }
+
+        .arrow span {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: rgba(47, 224, 122, .12);
+            border: 1px solid rgba(47, 224, 122, .35);
+            font-size: 1.4rem;
+        }
+
+        .lab-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .6rem;
+        }
+
+        .lab-actions button {
+            font: inherit;
+            font-weight: 700;
+            font-size: .9rem;
+            padding: .6rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .lab-actions button.go {
+            background: var(--green);
+            color: #03140a;
+            border-color: var(--green);
+        }
+
+        .status {
+            font-size: .88rem;
+            color: var(--soft);
+            min-height: 1.4em;
+        }
+
+        .status.ok { color: var(--green); }
+
+        .status.bad { color: #fca5a5; }
+
+        .lab-note {
+            margin: 1.25rem 0 0;
+            font-size: .82rem;
+            color: var(--mute);
+        }
+
+        /* ---------- Sections ---------- */
+        section { padding: 5.5rem 0; }
+
+        h2 {
+            font-family: var(--display);
+            font-weight: 700;
+            font-size: clamp(1.9rem, 3.8vw, 2.8rem);
+            line-height: 1.08;
+            letter-spacing: -.025em;
+            margin: 0 0 .8rem;
+        }
+
+        .section-lede {
+            color: var(--soft);
+            max-width: 60ch;
+            margin: 0 0 2.75rem;
+        }
+
+        .kicker {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: .78rem;
+            font-weight: 700;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: .6rem;
+        }
+
+        .center { text-align: center; }
+
+        .center .section-lede {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Split features */
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 2.5rem 0;
+        }
+
+        .split.flip .split-text { order: 2; }
+
+        .split ul {
+            margin: 0;
+            padding-left: 1.1rem;
+            color: var(--soft);
+        }
+
+        .split li { margin-bottom: .4rem; }
+
+        .duo {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .duo .phone {
+            width: 220px;
+            margin: 0;
+        }
+
+        .duo .phone:nth-child(2) { margin-top: 3rem; }
+
+        /* Calculator disguise */
+        .disguise {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+            align-items: center;
+            padding: 3rem;
+            border-radius: 32px;
+            background:
+                radial-gradient(60% 120% at 100% 0%, rgba(47, 224, 122, .14), transparent 60%),
+                var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .calc {
+            width: 300px;
+            border-radius: 36px;
+            padding: 10px;
+            background: #000;
+            border: 1px solid #1d3a27;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, .6);
+        }
+
+        .calc-screen {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #0d0d0f;
+            padding: 1.25rem 1rem 1rem;
+            height: 470px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-display {
+            flex: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            font-family: var(--display);
+            font-size: 2.8rem;
+            color: #fff;
+            padding: 0 .4rem .8rem;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .keys {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: .55rem;
+        }
+
+        .keys button {
+            font: inherit;
+            font-family: var(--display);
+            font-size: 1.25rem;
+            height: 54px;
+            border: 0;
+            border-radius: 50%;
+            background: #2a2a2e;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .keys button.op { background: #ff9f0a; }
+
+        .keys button.fn { background: #a5a5aa; color: #000; }
+
+        .keys button:active { filter: brightness(1.3); }
+
+        .vault-open {
+            position: absolute;
+            inset: 0;
+            padding: 1.5rem 1.1rem;
+            background: linear-gradient(180deg, #0f2b1a, #071209);
+            display: flex;
+            flex-direction: column;
+            gap: .7rem;
+            transform: translateY(100%);
+            transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .vault-open.show { transform: none; }
+
+        .vault-open h4 {
+            margin: 0;
+            font-family: var(--display);
+            font-size: 1.3rem;
+        }
+
+        .vault-open small { color: var(--mute); }
+
+        .vf {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            padding: .7rem .8rem;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid var(--line);
+            font-size: .9rem;
+        }
+
+        .vf i {
+            font-style: normal;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: rgba(47, 224, 122, .15);
+        }
+
+        .vault-open button {
+            font: inherit;
+            margin-top: auto;
+            padding: .7rem;
+            border-radius: 12px;
+            border: 0;
+            background: var(--green);
+            color: #03140a;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .pin-hint {
+            display: inline-flex;
+            gap: .35rem;
+            align-items: center;
+            font-family: var(--mono);
+            font-size: .9rem;
+            padding: .45rem .8rem;
+            border-radius: 10px;
+            background: var(--bg);
+            border: 1px dashed var(--line);
+            color: var(--soft);
+            margin-top: .5rem;
+        }
+
+        .pin-hint b { color: var(--green); }
+
+        /* Stealth grid */
+        .stealth {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .st {
+            padding: 1.5rem;
+            border-radius: 20px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+        }
+
+        .st .ic {
+            font-size: 1.5rem;
+            margin-bottom: .7rem;
+        }
+
+        .st h3 {
+            margin: 0 0 .3rem;
+            font-size: 1.05rem;
+        }
+
+        .st p {
+            margin: 0;
+            color: var(--mute);
+            font-size: .92rem;
+        }
+
+        .pro-tag {
+            display: inline-block;
+            font-size: .68rem;
+            font-weight: 700;
+            padding: .1rem .45rem;
+            border-radius: 6px;
+            background: #fbbf24;
+            color: #2a1a00;
+            margin-left: .3rem;
+            vertical-align: middle;
+        }
+
+        /* Compare */
+        .compare {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .cmp {
+            padding: 1.75rem;
+            border-radius: 22px;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+        }
+
+        .cmp.win {
+            border-color: rgba(47, 224, 122, .5);
+            background: linear-gradient(160deg, rgba(47, 224, 122, .1), var(--bg-2) 60%);
+        }
+
+        .cmp h3 {
+            margin: 0 0 1rem;
+            font-family: var(--display);
+            font-size: 1.25rem;
+        }
+
+        .cmp ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: .6rem;
+        }
+
+        .cmp li {
+            display: grid;
+            grid-template-columns: 22px 1fr;
+            gap: .5rem;
+            color: var(--soft);
+        }
+
+        .cmp.lose li::before { content: "✕"; color: #f87171; font-weight: 700; }
+
+        .cmp.win li::before { content: "✓"; color: var(--green); font-weight: 700; }
+
+        /* Trailer */
+        .trailer {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            aspect-ratio: 16 / 9;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            padding: 0;
+            cursor: pointer;
+            background: #000;
+        }
+
+        .trailer img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .4s ease;
+        }
+
+        .trailer:hover img { transform: scale(1.03); }
+
+        .trailer .play {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(to top, rgba(5, 10, 7, .6), rgba(5, 10, 7, .1));
+        }
+
+        .trailer .play span {
+            width: 86px;
+            height: 86px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--green);
+            transition: transform .2s;
+        }
+
+        .trailer:hover .play span { transform: scale(1.08); }
+
+        .trailer .play svg {
+            width: 30px;
+            height: 30px;
+            margin-left: 5px;
+            color: #03140a;
+        }
+
+        .trailer iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Gallery */
+        .gallery-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .gal-btns {
+            display: flex;
+            gap: .5rem;
+            margin-bottom: 2.75rem;
+        }
+
+        .gal-btns button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--bg-2);
+            color: var(--text);
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .gal-btns button:hover { border-color: var(--green); }
+
+        .gallery {
+            display: flex;
+            gap: 1.25rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: .5rem 5vw 1.5rem;
+            margin: 0 calc(50% - 50vw);
+            scrollbar-width: none;
+        }
+
+        .gallery::-webkit-scrollbar { display: none; }
+
+        .gallery figure {
+            flex: 0 0 200px;
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        .gallery .phone {
+            width: 100%;
+            border-radius: 30px;
+            padding: 6px;
+        }
+
+        .gallery .phone img { border-radius: 24px; }
+
+        .gallery figcaption {
+            text-align: center;
+            font-size: .88rem;
+            color: var(--mute);
+            margin-top: .8rem;
+        }
+
+        /* FAQ */
+        .faq { max-width: 780px; }
+
+        details {
+            border-bottom: 1px solid var(--line);
+            padding: 1.1rem 0;
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        summary::-webkit-details-marker { display: none; }
+
+        summary::after {
+            content: "+";
+            color: var(--green);
+            font-size: 1.3rem;
+            line-height: 1;
+        }
+
+        details[open] summary::after { content: "–"; }
+
+        details p {
+            margin: .75rem 0 0;
+            color: var(--soft);
+        }
+
+        /* CTA */
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-radius: 30px;
+            border: 1px solid var(--line);
+            background:
+                radial-gradient(60% 120% at 50% 0%, rgba(47, 224, 122, .2), transparent 65%),
+                var(--bg-2);
+        }
+
+        .cta img {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .cta p {
+            color: var(--soft);
+            max-width: 46ch;
+            margin: 0 auto 2rem;
+        }
+
+        .note {
+            margin: 2rem auto 0;
+            max-width: 80ch;
+            font-size: .85rem;
+            color: var(--mute);
+            text-align: center;
+        }
+
+        .note a { color: var(--soft); }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 2.5rem 0 3rem;
+            font-size: .88rem;
+            color: var(--mute);
+        }
+
+        footer .wrap {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        footer nav {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        footer a { text-decoration: none; }
+
+        footer a:hover { color: var(--text); }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 960px) {
+            .hero-grid, .split, .disguise { grid-template-columns: 1fr; gap: 2.5rem; }
+            .split.flip .split-text { order: 0; }
+            .lab, .disguise { padding: 2rem 1.5rem; }
+            .lab-head { grid-template-columns: 1fr; }
+            .lab-grid { grid-template-columns: 1fr; }
+            .arrow span { transform: rotate(90deg); }
+            .stealth { grid-template-columns: 1fr 1fr; }
+            .calc { margin: 0 auto; }
+            .phone { width: 240px; }
+            .duo .phone { width: 170px; }
+        }
+
+        @media (max-width: 600px) {
+            .tabs a:not([aria-current="page"]) { display: none; }
+            .hero { padding: 3rem 0; }
+            section { padding: 4rem 0; }
+            .stealth, .compare { grid-template-columns: 1fr; }
+            .duo .phone { width: 145px; }
+            .gallery figure { flex-basis: 170px; }
+            .calc { width: 280px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            * { transition: none !important; }
         }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container">
-            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="safekeep_info.html" class="app-bar-link active">App Info</a>
-                <a href="safekeep_privacypolicy.html" class="app-bar-link">Privacy Policy</a>
-                <a href="safekeep_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="safekeep_info.html" aria-current="page">App info</a>
+                <a href="safekeep_privacypolicy.html">Privacy</a>
+                <a href="safekeep_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero container">
-            <img src="https://play-lh.googleusercontent.com/Y-vEXw1NXdcXe6uSVeucD6Bv2TtN5uBQTNT8ah07H--sXo9IcO5E8h0WYPADhyMp8w=s128-rw"
-                alt="Safekeep App Icon" class="hero-icon">
-            <h1 class="grand-title">Your Digital Fortress, <span class="gradient-text">Secured</span>.</h1>
-            <p class="intro-lede">
-                Safekeep is a zero-knowledge, end-to-end encrypted service that allows you to store and manage your
-                digital files securely. All encryption and decryption operations are performed exclusively on your
-                device.
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.devduos.encryptedphotosvideoshider"
-                target="_blank" class="cta-button">View on Play Store</a>
-        </section>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="wrap hero-grid">
+                <div>
+                    <div class="app-id">
+                        <img src="https://play-lh.googleusercontent.com/xvj_ERCVi1zPcRyiZSuz7F9uPmyUXQm5eHvuCLAK5QOIQFBvBOgiAZdJnEMgO5heVNQ1cuXkJ_8IsoT6V0QY=s256-rw"
+                            alt="Safekeep app icon" width="64" height="64">
+                        <div>
+                            <strong>Safekeep: Secure Folder Vault</strong>
+                            <span>by DevDuo Software</span>
+                        </div>
+                    </div>
+                    <h1>Not hidden. <em>Encrypted.</em></h1>
+                    <p class="lede">Lock private photos, videos and documents behind AES-256 encryption done on your
+                        phone. Organise them with folders and tags, share them securely, and even disguise the vault as
+                        a calculator.</p>
+                    <div class="actions">
+                        <a href="https://play.google.com/store/apps/details?id=com.devduos.encryptedphotosvideoshider"
+                            target="_blank" rel="noopener" class="btn btn-main">View on Google Play</a>
+                        <a href="#lab" class="btn btn-line">See encryption live</a>
+                    </div>
+                    <div class="badges"><span>AES-256</span><span>Zero-knowledge</span><span>Offline-first</span><span>Your
+                            own Google Drive</span></div>
+                </div>
+                <div class="phone">
+                    <video src="screens/hero-loop.mp4" poster="screens/01-home.jpg" autoplay muted loop playsinline
+                        preload="metadata" id="heroLoop" aria-label="Securing and sharing a file in Safekeep"></video>
+                </div>
+            </div>
+        </div>
 
-        <section class="container">
-            <h2 class="section-title">Core Security Principles</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
-                    </svg>
-                    <h3>Zero-Knowledge Encryption</h3>
-                    <p>Your Master Key is the only key that can unlock your files. It is never sent to us or stored on
-                        any server. We cannot access your data, ever.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                    </svg>
-                    <h3>On-Device Operations</h3>
-                    <p>All encryption and decryption happens exclusively on your device. Your files are only ever in
-                        their original state while you are actively viewing them.</p>
-                </div>
-                <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M12 18a.75.75 0 0 0 .75-.75v-4.5A.75.75 0 0 0 12 12h0a.75.75 0 0 0-.75.75v4.5A.75.75 0 0 0 12 18Zm0-9a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-1.5 0v2.25A.75.75 0 0 0 12 9Zm0 9a.75.75 0 0 0 .75-.75v-4.5a.75.75 0 0 0-1.5 0v4.5A.75.75 0 0 0 12 18Zm0-9a.75.75 0 0 0 .75-.75V6a.75.75 0 0 0-1.5 0v2.25A.75.75 0 0 0 12 9Z" />
-                    </svg>
-                    <h3>Cross-Platform Sync</h3>
-                    <p>For signed-in users, your encrypted data is backed up to a private folder inside your own Google
-                        Drive account. We never have access to your Google Drive.</p>
+        <!-- Crypto lab -->
+        <section id="lab" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="lab">
+                    <div class="lab-head">
+                        <div>
+                            <span class="kicker">Try it here</span>
+                            <h2>Watch your words turn unreadable</h2>
+                            <p class="section-lede" style="margin-bottom:0">This demo uses real AES-256 encryption,
+                                right here in your browser. Nothing is sent anywhere. Safekeep does the same on your
+                                phone for every file.</p>
+                        </div>
+                    </div>
+                    <div class="lab-grid">
+                        <div class="pane">
+                            <label for="plain">Your secret</label>
+                            <textarea id="plain" maxlength="200">My bank PIN is in the Bank Documents folder.</textarea>
+                            <label for="key">Master key</label>
+                            <input id="key" type="text" value="safekeep-2026" autocomplete="off" spellcheck="false">
+                        </div>
+                        <div class="arrow" aria-hidden="true"><span>🔒</span></div>
+                        <div class="pane">
+                            <span class="lbl">What anyone else sees</span>
+                            <div class="cipher" id="cipher">…</div>
+                            <label for="tryKey">Unlock with key</label>
+                            <input id="tryKey" type="text" placeholder="Type the master key" autocomplete="off"
+                                spellcheck="false">
+                            <div class="lab-actions">
+                                <button type="button" class="go" id="unlockBtn">Unlock</button>
+                                <button type="button" id="wrongBtn">Try a wrong key</button>
+                            </div>
+                            <div class="status" id="status" aria-live="polite"></div>
+                        </div>
+                    </div>
+                    <p class="lab-note">Demo only: AES-GCM with a key derived from your text by PBKDF2. Your typing
+                        never leaves this page.</p>
                 </div>
             </div>
         </section>
 
-        <section class="container">
-            <h2 class="section-title">Visual Showcase</h2>
-            <div class="visual-showcase">
-                <p>[Your App Screenshots or a Demo Video Can Go Here]</p>
+        <!-- Features -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Encrypt any file</span>
+                        <h2>One tap from gallery to vault</h2>
+                        <ul>
+                            <li>Move photos, videos and documents into the vault in seconds</li>
+                            <li>Use <b>Secure Camera</b> to capture straight into the vault, never your gallery</li>
+                            <li>Write encrypted <b>Private Notes</b></li>
+                            <li>Every format is supported</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/02-secure-file.jpg" alt="Secure a new file"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/06-success.jpg" alt="File secured" loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split flip">
+                    <div class="split-text">
+                        <span class="kicker">Folders and tags</span>
+                        <h2>Hide it. Then find it in seconds.</h2>
+                        <ul>
+                            <li>Create folders like Personal, Office or Important Documents</li>
+                            <li>Give each folder an emoji icon</li>
+                            <li>Add tags like #creditcard or #office</li>
+                            <li>Search across every hidden file</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/08-folders.jpg" alt="Folders" loading="lazy"></div>
+                        <div class="phone"><img src="screens/05-tags.jpg" alt="Tags and filters" loading="lazy"></div>
+                    </div>
+                </div>
+
+                <div class="split">
+                    <div class="split-text">
+                        <span class="kicker">Share securely</span>
+                        <h2>Send it locked, open it anywhere</h2>
+                        <ul>
+                            <li>Share the original file normally, or as a secure encrypted file</li>
+                            <li>Use a random key or set your own</li>
+                            <li>The receiver opens it in any browser and enters the key to unlock it</li>
+                        </ul>
+                    </div>
+                    <div class="duo">
+                        <div class="phone"><img src="screens/03-secure-share.jpg" alt="Secure share options"
+                                loading="lazy"></div>
+                        <div class="phone"><img src="screens/04-web-unlock.jpg" alt="Unlocking a shared file"
+                                loading="lazy"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calculator disguise -->
+        <section id="disguise" style="padding-top:1rem">
+            <div class="wrap">
+                <div class="disguise">
+                    <div>
+                        <span class="kicker">Premium · App masking</span>
+                        <h2>Is that a calculator? Exactly.</h2>
+                        <p class="section-lede" style="margin-bottom:1rem">Disguise Safekeep as a working calculator,
+                            weather or notes app. It really works as one, until you type your secret PIN.</p>
+                        <p style="color:var(--soft);margin:0">Try it: type the PIN and press equals.</p>
+                        <div class="pin-hint">PIN <b>2580</b> then <b>=</b></div>
+                    </div>
+                    <div class="calc">
+                        <div class="calc-screen">
+                            <div class="calc-display" id="calcDisplay">0</div>
+                            <div class="keys" id="keys"></div>
+                            <div class="vault-open" id="vaultOpen" aria-hidden="true">
+                                <h4>Secure Vault</h4>
+                                <small>Unlocked with your disguise PIN</small>
+                                <div class="vf"><i>📁</i>Bank Documents</div>
+                                <div class="vf"><i>🖼️</i>Trip photos</div>
+                                <div class="vf"><i>📝</i>Private notes</div>
+                                <button type="button" id="lockAgain">Lock and return to calculator</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stealth tools -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <span class="kicker">Stealth tools</span>
+                <h2>Built for real-life pressure</h2>
+                <p class="section-lede">Extra protection for the moments that matter.</p>
+                <div class="stealth">
+                    <div class="st">
+                        <div class="ic" aria-hidden="true">🎭</div>
+                        <h3>Decoy Vault <span class="pro-tag">PRO</span></h3>
+                        <p>A fake vault with its own PIN for when someone forces you to open the app.</p>
+                    </div>
+                    <div class="st">
+                        <div class="ic" aria-hidden="true">🙈</div>
+                        <h3>Panic Gesture <span class="pro-tag">PRO</span></h3>
+                        <p>Flip your phone face down to close the app instantly.</p>
+                    </div>
+                    <div class="st">
+                        <div class="ic" aria-hidden="true">📸</div>
+                        <h3>Intruder Selfie</h3>
+                        <p>Snap a photo of anyone who enters the wrong PIN too many times.</p>
+                    </div>
+                    <div class="st">
+                        <div class="ic" aria-hidden="true">🧩</div>
+                        <h3>Corrupt File Illusion</h3>
+                        <p>Shows a fake “file corrupted” error until you use your secret gesture.</p>
+                    </div>
+                </div>
+                <div class="duo" style="margin-top:2.5rem">
+                    <div class="phone"><img src="screens/11-stealth-tools.jpg" alt="Panic gesture and decoy vault"
+                            loading="lazy"></div>
+                    <div class="phone"><img src="screens/14-notes-disguise.jpg" alt="Notes app disguise"
+                            loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compare -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Why encryption beats a gallery lock</h2>
+                <p class="section-lede">A basic photo hider only makes files invisible. Safekeep makes them unreadable.
+                </p>
+                <div class="compare">
+                    <div class="cmp lose">
+                        <h3>Basic gallery lock</h3>
+                        <ul>
+                            <li>Files are only hidden, not encrypted</li>
+                            <li>Readable if the phone is plugged into a computer</li>
+                            <li>Often no backup if you lose your phone</li>
+                            <li>Easy to spot on your home screen</li>
+                        </ul>
+                    </div>
+                    <div class="cmp win">
+                        <h3>Safekeep</h3>
+                        <ul>
+                            <li>AES-256 encryption on your device</li>
+                            <li>Files stay unreadable even off the phone</li>
+                            <li>Optional encrypted backup in your own Google Drive</li>
+                            <li>Calculator, weather or notes disguise</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trailer -->
+        <section id="trailer" style="padding-top:1rem">
+            <div class="wrap center">
+                <h2>Watch the trailer</h2>
+                <p class="section-lede">See files secured, organised and shared in seconds.</p>
+                <button type="button" class="trailer" id="trailerBtn" aria-label="Play the Safekeep trailer">
+                    <img src="https://i.ytimg.com/vi/Zztrww5XMxA/hqdefault.jpg" alt="" loading="lazy">
+                    <span class="play"><span><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                                <path d="M8 5v14l11-7z" />
+                            </svg></span></span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="gallery-head">
+                    <div>
+                        <h2>Take a look inside</h2>
+                        <p class="section-lede" style="margin-bottom:2.75rem">Real screens from the app.</p>
+                    </div>
+                    <div class="gal-btns">
+                        <button type="button" id="galPrev" aria-label="Previous screenshots">‹</button>
+                        <button type="button" id="galNext" aria-label="Next screenshots">›</button>
+                    </div>
+                </div>
+                <div class="gallery" id="gallery">
+                    <figure>
+                        <div class="phone"><img src="screens/01-home.jpg" alt="Secure Vault home" loading="lazy"></div>
+                        <figcaption>Secure Vault</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/07-files.jpg" alt="Files with tags" loading="lazy"></div>
+                        <figcaption>Tagged files</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/02-secure-file.jpg" alt="Secure a file" loading="lazy">
+                        </div>
+                        <figcaption>Secure a new file</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/09-edit-folder.jpg" alt="Edit folder" loading="lazy">
+                        </div>
+                        <figcaption>Emoji folders</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/03-secure-share.jpg" alt="Secure share" loading="lazy">
+                        </div>
+                        <figcaption>Secure share</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/10-profile.jpg" alt="Profile and settings"
+                                loading="lazy"></div>
+                        <figcaption>Guest or Google</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/12-intruder-selfie.jpg" alt="Intruder selfie"
+                                loading="lazy"></div>
+                        <figcaption>Intruder selfie</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/13-disguise-pin.jpg" alt="Disguise PIN" loading="lazy">
+                        </div>
+                        <figcaption>Disguise PIN</figcaption>
+                    </figure>
+                    <figure>
+                        <div class="phone"><img src="screens/14-notes-disguise.jpg" alt="Notes disguise"
+                                loading="lazy"></div>
+                        <figcaption>Notes disguise</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <h2>Questions</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Can you see my files?</summary>
+                        <p>No. Files are encrypted on your phone with your Master Key, which is never sent to us. We
+                            have zero access to your files or your key.</p>
+                    </details>
+                    <details>
+                        <summary>What if I forget my Master Key?</summary>
+                        <p>Because of the zero-knowledge design, nobody can recover it, including us. Keep your Master
+                            Key written down somewhere safe.</p>
+                    </details>
+                    <details>
+                        <summary>Guest or Google account, which should I use?</summary>
+                        <p>Guest keeps everything offline on your phone only. Signing in with Google adds an encrypted
+                            backup in a private folder of your own Google Drive, so you can restore it on another
+                            device.</p>
+                    </details>
+                    <details>
+                        <summary>Will uninstalling delete my files?</summary>
+                        <p>For Guest accounts, yes, everything stored in the app is deleted. Export your files or use a
+                            Google backup before uninstalling.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section style="padding-top:1rem">
+            <div class="wrap">
+                <div class="cta">
+                    <img src="https://play-lh.googleusercontent.com/xvj_ERCVi1zPcRyiZSuz7F9uPmyUXQm5eHvuCLAK5QOIQFBvBOgiAZdJnEMgO5heVNQ1cuXkJ_8IsoT6V0QY=s256-rw"
+                        alt="" width="80" height="80">
+                    <h2>Lock what matters</h2>
+                    <p>Keep your private photos, videos and files in a vault only you can open.</p>
+                    <a href="https://play.google.com/store/apps/details?id=com.devduos.encryptedphotosvideoshider"
+                        target="_blank" rel="noopener" class="btn btn-main">View on Google Play</a>
+                </div>
+                <p class="note">Please keep your Master Key safe. If it is lost, your data cannot be recovered. Read our
+                    <a href="safekeep_termsandconditions.html">terms and conditions</a>.</p>
             </div>
         </section>
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-links">
-                <a href="safekeep_privacypolicy.html">Privacy Policy</a>
-                <a href="safekeep_termsandconditions.html">Terms of Service</a>
-            </div>
-            <p class="muted">© 2025 Devduos. All rights reserved.</p>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="safekeep_privacypolicy.html">Privacy policy</a>
+                <a href="safekeep_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+                <a href="../../../devduos.html">More apps</a>
+            </nav>
         </div>
     </footer>
 
     <script>
-        gsap.from("header", { opacity: 0, y: -20, duration: 0.8, delay: 0.2, ease: "power2.out" });
-        gsap.from(".hero > *", { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, delay: 0.5, ease: "power2.out" });
-    </script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) document.getElementById('heroLoop').pause();
 
+        // ---- Real AES-GCM demo (Web Crypto, runs locally) ----
+        const plainEl = document.getElementById('plain');
+        const keyEl = document.getElementById('key');
+        const cipherEl = document.getElementById('cipher');
+        const statusEl = document.getElementById('status');
+        const hasCrypto = !!(window.crypto && crypto.subtle);
+        let sealed = null;
+        const SALT = new TextEncoder().encode('safekeep-demo-salt');
+
+        async function deriveKey(pass) {
+            const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+            return crypto.subtle.deriveKey({ name: 'PBKDF2', salt: SALT, iterations: 100000, hash: 'SHA-256' },
+                base, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+        }
+        const toB64 = bytes => btoa(String.fromCharCode(...bytes));
+
+        async function encryptNow() {
+            if (!hasCrypto) { cipherEl.textContent = 'Encryption preview needs a secure (https) page.'; return; }
+            const text = plainEl.value || ' ';
+            const key = await deriveKey(keyEl.value || ' ');
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const ct = new Uint8Array(await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(text)));
+            sealed = { iv, ct };
+            scramble(toB64(new Uint8Array([...iv, ...ct])));
+        }
+
+        let scrambleTimer = null;
+        function scramble(finalText) {
+            clearInterval(scrambleTimer);
+            if (reduce) { cipherEl.textContent = finalText; return; }
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+            let n = 0;
+            scrambleTimer = setInterval(() => {
+                n += 4;
+                cipherEl.textContent = finalText.slice(0, n) + Array.from({ length: Math.max(0, finalText.length - n) }, () => chars[Math.random() * chars.length | 0]).join('');
+                if (n >= finalText.length) clearInterval(scrambleTimer);
+            }, 30);
+        }
+
+        async function tryUnlock(pass) {
+            if (!sealed || !hasCrypto) return;
+            try {
+                const key = await deriveKey(pass);
+                const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: sealed.iv }, key, sealed.ct);
+                statusEl.className = 'status ok';
+                statusEl.textContent = '✓ Unlocked: “' + new TextDecoder().decode(pt) + '”';
+            } catch (e) {
+                statusEl.className = 'status bad';
+                statusEl.textContent = '✕ Wrong key. The data stays unreadable.';
+            }
+        }
+
+        let debounce = null;
+        [plainEl, keyEl].forEach(el => el.addEventListener('input', () => {
+            clearTimeout(debounce);
+            statusEl.textContent = '';
+            debounce = setTimeout(encryptNow, 250);
+        }));
+        document.getElementById('unlockBtn').onclick = () => tryUnlock(document.getElementById('tryKey').value);
+        document.getElementById('wrongBtn').onclick = () => {
+            document.getElementById('tryKey').value = 'guess123';
+            tryUnlock('guess123');
+        };
+        encryptNow();
+
+        // ---- Calculator disguise demo ----
+        const PIN = '2580';
+        const display = document.getElementById('calcDisplay');
+        const vault = document.getElementById('vaultOpen');
+        let expr = '';
+        const KEYS = ['C', '±', '%', '÷', '7', '8', '9', '×', '4', '5', '6', '−', '1', '2', '3', '+', '0', '.', '⌫', '='];
+        const keysBox = document.getElementById('keys');
+        KEYS.forEach(k => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.textContent = k;
+            if ('÷×−+='.includes(k)) b.className = 'op';
+            if ('C±%'.includes(k)) b.className = 'fn';
+            b.onclick = () => press(k);
+            keysBox.appendChild(b);
+        });
+
+        function show(v) { display.textContent = v === '' ? '0' : v; }
+
+        function press(k) {
+            if (k === 'C') { expr = ''; return show(expr); }
+            if (k === '⌫') { expr = expr.slice(0, -1); return show(expr); }
+            if (k === '±') { if (expr && !isNaN(expr)) expr = String(-Number(expr)); return show(expr); }
+            if (k === '%') { if (expr && !isNaN(expr)) expr = String(Number(expr) / 100); return show(expr); }
+            if (k === '=') {
+                if (expr === PIN) {
+                    vault.classList.add('show');
+                    vault.setAttribute('aria-hidden', 'false');
+                    expr = '';
+                    return show(expr);
+                }
+                try {
+                    const js = expr.replace(/×/g, '*').replace(/÷/g, '/').replace(/−/g, '-');
+                    if (!/^[0-9+\-*/. ]+$/.test(js)) throw 0;
+                    const r = Function('"use strict";return (' + js + ')')();
+                    expr = Number.isFinite(r) ? String(+r.toFixed(8)) : 'Error';
+                } catch (e) { expr = 'Error'; }
+                return show(expr);
+            }
+            if (expr === 'Error') expr = '';
+            if (expr.length < 14) expr += k;
+            show(expr);
+        }
+
+        document.getElementById('lockAgain').onclick = () => {
+            vault.classList.remove('show');
+            vault.setAttribute('aria-hidden', 'true');
+        };
+
+        // YouTube trailer loads only when tapped
+        const trailerBtn = document.getElementById('trailerBtn');
+        trailerBtn.addEventListener('click', () => {
+            const f = document.createElement('iframe');
+            f.src = 'https://www.youtube-nocookie.com/embed/Zztrww5XMxA?autoplay=1&rel=0&modestbranding=1';
+            f.title = 'Safekeep trailer';
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+            f.allowFullscreen = true;
+            trailerBtn.innerHTML = '';
+            trailerBtn.appendChild(f);
+            trailerBtn.style.cursor = 'default';
+        }, { once: true });
+
+        // Gallery buttons
+        const gal = document.getElementById('gallery');
+        const stepW = () => (gal.querySelector('figure')?.offsetWidth || 200) + 20;
+        document.getElementById('galPrev').onclick = () => gal.scrollBy({ left: -stepW() * 2, behavior: 'smooth' });
+        document.getElementById('galNext').onclick = () => gal.scrollBy({ left: stepW() * 2, behavior: 'smooth' });
+    </script>
 </body>
 
 </html>

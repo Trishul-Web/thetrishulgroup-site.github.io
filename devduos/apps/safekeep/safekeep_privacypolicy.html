@@ -3,234 +3,252 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Privacy Policy - Safekeep | DevDuo's</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Privacy Policy - Safekeep | DevDuo Software</title>
+    <meta name="theme-color" content="#050a07">
+    <link rel="icon" href="https://play-lh.googleusercontent.com/xvj_ERCVi1zPcRyiZSuz7F9uPmyUXQm5eHvuCLAK5QOIQFBvBOgiAZdJnEMgO5heVNQ1cuXkJ_8IsoT6V0QY=s128-rw">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Sora:wght@600;800&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #010101;
-            --fg: #e5e7eb;
-            --muted: #9aa3af;
-            --border: #222;
-            --brand-1: #5eead4;
-            --brand-2: #60a5fa;
-            --font-sans: "Inter", system-ui, sans-serif;
-            --font-display: "Sora", sans-serif;
+            --bg: #050a07; --card: #0b140e; --ink: #e8f3ec; --soft: #bcd0c2; --mute: #7a9583;
+            --line: #1c3324; --violet: #2fe07a; --violet-soft: rgba(47, 224, 122, .08); --warn: #ff8a80; --warn-soft: rgba(255, 82, 82, .1);
+            --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: var(--bg);
-            color: var(--fg);
-            font-family: var(--font-sans);
-            line-height: 1.7;
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+        body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1rem;
+            line-height: 1.75; -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom, 0px); }
+        a { color: var(--violet); }
+        :focus-visible { outline: 2px solid var(--violet); outline-offset: 3px; border-radius: 6px; }
+        .wrap { width: min(1120px, 90vw); margin: 0 auto; }
+        .nav { position: sticky; top: 0; z-index: 50; padding-top: env(safe-area-inset-top, 0px);
+            background: rgba(5, 10, 7, .84); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line); }
+        .nav .wrap { height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .studio { display: flex; align-items: center; gap: .6rem; text-decoration: none; font-weight: 600;
+            font-size: .95rem; color: var(--ink); }
+        .studio img { width: 30px; height: 30px; border-radius: 8px; }
+        .tabs { display: flex; gap: .25rem; font-size: .9rem; }
+        .tabs a { text-decoration: none; color: var(--mute); padding: .45rem .85rem; border-radius: 999px;
+            font-weight: 500; transition: color .2s; }
+        .tabs a:hover { color: var(--ink); }
+        .tabs a[aria-current="page"] { background: #2fe07a; color: #03140a; }
+        .doc-head { position: relative; padding: 4rem 0 2.5rem; border-bottom: 1px solid var(--line); background: radial-gradient(60% 140% at 85% 0%, rgba(47, 224, 122, .2), transparent 60%), radial-gradient(50% 120% at 0% 100%, rgba(24, 184, 92, .08), transparent 60%), var(--card); }
+        .app-chip { display: inline-flex; align-items: center; gap: .6rem; font-size: .9rem; color: var(--mute);
+            text-decoration: none; margin-bottom: 1.25rem; }
+        .app-chip img { width: 32px; height: 32px; border-radius: 9px; }
+        h1, article h2 { font-family: "Space Grotesk", system-ui, sans-serif; }
+        .caps { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 14px; padding: .9rem 1.1rem; list-style: none; margin-left: -1.25rem; }
+        .caps strong { color: var(--warn); }
+        h1 { font-size: clamp(2rem, 4.5vw, 3rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 .75rem; }
+        .meta { color: var(--mute); font-size: .92rem; margin: 0; }
+        .layout { display: grid; grid-template-columns: 230px 1fr; gap: 4rem; padding: 3rem 0 5rem; }
+        .toc { position: sticky; top: 96px; align-self: start; font-size: .9rem; }
+        .toc strong { display: block; font-size: .8rem; color: var(--mute); margin-bottom: .75rem; font-weight: 600; }
+        .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+        .toc a { display: block; padding: .3rem 0 .3rem 1rem; margin-left: -2px; border-left: 2px solid transparent;
+            color: var(--mute); text-decoration: none; line-height: 1.4; }
+        .toc a:hover, .toc a.on { color: var(--ink); border-left-color: var(--violet); }
+        article { max-width: 720px; }
+        article h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.75rem 0 .75rem; letter-spacing: -.01em; }
+        article section:first-of-type h2 { margin-top: 0; }
+        article p, article li { color: var(--soft); }
+        article ul { padding-left: 1.25rem; }
+        article li { margin-bottom: .5rem; }
+        article strong { color: var(--ink); }
+        .summary { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 2.5rem; }
+        .summary h2 { margin: 0 0 .5rem; font-size: 1.05rem; }
+        .summary ul { margin: 0; }
+        .summary li { color: var(--ink); }
+        .summary, .highlight { border: 1px solid rgba(47, 224, 122, .35); }
+        .caps { display: block; background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 14px; padding: .9rem 1.1rem; }
+        .caps strong { color: var(--warn); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: .93rem; margin: 1rem 0; }
+        .table-wrap { overflow-x: auto; }
+        .data-table th, .data-table td { text-align: left; padding: .75rem .9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+        .data-table th { color: var(--ink); background: var(--card); }
+        .data-table td { color: var(--soft); }
+        article h3 { color: var(--ink); font-size: 1.05rem; margin: 1.25rem 0 .25rem; }
+        .highlight { background: var(--violet-soft); border-radius: 20px; padding: 1.5rem 1.75rem; margin-bottom: 1rem; }
+        .highlight h2 { margin-top: 0 !important; }
+        h1 { color: var(--ink); font-weight: 800; letter-spacing: -.02em; }
+        h1, article h2 { font-family: "Space Grotesk", system-ui, sans-serif; }
+        article h2 { letter-spacing: -.01em; }
+        .app-chip { color: var(--soft); }
+        .disclaimer { background: var(--warn-soft); border: 1px solid rgba(255, 138, 128, .35); border-radius: 20px;
+            padding: 1.5rem 1.75rem; margin: 1.5rem 0 1rem; }
+        .disclaimer h2 { margin-top: 0 !important; color: var(--warn); }
+        .disclaimer p { margin-bottom: 0; color: #ffd6d2; }
+        .contact { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: .5rem 1.75rem; }
+        footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3rem; font-size: .88rem; color: var(--mute); }
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+        footer nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+        footer a { text-decoration: none; color: var(--mute); }
+        footer a:hover { color: var(--ink); }
+        @media (max-width: 860px) {
+            .layout { grid-template-columns: 1fr; gap: 2rem; }
+            .toc { position: static; }
         }
-
-        .container {
-            width: min(800px, 90vw);
-            margin: 0 auto;
-            padding: 4rem 0;
-        }
-
-        h1,
-        h2 {
-            font-family: var(--font-display);
-            color: var(--brand-1);
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        h2 {
-            font-size: 1.8rem;
-            margin-top: 3rem;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        p,
-        li {
-            color: var(--muted);
-            font-size: 1.1rem;
-        }
-
-        a {
-            color: var(--brand-2);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        ul {
-            padding-left: 2rem;
-        }
-
-        .timestamp {
-            font-style: italic;
-            color: var(--muted);
-        }
-
-        .bg-wrap {
-            position: fixed;
-            inset: -20vmax;
-            pointer-events: none;
-            z-index: -1;
-            filter: saturate(1.05);
-        }
-
-        .aurora {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(60% 70% at 10% 10%, rgba(94, 234, 212, .12), transparent 60%), radial-gradient(70% 70% at 90% 90%, rgba(96, 165, 250, .1), transparent 60%);
-            animation: floaty 22s ease-in-out infinite alternate;
-        }
-
-        @keyframes floaty {
-            to {
-                transform: translate3d(0, -2%, 0) scale(1.02)
-            }
-        }
-
-        header {
-            padding: 1.25rem 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        header .container-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1000px, 90vw);
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-family: var(--font-display);
-            font-weight: 800;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
-
-        .gradient-text {
-            background: linear-gradient(90deg, var(--brand-1), var(--brand-2));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .app-bar {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .app-bar-link {
-            text-decoration: none;
-            color: var(--muted);
-            font-weight: 500;
-            transition: color .2s;
-            padding: 0.5rem;
-            border-bottom: 2px solid transparent;
-        }
-
-        .app-bar-link:hover {
-            color: var(--fg);
-        }
-
-        .app-bar-link.active {
-            color: var(--brand-1);
-            border-bottom-color: var(--brand-1);
-        }
+        @media (max-width: 600px) { .tabs a:not([aria-current="page"]) { display: none; } }
+        @media print { .nav, .toc, footer { display: none; } .layout { display: block; } body, .doc-head, .contact, .summary { background: #fff !important; color: #000; } h1 { color: #000; -webkit-text-fill-color: #000; } article p, article li { color: #222; } }
     </style>
 </head>
 
 <body>
-    <div class="bg-wrap">
-        <div class="aurora"></div>
-    </div>
-
-    <header>
-        <div class="container-header">
-            <a href="/devduos.html" class="logo gradient-text">DevDuo's</a>
-            <nav class="app-bar">
-                <a href="safekeep_info.html" class="app-bar-link">App Info</a>
-                <a href="safekeep_privacypolicy.html" class="app-bar-link active">Privacy Policy</a>
-                <a href="safekeep_termsandconditions.html" class="app-bar-link">Terms & Conditions</a>
+    <header class="nav">
+        <div class="wrap">
+            <a href="../../../devduos.html" class="studio">
+                <img src="../../../assets/devduo_logo.png" alt="" width="30" height="30">
+                DevDuo Software
+            </a>
+            <nav class="tabs" aria-label="App pages">
+                <a href="safekeep_info.html">App info</a>
+                <a href="safekeep_privacypolicy.html" aria-current="page">Privacy</a>
+                <a href="safekeep_termsandconditions.html">Terms</a>
             </nav>
         </div>
     </header>
 
-    <main class="container">
-        <h1>Privacy Policy for Safekeep</h1>
-        <p class="timestamp">Last Updated: September 8, 2025</p>
+    <div class="doc-head">
+        <div class="wrap">
+            <a href="safekeep_info.html" class="app-chip"><img src="https://play-lh.googleusercontent.com/xvj_ERCVi1zPcRyiZSuz7F9uPmyUXQm5eHvuCLAK5QOIQFBvBOgiAZdJnEMgO5heVNQ1cuXkJ_8IsoT6V0QY=s128-rw" alt="" width="32" height="32">Safekeep: Secure Folder Vault</a>
+            <h1>Privacy Policy for Safekeep</h1>
+            <p class="meta">Last Updated: October 30, 2026 · Previous version: September 8, 2025</p>
+        </div>
+    </div>
 
-        <p>DevDuo's ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we
-            handle your information when you use our Safekeep mobile application (the "Service").</p>
-
-        <h2>1. The "Zero-Knowledge" Principle</h2>
-        <p>Safekeep is a **zero-knowledge** application. This means we, the developers, have zero access to the files
-            you encrypt or the Master Key you create. Your data's privacy is mathematically guaranteed by the encryption
-            itself, which occurs exclusively on your device.</p>
-
-        <h2>2. Information We Do Not Collect</h2>
-        <ul>
-            <li>**Your Master Key:** Your Master Key is created by you and is never transmitted to our servers. We
-                cannot recover it if you lose it.</li>
-            <li>**Your Files:** The contents of the files you choose to encrypt are never uploaded or visible to us.
-            </li>
-            <li>**Personal Information:** We do not require you to create an account with personal details like your
-                name or address to use the core features of the app.</li>
-        </ul>
-
-        <h2>3. Information We Collect</h2>
-        <p>Our collection is limited to what is essential for the app's functionality and improvement:</p>
-        <ul>
-            <li><strong>Google Account Information (Optional):</strong> If you choose to sign in with Google to enable
-                cloud backup, we receive your email address and basic profile information from Google for authentication
-                purposes only. This allows us to connect the Service to your personal Google Drive account.</li>
-            <li><strong>Anonymous Analytics:</strong> We may collect anonymous, aggregated usage data, such as app
-                crashes, session duration, and feature usage. This data is not personally identifiable and helps us
-                improve the app's stability and user experience.</li>
-            <li><strong>Purchase Information (Premium Users):</strong> If you subscribe to Safekeep Premium, the
-                transaction is handled by the respective app store (Google Play). We receive anonymous purchase tokens
-                to verify your subscription status but do not receive your payment information.</li>
-        </ul>
-
-        <h2>4. How Your Data Is Used</h2>
-        <ul>
-            <li><strong>Cloud Backup (Optional):</strong> If you sign in, the Service will create a private folder named
-                "safekeep-data" in your own Google Drive. Your encrypted files are stored there. We do not have
-                permission to access any other part of your Google Drive.</li>
-            <li><strong>Service Improvement:</strong> Anonymous analytics help us identify bugs, understand which
-                features are popular, and make the app better.</li>
-        </ul>
-
-        <h2>5. Data Security</h2>
-        <p>We implement industry-standard security measures, but the ultimate security of your files rests on the
-            strength of your Master Key and the principle of on-device, end-to-end encryption.</p>
-
-        <h2>6. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new
-            Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
-
-        <h2>7. Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at: <a
-                href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+    <main class="wrap layout">
+        <nav class="toc" aria-label="On this page">
+            <strong>On this page</strong>
+            <ol>
+                <li><a href="#about">About This Policy</a></li>
+                <li><a href="#zk">1. The “Zero-Knowledge” Principle</a></li>
+                <li><a href="#notcollect">2. Information We Do Not Collect</a></li>
+                <li><a href="#collect">3. Information We Collect</a></li>
+                <li><a href="#use">4. How Your Data Is Used</a></li>
+                <li><a href="#permissions">5. Device Permissions</a></li>
+                <li><a href="#features">6. Privacy Features and Your Data</a></li>
+                <li><a href="#security">7. Data Security</a></li>
+                <li><a href="#delete">8. Data Retention and Deletion</a></li>
+                <li><a href="#children">9. Children's Privacy</a></li>
+                <li><a href="#changes">10. Changes to This Privacy Policy</a></li>
+                <li><a href="#contact">11. Contact Us</a></li>
+            </ol>
+        </nav>
+        <article>
+            <div class="summary">
+                <h2>The short version</h2>
+                <ul>
+                    <li>Your files are encrypted on your phone with AES-256. We never see them or your Master Key.</li>
+                    <li>Guest mode keeps everything offline on your device.</li>
+                    <li>If you sign in with Google, encrypted backups go to a private folder in <strong>your own</strong> Google Drive.</li>
+                    <li>We cannot recover a lost Master Key, so keep it safe.</li>
+                </ul>
+            </div>
+            <section id="about">
+                <h2>About This Policy</h2>
+                <p>DevDuo's ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we handle your information when you use our Safekeep mobile application, published on Google Play as Safekeep: Secure Folder Vault (the "Service").</p>
+            </section>
+            <section id="zk">
+                <h2>1. The “Zero-Knowledge” Principle</h2>
+                <p>Safekeep is a <strong>zero-knowledge</strong> application. This means we, the developers, have zero access to the files you encrypt or the Master Key you create. Your data's privacy is mathematically guaranteed by the encryption itself, which occurs exclusively on your device.</p>
+            </section>
+            <section id="notcollect">
+                <h2>2. Information We Do Not Collect</h2>
+                <ul>
+                    <li><strong>Your Master Key:</strong> Your Master Key is created by you and is never transmitted to our servers. We cannot recover it if you lose it.</li>
+                    <li><strong>Your Files:</strong> The contents of the files you choose to encrypt are never uploaded or visible to us.</li>
+                    <li><strong>Personal Information:</strong> We do not require you to create an account with personal details like your name or address to use the core features of the app.</li>
+                    <li><strong>Your PINs:</strong> your vault, disguise and decoy PINs stay on your device.</li>
+                </ul>
+            </section>
+            <section id="collect">
+                <h2>3. Information We Collect</h2>
+                <p>Our collection is limited to what is essential for the app's functionality and improvement:</p>
+                <ul>
+                    <li><strong>Google Account Information (Optional):</strong> If you choose to sign in with Google to enable cloud backup, we receive your email address and basic profile information from Google for authentication purposes only. This allows us to connect the Service to your personal Google Drive account.</li>
+                    <li><strong>Anonymous Analytics:</strong> We may collect anonymous, aggregated usage data, such as app crashes, session duration, and feature usage. This data is not personally identifiable and helps us improve the app's stability and user experience.</li>
+                    <li><strong>Purchase Information (Premium Users):</strong> If you subscribe to Safekeep Premium, the transaction is handled by the respective app store (Google Play). We receive anonymous purchase tokens to verify your subscription status but do not receive your payment information.</li>
+                </ul>
+            </section>
+            <section id="use">
+                <h2>4. How Your Data Is Used</h2>
+                <ul>
+                    <li><strong>Cloud Backup (Optional):</strong> If you sign in, the Service will create a private folder named "safekeep-data" in your own Google Drive. Your encrypted files are stored there. We do not have permission to access any other part of your Google Drive.</li>
+                    <li><strong>Service Improvement:</strong> Anonymous analytics help us identify bugs, understand which features are popular, and make the app better.</li>
+                </ul>
+            </section>
+            <section id="permissions">
+                <h2>5. Device Permissions</h2>
+                <ul>
+                    <li><strong>Photos, videos and files:</strong> to let you choose files to encrypt and to save files you decrypt or export.</li>
+                    <li><strong>Camera:</strong> for Secure Camera, which captures directly into the vault without saving to your gallery, and for Intruder Selfie if you turn it on.</li>
+                    <li><strong>Motion sensors:</strong> used only for the Panic Gesture, to detect when you flip your phone face down.</li>
+                    <li><strong>Internet:</strong> for optional Google sign-in and Drive backup, and to verify purchases.</li>
+                </ul>
+            </section>
+            <section id="features">
+                <h2>6. Privacy Features and Your Data</h2>
+                <ul>
+                    <li><strong>Intruder Selfie:</strong> photos of failed unlock attempts are stored only inside your vault on your device. They are never sent to us.</li>
+                    <li><strong>Secure Share:</strong> when you share a file as a secure encrypted file, it stays encrypted. The person you send it to needs the key you choose to open it, and decryption happens in their browser or app. We never receive the file or the key.</li>
+                    <li><strong>App Masking and Decoy Vault:</strong> the calculator, weather or notes disguise and the decoy vault work entirely on your device.</li>
+                    <li><strong>Private Notes:</strong> notes you write in the vault are encrypted and stored like your files.</li>
+                </ul>
+            </section>
+            <section id="security">
+                <h2>7. Data Security</h2>
+                <p>We implement industry-standard security measures, but the ultimate security of your files rests on the strength of your Master Key and the principle of on-device, end-to-end encryption.</p>
+                <p>Use a strong, unique Master Key and PIN, and keep your phone's screen lock turned on.</p>
+            </section>
+            <section id="delete">
+                <h2>8. Data Retention and Deletion</h2>
+                <ul>
+                    <li><strong>Delete inside the app:</strong> remove any file, folder, tag or note at any time.</li>
+                    <li><strong>Guest accounts:</strong> uninstalling the app or clearing its data permanently deletes all files stored on your device.</li>
+                    <li><strong>Google backups:</strong> you can delete the "safekeep-data" folder from your own Google Drive at any time, and remove Safekeep's access from your Google Account settings.</li>
+                </ul>
+            </section>
+            <section id="children">
+                <h2>9. Children's Privacy</h2>
+                <p>The Service is not directed at children under 13, and we do not knowingly collect personal information from children. If you believe a child has provided personal information, please contact us.</p>
+            </section>
+            <section id="changes">
+                <h2>10. Changes to This Privacy Policy</h2>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+            </section>
+            <section id="contact">
+                <h2>11. Contact Us</h2>
+                <div class="contact">
+                <p>If you have any questions about this Privacy Policy, please contact us at: <a href="mailto:support.devduos@thetrishulgroup.com">support.devduos@thetrishulgroup.com</a></p>
+                <p>DevDuo Software, Pune, India</p>
+                </div>
+            </section>
+        </article>
     </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© <span id="year">2026</span> DevDuo Software, a Trishul Group company.</span>
+            <nav aria-label="Footer">
+                <a href="safekeep_info.html">App info</a>
+                <a href="safekeep_privacypolicy.html">Privacy policy</a>
+                <a href="safekeep_termsandconditions.html">Terms and conditions</a>
+                <a href="mailto:support.devduos@thetrishulgroup.com">Support</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        const links = [...document.querySelectorAll('.toc a')];
+        const io = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+        }), { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('article section').forEach(s => io.observe(s));
+    </script>
 </body>
 
 </html>
